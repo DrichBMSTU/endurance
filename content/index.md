@@ -1,6 +1,9 @@
 ---
-title: Всем здарова
+title: For those who love physics
 ---
+# Теория
+## 1. Механика
+[[1.1 Кинематика]]
+[[1.2 Динамика]]
+[[1.3 Статика]]
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
