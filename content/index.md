@@ -1,7 +1,7 @@
 ---
 title: For those who love physics
 ---
-![](/content/adds/VnGtjid.gif)
+![[/content/adds/VnGtjid.gif]]
 # Миссия Endurance
 - Структуризация физического знания, необходимого для сдачи гос. экзаменов по физике
 - Доступность и легкость материала
