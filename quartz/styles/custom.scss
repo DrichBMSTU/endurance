@@ -4,3 +4,11 @@
 :root {
     --textHighlight: rgba(31, 161, 181, 0.5) !important; // Пример: #ffd3b6 (розовый)
 }
+
+[data-theme="dark"] {
+  --textHighlight: rgba(31, 161, 181, 0.5) !important; // Пример: #2d5c7f (синий)
+}
+
+mark {
+    background-color: var(--textHighlight) !important;
+  }
