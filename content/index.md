@@ -13,7 +13,7 @@ title: For those who love physics
 P.S. На сайте доступен **поиск статей**, поэтому что-то полезное может найти любой интересующийся ученик.
 # Нашел ошибку - свяжись со мной
 Контакты:
-- [![](Telegram_Messenger.png)](karpuzivert|https://t.me/karpuzivert)
+- [![](Telegram_Messenger.png)](https://t.me/karpuzivert)
 
 ---
 
