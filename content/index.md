@@ -1,7 +1,7 @@
 ---
 title: For those who love physics
 ---
-![[/content/adds/Endurance.gif]]![[Endurance2.gif]]
+![[Endurance.gif]]
 # Миссия Endurance
 - Структуризация физического знания, необходимого для сдачи гос. экзаменов по физике
 - Доступность и легкость материала
@@ -13,8 +13,8 @@ title: For those who love physics
 P.S. На сайте доступен **поиск статей**, поэтому что-то полезное может найти любой интересующийся ученик.
 # Нашел ошибку - свяжись со мной
 Контакты:
-- tg: [![karpuzivert](/content/adds/Telegram_Messenger.png)](https://t.me/karpuzivert)
+- tg: [![](Telegram_Messenger.png)](karpuzivert|https://t.me/karpuzivert)
 
 ---
 
-- VK: [![Даниил Карпов](/content/adds/vk.png)](https://vk.com/karpedze)
+- VK: [![](vk.png)](https://vk.com/karpedze)
