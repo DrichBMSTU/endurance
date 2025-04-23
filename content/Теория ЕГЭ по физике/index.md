@@ -43,6 +43,7 @@ title: Теория ЕГЭ по физике
 
 ---
 
-<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=Codificator.pdf" width="100%" height="800px" style="border: none;"> </iframe>
+<iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=/content/adds/adds_pdf/Codificator.pdf" width="100%" height="500px" style="border: none;"> 
+</iframe>
 
 
