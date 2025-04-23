@@ -11,12 +11,12 @@ title: Теория ЕГЭ по физике
 # Актуальный Кодификатор ФИПИ по физике на 2024-2025
 (открывается с ПК)
 <iframe 
-  src="https://github.com/DrichBMSTU/endurance/blob/v4/content/adds/adds_pdf/Codificator.pdf" 
+  src="Codificator.pdf" 
   style="width: 100%; height: 600px; border: none;"
   title="PDF Viewer"
 >
   Ваш браузер не поддерживает PDF. 
-  <a href="https://github.com/DrichBMSTU/endurance/blob/v4/content/adds/adds_pdf/Codificator.pdf">Скачать PDF</a>
+  <a href="Codificator.pdf">Скачать PDF</a>
 </iframe>
 
 
