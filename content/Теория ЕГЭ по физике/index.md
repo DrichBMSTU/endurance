@@ -18,7 +18,23 @@ title: Теория ЕГЭ по физике
   Ваш браузер не поддерживает PDF. 
   <a href="Codificator.pdf">Скачать PDF</a>
 </iframe>
-
-
-![[Codificator.pdf]]
+<div id="pdf-viewer"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  const url = "Codificator.pdf";
+  const container = document.getElementById("pdf-viewer");
+  
+  pdfjsLib.getDocument(url).promise.then(pdf => {
+    for (let i = 1; i <= pdf.numPages; i++) {
+      pdf.getPage(i).then(page => {
+        const canvas = document.createElement("canvas");
+        container.appendChild(canvas);
+        const viewport = page.getViewport({ scale: 1.5 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        page.render({ canvasContext: canvas.getContext("2d"), viewport });
+      });
+    }
+  });
+</script>
 
