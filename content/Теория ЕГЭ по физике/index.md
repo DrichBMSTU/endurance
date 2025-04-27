@@ -17,3 +17,10 @@ title: Теория ЕГЭ по физике
 ---
 
 ![[Codificator.pdf]]
+
+---
+<iframe
+src="Codificator.pdf"
+style="width: 100%; height: 900px; border: none;"
+title="PDF Viewer"
+</iframe>
