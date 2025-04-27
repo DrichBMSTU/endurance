@@ -15,3 +15,4 @@ title: Теория ЕГЭ по физике
         height="600px" 
         style="border: none;">
 </iframe>
+![[Codificator.pdf]]
