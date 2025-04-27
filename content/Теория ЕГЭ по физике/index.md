@@ -25,7 +25,7 @@ title: Теория ЕГЭ по физике
 <script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
 <script>
   const container = document.getElementById('pdf-container');
-  const pdfUrl = '/adds/adds_pdf/Codificator.pdf'; 
+  const pdfUrl = 'https://drichbmstu.github.io/endurance/adds/adds_pdf/Codificator.pdf'
   
   pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
     pdf.getPage(1).then(page => {
