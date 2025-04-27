@@ -22,7 +22,7 @@ title: Теория ЕГЭ по физике
 
 <div style="width:100%;height:0;padding-bottom:120%;position:relative;">
   <embed 
-    src="Codificator.pdf" 
+    src="/adds/adds_pdf/Codificator.pdf" 
     type="application/pdf" 
     style="position:absolute;top:0;left:0;width:100%;height:100%;">
   </embed>
