@@ -22,8 +22,9 @@ title: Теория ЕГЭ по физике
 
 <div style="position: relative; padding-bottom: 120%; height: 0; overflow: hidden;">
   <iframe 
-    src="/adds/adds_pdf/Codificator.pdf" 
+    src="https://docs.google.com/gview?url=https://drichbmstu.github.io/endurance/adds/adds_pdf/Codificator.pdf&embedded=true" 
     style="position: absolute; top:0; left:0; width:100%; height:100%; border:none;" 
     allowfullscreen>
   </iframe>
 </div>
+
