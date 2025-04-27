@@ -19,3 +19,11 @@ title: Теория ЕГЭ по физике
 ![[Codificator.pdf]]
 
 ---
+
+<div style="width:100%;height:0;padding-bottom:120%;position:relative;">
+  <embed 
+    src="Codificator.pdf" 
+    type="application/pdf" 
+    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+  </embed>
+</div>
