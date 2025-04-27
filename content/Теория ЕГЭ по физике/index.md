@@ -20,27 +20,11 @@ title: Теория ЕГЭ по физике
 
 ---
 
-<div id="pdf-container" style="width: 100%; height: 600px;"></div>
-
-<script src="//mozilla.github.io/pdf.js/build/pdf.js"></script>
-<script>
-  const container = document.getElementById('pdf-container');
-  const pdfUrl = 'https://drichbmstu.github.io/endurance/adds/adds_pdf/Codificator.pdf'
-  
-  pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
-    pdf.getPage(1).then(page => {
-      const viewport = page.getViewport({ scale: 1 });
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
-      
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      container.appendChild(canvas);
-      
-      page.render({
-        canvasContext: context,
-        viewport: viewport
-      });
-    });
-  });
-</script>
+<div id="pdf-container" style="height: 500px; width: 100%;">
+  <iframe 
+    src="https://mozilla.github.io/pdf.js/web/viewer.html?file=/adds/adds_pdf/Codificator.pdf" 
+    width="100%" 
+    height="100%" 
+    style="border: none;">
+  </iframe>
+</div>
