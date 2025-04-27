@@ -24,3 +24,6 @@ src="Codificator.pdf"
 style="width: 100%; height: 900px; border: none;"
 title="PDF Viewer"
 </iframe>
+
+---
+[[https://docs.google.com/viewer?url=drichbmstu.github.io/endurance/adds/adds_pdf/Codificator.pdf&embedded=true]]
