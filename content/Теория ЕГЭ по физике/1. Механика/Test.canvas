@@ -1,6 +1,12 @@
 {
 	"nodes":[
-		{"id":"695320febbe09a57","x":-440,"y":-180,"width":250,"height":60,"type":"text","text":"кукцук"}
+		{"id":"695320febbe09a57","type":"text","text":"кукцук","x":-440,"y":-180,"width":250,"height":60},
+		{"id":"73940d52c620ff4d","x":-440,"y":-180,"width":250,"height":60,"color":"1","type":"text","text":"Механика"},
+		{"id":"a6bef6469c21d06c","x":-600,"y":100,"width":160,"height":60,"type":"text","text":"[[1.1 Кинематика|Кинематика]]"},
+		{"id":"5d45ae069cff487d","x":-190,"y":100,"width":160,"height":60,"type":"text","text":"[[1.2 Динамика|Динамика]]"}
 	],
-	"edges":[]
+	"edges":[
+		{"id":"0cfe9915d2386cdd","fromNode":"695320febbe09a57","fromSide":"bottom","toNode":"a6bef6469c21d06c","toSide":"top"},
+		{"id":"baa62832f905009e","fromNode":"73940d52c620ff4d","fromSide":"bottom","toNode":"5d45ae069cff487d","toSide":"top"}
+	]
 }
