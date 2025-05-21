@@ -95,6 +95,7 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.3",
+    "vis-network": "^9.1.10",
     "workerpool": "^9.2.0",
     "ws": "^8.18.1",
     "yargs": "^17.7.2"
