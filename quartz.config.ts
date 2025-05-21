@@ -1,5 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { CanvasPlugin } from "./plugins/canvas"
 
 /**
  * Quartz 4 Configuration
@@ -54,7 +55,7 @@ const config: QuartzConfig = {
     },
   },
   plugins: {
-    transformers: [
+    transformers: [CanvasPlugin,
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
         priority: ["frontmatter", "git", "filesystem"],
