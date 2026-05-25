@@ -1,0 +1,47 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\begin{document}
+\begin{tikzpicture}[
+  font=\sffamily,
+  >=Latex,
+  wall/.style={line width=1.1pt, draw=gray!70!black},
+  pressure/.style={-{Latex[length=3mm]}, line width=1.1pt, draw=blue!65!black},
+  measure/.style={{Latex[length=2.4mm]}-{Latex[length=2.4mm]}, line width=0.9pt, draw=gray!45!black},
+  guide/.style={line width=0.7pt, draw=gray!45!black, dashed},
+  label/.style={text=gray!20!black}
+]
+  \definecolor{fluid}{RGB}{223,242,249}
+  \definecolor{fluidline}{RGB}{72,137,173}
+
+  \draw[wall, rounded corners=4pt] (0.6,0.4) -- (0.6,4.3) -- (7.1,4.3) -- (7.1,0.4) -- cycle;
+  \fill[fluid] (0.75,0.55) rectangle (6.95,3.55);
+  \draw[line width=1pt, draw=fluidline] (0.75,3.55) -- (6.95,3.55);
+
+  \foreach \x in {2.0,3.1,4.2,5.3} {
+    \draw[pressure] (\x,4.15) -- (\x,3.65);
+  }
+  \node[label] at (3.65,4.42) {внешнее давление $p_0$};
+
+  \coordinate (A) at (4.45,1.55);
+  \draw[fill=fluidline, draw=none] (A) circle (2.4pt);
+  \node[label, right] at (4.58,1.55) {точка $A$};
+  \node[label, right] at (4.58,1.1) {$p_A=p_0+\rho gh$};
+
+  \draw[guide] (0.75,3.55) -- (7.55,3.55);
+  \draw[guide] (A) -- (7.55,1.55);
+  \draw[measure] (7.45,3.55) -- (7.45,1.55);
+  \node[label, right] at (7.55,2.55) {$h$};
+
+  \draw[pressure] (1.55,1.55) -- (2.35,1.55);
+  \draw[pressure] (2.95,1.55) -- (2.15,1.55);
+  \draw[pressure] (2.55,1.95) -- (2.55,1.15);
+  \node[label] at (2.55,0.83) {давление действует во все стороны};
+
+  \node[label] at (3.85,2.7) {покоящаяся жидкость};
+  \node[label, below] at (3.85,0.35) {чем глубже точка, тем больше вклад $\rho gh$};
+\end{tikzpicture}
+\end{document}
