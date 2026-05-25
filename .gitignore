@@ -7,6 +7,7 @@ tsconfig.tsbuildinfo
 .obsidian
 .quartz-cache
 .codex/pdf_text_cache/
+.codex/diagram_sources/build/
 private/
 .replit
 replit.nix
