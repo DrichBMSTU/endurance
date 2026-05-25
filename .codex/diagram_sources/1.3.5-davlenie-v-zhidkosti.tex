@@ -10,38 +10,43 @@
   >=Latex,
   wall/.style={line width=1.1pt, draw=gray!70!black},
   pressure/.style={-{Latex[length=3mm]}, line width=1.1pt, draw=blue!65!black},
-  measure/.style={{Latex[length=2.4mm]}-{Latex[length=2.4mm]}, line width=0.9pt, draw=gray!45!black},
-  guide/.style={line width=0.7pt, draw=gray!45!black, dashed},
-  label/.style={text=gray!20!black}
+  measure/.style={{Latex[length=2.4mm]}-{Latex[length=2.4mm]}, line width=0.9pt, draw=gray!55!black},
+  guide/.style={line width=0.7pt, draw=gray!55!black, dashed},
+  label/.style={text=gray!15!black},
+  note/.style={text=gray!15!black, fill=white, rounded corners=2pt, inner xsep=4pt, inner ysep=2pt}
 ]
+  \definecolor{canvas}{RGB}{255,255,255}
   \definecolor{fluid}{RGB}{223,242,249}
   \definecolor{fluidline}{RGB}{72,137,173}
 
-  \draw[wall, rounded corners=4pt] (0.6,0.4) -- (0.6,4.3) -- (7.1,4.3) -- (7.1,0.4) -- cycle;
-  \fill[fluid] (0.75,0.55) rectangle (6.95,3.55);
-  \draw[line width=1pt, draw=fluidline] (0.75,3.55) -- (6.95,3.55);
+  \fill[canvas] (-0.1,-0.25) rectangle (8.35,4.85);
+
+  \draw[wall, rounded corners=4pt] (0.6,0.45) -- (0.6,4.15) -- (7.1,4.15) -- (7.1,0.45) -- cycle;
+  \fill[fluid] (0.75,0.6) rectangle (6.95,3.45);
+  \draw[line width=1pt, draw=fluidline] (0.75,3.45) -- (6.95,3.45);
 
   \foreach \x in {2.0,3.1,4.2,5.3} {
-    \draw[pressure] (\x,4.15) -- (\x,3.65);
+    \draw[pressure] (\x,4.03) -- (\x,3.58);
   }
-  \node[label] at (3.65,4.42) {внешнее давление $p_0$};
+  \node[note] at (3.65,4.45) {внешнее давление $p_0$};
 
-  \coordinate (A) at (4.45,1.55);
+  \coordinate (A) at (4.35,1.5);
   \draw[fill=fluidline, draw=none] (A) circle (2.4pt);
-  \node[label, right] at (4.58,1.55) {точка $A$};
-  \node[label, right] at (4.58,1.1) {$p_A=p_0+\rho gh$};
+  \node[note, anchor=west] at (4.55,1.78) {точка $A$};
+  \node[note, anchor=west] at (4.55,0.92) {$p_A=p_0+\rho gh$};
 
-  \draw[guide] (0.75,3.55) -- (7.55,3.55);
-  \draw[guide] (A) -- (7.55,1.55);
-  \draw[measure] (7.45,3.55) -- (7.45,1.55);
-  \node[label, right] at (7.55,2.55) {$h$};
+  \draw[guide] (0.75,3.45) -- (7.65,3.45);
+  \draw[guide] (A) -- (7.65,1.5);
+  \draw[measure] (7.52,3.45) -- (7.52,1.5);
+  \node[note, anchor=west] at (7.65,2.48) {$h$};
 
-  \draw[pressure] (1.55,1.55) -- (2.35,1.55);
-  \draw[pressure] (2.95,1.55) -- (2.15,1.55);
-  \draw[pressure] (2.55,1.95) -- (2.55,1.15);
-  \node[label] at (2.55,0.83) {давление действует во все стороны};
+  \coordinate (B) at (2.35,1.75);
+  \draw[fill=fluidline, draw=none] (B) circle (2.2pt);
+  \foreach \angle in {0,60,120,180,240,300} {
+    \draw[pressure] (B) -- ++(\angle:0.62);
+  }
+  \node[note, align=center] at (2.35,0.86) {давление действует\\во все стороны};
 
-  \node[label] at (3.85,2.7) {покоящаяся жидкость};
-  \node[label, below] at (3.85,0.35) {чем глубже точка, тем больше вклад $\rho gh$};
+  \node[note] at (3.85,2.72) {покоящаяся жидкость};
 \end{tikzpicture}
 \end{document}
