@@ -1,0 +1,75 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1pt,
+  y=1pt,
+  font=\sffamily\Large,
+  >=Latex,
+  vector/.style={-{Latex[length=13pt]}, line width=3pt},
+  guide/.style={line width=2pt, draw=gray!55!black, dashed},
+  body/.style={line width=2.2pt, draw=gray!25!black, fill=gray!13},
+  label/.style={text=gray!12!black, fill=white, rounded corners=4pt, inner xsep=7pt, inner ysep=4pt},
+  smalllabel/.style={text=gray!12!black, fill=white, rounded corners=3pt, inner xsep=5pt, inner ysep=3pt}
+]
+  \definecolor{canvas}{RGB}{255,255,255}
+  \definecolor{moveblue}{RGB}{38,111,175}
+  \definecolor{rotred}{RGB}{193,70,72}
+  \definecolor{axisgreen}{RGB}{47,128,86}
+  \definecolor{pointgold}{RGB}{189,132,38}
+
+  \fill[canvas] (0,0) rectangle (1000,600);
+  \draw[gray!30, line width=2pt] (500,70) -- (500,540);
+
+  \node[label, font=\sffamily\LARGE\bfseries] at (250,545) {Поступательное движение};
+  \node[label, font=\sffamily\LARGE\bfseries] at (750,545) {Вращательное движение};
+
+  % Translational motion: the body keeps its orientation.
+  \coordinate (A1) at (145,300);
+  \coordinate (A2) at (335,385);
+  \begin{scope}
+    \draw[body] (A1) ++(-65,-65) rectangle ++(130,130);
+    \draw[body, fill=gray!8] (A2) ++(-65,-65) rectangle ++(130,130);
+    \coordinate (P1) at ($(A1)+(-35,35)$);
+    \coordinate (Q1) at ($(A1)+(35,-35)$);
+    \coordinate (P2) at ($(A2)+(-35,35)$);
+    \coordinate (Q2) at ($(A2)+(35,-35)$);
+    \draw[line width=4pt, draw=axisgreen] (P1) -- (Q1);
+    \draw[line width=4pt, draw=axisgreen] (P2) -- (Q2);
+    \fill[pointgold] (P1) circle (7pt) node[smalllabel, anchor=south east, yshift=6pt] {$A$};
+    \fill[pointgold] (Q1) circle (7pt) node[smalllabel, anchor=north west, yshift=-6pt] {$B$};
+    \fill[pointgold] (P2) circle (7pt);
+    \fill[pointgold] (Q2) circle (7pt);
+    \draw[guide] (P1) -- (P2);
+    \draw[guide] (Q1) -- (Q2);
+    \draw[vector, draw=moveblue] ($(A1)+(0,-100)$) -- ($(A2)+(0,-100)$);
+    \node[smalllabel, text=moveblue] at (240,170) {перенос без поворота};
+    \node[label, align=center] at (250,80) {отрезок $AB$ остаётся\\параллелен самому себе};
+  \end{scope}
+
+  % Rotational motion: points move around one axis.
+  \coordinate (O) at (750,305);
+  \draw[guide, draw=axisgreen] ($(O)+(0,-175)$) -- ($(O)+(0,175)$);
+  \draw[line width=2.4pt, draw=gray!60!black] (O) circle (130);
+  \draw[line width=2pt, draw=gray!55!black, dashed] (O) circle (78);
+  \draw[line width=2.4pt, draw=gray!45!black] ($(O)+(-130,0)$) arc[start angle=180,end angle=360,x radius=130,y radius=34];
+  \draw[line width=2.4pt, draw=gray!45!black, dashed] ($(O)+(130,0)$) arc[start angle=0,end angle=180,x radius=130,y radius=34];
+
+  \coordinate (R1) at ($(O)+(35:130)$);
+  \coordinate (R2) at ($(O)+(220:78)$);
+  \fill[rotred] (R1) circle (7pt);
+  \fill[pointgold] (R2) circle (7pt);
+  \draw[vector, draw=rotred] (R1) -- ++(125:72);
+  \draw[vector, draw=pointgold] (R2) -- ++(310:55);
+  \node[smalllabel, text=rotred] at ($(R1)+(70,70)$) {точка дальше от оси};
+  \node[smalllabel, text=pointgold] at ($(R2)+(-80,-45)$) {точка ближе к оси};
+
+  \draw[-{Latex[length=12pt]}, line width=3pt, draw=moveblue] ($(O)+(165:165)$) arc[start angle=165,end angle=80,radius=165];
+  \node[smalllabel, text=moveblue] at ($(O)+(-120,145)$) {поворот тела};
+  \node[label, align=center] at (750,80) {точки описывают окружности\\с центрами на общей оси};
+\end{tikzpicture}
+\end{document}
