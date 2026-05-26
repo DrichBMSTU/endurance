@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Схема действия архимедовой силы</title>
+  <desc id="desc">Тело частично погружено в жидкость. Вверх направлена архимедова сила, вниз сила тяжести, рядом отмечен вытесненный объём.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#1e63a5"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#b33232"/>
+    </marker>
+    <marker id="arrow-gray-start" viewBox="0 0 12 12" refX="2" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 12 0 L 0 6 L 12 12 z" fill="#606b75"/>
+    </marker>
+    <marker id="arrow-gray-end" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#606b75"/>
+    </marker>
+    <style>
+      .label { font-family: Arial, sans-serif; font-size: 25px; fill: #202832; }
+      .small { font-family: Arial, sans-serif; font-size: 22px; fill: #202832; }
+      .blue { font-family: Arial, sans-serif; font-size: 28px; fill: #1e63a5; font-weight: 700; }
+      .red { font-family: Arial, sans-serif; font-size: 28px; fill: #b33232; font-weight: 700; }
+      .note { fill: #ffffff; stroke: #d9e0e6; stroke-width: 2; rx: 8; }
+      .guide { stroke: #606b75; stroke-width: 2; stroke-dasharray: 8 8; fill: none; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1000" height="600" rx="12" fill="#ffffff"/>
+
+  <rect x="70" y="70" width="620" height="450" rx="10" fill="#ffffff" stroke="#4a5561" stroke-width="4"/>
+  <rect x="90" y="190" width="580" height="310" fill="#e0f2f8"/>
+  <line x1="90" y1="190" x2="670" y2="190" stroke="#4287af" stroke-width="5"/>
+  <text x="115" y="475" class="label">жидкость плотности ρ</text>
+
+  <rect x="300" y="140" width="170" height="250" rx="8" fill="#ecc470" stroke="#805d24" stroke-width="4"/>
+  <line x1="300" y1="190" x2="470" y2="190" class="guide"/>
+  <text x="420" y="160" class="small">тело</text>
+
+  <circle cx="385" cy="280" r="5" fill="#202832"/>
+  <line x1="385" y1="280" x2="385" y2="105" stroke="#1e63a5" stroke-width="7" marker-end="url(#arrow-blue)"/>
+  <rect x="105" y="92" width="142" height="45" class="note"/>
+  <text x="122" y="123" class="blue">FАрх</text>
+
+  <line x1="385" y1="280" x2="385" y2="455" stroke="#b33232" stroke-width="7" marker-end="url(#arrow-red)"/>
+  <rect x="190" y="410" width="125" height="45" class="note"/>
+  <text x="207" y="441" class="red">P = mg</text>
+
+  <line x1="475" y1="190" x2="560" y2="190" class="guide"/>
+  <line x1="475" y1="390" x2="560" y2="390" class="guide"/>
+  <line x1="545" y1="195" x2="545" y2="385" stroke="#606b75" stroke-width="3" marker-start="url(#arrow-gray-start)" marker-end="url(#arrow-gray-end)"/>
+  <rect x="570" y="270" width="190" height="48" class="note"/>
+  <text x="588" y="302" class="label">Vвытесн</text>
+
+  <rect x="730" y="105" width="220" height="92" class="note"/>
+  <text x="750" y="140" class="small">Выталкивающая</text>
+  <text x="750" y="170" class="small">сила направлена вверх</text>
+  <line x1="760" y1="225" x2="870" y2="225" stroke="#1e63a5" stroke-width="7" marker-end="url(#arrow-blue)"/>
+
+  <rect x="730" y="285" width="220" height="92" class="note"/>
+  <text x="750" y="320" class="small">Сила тяжести</text>
+  <text x="750" y="350" class="small">направлена вниз</text>
+  <line x1="760" y1="405" x2="870" y2="405" stroke="#b33232" stroke-width="7" marker-end="url(#arrow-red)"/>
+
+  <rect x="720" y="455" width="245" height="82" class="note"/>
+  <text x="742" y="490" class="small">При плавании:</text>
+  <text x="742" y="522" class="label">FАрх = mg</text>
+
+  <text x="150" y="555" class="label">Погруженная часть тела вытесняет такой же объём жидкости</text>
+</svg>
