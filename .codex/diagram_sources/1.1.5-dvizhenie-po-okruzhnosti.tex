@@ -1,16 +1,18 @@
 \documentclass[tikz,border=6pt]{standalone}
 \usepackage{amsmath}
 \usepackage{fontspec}
-\usetikzlibrary{arrows.meta,angles,quotes}
+\usetikzlibrary{arrows.meta,angles,quotes,calc}
 \setmainfont{Arial}
 \setsansfont{Arial}
 
 \begin{document}
 \begin{tikzpicture}[
+  scale=1.35,
+  every node/.style={transform shape},
   font=\sffamily,
   >=Latex,
-  orbit/.style={line width=1.1pt, draw=gray!60!black},
-  vector/.style={-{Latex[length=3mm]}, line width=1.2pt},
+  orbit/.style={line width=1.15pt, draw=gray!60!black},
+  vector/.style={-{Latex[length=3.2mm]}, line width=1.25pt},
   guide/.style={line width=0.8pt, draw=gray!50!black, dashed},
   label/.style={text=gray!15!black, fill=white, rounded corners=2pt, inner xsep=4pt, inner ysep=2pt}
 ]
@@ -20,28 +22,30 @@
   \definecolor{acgreen}{RGB}{57,137,90}
   \definecolor{omegagold}{RGB}{180,129,42}
 
-  \fill[canvas] (-3.3,-2.95) rectangle (4.6,3.05);
+  \fill[canvas] (-5.0,-4.05) rectangle (6.9,4.45);
 
-  \coordinate (O) at (0,0);
-  \coordinate (M) at (45:2.1);
-  \coordinate (X) at (2.1,0);
+  \coordinate (O) at (-0.8,0);
+  \coordinate (M) at ($(O)+(45:2.8)$);
+  \coordinate (X) at ($(O)+(2.8,0)$);
 
-  \draw[orbit] (O) circle (2.1);
+  \draw[orbit] (O) circle (2.8);
   \draw[guide] (O) -- (M);
   \draw[guide] (O) -- (X);
-  \draw[vector, draw=speedred] (M) -- ++(135:1.45) node[label, anchor=south east] {$\vec v$};
-  \draw[vector, draw=acgreen] (M) -- (0.42,0.42) node[label, midway, below right] {$\vec a_{\text{цс}}$};
-  \draw[vector, draw=omegagold] (1.0,0.0) arc[start angle=0,end angle=45,radius=1.0];
-  \node[label, text=omegagold] at (1.3,0.45) {$\omega$};
+  \draw[vector, draw=speedred] (M) -- ++(135:2.15);
+  \node[label, text=speedred, anchor=south east] at ($(M)+(135:2.25)$) {$\vec v$};
+  \draw[vector, draw=acgreen] (M) -- ($(O)+(0.35,0.35)$);
+  \node[label, text=acgreen, anchor=west] at ($(M)+(0.95,-0.35)$) {$\vec a_{\text{цс}}$};
+  \draw[vector, draw=omegagold] ($(O)+(3.35,0)$) arc[start angle=0,end angle=45,radius=3.35];
+  \node[label, text=omegagold, anchor=west] at ($(O)+(3.2,1.35)$) {$\omega$};
 
-  \pic[draw=gray!55!black, angle radius=0.48cm, "$\varphi$", angle eccentricity=1.45] {angle = X--O--M};
+  \pic[draw=gray!55!black, angle radius=0.72cm, "$\varphi$", angle eccentricity=1.45] {angle = X--O--M};
 
-  \fill[gray!20!black] (O) circle (1.8pt);
-  \node[label, anchor=north east] at (O) {$O$};
-  \fill[pointblue] (M) circle (2.8pt);
-  \node[label, anchor=south west] at (M) {$M$};
+  \fill[gray!20!black] (O) circle (2pt);
+  \node[label, anchor=north east] at ($(O)+(-0.08,-0.08)$) {$O$};
+  \fill[pointblue] (M) circle (3pt);
+  \node[label, anchor=south west] at ($(M)+(0.08,0.08)$) {$M$};
 
-  \node[label] at (0.85,0.9) {$R$};
-  \node[label, align=center] at (0,-2.55) {скорость направлена по касательной,\\ускорение — к центру окружности};
+  \node[label] at ($(O)+(1.0,1.32)$) {$R$};
+  \node[label, align=center] at (0,-3.55) {скорость направлена по касательной,\\ускорение — к центру окружности};
 \end{tikzpicture}
 \end{document}
