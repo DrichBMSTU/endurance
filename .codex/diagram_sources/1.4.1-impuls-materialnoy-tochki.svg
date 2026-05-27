@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Импульс материальной точки</title>
+  <desc id="desc">Материальная точка движется вправо; векторы скорости и импульса направлены одинаково.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <rect x="18" y="18" width="964" height="564" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="3"/>
+  <line x1="110" y1="360" x2="890" y2="360" stroke="#94a3b8" stroke-width="4" stroke-dasharray="14 14"/>
+  <line x1="130" y1="430" x2="845" y2="430" stroke="#4b5563" stroke-width="4" marker-end="url(#arrow-gray)"/>
+  <text x="650" y="478" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" fill="#374151">ось движения</text>
+
+  <circle cx="310" cy="300" r="72" fill="#e0f2fe" stroke="#0f172a" stroke-width="5"/>
+  <text x="310" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#0f172a">m</text>
+  <text x="310" y="178" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#334155">материальная точка</text>
+
+  <line x1="310" y1="260" x2="630" y2="260" stroke="#2563eb" stroke-width="8" stroke-linecap="round" marker-end="url(#arrow-blue)"/>
+  <text x="470" y="228" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#2563eb">v</text>
+
+  <line x1="310" y1="336" x2="710" y2="336" stroke="#dc2626" stroke-width="8" stroke-linecap="round" marker-end="url(#arrow-red)"/>
+  <text x="510" y="407" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#dc2626">p = mv</text>
+
+  <rect x="610" y="110" width="280" height="94" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="645" y="150" font-family="Arial, sans-serif" font-size="30" fill="#111827">направления</text>
+  <text x="645" y="186" font-family="Arial, sans-serif" font-size="30" fill="#111827">совпадают</text>
+</svg>
