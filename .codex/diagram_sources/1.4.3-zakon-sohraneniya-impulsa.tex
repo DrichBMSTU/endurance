@@ -1,0 +1,79 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{bluebg}{HTML}{EFF6FF}
+\definecolor{bluebox}{HTML}{DBEAFE}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluedark}{HTML}{1E3A8A}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{greenbg}{HTML}{F0FDF4}
+\definecolor{greenbox}{HTML}{DCFCE7}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{greendark}{HTML}{166534}
+\definecolor{gray}{HTML}{475569}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (200,120);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (5,5) rectangle (195,115);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (100,107)
+    {Импульс системы меняют только внешние силы};
+
+  \draw[fill=bluebg, draw=blue!45, line width=0.55mm, rounded corners=3.5mm] (14,19) rectangle (91,97);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=bluedark] at (52.5,88.5)
+    {Закон изменения};
+
+  \draw[fill=bluebox, draw=blue, line width=0.8mm, dashed, dash pattern=on 2.4mm off 1.8mm, rounded corners=3mm]
+    (32,44) rectangle (73,76);
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=textmain] at (52.5,70)
+    {система тел};
+  \draw[fill=blue!55, draw=blue!75!black, line width=0.8mm] (45,57) circle (5.8);
+  \draw[fill=blue!35, draw=blue!75!black, line width=0.8mm] (60,57) circle (5.8);
+
+  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=blue, line width=1.05mm] (16,57) -- (31,57);
+  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=blue] at (23.6,63)
+    {$\vec{F}_{\text{внешн}}\Delta t$};
+
+  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=red, line width=1.05mm] (73,57) -- (88,57);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=red] at (80.5,63)
+    {$\Delta\vec{p}$};
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=textmain] at (52.5,34.5)
+    {есть внешний импульс силы};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=textmain] at (52.5,27.5)
+    {значит импульс системы меняется};
+
+  \draw[fill=greenbg, draw=green!50, line width=0.55mm, rounded corners=3.5mm] (109,19) rectangle (186,97);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=greendark] at (147.5,88.5)
+    {Закон сохранения};
+
+  \draw[fill=greenbox, draw=green, line width=0.8mm, dashed, dash pattern=on 2.4mm off 1.8mm, rounded corners=3mm]
+    (125,43) rectangle (170,76);
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=textmain] at (147.5,70)
+    {замкнутая система};
+  \draw[fill=green!70, draw=green!55!black, line width=0.8mm] (138,56.5) circle (6);
+  \draw[fill=green!40, draw=green!55!black, line width=0.8mm] (157,56.5) circle (6);
+
+  \draw[-{Latex[length=4mm,width=3mm]}, draw=gray, line width=0.9mm] (143.6,56.5) -- (151.7,56.5);
+  \draw[-{Latex[length=4mm,width=3mm]}, draw=gray, line width=0.9mm] (151.7,51.7) -- (143.6,51.7);
+
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=gray] at (147.5,38.2)
+    {внутренние силы};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=gray] at (147.5,32.5)
+    {попарно компенсируются};
+
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=greendark] at (147.5,29)
+    {$\sum \vec{F}_{\text{внешн}}=0$};
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=greendark] at (147.5,23.5)
+    {$\vec{p}_{\text{до}}=\vec{p}_{\text{после}}$};
+\end{tikzpicture}
+\end{document}
