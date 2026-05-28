@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Закон изменения и сохранения импульса</title>
+  <desc id="desc">Слева внешняя сила меняет импульс системы, справа в замкнутой системе внутренние силы не меняют суммарный импульс.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="600" rx="24" fill="#f8fafc"/>
+  <rect x="24" y="24" width="952" height="552" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+
+  <text x="500" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0f172a">Импульс системы меняют только внешние силы</text>
+
+  <rect x="70" y="115" width="385" height="390" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="3"/>
+  <text x="262" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#1e3a8a">Закон изменения</text>
+
+  <rect x="160" y="220" width="205" height="160" rx="18" fill="#dbeafe" stroke="#2563eb" stroke-width="4" stroke-dasharray="12 10"/>
+  <text x="262" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#0f172a">система тел</text>
+
+  <circle cx="225" cy="315" r="28" fill="#60a5fa" stroke="#1d4ed8" stroke-width="4"/>
+  <circle cx="300" cy="315" r="28" fill="#93c5fd" stroke="#1d4ed8" stroke-width="4"/>
+
+  <line x1="95" y1="315" x2="155" y2="315" stroke="#2563eb" stroke-width="6" marker-end="url(#arrow-blue)"/>
+  <text x="118" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="700" fill="#2563eb">F<tspan baseline-shift="sub" font-size="15">внешн</tspan>Δt</text>
+
+  <line x1="365" y1="315" x2="425" y2="315" stroke="#dc2626" stroke-width="6" marker-end="url(#arrow-red)"/>
+  <text x="398" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#dc2626">Δp</text>
+
+  <text x="262" y="435" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#0f172a">есть внешний импульс силы</text>
+  <text x="262" y="466" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#0f172a">значит импульс системы меняется</text>
+
+  <rect x="545" y="115" width="385" height="390" rx="18" fill="#f0fdf4" stroke="#86efac" stroke-width="3"/>
+  <text x="738" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#166534">Закон сохранения</text>
+
+  <rect x="625" y="218" width="225" height="165" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="4" stroke-dasharray="12 10"/>
+  <text x="738" y="253" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#0f172a">замкнутая система</text>
+
+  <circle cx="690" cy="318" r="30" fill="#4ade80" stroke="#15803d" stroke-width="4"/>
+  <circle cx="785" cy="318" r="30" fill="#86efac" stroke="#15803d" stroke-width="4"/>
+
+  <line x1="718" y1="318" x2="755" y2="318" stroke="#475569" stroke-width="5" marker-end="url(#arrow-gray)"/>
+  <line x1="757" y1="342" x2="720" y2="342" stroke="#475569" stroke-width="5" marker-end="url(#arrow-gray)"/>
+  <text x="738" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#334155">внутренние силы попарно компенсируются</text>
+
+  <text x="738" y="449" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#166534">ΣF<tspan baseline-shift="sub" font-size="16">внешн</tspan> = 0</text>
+  <text x="738" y="482" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#166534">p<tspan baseline-shift="sub" font-size="16">до</tspan> = p<tspan baseline-shift="sub" font-size="16">после</tspan></text>
+</svg>
