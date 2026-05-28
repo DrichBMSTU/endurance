@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc">
+  <title id="title">Импульс системы тел</title>
+  <desc id="desc">Два тела с импульсами p1 и p2. Их общий импульс p показан как векторная сумма.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#1f6feb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#2e7d32"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#c62828"/>
+    </marker>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1f2937" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="600" rx="18" fill="#f8fafc"/>
+  <rect x="38" y="36" width="924" height="528" rx="16" fill="#ffffff" stroke="#d0d7de" stroke-width="2"/>
+
+  <text x="500" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1f2937">Импульс системы тел</text>
+  <text x="500" y="124" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#4b5563">общий импульс равен векторной сумме импульсов тел</text>
+
+  <g filter="url(#soft-shadow)">
+    <rect x="126" y="194" width="160" height="86" rx="12" fill="#eef6ff" stroke="#8bb8e8" stroke-width="3"/>
+    <circle cx="166" cy="288" r="16" fill="#64748b"/>
+    <circle cx="246" cy="288" r="16" fill="#64748b"/>
+    <text x="206" y="244" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2937">тело 1</text>
+
+    <rect x="664" y="196" width="160" height="86" rx="12" fill="#f0f9f0" stroke="#91c995" stroke-width="3"/>
+    <circle cx="704" cy="290" r="16" fill="#64748b"/>
+    <circle cx="784" cy="290" r="16" fill="#64748b"/>
+    <text x="744" y="246" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2937">тело 2</text>
+  </g>
+
+  <line x1="288" y1="238" x2="456" y2="238" stroke="#1f6feb" stroke-width="8" stroke-linecap="round" marker-end="url(#arrow-blue)"/>
+  <text x="372" y="214" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1f6feb">p<tspan baseline-shift="sub" font-size="19">1</tspan></text>
+
+  <line x1="664" y1="238" x2="520" y2="318" stroke="#2e7d32" stroke-width="8" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+  <text x="616" y="306" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#2e7d32">p<tspan baseline-shift="sub" font-size="19">2</tspan></text>
+
+  <text x="500" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1f2937">p = p<tspan baseline-shift="sub" font-size="20">1</tspan> + p<tspan baseline-shift="sub" font-size="20">2</tspan> + ...</text>
+
+  <g transform="translate(272 468)">
+    <line x1="0" y1="0" x2="210" y2="0" stroke="#1f6feb" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow-blue)"/>
+    <line x1="210" y1="0" x2="390" y2="-86" stroke="#2e7d32" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+    <line x1="0" y1="0" x2="390" y2="-86" stroke="#c62828" stroke-width="9" stroke-linecap="round" marker-end="url(#arrow-red)"/>
+
+    <text x="104" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#1f6feb">p<tspan baseline-shift="sub" font-size="18">1</tspan></text>
+    <text x="330" y="-24" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#2e7d32">p<tspan baseline-shift="sub" font-size="18">2</tspan></text>
+    <text x="194" y="-70" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#c62828">p</text>
+  </g>
+
+  <text x="500" y="542" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#4b5563">сначала выбирают систему тел, затем складывают импульсы всех её частей</text>
+</svg>
