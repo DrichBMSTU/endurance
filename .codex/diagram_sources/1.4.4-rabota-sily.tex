@@ -1,0 +1,65 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,angles,quotes}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{force}{HTML}{DC2626}
+\definecolor{move}{HTML}{2563EB}
+\definecolor{projection}{HTML}{16A34A}
+\definecolor{softblue}{HTML}{DBEAFE}
+\definecolor{softgreen}{HTML}{DCFCE7}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (250,150);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (244,144);
+
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont, text=textmain] at (125,132)
+    {Работа силы на малом перемещении};
+
+  \coordinate (O) at (45,66);
+  \coordinate (X) at (205,66);
+  \coordinate (F) at (125,115);
+  \coordinate (P) at (125,66);
+
+  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=axis, line width=0.75mm] (28,66) -- (221,66);
+  \node[font=\sffamily\fontsize{13}{15}\selectfont, text=axis] at (226,66) {$x$};
+
+  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=move, line width=1.15mm] (O) -- (X);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=move] at (137,54)
+    {$\Delta\vec{r}$};
+
+  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=force, line width=1.15mm] (O) -- (F);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=force] at (135,117)
+    {$\vec{F}$};
+
+  \draw[dashed, draw=projection, line width=0.8mm] (F) -- (P);
+  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=projection, line width=1.05mm] (O) -- (P);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=projection] at (86,76)
+    {$F_x$};
+
+  \pic[
+    draw=axis,
+    line width=0.65mm,
+    angle radius=21mm,
+    "$\alpha$",
+    angle eccentricity=1.28,
+    text=axis,
+    font=\sffamily\fontsize{14}{17}\selectfont
+  ] {angle = X--O--F};
+
+  \draw[fill=softgreen, draw=projection!55, line width=0.45mm, rounded corners=2.5mm] (24,18) rectangle (226,39);
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=textmain] at (125,29)
+    {$A = F\Delta r\cos\alpha = F_x\Delta x$};
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (178,96)
+    {работу дает проекция\\силы на перемещение};
+\end{tikzpicture}
+\end{document}
