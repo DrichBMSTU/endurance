@@ -1,0 +1,64 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{disp}{HTML}{2563EB}
+\definecolor{vel}{HTML}{16A34A}
+\definecolor{acc}{HTML}{DC2626}
+\definecolor{soft}{HTML}{EFF6FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (270,154);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (264,148);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont, text=textmain] at (135,136)
+    {Гармонические колебания};
+
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (19,22) rectangle (251,123);
+
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (30,72) -- (242,72);
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (38,36) -- (38,113);
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (244,64) {$t$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (49,113) {$x,\ v_x,\ a_x$};
+
+  \draw[dashed, draw=axis!55, line width=0.35mm] (38,104) -- (235,104);
+  \draw[dashed, draw=axis!55, line width=0.35mm] (38,40) -- (235,40);
+  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=axis] at (29,104) {$A$};
+  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=axis] at (27,40) {$-A$};
+
+  \draw[draw=disp, line width=1.25mm, smooth]
+    plot coordinates {(38,72) (50.25,90.4) (62.5,98) (74.75,90.4) (87,72) (99.25,53.6) (111.5,46) (123.75,53.6) (136,72) (148.25,90.4) (160.5,98) (172.75,90.4) (185,72) (197.25,53.6) (209.5,46) (221.75,53.6) (234,72)};
+  \draw[draw=vel, line width=1.1mm, smooth]
+    plot coordinates {(38,93) (50.25,86.85) (62.5,72) (74.75,57.15) (87,51) (99.25,57.15) (111.5,72) (123.75,86.85) (136,93) (148.25,86.85) (160.5,72) (172.75,57.15) (185,51) (197.25,57.15) (209.5,72) (221.75,86.85) (234,93)};
+  \draw[draw=acc, line width=1.1mm, smooth]
+    plot coordinates {(38,72) (50.25,55.0) (62.5,48) (74.75,55.0) (87,72) (99.25,89.0) (111.5,96) (123.75,89.0) (136,72) (148.25,55.0) (160.5,48) (172.75,55.0) (185,72) (197.25,89.0) (209.5,96) (221.75,89.0) (234,72)};
+
+  \draw[<->, draw=axis, line width=0.5mm] (38,28) -- (136,28);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=axis] at (87,18) {$T$};
+  \draw[dashed, draw=axis!45, line width=0.35mm] (38,28) -- (38,104);
+  \draw[dashed, draw=axis!45, line width=0.35mm] (136,28) -- (136,104);
+
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=disp, anchor=west] at (166,112)
+    {$x(t)=A\sin(\omega t+\varphi_0)$};
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=vel, anchor=west] at (166,101)
+    {$v_x(t)=x'_t$};
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=acc, anchor=west] at (166,90)
+    {$a_x(t)=-\omega^2x(t)$};
+
+  \draw[fill=disp, draw=none] (154,112) circle (1.8mm);
+  \draw[fill=vel, draw=none] (154,101) circle (1.8mm);
+  \draw[fill=acc, draw=none] (154,90) circle (1.8mm);
+
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, align=center] at (135,11)
+    {ускорение всегда направлено к положению равновесия};
+\end{tikzpicture}
+\end{document}
