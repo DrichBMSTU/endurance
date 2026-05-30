@@ -1,0 +1,70 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{soft}{HTML}{EFF6FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (278,158);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (272,152);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (139,140)
+    {Резонансная кривая};
+
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (20,24) rectangle (258,126);
+
+  \draw[-{Latex[length=3.2mm,width=2.1mm]}, draw=axis, line width=0.6mm] (38,42) -- (240,42);
+  \draw[-{Latex[length=3.2mm,width=2.1mm]}, draw=axis, line width=0.6mm] (48,34) -- (48,116);
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (244,34) {$\Omega$};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (37,116) {$A$};
+
+  \draw[dashed, draw=axis!55, line width=0.4mm] (142,42) -- (142,111);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=axis] at (142,30) {$\omega_0$};
+
+  \draw[draw=green, line width=1.25mm, smooth]
+    plot coordinates {
+      (52,44) (64,46) (76,49) (88,54) (100,62) (112,74)
+      (124,88) (136,96) (142,98) (148,97) (160,88) (172,76)
+      (184,65) (196,57) (208,51) (220,47) (232,45)
+    };
+
+  \draw[draw=red, line width=1.25mm, smooth]
+    plot coordinates {
+      (52,43) (64,44) (76,45) (88,47) (100,50) (112,58)
+      (124,78) (134,108) (140,118) (146,108) (156,78) (168,57)
+      (180,49) (196,46) (212,44) (232,43)
+    };
+
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=red, line width=0.55mm] (165,112) -- (146,109);
+  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=red, align=left] at (202,114)
+    {малые потери:\\высокий пик};
+
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=green, line width=0.55mm] (185,88) -- (161,84);
+  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=green, align=left] at (212,87)
+    {большие потери:\\пик ниже};
+
+  \draw[<->, draw=blue, line width=0.55mm] (118,22) -- (166,22);
+  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=blue] at (142,15)
+    {область резонанса};
+
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, align=center] at (82,17)
+    {$\Omega \ll \omega_0$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, align=center] at (209,17)
+    {$\Omega \gg \omega_0$};
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=textmain, align=center] at (139,134)
+    {амплитуда вынужденных колебаний максимальна около собственной частоты};
+\end{tikzpicture}
+\end{document}
