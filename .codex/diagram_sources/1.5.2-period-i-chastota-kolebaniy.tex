@@ -13,61 +13,67 @@
 \definecolor{blue}{HTML}{2563EB}
 \definecolor{green}{HTML}{16A34A}
 \definecolor{red}{HTML}{DC2626}
+\definecolor{purple}{HTML}{7C3AED}
 \definecolor{soft}{HTML}{EFF6FF}
 \definecolor{softgreen}{HTML}{ECFDF5}
 
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
-  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (270,154);
-  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (264,148);
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (300,166);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (294,160);
 
-  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (135,136)
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (150,148)
     {Периоды свободных колебаний};
 
-  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (18,22) rectangle (128,121);
-  \draw[fill=softgreen, draw=border, line width=0.35mm, rounded corners=2.5mm] (142,22) rectangle (252,121);
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (18,24) rectangle (139,133);
+  \draw[fill=softgreen, draw=border, line width=0.35mm, rounded corners=2.5mm] (154,24) rectangle (282,133);
 
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=textmain] at (73,111)
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=textmain] at (78.5,123)
     {Математический маятник};
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=textmain] at (197,111)
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=textmain] at (218,123)
     {Пружинный маятник};
 
   % Mathematical pendulum
-  \coordinate (O) at (73,94);
-  \coordinate (M) at (94,51);
-  \coordinate (V) at (73,45);
-  \draw[draw=axis, line width=0.6mm] (48,94) -- (98,94);
+  \coordinate (O) at (78.5,104);
+  \coordinate (M) at (100,57);
+  \coordinate (V) at (78.5,51);
+  \draw[draw=axis, line width=0.6mm] (51,104) -- (106,104);
   \fill[axis] (O) circle (1.4mm);
   \draw[dashed, draw=axis!55, line width=0.35mm] (O) -- (V);
   \draw[draw=axis, line width=0.7mm] (O) -- (M);
   \fill[blue] (M) circle (5.2mm);
   \draw[-{Latex[length=3mm,width=2mm]}, draw=red, line width=0.55mm] (M) -- ++(0,-18)
     node[below, font=\sffamily\fontsize{10}{12}\selectfont, text=red] {$m\vec g$};
-  \draw[draw=blue, line width=0.45mm] (79,83) arc[start angle=-90,end angle=-64,radius=11mm];
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue] at (84,78) {$\alpha$};
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (88,77) {$l$};
-  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=blue] at (73,35)
+  \draw[draw=blue, line width=0.45mm] (78.5,90) arc[start angle=-90,end angle=-65.4,radius=14mm];
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue] at (85,87) {$\alpha$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (94,82) {$l$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=blue] at (78.5,40)
     {$T=2\pi\sqrt{\dfrac{l}{g}}$};
-  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis, align=center] at (73,25)
-    {малые колебания};
 
   % Spring pendulum
-  \draw[draw=axis, line width=0.6mm] (158,94) -- (236,94);
-  \draw[draw=axis, line width=0.75mm] (162,88) -- (162,100);
+  \draw[draw=axis, line width=0.75mm] (167,74) -- (167,103);
   \draw[decorate, decoration={coil, aspect=0.55, segment length=4.5mm, amplitude=3mm},
-    draw=green, line width=0.85mm] (162,94) -- (205,94);
-  \draw[fill=blue, draw=blue!70!black, line width=0.45mm, rounded corners=1.5mm] (205,78) rectangle (227,110);
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=white] at (216,94) {$m$};
-  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.5mm] (216,67) -- (239,67);
-  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.5mm] (216,67) -- (193,67);
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (216,58) {$x$};
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=green] at (183,106) {$k$};
-  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=green] at (197,35)
-    {$T=2\pi\sqrt{\dfrac{m}{k}}$};
-  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis, align=center] at (197,25)
-    {свободные колебания};
+    draw=green, line width=0.85mm] (167,88) -- (221,88);
+  \draw[fill=blue, draw=blue!70!black, line width=0.45mm, rounded corners=1.5mm] (221,74) rectangle (243,102);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=white] at (232,88) {$m$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=green] at (192,102) {$k$};
 
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=textmain] at (135,12)
+  \draw[-{Latex[length=3.2mm,width=2.1mm]}, draw=axis, line width=0.55mm] (167,60) -- (264,60);
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (267,60) {$X$};
+  \draw[dashed, draw=axis!60, line width=0.35mm] (207,56) -- (207,107);
+  \draw[dashed, draw=blue!70, line width=0.35mm] (232,56) -- (232,107);
+  \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, align=center] at (207,50)
+    {недеф.\\положение};
+  \node[font=\sffamily\fontsize{9}{11}\selectfont, text=blue, align=center] at (237,50)
+    {смещ.\\положение};
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=red, line width=0.65mm] (232,110) -- (211,110)
+    node[midway, above, font=\sffamily\fontsize{10}{12}\selectfont, text=red] {$\vec F_{\text{упр}}$};
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=purple, line width=0.65mm] (232,104) -- (211,104)
+    node[midway, below, font=\sffamily\fontsize{10}{12}\selectfont, text=purple] {$\vec a$};
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=green] at (218,35)
+    {$T=2\pi\sqrt{\dfrac{m}{k}}$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=textmain] at (150,13)
     {$T=\dfrac{2\pi}{\omega}=\dfrac{1}{\nu}$};
 \end{tikzpicture}
 \end{document}
