@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="430" viewBox="0 0 920 430" role="img" aria-labelledby="title desc">
+  <title id="title">Модели строения вещества</title>
+  <desc id="desc">Схема сравнивает расположение частиц в газе, жидкости и твёрдом теле.</desc>
+  <rect width="920" height="430" rx="0" fill="#f8fafc"/>
+  <rect x="28" y="28" width="864" height="374" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+
+  <text x="460" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#0f172a">Модели строения вещества</text>
+  <text x="460" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#475569">частицы расположены и движутся по-разному в разных агрегатных состояниях</text>
+
+  <g transform="translate(70 135)">
+    <rect width="230" height="220" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="115" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Газ</text>
+    <rect x="28" y="58" width="174" height="104" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <g fill="#2563eb">
+      <circle cx="55" cy="85" r="8"/>
+      <circle cx="142" cy="82" r="8"/>
+      <circle cx="91" cy="119" r="8"/>
+      <circle cx="174" cy="128" r="8"/>
+      <circle cx="50" cy="145" r="8"/>
+      <circle cx="126" cy="146" r="8"/>
+    </g>
+    <g stroke="#2563eb" stroke-width="2" stroke-linecap="round" marker-end="url(#arrow-blue)">
+      <line x1="55" y1="85" x2="72" y2="75"/>
+      <line x1="142" y1="82" x2="124" y2="96"/>
+      <line x1="174" y1="128" x2="157" y2="111"/>
+    </g>
+    <text x="115" y="188" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">частицы далеко</text>
+    <text x="115" y="211" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">заполняет сосуд</text>
+  </g>
+
+  <g transform="translate(345 135)">
+    <rect width="230" height="220" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="115" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Жидкость</text>
+    <rect x="28" y="58" width="174" height="104" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <g fill="#16a34a">
+      <circle cx="61" cy="132" r="8"/>
+      <circle cx="91" cy="135" r="8"/>
+      <circle cx="121" cy="129" r="8"/>
+      <circle cx="151" cy="137" r="8"/>
+      <circle cx="51" cy="104" r="8"/>
+      <circle cx="82" cy="101" r="8"/>
+      <circle cx="112" cy="106" r="8"/>
+      <circle cx="143" cy="99" r="8"/>
+      <circle cx="172" cy="109" r="8"/>
+      <circle cx="70" cy="76" r="8"/>
+      <circle cx="101" cy="81" r="8"/>
+      <circle cx="132" cy="75" r="8"/>
+      <circle cx="162" cy="82" r="8"/>
+    </g>
+    <text x="115" y="188" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">сохраняет объём</text>
+    <text x="115" y="211" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">принимает форму сосуда</text>
+  </g>
+
+  <g transform="translate(620 135)">
+    <rect width="230" height="220" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="115" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Твёрдое тело</text>
+    <rect x="28" y="58" width="174" height="104" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <g stroke="#d97706" stroke-width="1.4" opacity="0.45">
+      <line x1="62" y1="82" x2="152" y2="82"/>
+      <line x1="62" y1="110" x2="152" y2="110"/>
+      <line x1="62" y1="138" x2="152" y2="138"/>
+      <line x1="62" y1="82" x2="62" y2="138"/>
+      <line x1="92" y1="82" x2="92" y2="138"/>
+      <line x1="122" y1="82" x2="122" y2="138"/>
+      <line x1="152" y1="82" x2="152" y2="138"/>
+    </g>
+    <g fill="#d97706">
+      <circle cx="62" cy="82" r="8"/>
+      <circle cx="92" cy="82" r="8"/>
+      <circle cx="122" cy="82" r="8"/>
+      <circle cx="152" cy="82" r="8"/>
+      <circle cx="62" cy="110" r="8"/>
+      <circle cx="92" cy="110" r="8"/>
+      <circle cx="122" cy="110" r="8"/>
+      <circle cx="152" cy="110" r="8"/>
+      <circle cx="62" cy="138" r="8"/>
+      <circle cx="92" cy="138" r="8"/>
+      <circle cx="122" cy="138" r="8"/>
+      <circle cx="152" cy="138" r="8"/>
+    </g>
+    <text x="115" y="188" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">сохраняет форму</text>
+    <text x="115" y="211" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#475569">и объём</text>
+  </g>
+
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+</svg>

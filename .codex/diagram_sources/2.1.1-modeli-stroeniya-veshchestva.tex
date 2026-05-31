@@ -1,0 +1,72 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{amber}{HTML}{D97706}
+\definecolor{softblue}{HTML}{DBEAFE}
+\definecolor{softgreen}{HTML}{DCFCE7}
+\definecolor{softamber}{HTML}{FEF3C7}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (252,118);
+
+  \node[font=\sffamily\bfseries\fontsize{17}{21}\selectfont, text=textmain] at (126,106)
+    {Модели строения вещества};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=textmuted] at (126,96)
+    {частицы расположены и движутся по-разному в разных агрегатных состояниях};
+
+  \draw[fill=white, draw=border, line width=0.35mm, rounded corners=3mm] (8,16) rectangle ++(76,72);
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (46,78) {Газ};
+  \draw[fill=softblue, draw=blue, line width=0.35mm, rounded corners=2mm] (18,30) rectangle ++(56,38);
+
+  \draw[fill=white, draw=border, line width=0.35mm, rounded corners=3mm] (88,16) rectangle ++(76,72);
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (126,78) {Жидкость};
+  \draw[fill=softgreen, draw=green, line width=0.35mm, rounded corners=2mm] (98,30) rectangle ++(56,38);
+
+  \draw[fill=white, draw=border, line width=0.35mm, rounded corners=3mm] (168,16) rectangle ++(76,72);
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (206,78) {Твёрдое тело};
+  \draw[fill=softamber, draw=amber, line width=0.35mm, rounded corners=2mm] (178,30) rectangle ++(56,38);
+
+  % Gas: particles are far apart.
+  \foreach \x/\y in {25/60,55/58,39/45,66/39,21/33,49/32} {
+    \fill[blue] (\x,\y) circle (2.2);
+  }
+  \draw[-{Latex[length=2.8mm]}, blue, line width=0.3mm] (25,60) -- ++(6,4);
+  \draw[-{Latex[length=2.8mm]}, blue, line width=0.3mm] (55,58) -- ++(-6,-3);
+  \draw[-{Latex[length=2.8mm]}, blue, line width=0.3mm] (66,39) -- ++(-5,5);
+  \node[font=\sffamily\fontsize{8.5}{10}\selectfont, text=textmuted, align=center] at (46,23)
+    {частицы далеко\\заполняет сосуд};
+
+  % Liquid: particles are close but disordered.
+  \foreach \x/\y in {
+    108/37,119/39,130/36,140/41,
+    103/49,115/51,127/48,138/53,149/48,
+    109/60,121/62,133/59,145/62
+  } {
+    \fill[green] (\x,\y) circle (2.5);
+  }
+  \node[font=\sffamily\fontsize{8.5}{10}\selectfont, text=textmuted, align=center] at (126,23)
+    {сохраняет объём\\принимает форму сосуда};
+
+  % Solid: particles are ordered in lattice.
+  \foreach \x in {190,202,214,226}
+    \foreach \y in {39,51,63}
+      \fill[amber] (\x,\y) circle (2.4);
+  \foreach \x in {190,202,214,226}
+    \draw[amber, opacity=0.45, line width=0.25mm] (\x,39) -- (\x,63);
+  \foreach \y in {39,51,63}
+    \draw[amber, opacity=0.45, line width=0.25mm] (190,\y) -- (226,\y);
+  \node[font=\sffamily\fontsize{8.5}{10}\selectfont, text=textmuted, align=center] at (206,23)
+    {сохраняет форму\\и объём};
+\end{tikzpicture}
+\end{document}
