@@ -1,0 +1,87 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{soft}{HTML}{EFF6FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (278,160);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (272,154);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (139,143)
+    {Поперечная и продольная волны};
+
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (18,84) rectangle (260,130);
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain, anchor=west] at (26,121)
+    {Поперечная волна};
+
+  \draw[-{Latex[length=3.2mm,width=2.1mm]}, draw=axis, line width=0.6mm] (38,103) -- (242,103);
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (226,95)
+    {распространение};
+
+  \draw[draw=blue, line width=1.1mm, smooth]
+    plot coordinates {
+      (38,103) (46,112) (54,116) (62,112) (70,103) (78,94) (86,90) (94,94)
+      (102,103) (110,112) (118,116) (126,112) (134,103) (142,94) (150,90) (158,94)
+      (166,103) (174,112) (182,116) (190,112) (198,103) (206,94) (214,90) (222,94) (232,103)
+    };
+
+  \draw[<->, draw=green, line width=0.6mm] (70,116) -- (70,103);
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=green] at (61,113) {$A$};
+
+  \draw[decorate, decoration={brace, amplitude=2mm, mirror}, draw=red, line width=0.55mm]
+    (54,87) -- (118,87);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=red] at (86,78) {$\lambda$};
+
+  \foreach \x in {50,82,114,146,178,210} {
+    \draw[-{Latex[length=2.6mm,width=1.7mm]}, draw=blue, line width=0.5mm] (\x,95) -- (\x,111);
+    \draw[-{Latex[length=2.6mm,width=1.7mm]}, draw=blue, line width=0.5mm] (\x+16,111) -- (\x+16,95);
+  }
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue, align=center] at (42,125)
+    {частицы\\колеблются вверх-вниз};
+
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (18,22) rectangle (260,72);
+  \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain, anchor=west] at (26,63)
+    {Продольная волна};
+
+  \draw[-{Latex[length=3.2mm,width=2.1mm]}, draw=axis, line width=0.6mm] (38,44) -- (242,44);
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (226,36)
+    {распространение};
+
+  \foreach \x in {44,49,54,59,64,94,99,104,109,114,144,149,154,159,164,194,199,204,209,214} {
+    \draw[draw=blue, line width=0.7mm] (\x,36) -- (\x,52);
+  }
+  \foreach \x in {74,84,124,134,174,184,224} {
+    \draw[draw=axis!50, line width=0.45mm] (\x,38) -- (\x,50);
+  }
+
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue] at (54,57) {сгущение};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (79,30) {разрежение};
+
+  \draw[decorate, decoration={brace, amplitude=2mm, mirror}, draw=red, line width=0.55mm]
+    (54,24) -- (154,24);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=red] at (104,15) {$\lambda$};
+
+  \foreach \x in {72,128,184} {
+    \draw[-{Latex[length=2.6mm,width=1.7mm]}, draw=green, line width=0.55mm] (\x,55) -- (\x+12,55);
+    \draw[-{Latex[length=2.6mm,width=1.7mm]}, draw=green, line width=0.55mm] (\x,33) -- (\x-12,33);
+  }
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=green, align=center] at (62,68)
+    {частицы колеблются\\вдоль волны};
+
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=textmain] at (139,136)
+    {длина волны: расстояние между ближайшими одинаковыми состояниями среды};
+\end{tikzpicture}
+\end{document}
