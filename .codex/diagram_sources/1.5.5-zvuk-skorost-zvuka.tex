@@ -1,0 +1,73 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{soft}{HTML}{EFF6FF}
+\definecolor{amber}{HTML}{F59E0B}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none] (0,0) rectangle (278,164);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (8,8) rectangle (270,156);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (139,143)
+    {Звуковая волна в воздухе};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (139,132)
+    {продольная волна: сжатия и разрежения давления распространяются от источника};
+
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2mm] (22,76) rectangle (256,122);
+
+  \draw[fill=axis!12, draw=axis, line width=0.45mm] (35,91) rectangle (45,107);
+  \draw[draw=axis, line width=0.7mm] (47,91) -- (47,107);
+  \draw[draw=axis, line width=0.55mm, decorate, decoration={coil, aspect=0.35, segment length=2.4mm, amplitude=1.4mm}]
+    (47,99) -- (58,99);
+  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis] at (42,84) {источник};
+
+  \draw[-{Latex[length=3.4mm,width=2.2mm]}, draw=blue, line width=0.65mm] (208,116) -- (244,116);
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=blue] at (226,121) {$v$};
+
+  \foreach \x in {68,71,74,77,80,83,86,89,104,119,134,149,164,167,170,173,176,179,182,185,200,215,230,233,236,239,242} {
+    \fill[blue] (\x,99) circle (1.55mm);
+  }
+  \foreach \x/\dx in {70/7,78/-7,86/7,116/-7,148/7,166/-7,174/7,182/-7,214/7,232/-7,240/7} {
+    \draw[-{Latex[length=2.3mm,width=1.5mm]}, draw=green, line width=0.45mm] (\x,99) -- ++(\dx,0);
+  }
+
+  \draw[dashed, draw=axis!45, line width=0.35mm] (78,82) -- (78,116);
+  \draw[dashed, draw=axis!45, line width=0.35mm] (174,82) -- (174,116);
+  \draw[<->, draw=red, line width=0.55mm] (78,84) -- (174,84);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=red, fill=white, inner sep=1pt] at (126,84)
+    {$\lambda$};
+
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue] at (78,116) {сжатие};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (126,116) {разрежение};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue] at (174,116) {сжатие};
+
+  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2mm] (22,24) rectangle (256,66);
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.5mm] (38,43) -- (240,43);
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.5mm] (48,30) -- (48,61);
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (245,38) {$x$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (39,61) {$p$};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis] at (67,31) {$p_0$};
+
+  \draw[draw=amber, line width=1mm, smooth]
+    plot coordinates {
+      (52,43) (64,52) (76,58) (88,52) (100,43) (112,34) (124,28) (136,34)
+      (148,43) (160,52) (172,58) (184,52) (196,43) (208,34) (220,28) (232,34) (244,43)
+    };
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=textmain] at (144,17)
+    {давление колеблется около среднего значения};
+\end{tikzpicture}
+\end{document}
+
