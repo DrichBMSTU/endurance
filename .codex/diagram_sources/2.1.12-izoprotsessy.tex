@@ -1,0 +1,87 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{panel}{HTML}{F8FAFC}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{red}{HTML}{DC2626}
+
+\newcommand{\axisplot}[4]{
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (50,0);
+  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,50);
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (55,-1) {#1};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (-4,54) {#2};
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (320,164);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (314,158);
+
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (160,144)
+    {Графики изопроцессов};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (160,133)
+    {pV-, pT- и VT-диаграммы при неизменном числе молекул};
+
+  \begin{scope}[shift={(22,24)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (88,104);
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (44,94) {$pV$-диаграмма};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=blue, anchor=east, align=right] at (82,80) {$T=const$\\изотерма};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=green, anchor=east, align=right] at (82,68) {$V=const$\\изохора};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=red, anchor=east, align=right] at (82,56) {$p=const$\\изобара};
+    \begin{scope}[shift={(16,18)}]
+      \axisplot{$V$}{$p$}{blue}{$T=const$\\изотерма}
+      \draw[draw=blue, line width=0.95mm, smooth]
+        plot coordinates {(9,43) (14,38) (19,31) (24,23) (29,17) (36,12) (44,9)};
+      \draw[draw=green, line width=0.95mm] (31,2) -- (31,44);
+      \draw[draw=red, line width=0.95mm] (2,25) -- (47,25);
+    \end{scope}
+  \end{scope}
+
+  \begin{scope}[shift={(116,24)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (88,104);
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (44,94) {$pT$-диаграмма};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=green, anchor=east, align=right] at (82,80) {$V=const$\\изохора};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=blue, anchor=east, align=right] at (82,68) {$T=const$\\изотерма};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=red, anchor=east, align=right] at (82,56) {$p=const$\\изобара};
+    \begin{scope}[shift={(16,18)}]
+      \axisplot{$T$}{$p$}{green}{$V=const$\\изохора}
+      \draw[draw=green, line width=0.95mm] (2,2) -- (42,42);
+      \draw[draw=blue, line width=0.95mm] (29,2) -- (29,44);
+      \draw[draw=red, line width=0.95mm] (2,24) -- (47,24);
+    \end{scope}
+  \end{scope}
+
+  \begin{scope}[shift={(210,24)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (88,104);
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (44,94) {$VT$-диаграмма};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=red, anchor=east, align=right] at (82,80) {$p=const$\\изобара};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=blue, anchor=east, align=right] at (82,68) {$T=const$\\изотерма};
+    \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=green, anchor=east, align=right] at (82,56) {$V=const$\\изохора};
+    \begin{scope}[shift={(16,18)}]
+      \axisplot{$T$}{$V$}{red}{$p=const$\\изобара}
+      \draw[draw=red, line width=0.95mm] (2,2) -- (42,42);
+      \draw[draw=blue, line width=0.95mm] (29,2) -- (29,44);
+      \draw[draw=green, line width=0.95mm] (2,24) -- (47,24);
+    \end{scope}
+  \end{scope}
+
+  \begin{scope}[shift={(82,14)}]
+    \draw[draw=blue, line width=0.95mm] (0,0) -- (14,0);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, anchor=west] at (18,0) {изотерма};
+    \draw[draw=green, line width=0.95mm] (74,0) -- (88,0);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, anchor=west] at (92,0) {изохора};
+    \draw[draw=red, line width=0.95mm] (148,0) -- (162,0);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, anchor=west] at (166,0) {изобара};
+  \end{scope}
+\end{tikzpicture}
+\end{document}
