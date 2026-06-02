@@ -40,8 +40,8 @@
     \node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont, text=red, anchor=east, align=right] at (82,56) {$p=const$\\изобара};
     \begin{scope}[shift={(16,18)}]
       \axisplot{$V$}{$p$}{blue}{$T=const$\\изотерма}
-      \draw[draw=blue, line width=0.95mm, smooth]
-        plot coordinates {(9,43) (14,38) (19,31) (24,23) (29,17) (36,12) (44,9)};
+      \draw[draw=blue, line width=0.95mm, domain=9:44, samples=80, smooth, variable=\x]
+        plot ({\x},{380/\x});
       \draw[draw=green, line width=0.95mm] (31,2) -- (31,44);
       \draw[draw=red, line width=0.95mm] (2,25) -- (47,25);
     \end{scope}
