@@ -1,0 +1,87 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{panel}{HTML}{F8FAFC}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+
+\newcommand{\smallaxis}[2]{
+  \draw[-{Latex[length=2.6mm,width=1.8mm]}, draw=axis, line width=0.45mm] (0,0) -- (58,0);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]}, draw=axis, line width=0.45mm] (0,0) -- (0,38);
+  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis] at (63,-1) {#1};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis] at (-5,42) {#2};
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (320,190);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (314,184);
+
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont, text=textmain] at (160,171)
+    {Насыщенный пар};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (160,159)
+    {Зависимость от температуры и независимость от объёма при наличии жидкости};
+
+  \begin{scope}[shift={(22,92)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (132,58);
+    \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (66,49)
+      {Давление при нагревании};
+    \begin{scope}[shift={(18,9)}]
+      \smallaxis{$T$}{$p_{\text{н}}$}
+      \draw[draw=blue, line width=0.95mm, smooth]
+        (4,4) .. controls (18,8) and (32,17) .. (52,34);
+      \node[font=\sffamily\fontsize{9}{11}\selectfont, text=blue, align=left, anchor=west] at (60,25)
+        {растёт};
+    \end{scope}
+  \end{scope}
+
+  \begin{scope}[shift={(166,92)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (132,58);
+    \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (66,49)
+      {Плотность при нагревании};
+    \begin{scope}[shift={(18,9)}]
+      \smallaxis{$T$}{$\rho_{\text{н}}$}
+      \draw[draw=green, line width=0.95mm, smooth]
+        (4,4) .. controls (18,7) and (34,15) .. (52,33);
+      \node[font=\sffamily\fontsize{9}{11}\selectfont, text=green, align=left, anchor=west] at (60,25)
+        {растёт};
+    \end{scope}
+  \end{scope}
+
+  \begin{scope}[shift={(22,24)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (132,58);
+    \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (66,49)
+      {Давление при $T=const$};
+    \begin{scope}[shift={(18,9)}]
+      \smallaxis{$V$}{$p_{\text{н}}$}
+      \draw[draw=blue, line width=0.95mm] (4,22) -- (54,22);
+      \node[font=\sffamily\fontsize{9}{11}\selectfont, text=blue, align=left, anchor=west] at (60,22)
+        {не зависит\\от $V$};
+    \end{scope}
+  \end{scope}
+
+  \begin{scope}[shift={(166,24)}]
+    \draw[fill=panel, draw=border, line width=0.35mm, rounded corners=2.5mm] (0,0) rectangle (132,58);
+    \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont, text=textmain] at (66,49)
+      {Плотность при $T=const$};
+    \begin{scope}[shift={(18,9)}]
+      \smallaxis{$V$}{$\rho_{\text{н}}$}
+      \draw[draw=green, line width=0.95mm] (4,22) -- (54,22);
+      \node[font=\sffamily\fontsize{9}{11}\selectfont, text=green, align=left, anchor=west] at (60,22)
+        {не зависит\\от $V$};
+    \end{scope}
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis] at (160,14)
+    {Горизонтальные участки справедливы, пока пар соприкасается с жидкостью и может испаряться или конденсироваться.};
+\end{tikzpicture}
+\end{document}
