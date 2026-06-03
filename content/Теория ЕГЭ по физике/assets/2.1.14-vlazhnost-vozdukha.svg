@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="500" viewBox="0 0 920 500" role="img" aria-labelledby="title desc">
+  <title id="title">Относительная влажность воздуха</title>
+  <desc id="desc">Схема показывает относительную влажность как отношение фактического водяного пара к насыщенному пару при той же температуре.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .title { fill: #0f172a; font: 700 28px Arial, sans-serif; }
+      .text { fill: #334155; font: 18px Arial, sans-serif; }
+      .small { fill: #475569; font: 15px Arial, sans-serif; }
+      .formula { fill: #0f172a; font: 700 22px Arial, sans-serif; }
+      .bar-bg { fill: #e2e8f0; }
+      .actual { fill: #0ea5e9; }
+      .saturated { fill: #22c55e; }
+      .warn { fill: #f97316; }
+      .line { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 8 7; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="8" y="8" width="904" height="484" rx="18"/>
+  <rect class="panel" x="28" y="28" width="864" height="444" rx="14"/>
+
+  <text class="title" x="460" y="72" text-anchor="middle">Относительная влажность при одной температуре T</text>
+  <text class="text" x="460" y="108" text-anchor="middle">сравниваем фактический водяной пар с насыщенным паром при той же температуре</text>
+
+  <g transform="translate(80 150)">
+    <text class="formula" x="145" y="0" text-anchor="middle">Фактически есть</text>
+    <rect class="bar-bg" x="30" y="28" width="230" height="210" rx="14"/>
+    <rect class="actual" x="30" y="122" width="230" height="116" rx="14"/>
+    <line class="line" x1="30" y1="28" x2="260" y2="28"/>
+    <text class="text" x="145" y="82" text-anchor="middle">водяной пар</text>
+    <text class="formula" x="145" y="176" text-anchor="middle">p<tspan baseline-shift="sub" font-size="14">пара</tspan>, ρ<tspan baseline-shift="sub" font-size="14">пара</tspan></text>
+    <text class="small" x="145" y="256" text-anchor="middle">меньше максимума</text>
+  </g>
+
+  <g transform="translate(590 150)">
+    <text class="formula" x="145" y="0" text-anchor="middle">Могло бы быть</text>
+    <rect class="bar-bg" x="30" y="28" width="230" height="210" rx="14"/>
+    <rect class="saturated" x="30" y="28" width="230" height="210" rx="14"/>
+    <text class="text" x="145" y="82" text-anchor="middle">насыщенный пар</text>
+    <text class="formula" x="145" y="148" text-anchor="middle">p<tspan baseline-shift="sub" font-size="14">н</tspan>(T), ρ<tspan baseline-shift="sub" font-size="14">н</tspan>(T)</text>
+    <text class="small" x="145" y="256" text-anchor="middle">максимум при этой T</text>
+  </g>
+
+  <g transform="translate(326 184)">
+    <path d="M0 78 H172" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+    <text class="small" x="86" y="46" text-anchor="middle">отношение</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect x="160" y="414" width="600" height="52" rx="12" fill="#eef6ff" stroke="#bfdbfe" stroke-width="2"/>
+  <text class="formula" x="460" y="446" text-anchor="middle">φ = p<tspan baseline-shift="sub" font-size="14">пара</tspan>/p<tspan baseline-shift="sub" font-size="14">н</tspan>(T) = ρ<tspan baseline-shift="sub" font-size="14">пара</tspan>/ρ<tspan baseline-shift="sub" font-size="14">н</tspan>(T)</text>
+</svg>
