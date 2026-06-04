@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" role="img" aria-labelledby="title desc">
+  <title id="title">Преобразование энергии в фазовых переходах</title>
+  <desc id="desc">График показывает, что при плавлении и кипении температура остаётся постоянной, а энергия идёт на фазовый переход.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .axis { stroke: #334155; stroke-width: 3; }
+      .grid { stroke: #e2e8f0; stroke-width: 2; }
+      .curve { fill: none; stroke: #2563eb; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .plateau { fill: none; stroke: #f97316; stroke-width: 8; stroke-linecap: round; }
+      .title { fill: #0f172a; font: 700 28px Arial, sans-serif; }
+      .label { fill: #334155; font: 18px Arial, sans-serif; }
+      .small { fill: #475569; font: 15px Arial, sans-serif; }
+      .phase { fill: #0f172a; font: 700 16px Arial, sans-serif; }
+      .formula { fill: #0f172a; font: 700 20px Arial, sans-serif; }
+      .note { fill: #eef6ff; stroke: #bfdbfe; stroke-width: 2; }
+      .melt { fill: #fff7ed; stroke: #fed7aa; stroke-width: 2; }
+      .boil { fill: #ecfeff; stroke: #a5f3fc; stroke-width: 2; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="8" y="8" width="904" height="504" rx="18"/>
+  <rect class="panel" x="28" y="28" width="864" height="464" rx="14"/>
+
+  <text class="title" x="460" y="72" text-anchor="middle">Энергия при нагревании и фазовых переходах</text>
+  <text class="label" x="460" y="108" text-anchor="middle">на плато температура постоянна, но энергия продолжает поступать</text>
+
+  <g transform="translate(95 142)">
+    <line class="axis" x1="0" y1="280" x2="700" y2="280" marker-end="url(#arrow)"/>
+    <line class="axis" x1="0" y1="280" x2="0" y2="10" marker-end="url(#arrow)"/>
+
+    <line class="grid" x1="0" y1="205" x2="700" y2="205"/>
+    <line class="grid" x1="0" y1="95" x2="700" y2="95"/>
+    <text class="small" x="-14" y="211" text-anchor="end">T<tspan baseline-shift="sub" font-size="11">пл</tspan></text>
+    <text class="small" x="-14" y="101" text-anchor="end">T<tspan baseline-shift="sub" font-size="11">кип</tspan></text>
+
+    <path class="curve" d="M42 252 L150 205"/>
+    <path class="plateau" d="M150 205 L300 205"/>
+    <path class="curve" d="M300 205 L455 95"/>
+    <path class="plateau" d="M455 95 L615 95"/>
+    <path class="curve" d="M615 95 L675 50"/>
+
+    <rect class="melt" x="165" y="218" width="120" height="44" rx="10"/>
+    <text class="formula" x="225" y="246" text-anchor="middle">Q = λm</text>
+
+    <rect class="boil" x="472" y="108" width="126" height="44" rx="10"/>
+    <text class="formula" x="535" y="136" text-anchor="middle">Q = Lm</text>
+
+    <text class="phase" x="70" y="304" text-anchor="middle">твёрдое</text>
+    <text class="phase" x="225" y="304" text-anchor="middle">плавление</text>
+    <text class="phase" x="377" y="304" text-anchor="middle">жидкость</text>
+    <text class="phase" x="535" y="304" text-anchor="middle">кипение</text>
+    <text class="phase" x="648" y="304" text-anchor="middle">пар</text>
+
+    <text class="label" x="716" y="286" text-anchor="start">Q</text>
+    <text class="label" x="-48" y="150" text-anchor="middle" transform="rotate(-90 -48 150)">температура T</text>
+  </g>
+
+  <rect class="note" x="100" y="456" width="720" height="28" rx="10"/>
+  <text class="small" x="460" y="475" text-anchor="middle">Обратные переходы: конденсация и кристаллизация выделяют такую же энергию по модулю.</text>
+</svg>
