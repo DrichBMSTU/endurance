@@ -1,0 +1,91 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{grid}{HTML}{E2E8F0}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{greenfill}{HTML}{DCFCE7}
+\definecolor{red}{HTML}{DC2626}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (330,188);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (324,182);
+
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (165,167)
+    {Работа газа на $pV$-диаграмме};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (165,155)
+    {площадь под графиком процесса равна работе газа};
+
+  \begin{scope}[shift={(28,30)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (63,105)
+      {Изобарный процесс};
+    \foreach \x in {20,40,60,80,100} {
+      \draw[draw=grid, line width=0.22mm] (\x,0) -- (\x,82);
+    }
+    \foreach \y in {20,40,60,80} {
+      \draw[draw=grid, line width=0.22mm] (0,\y) -- (122,\y);
+    }
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (130,0);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,90);
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (136,-1) {$V$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,94) {$p$};
+
+    \draw[fill=bluefill, draw=none] (26,0) rectangle (102,54);
+    \draw[draw=blue, line width=1mm] (26,54) -- (102,54);
+    \draw[draw=axis, dashed, line width=0.35mm] (26,0) -- (26,54);
+    \draw[draw=axis, dashed, line width=0.35mm] (102,0) -- (102,54);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (26,-9) {$V_1$};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (102,-9) {$V_2$};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=blue, anchor=east] at (-4,54) {$p$};
+    \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=blue] at (64,27) {$A=p\Delta V$};
+    \draw[-{Latex[length=2.6mm,width=1.8mm]}, draw=blue, line width=0.55mm] (34,64) -- (94,64);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (64,72) {расширение};
+  \end{scope}
+
+  \begin{scope}[shift={(182,30)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (63,105)
+      {Произвольный процесс};
+    \foreach \x in {20,40,60,80,100} {
+      \draw[draw=grid, line width=0.22mm] (\x,0) -- (\x,82);
+    }
+    \foreach \y in {20,40,60,80} {
+      \draw[draw=grid, line width=0.22mm] (0,\y) -- (122,\y);
+    }
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (130,0);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,90);
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (136,-1) {$V$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,94) {$p$};
+
+    \path[fill=greenfill] (22,0) -- (22,38)
+      .. controls (42,70) and (72,72) .. (106,58)
+      -- (106,0) -- cycle;
+    \draw[draw=green, line width=1mm] (22,38)
+      .. controls (42,70) and (72,72) .. (106,58);
+    \draw[draw=axis, dashed, line width=0.35mm] (22,0) -- (22,38);
+    \draw[draw=axis, dashed, line width=0.35mm] (106,0) -- (106,58);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (22,-9) {$V_1$};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (106,-9) {$V_2$};
+    \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=green] at (64,29) {$A=\text{площадь}$};
+
+    \draw[draw=axis, line width=0.3mm] (40,0) -- (40,60);
+    \draw[draw=axis, line width=0.3mm] (58,0) -- (58,69);
+    \draw[draw=axis, line width=0.3mm] (76,0) -- (76,68);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis, align=center] at (64,84)
+      {сумма малых\\площадей $p\Delta V$};
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (165,18)
+    {При расширении площадь берут со знаком ``+'', при сжатии — со знаком ``-''.};
+\end{tikzpicture}
+\end{document}
