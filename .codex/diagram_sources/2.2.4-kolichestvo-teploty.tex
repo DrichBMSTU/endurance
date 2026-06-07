@@ -1,0 +1,76 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{grid}{HTML}{E2E8F0}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{16A34A}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (320,184);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (314,178);
+
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (160,163)
+    {Количество теплоты при нагревании};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (160,151)
+    {$Q = cm\Delta T$: чем больше $c$ или $m$, тем больше наклон графика};
+
+  \begin{scope}[shift={(52,38)}]
+    \foreach \x in {40,80,120,160,200} {
+      \draw[draw=grid, line width=0.25mm] (\x,0) -- (\x,92);
+    }
+    \foreach \y in {20,40,60,80} {
+      \draw[draw=grid, line width=0.25mm] (0,\y) -- (215,\y);
+    }
+
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (224,0);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,100);
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (231,-1) {$\Delta T$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-8,104) {$Q$};
+
+    \draw[draw=blue, line width=1mm] (0,0) -- (194,58);
+    \draw[draw=green, line width=1mm] (0,0) -- (154,88);
+
+    \draw[draw=axis, dashed, line width=0.35mm] (118,0) -- (118,67);
+    \draw[draw=blue, dashed, line width=0.35mm] (0,35) -- (118,35);
+    \draw[draw=green, dashed, line width=0.35mm] (0,67) -- (118,67);
+
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (118,-9) {$\Delta T_0$};
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=blue, anchor=east] at (-5,35) {$Q_1$};
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=green, anchor=east] at (-5,67) {$Q_2$};
+
+    \node[
+      font=\sffamily\fontsize{11}{13}\selectfont,
+      text=blue,
+      align=left,
+      anchor=west,
+      fill=white,
+      rounded corners=1mm,
+      inner sep=1.2mm
+    ] at (174,38)
+      {меньше $c$\\или $m$};
+    \node[
+      font=\sffamily\fontsize{11}{13}\selectfont,
+      text=green,
+      align=left,
+      anchor=west,
+      fill=white,
+      rounded corners=1mm,
+      inner sep=1.2mm
+    ] at (174,84)
+      {больше $c$\\или $m$};
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (160,18)
+    {При одном и том же $\Delta T_0$ большее значение $cm$ даёт большее количество теплоты: $Q_2 > Q_1$.};
+\end{tikzpicture}
+\end{document}
