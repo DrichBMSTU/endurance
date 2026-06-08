@@ -1,0 +1,96 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{grid}{HTML}{E2E8F0}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{greenfill}{HTML}{DCFCE7}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{orangefill}{HTML}{FFEDD5}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (330,190);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (324,184);
+
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (165,170)
+    {Первый закон термодинамики};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (165,158)
+    {$Q_{12}=\Delta U_{12}+A_{12}$: теплота идёт на внутреннюю энергию и работу};
+
+  \begin{scope}[shift={(24,29)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (66,106)
+      {Баланс энергии};
+
+    \draw[fill=bluefill, draw=blue, line width=0.7mm, rounded corners=3mm] (34,32) rectangle (98,78);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=blue] at (66,61) {система};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (66,47) {состояние $1 \to 2$};
+
+    \draw[-{Latex[length=3.2mm,width=2.2mm]}, draw=green, line width=1mm] (0,55) -- (32,55);
+    \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=green] at (16,67) {$Q_{12}$};
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis, align=center] at (16,41) {теплота\\получена};
+
+    \draw[-{Latex[length=3.2mm,width=2.2mm]}, draw=orange, line width=1mm] (100,55) -- (132,55);
+    \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=orange] at (116,67) {$A_{12}$};
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis, align=center] at (116,41) {работа\\системы};
+
+    \draw[-{Latex[length=2.7mm,width=1.9mm]}, draw=blue, line width=0.75mm] (66,30) -- (66,5);
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=blue] at (66,-3) {$\Delta U_{12}=U_2-U_1$};
+
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, align=center] at (66,91)
+      {$Q_{12}$ распределяется между\\$\Delta U_{12}$ и $A_{12}$};
+  \end{scope}
+
+  \begin{scope}[shift={(182,28)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (63,107)
+      {Адиабата: $Q_{12}=0$};
+
+    \foreach \x in {20,40,60,80,100} {
+      \draw[draw=grid, line width=0.22mm] (\x,0) -- (\x,86);
+    }
+    \foreach \y in {20,40,60,80} {
+      \draw[draw=grid, line width=0.22mm] (0,\y) -- (122,\y);
+    }
+
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (130,0);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,94);
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (136,-1) {$V$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,97) {$p$};
+
+    \coordinate (P1) at (24,78);
+    \coordinate (P2) at (108,36);
+    \coordinate (P3) at (108,18);
+
+    \draw[draw=green, line width=0.9mm] (P1) .. controls (45,55) and (78,42) .. (P2);
+    \draw[draw=red, line width=0.9mm] (P1) .. controls (42,45) and (76,25) .. (P3);
+
+    \fill[fill=textmain] (P1) circle (1.7mm);
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=textmain, anchor=south east] at (P1) {1};
+
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=green, anchor=west] at (72,48)
+      {изотерма};
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=red, anchor=west] at (70,23)
+      {адиабата};
+
+    \draw[-{Latex[length=2.8mm,width=2mm]}, draw=axis, line width=0.5mm] (31,86) -- (93,86);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=axis] at (62,94) {расширение};
+
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, align=center] at (62,-18)
+      {$A_{12}=-\Delta U_{12}=U_1-U_2$};
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (165,18)
+    {При адиабатном расширении работа совершается за счёт уменьшения внутренней энергии.};
+\end{tikzpicture}
+\end{document}
