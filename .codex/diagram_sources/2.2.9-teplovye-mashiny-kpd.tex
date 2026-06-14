@@ -1,0 +1,102 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{grid}{HTML}{E2E8F0}
+\definecolor{hot}{HTML}{DC2626}
+\definecolor{hotfill}{HTML}{FEE2E2}
+\definecolor{cold}{HTML}{2563EB}
+\definecolor{coldfill}{HTML}{DBEAFE}
+\definecolor{work}{HTML}{16A34A}
+\definecolor{workfill}{HTML}{DCFCE7}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{orangefill}{HTML}{FFEDD5}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (340,198);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (334,192);
+
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (170,178)
+    {Тепловая машина и КПД};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (170,165)
+    {$\eta=\dfrac{A_{\text{за цикл}}}{Q_{\text{нагр}}}
+      =1-\dfrac{Q_{\text{хол}}}{Q_{\text{нагр}}}$};
+
+  \begin{scope}[shift={(24,35)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (69,124)
+      {Схема двигателя};
+
+    \draw[fill=hotfill, draw=hot, line width=0.75mm, rounded corners=3mm] (15,82) rectangle (123,112);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=hot] at (69,100) {нагреватель};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,89) {$Q_{\text{нагр}}$ отдано машине};
+
+    \draw[fill=workfill, draw=work, line width=0.75mm, rounded corners=3mm] (15,36) rectangle (123,66);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=work] at (69,54) {рабочее тело};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,43) {газ или пар};
+
+    \draw[fill=coldfill, draw=cold, line width=0.75mm, rounded corners=3mm] (15,-10) rectangle (123,20);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=cold] at (69,8) {холодильник};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,-3) {$Q_{\text{хол}}$ получено};
+
+    \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=hot, line width=1.1mm] (69,82) -- (69,68);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=hot, anchor=west] at (75,73)
+      {$Q_{\text{нагр}}$};
+
+    \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=cold, line width=1.1mm] (69,34) -- (69,22);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=cold, anchor=west] at (75,27)
+      {$Q_{\text{хол}}$};
+
+    \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=work, line width=1.1mm] (125,51) -- (158,51);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=work, anchor=west] at (135,62)
+      {$A_{\text{за цикл}}$};
+
+  \end{scope}
+
+  \begin{scope}[shift={(196,35)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (62,111)
+      {Прямой цикл};
+
+    \foreach \x in {20,40,60,80,100} {
+      \draw[draw=grid, line width=0.22mm] (\x,0) -- (\x,92);
+    }
+    \foreach \y in {20,40,60,80} {
+      \draw[draw=grid, line width=0.22mm] (0,\y) -- (124,\y);
+    }
+
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (132,0);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,100);
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (138,-1) {$V$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,103) {$p$};
+
+    \coordinate (A) at (24,28);
+    \coordinate (B) at (105,28);
+    \coordinate (C) at (105,74);
+    \coordinate (D) at (24,74);
+
+    \fill[orangefill] (A) .. controls (47,19) and (82,20) .. (B)
+      -- (C) .. controls (82,88) and (47,86) .. (D) -- cycle;
+    \draw[draw=orange, line width=0.95mm] (A) .. controls (47,19) and (82,20) .. (B);
+    \draw[draw=orange, line width=0.95mm] (D) .. controls (47,86) and (82,88) .. (C);
+    \draw[draw=orange, line width=0.95mm] (B) -- (C);
+    \draw[draw=orange, line width=0.95mm] (D) -- (A);
+
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=orange, line width=0.85mm] (45,78) -- (70,82);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=orange, line width=0.85mm] (84,25) -- (58,24);
+
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=orange] at (64,52)
+      {$A_{\text{за цикл}}$};
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (170,18)
+    {Работа за цикл равна полученной от нагревателя теплоте минус теплота, отданная холодильнику.};
+\end{tikzpicture}
+\end{document}
