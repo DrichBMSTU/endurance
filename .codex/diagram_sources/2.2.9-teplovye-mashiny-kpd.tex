@@ -1,7 +1,7 @@
 \documentclass[tikz,border=8pt]{standalone}
 \usepackage{fontspec}
 \usepackage{amsmath}
-\usetikzlibrary{arrows.meta,calc}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
 
 \setmainfont{Arial}
 \setsansfont{Arial}
@@ -20,6 +20,15 @@
 \definecolor{orange}{HTML}{EA580C}
 \definecolor{orangefill}{HTML}{FFEDD5}
 
+\tikzset{
+  cycleedge/.style={
+    draw=orange,
+    line width=0.95mm,
+    postaction={decorate},
+    decoration={markings, mark=at position 0.55 with {\arrow{Latex[length=3mm,width=2mm]}}}
+  }
+}
+
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
   \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (340,198);
@@ -29,7 +38,7 @@
     {Тепловая машина и КПД};
   \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (170,165)
     {$\eta=\dfrac{A_{\text{за цикл}}}{Q_{\text{нагр}}}
-      =1-\dfrac{Q_{\text{хол}}}{Q_{\text{нагр}}}$};
+      =1-\dfrac{|Q_{\text{хол}}|}{Q_{\text{нагр}}}$};
 
   \begin{scope}[shift={(24,35)}]
     \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (69,124)
@@ -45,7 +54,7 @@
 
     \draw[fill=coldfill, draw=cold, line width=0.75mm, rounded corners=3mm] (15,-10) rectangle (123,20);
     \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=cold] at (69,8) {холодильник};
-    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,-3) {$Q_{\text{хол}}$ получено};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,-3) {$|Q_{\text{хол}}|$ получено};
 
     \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=hot, line width=1.1mm] (69,82) -- (69,68);
     \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=hot, anchor=west] at (75,73)
@@ -53,7 +62,7 @@
 
     \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=cold, line width=1.1mm] (69,34) -- (69,22);
     \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=cold, anchor=west] at (75,27)
-      {$Q_{\text{хол}}$};
+      {$|Q_{\text{хол}}|$};
 
     \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=work, line width=1.1mm] (125,51) -- (158,51);
     \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=work, anchor=west] at (135,62)
@@ -74,7 +83,7 @@
 
     \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (132,0);
     \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,100);
-    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (138,-1) {$V$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (125,-6) {$V$};
     \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,103) {$p$};
 
     \coordinate (A) at (24,28);
@@ -84,19 +93,16 @@
 
     \fill[orangefill] (A) .. controls (47,19) and (82,20) .. (B)
       -- (C) .. controls (82,88) and (47,86) .. (D) -- cycle;
-    \draw[draw=orange, line width=0.95mm] (A) .. controls (47,19) and (82,20) .. (B);
-    \draw[draw=orange, line width=0.95mm] (D) .. controls (47,86) and (82,88) .. (C);
-    \draw[draw=orange, line width=0.95mm] (B) -- (C);
-    \draw[draw=orange, line width=0.95mm] (D) -- (A);
-
-    \draw[-{Latex[length=3mm,width=2mm]}, draw=orange, line width=0.85mm] (45,78) -- (70,82);
-    \draw[-{Latex[length=3mm,width=2mm]}, draw=orange, line width=0.85mm] (84,25) -- (58,24);
+    \draw[cycleedge] (D) .. controls (47,86) and (82,88) .. (C);
+    \draw[cycleedge] (C) -- (B);
+    \draw[cycleedge] (B) .. controls (82,20) and (47,19) .. (A);
+    \draw[cycleedge] (A) -- (D);
 
     \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=orange] at (64,52)
       {$A_{\text{за цикл}}$};
   \end{scope}
 
   \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (170,18)
-    {Работа за цикл равна полученной от нагревателя теплоте минус теплота, отданная холодильнику.};
+    {Работа за цикл равна теплоте от нагревателя минус модуль теплоты, отданной холодильнику.};
 \end{tikzpicture}
 \end{document}
