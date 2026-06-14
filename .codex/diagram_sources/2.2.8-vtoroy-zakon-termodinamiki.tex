@@ -1,0 +1,78 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{hot}{HTML}{DC2626}
+\definecolor{hotfill}{HTML}{FEE2E2}
+\definecolor{cold}{HTML}{2563EB}
+\definecolor{coldfill}{HTML}{DBEAFE}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{greenfill}{HTML}{DCFCE7}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{orangefill}{HTML}{FFEDD5}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (330,178);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (324,172);
+
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont, text=textmain] at (165,158)
+    {Второй закон термодинамики};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (165,146)
+    {самопроизвольные тепловые процессы имеют направление};
+
+  \begin{scope}[shift={(24,42)}]
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=textmain] at (69,91)
+      {Самопроизвольно};
+
+    \draw[fill=hotfill, draw=hot, line width=0.7mm, rounded corners=3mm] (0,20) rectangle (54,62);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=hot] at (27,47) {горячее};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (27,32) {$T_1>T_2$};
+
+    \draw[fill=coldfill, draw=cold, line width=0.7mm, rounded corners=3mm] (84,20) rectangle (138,62);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=cold] at (111,47) {холодное};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (111,32) {$T_2$};
+
+    \draw[-{Latex[length=4mm,width=2.6mm]}, draw=green, line width=1.15mm] (57,41) -- (81,41);
+    \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=green] at (69,54) {$Q$};
+
+    \draw[fill=greenfill, draw=green, line width=0.45mm, rounded corners=2mm] (19,0) rectangle (119,13);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=green] at (69,6.6)
+      {идёт от горячего к холодному};
+  \end{scope}
+
+  \begin{scope}[shift={(184,42)}]
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=textmain] at (62,91)
+      {Не сам по себе};
+
+    \draw[fill=coldfill, draw=cold, line width=0.7mm, rounded corners=3mm] (0,20) rectangle (54,62);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=cold] at (27,47) {холодное};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (27,32) {$T_2$};
+
+    \draw[fill=hotfill, draw=hot, line width=0.7mm, rounded corners=3mm] (84,20) rectangle (138,62);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=hot] at (111,47) {горячее};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (111,32) {$T_1>T_2$};
+
+    \draw[-{Latex[length=4mm,width=2.6mm]}, draw=orange, line width=1.15mm] (57,41) -- (81,41);
+    \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=orange] at (69,54) {$Q$};
+
+    \draw[-{Latex[length=3.2mm,width=2.2mm]}, draw=orange, line width=0.8mm] (69,1) -- (69,18);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=orange] at (69,-9) {$A_{\text{внешн}}$};
+
+    \draw[fill=orangefill, draw=orange, line width=0.45mm, rounded corners=2mm] (6,68) rectangle (132,80);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont, text=orange] at (69,74)
+      {нужен внешний процесс};
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (165,24)
+    {Запрещён именно процесс, у которого передача теплоты от холодного к горячему\\является единственным результатом.};
+\end{tikzpicture}
+\end{document}
