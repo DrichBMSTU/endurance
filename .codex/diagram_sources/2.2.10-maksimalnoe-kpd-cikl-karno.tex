@@ -86,30 +86,54 @@
     \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (132,-6) {$V$};
     \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,103) {$p$};
 
-    \coordinate (P1) at (28,82);
-    \coordinate (P2) at (104,62);
-    \coordinate (P3) at (126,24);
-    \coordinate (P4) at (48,34);
+    \coordinate (P1) at (26.70,76.36);
+    \coordinate (P2) at (52.80,42.00);
+    \coordinate (P3) at (129.31,12.94);
+    \coordinate (P4) at (68.78,23.52);
 
-    \fill[orangefill] (P1)
-      .. controls (52,84) and (80,72) .. (P2)
-      .. controls (113,51) and (121,37) .. (P3)
-      .. controls (98,18) and (68,22) .. (P4)
-      .. controls (39,48) and (25,65) .. (P1)
+    \path[fill=orangefill]
+      plot[smooth] coordinates {
+        (26.70,76.36) (30.43,68.37) (34.16,61.89) (37.89,56.54)
+        (41.61,52.04) (45.34,48.20) (49.07,44.89) (52.80,42.00)
+      }
+      plot[smooth] coordinates {
+        (52.80,42.00) (63.73,32.98) (74.66,26.84) (85.59,22.43)
+        (96.52,19.13) (107.45,16.58) (118.38,14.57) (129.31,12.94)
+      }
+      plot[smooth] coordinates {
+        (129.31,12.94) (120.66,13.82) (112.01,14.84) (103.37,16.03)
+        (94.72,17.41) (86.07,19.06) (77.43,21.06) (68.78,23.52)
+      }
+      plot[smooth] coordinates {
+        (68.78,23.52) (62.77,26.48) (56.76,30.15) (50.75,34.78)
+        (44.73,40.78) (38.72,48.80) (32.71,59.97) (26.70,76.36)
+      }
       -- cycle;
 
-    \draw[cycleedge] (P1) .. controls (52,84) and (80,72) .. (P2);
-    \draw[cycleedge] (P2) .. controls (113,51) and (121,37) .. (P3);
-    \draw[cycleedge] (P3) .. controls (98,18) and (68,22) .. (P4);
-    \draw[cycleedge] (P4) .. controls (39,48) and (25,65) .. (P1);
+    \draw[cycleedge] plot[smooth] coordinates {
+      (26.70,76.36) (30.43,68.37) (34.16,61.89) (37.89,56.54)
+      (41.61,52.04) (45.34,48.20) (49.07,44.89) (52.80,42.00)
+    };
+    \draw[cycleedge] plot[smooth] coordinates {
+      (52.80,42.00) (63.73,32.98) (74.66,26.84) (85.59,22.43)
+      (96.52,19.13) (107.45,16.58) (118.38,14.57) (129.31,12.94)
+    };
+    \draw[cycleedge] plot[smooth] coordinates {
+      (129.31,12.94) (120.66,13.82) (112.01,14.84) (103.37,16.03)
+      (94.72,17.41) (86.07,19.06) (77.43,21.06) (68.78,23.52)
+    };
+    \draw[cycleedge] plot[smooth] coordinates {
+      (68.78,23.52) (62.77,26.48) (56.76,30.15) (50.75,34.78)
+      (44.73,40.78) (38.72,48.80) (32.71,59.97) (26.70,76.36)
+    };
 
-    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont, text=orange] at (68,91)
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont, text=orange] at (67,78)
       {изотерма $T_{\text{нагр}}$};
-    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont, text=orange] at (87,13)
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont, text=orange] at (98,7)
       {изотерма $T_{\text{хол}}$};
-    \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, rotate=-67] at (120,48)
+    \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, rotate=-57] at (95,30)
       {адиабата};
-    \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, rotate=69] at (35,54)
+    \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, rotate=67] at (48,48)
       {адиабата};
 
     \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=textmain] at (P1) [above left=1mm] {1};
