@@ -1,0 +1,124 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc,decorations.markings}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{axis}{HTML}{475569}
+\definecolor{grid}{HTML}{E2E8F0}
+\definecolor{hot}{HTML}{DC2626}
+\definecolor{hotfill}{HTML}{FEE2E2}
+\definecolor{cold}{HTML}{2563EB}
+\definecolor{coldfill}{HTML}{DBEAFE}
+\definecolor{work}{HTML}{16A34A}
+\definecolor{workfill}{HTML}{DCFCE7}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{orangefill}{HTML}{FFEDD5}
+
+\tikzset{
+  cycleedge/.style={
+    draw=orange,
+    line width=0.95mm,
+    postaction={decorate},
+    decoration={markings, mark=at position 0.55 with {\arrow{Latex[length=3mm,width=2mm]}}}
+  }
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (340,198);
+  \draw[fill=white, draw=border, line width=0.55mm, rounded corners=4mm] (6,6) rectangle (334,192);
+
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (170,178)
+    {Максимальный КПД и цикл Карно};
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (170,164)
+    {$\max\eta=\eta_{\text{Карно}}=
+      \dfrac{T_{\text{нагр}}-T_{\text{хол}}}{T_{\text{нагр}}}
+      =1-\dfrac{T_{\text{хол}}}{T_{\text{нагр}}}$};
+
+  \begin{scope}[shift={(24,34)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (69,122)
+      {Идеальная машина};
+
+    \draw[fill=hotfill, draw=hot, line width=0.75mm, rounded corners=3mm] (15,82) rectangle (123,112);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=hot] at (69,100) {нагреватель};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,89) {$T_{\text{нагр}}$};
+
+    \draw[fill=workfill, draw=work, line width=0.75mm, rounded corners=3mm] (15,36) rectangle (123,66);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=work] at (69,54) {машина Карно};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,43) {обратимый цикл};
+
+    \draw[fill=coldfill, draw=cold, line width=0.75mm, rounded corners=3mm] (15,-10) rectangle (123,20);
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont, text=cold] at (69,8) {холодильник};
+    \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (69,-3) {$T_{\text{хол}}$};
+
+    \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=hot, line width=1.1mm] (69,82) -- (69,68);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=hot, anchor=west] at (75,73)
+      {$Q_{\text{нагр}}$};
+
+    \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=cold, line width=1.1mm] (69,34) -- (69,22);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=cold, anchor=west] at (75,27)
+      {$|Q_{\text{хол}}|$};
+
+    \draw[-{Latex[length=3.4mm,width=2.3mm]}, draw=work, line width=1.1mm] (125,51) -- (158,51);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=work, anchor=west] at (135,62)
+      {$A_{\text{за цикл}}$};
+  \end{scope}
+
+  \begin{scope}[shift={(190,35)}]
+    \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=textmain] at (67,111)
+      {Цикл Карно};
+
+    \foreach \x in {20,40,60,80,100,120} {
+      \draw[draw=grid, line width=0.22mm] (\x,0) -- (\x,92);
+    }
+    \foreach \y in {20,40,60,80} {
+      \draw[draw=grid, line width=0.22mm] (0,\y) -- (132,\y);
+    }
+
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (140,0);
+    \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (0,0) -- (0,100);
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (132,-6) {$V$};
+    \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis] at (-6,103) {$p$};
+
+    \coordinate (P1) at (28,82);
+    \coordinate (P2) at (104,62);
+    \coordinate (P3) at (126,24);
+    \coordinate (P4) at (48,34);
+
+    \fill[orangefill] (P1)
+      .. controls (52,84) and (80,72) .. (P2)
+      .. controls (113,51) and (121,37) .. (P3)
+      .. controls (98,18) and (68,22) .. (P4)
+      .. controls (39,48) and (25,65) .. (P1)
+      -- cycle;
+
+    \draw[cycleedge] (P1) .. controls (52,84) and (80,72) .. (P2);
+    \draw[cycleedge] (P2) .. controls (113,51) and (121,37) .. (P3);
+    \draw[cycleedge] (P3) .. controls (98,18) and (68,22) .. (P4);
+    \draw[cycleedge] (P4) .. controls (39,48) and (25,65) .. (P1);
+
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont, text=orange] at (68,91)
+      {изотерма $T_{\text{нагр}}$};
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont, text=orange] at (87,13)
+      {изотерма $T_{\text{хол}}$};
+    \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, rotate=-67] at (120,48)
+      {адиабата};
+    \node[font=\sffamily\fontsize{9}{11}\selectfont, text=axis, rotate=69] at (35,54)
+      {адиабата};
+
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=textmain] at (P1) [above left=1mm] {1};
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=textmain] at (P2) [above right=1mm] {2};
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=textmain] at (P3) [below right=1mm] {3};
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=textmain] at (P4) [below left=1mm] {4};
+  \end{scope}
+
+  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (170,18)
+    {Предел КПД задаётся только абсолютными температурами нагревателя и холодильника.};
+\end{tikzpicture}
+\end{document}
