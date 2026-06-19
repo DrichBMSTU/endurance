@@ -1,0 +1,62 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{positive}{HTML}{EA580C}
+\definecolor{positivefill}{HTML}{FFEDD5}
+\definecolor{negative}{HTML}{2563EB}
+\definecolor{negativefill}{HTML}{DBEAFE}
+\definecolor{force}{HTML}{7C3AED}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (320,190);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (314,184);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (160,169) {Направление кулоновских сил};
+
+  % Attraction of unlike charges.
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (24,140) {Разноимённые заряды: притяжение};
+  \draw[draw=textmuted,dashed,line width=0.45mm] (72,111) -- (248,111);
+  \draw[fill=positivefill,draw=positive,line width=0.75mm] (96,111) circle (13);
+  \draw[fill=negativefill,draw=negative,line width=0.75mm] (224,111) circle (13);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=positive] at (96,111) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=negative] at (224,111) {$-$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont,text=textmain] at (96,91) {$q_1$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont,text=textmain] at (224,91) {$q_2$};
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=force,line width=1mm] (72,111) -- (82,111);
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=force,line width=1mm] (248,111) -- (238,111);
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=force] at (70,121) {$\vec F_1$};
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=force] at (250,121) {$\vec F_2$};
+  \draw[decorate,decoration={brace,mirror,amplitude=2mm},draw=textmuted,line width=0.45mm]
+    (96,84) -- (224,84) node[midway,below=2.5mm,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted] {$r$};
+
+  \draw[draw=border,line width=0.35mm] (24,72) -- (296,72);
+
+  % Repulsion of like charges.
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (24,56) {Одноимённые заряды: отталкивание};
+  \draw[draw=textmuted,dashed,line width=0.45mm] (72,30) -- (248,30);
+  \draw[fill=positivefill,draw=positive,line width=0.75mm] (96,30) circle (13);
+  \draw[fill=positivefill,draw=positive,line width=0.75mm] (224,30) circle (13);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=positive] at (96,30) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=positive] at (224,30) {$+$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont,text=textmain] at (96,13) {$q_1$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont,text=textmain] at (224,13) {$q_2$};
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=force,line width=1mm] (82,30) -- (62,30);
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=force,line width=1mm] (238,30) -- (258,30);
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=force] at (62,40) {$\vec F_1$};
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=force] at (258,40) {$\vec F_2$};
+\end{tikzpicture}
+\end{document}
