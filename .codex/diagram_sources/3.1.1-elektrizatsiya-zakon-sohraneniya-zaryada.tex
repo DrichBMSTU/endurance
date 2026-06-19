@@ -1,0 +1,76 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{positive}{HTML}{EA580C}
+\definecolor{positivefill}{HTML}{FFEDD5}
+\definecolor{negative}{HTML}{2563EB}
+\definecolor{negativefill}{HTML}{DBEAFE}
+\definecolor{neutralfill}{HTML}{F1F5F9}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (320,180);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (314,174);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (160,160) {Электризация и сохранение заряда};
+
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (82,139) {До электризации};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (238,139) {После электризации};
+
+  % Initial neutral bodies.
+  \draw[fill=neutralfill,draw=border,line width=0.65mm] (48,104) circle (23);
+  \draw[fill=neutralfill,draw=border,line width=0.65mm] (116,104) circle (23);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=textmain] at (48,104) {$A$};
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=textmain] at (116,104) {$B$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont,text=textmuted] at (48,73) {$q_A=0$};
+  \node[font=\sffamily\fontsize{11}{13}\selectfont,text=textmuted] at (116,73) {$q_B=0$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=positive] at (38,110) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=negative] at (58,110) {$-$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=positive] at (38,97) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=negative] at (58,97) {$-$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=positive] at (106,110) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=negative] at (126,110) {$-$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=positive] at (106,97) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=negative] at (126,97) {$-$};
+
+  % Transformation arrow between the two states.
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=textmuted,line width=0.9mm]
+    (143,104) -- (177,104);
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted,align=center]
+    at (160,120) {переход\\электронов};
+
+  % Charged bodies after electron transfer.
+  \draw[fill=positivefill,draw=positive,line width=0.75mm] (204,104) circle (23);
+  \draw[fill=negativefill,draw=negative,line width=0.75mm] (272,104) circle (23);
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=textmain] at (204,104) {$A$};
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=textmain] at (272,104) {$B$};
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=positive] at (204,73) {$q_A=+Ne$};
+  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=negative] at (272,73) {$q_B=-Ne$};
+  \foreach \x/\y in {194/112,214/112,194/96,214/96}
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=positive] at (\x,\y) {$+$};
+  \foreach \x/\y in {262/112,282/112,262/96,282/96}
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=negative] at (\x,\y) {$-$};
+
+  \draw[-{Latex[length=3.6mm,width=2.5mm]},draw=negative,line width=0.85mm]
+    (218,54) -- (258,54);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=negative]
+    at (238,63) {$N$ электронов};
+
+  \draw[draw=border,line width=0.35mm] (25,38) -- (295,38);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (160,23) {$q_A+q_B=+Ne-Ne=0$};
+\end{tikzpicture}
+\end{document}
