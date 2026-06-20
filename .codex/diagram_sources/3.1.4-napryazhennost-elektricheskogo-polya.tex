@@ -1,0 +1,73 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{positive}{HTML}{EA580C}
+\definecolor{positivefill}{HTML}{FFEDD5}
+\definecolor{negative}{HTML}{2563EB}
+\definecolor{negativefill}{HTML}{DBEAFE}
+\definecolor{field}{HTML}{7C3AED}
+\definecolor{fieldfill}{HTML}{F3E8FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,210);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (354,204);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (180,190) {Линии напряжённости электрического поля};
+
+  % Three field cards.
+  \foreach \x in {16,129,242} {
+    \draw[fill=pagebg,draw=border,line width=0.35mm,rounded corners=3mm]
+      (\x,24) rectangle ({\x+102},170);
+  }
+
+  % Positive point charge: radial field lines point outwards.
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (67,156) {Положительный заряд};
+  \foreach \angle in {0,45,...,315} {
+    \draw[-{Latex[length=3.2mm,width=2.4mm]},draw=positive,line width=0.8mm]
+      ({67+17*cos(\angle)},{96+17*sin(\angle)}) --
+      ({67+47*cos(\angle)},{96+47*sin(\angle)});
+  }
+  \draw[fill=positivefill,draw=positive,line width=0.75mm] (67,96) circle (12);
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=positive] at (67,96) {$+$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (67,39) {$\vec E$ направлен от заряда};
+
+  % Negative point charge: radial field lines point inwards.
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (180,156) {Отрицательный заряд};
+  \foreach \angle in {0,45,...,315} {
+    \draw[-{Latex[length=3.2mm,width=2.4mm]},draw=negative,line width=0.8mm]
+      ({180+47*cos(\angle)},{96+47*sin(\angle)}) --
+      ({180+17*cos(\angle)},{96+17*sin(\angle)});
+  }
+  \draw[fill=negativefill,draw=negative,line width=0.75mm] (180,96) circle (12);
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=negative] at (180,96) {$-$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (180,39) {$\vec E$ направлен к заряду};
+
+  % Uniform field: parallel, equally spaced field lines.
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (293,156) {Однородное поле};
+  \draw[fill=fieldfill,draw=field,line width=0.6mm,rounded corners=2mm]
+    (255,53) rectangle (331,137);
+  \foreach \y in {65,80,95,110,125} {
+    \draw[-{Latex[length=3.2mm,width=2.4mm]},draw=field,line width=0.9mm]
+      (262,\y) -- (324,\y);
+  }
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=field]
+    at (293,39) {$\vec E=\mathrm{const}$};
+\end{tikzpicture}
+\end{document}
