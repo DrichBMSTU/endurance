@@ -1,0 +1,84 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{positive}{HTML}{EA580C}
+\definecolor{positivefill}{HTML}{FFEDD5}
+\definecolor{negative}{HTML}{2563EB}
+\definecolor{negativefill}{HTML}{DBEAFE}
+\definecolor{field}{HTML}{7C3AED}
+\definecolor{induced}{HTML}{0F766E}
+\definecolor{metal}{HTML}{E2E8F0}
+\definecolor{metallight}{HTML}{F8FAFC}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (180,200) {Проводник в электростатическом поле};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (180,181) {заряды перераспределяются до равновесия};
+
+  % External uniform field.
+  \foreach \y in {52,78,104,130,156} {
+    \draw[-{Latex[length=4.6mm,width=3mm]},draw=field,line width=0.7mm]
+      (24,\y) -- (336,\y);
+  }
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=field,fill=pagebg,inner sep=1mm]
+    at (55,166) {$\vec E_0$};
+
+  % Conductor body.
+  \draw[fill=metal,draw=textmuted,line width=0.7mm]
+    (180,104) ellipse (67 and 45);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (180,104) {проводник};
+
+  % Induced charges on the surface.
+  \foreach \x/\y in {128/86,122/104,130/123,143/137} {
+    \draw[fill=negativefill,draw=negative,line width=0.45mm] (\x,\y) circle (5);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=negative] at (\x,\y) {$-$};
+  }
+  \foreach \x/\y in {232/86,238/104,230/123,217/137} {
+    \draw[fill=positivefill,draw=positive,line width=0.45mm] (\x,\y) circle (5);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=positive] at (\x,\y) {$+$};
+  }
+
+  % Internal fields that cancel.
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=field,line width=0.95mm]
+    (154,69) -- (206,69);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=field,fill=metal,inner sep=0.8mm]
+    at (180,58) {$\vec E_0$};
+
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=induced,line width=0.95mm]
+    (206,139) -- (154,139);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=induced,fill=metal,inner sep=0.8mm]
+    at (180,150) {$\vec E_{\text{инд}}$};
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain,fill=metallight,inner sep=1mm]
+    at (180,26) {$\vec E_0+\vec E_{\text{инд}}=0$ внутри проводника};
+
+  \node[align=center,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (73,31) {избыток\\отрицательного\\заряда};
+  \draw[-{Latex[length=3.2mm,width=2.3mm]},draw=negative,line width=0.55mm]
+    (92,54) -- (126,88);
+
+  \node[align=center,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (287,31) {избыток\\положительного\\заряда};
+  \draw[-{Latex[length=3.2mm,width=2.3mm]},draw=positive,line width=0.55mm]
+    (268,54) -- (234,88);
+
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain,fill=pagebg,inner sep=1.1mm]
+    at (180,166) {$\varphi=\mathrm{const}$ внутри и на поверхности};
+\end{tikzpicture}
+\end{document}
