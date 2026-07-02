@@ -1,0 +1,67 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathreplacing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{field}{HTML}{7C3AED}
+\definecolor{fieldfill}{HTML}{F3E8FF}
+\definecolor{equip}{HTML}{0F766E}
+\definecolor{point}{HTML}{EA580C}
+\definecolor{pointfill}{HTML}{FFEDD5}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,210);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (354,204);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (180,190) {Однородное поле и разность потенциалов};
+
+  \draw[fill=fieldfill,draw=border,line width=0.4mm,rounded corners=3mm]
+    (34,42) rectangle (326,162);
+
+  % Parallel field lines of a uniform electrostatic field.
+  \foreach \y in {66,86,106,126,146} {
+    \draw[-{Latex[length=4mm,width=2.8mm]},draw=field,line width=0.9mm]
+      (54,\y) -- (306,\y);
+  }
+
+  % Equipotential planes.
+  \draw[draw=equip,line width=0.75mm,dashed] (110,54) -- (110,154);
+  \draw[draw=equip,line width=0.75mm,dashed] (250,54) -- (250,154);
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=equip]
+    at (110,35) {$\varphi_1$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=equip]
+    at (250,35) {$\varphi_2$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (180,27) {$\varphi_1 > \varphi_2$};
+
+  % Points and distance.
+  \draw[fill=pointfill,draw=point,line width=0.7mm] (110,106) circle (5);
+  \draw[fill=pointfill,draw=point,line width=0.7mm] (250,106) circle (5);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=point,fill=fieldfill,inner sep=0.8mm]
+    at (110,122) {1};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=point,fill=fieldfill,inner sep=0.8mm]
+    at (250,122) {2};
+
+  \draw[decorate,decoration={brace,amplitude=4mm,mirror},draw=textmuted,line width=0.55mm]
+    (110,51) -- (250,51)
+    node[midway,yshift=-8mm,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted] {$d$};
+
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=field]
+    at (180,172) {$\vec E$};
+  \node[font=\sffamily\bfseries\fontsize{16}{20}\selectfont,text=textmain,fill=fieldfill,inner sep=1.4mm]
+    at (180,103) {$U=\varphi_1-\varphi_2=Ed$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (180,77) {напряжённость направлена в сторону убывания потенциала};
+\end{tikzpicture}
+\end{document}
