@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - v4
+  workflow_dispatch:
  
 permissions:
   contents: read
@@ -12,7 +13,7 @@ permissions:
  
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
  
 jobs:
   build:
@@ -29,7 +30,7 @@ jobs:
       - name: Build Quartz
         run: npx quartz build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: public
  
@@ -42,4 +43,6 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+        with:
+          timeout: 1800000
