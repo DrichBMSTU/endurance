@@ -1,0 +1,83 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{positive}{HTML}{EA580C}
+\definecolor{positivefill}{HTML}{FFEDD5}
+\definecolor{negative}{HTML}{2563EB}
+\definecolor{negativefill}{HTML}{DBEAFE}
+\definecolor{field}{HTML}{7C3AED}
+\definecolor{bound}{HTML}{0F766E}
+\definecolor{dielectric}{HTML}{ECFDF5}
+\definecolor{dielectricborder}{HTML}{10B981}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (380,230);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (374,224);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (190,210) {Диэлектрик в электростатическом поле};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (190,191) {связанные заряды ослабляют поле внутри вещества};
+
+  % External uniform field.
+  \foreach \y in {56,84,112,140,168} {
+    \draw[-{Latex[length=4.6mm,width=3mm]},draw=field,line width=0.7mm]
+      (24,\y) -- (356,\y);
+  }
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=field,fill=pagebg,inner sep=1mm]
+    at (51,177) {$\vec E_0$};
+
+  % Dielectric slab.
+  \draw[fill=dielectric,draw=dielectricborder,line width=0.85mm,rounded corners=2mm]
+    (130,48) rectangle (250,176);
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=textmain]
+    at (190,161) {диэлектрик};
+
+  % Bound charges on surfaces.
+  \foreach \y in {64,85,106,127,148} {
+    \draw[fill=negativefill,draw=negative,line width=0.45mm] (143,\y) circle (5);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=negative] at (143,\y) {$-$};
+    \draw[fill=positivefill,draw=positive,line width=0.45mm] (237,\y) circle (5);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=positive] at (237,\y) {$+$};
+  }
+
+  % Bound-charge field opposing external field.
+  \draw[-{Latex[length=4.1mm,width=2.8mm]},draw=bound,line width=1mm]
+    (224,83) -- (156,83);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=bound,fill=dielectric,inner sep=0.8mm]
+    at (190,70) {$\vec E_{\text{связ}}$};
+
+  % Resulting weaker field.
+  \draw[-{Latex[length=4mm,width=2.7mm]},draw=field,line width=0.95mm]
+    (158,125) -- (222,125);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=field,fill=dielectric,inner sep=0.8mm]
+    at (190,138) {$\vec E$};
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain,fill=pagebg,inner sep=1.2mm]
+    at (190,30) {$E=\dfrac{E_0}{\varepsilon}$, поэтому $E<E_0$ при $\varepsilon>1$};
+
+  \node[align=center,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (74,31) {связанные\\отрицательные\\заряды};
+  \draw[-{Latex[length=3.2mm,width=2.3mm]},draw=negative,line width=0.55mm]
+    (100,43) -- (140,64);
+
+  \node[align=center,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (306,31) {связанные\\положительные\\заряды};
+  \draw[-{Latex[length=3.2mm,width=2.3mm]},draw=positive,line width=0.55mm]
+    (280,43) -- (239,64);
+
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted,fill=dielectric,inner sep=1mm]
+    at (190,102) {поляризация};
+\end{tikzpicture}
+\end{document}
