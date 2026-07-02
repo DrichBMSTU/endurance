@@ -44,9 +44,9 @@
 
   % Observation point and guide lines.
   \coordinate (M) at (180,116);
-  \coordinate (Eone) at (230,145);
-  \coordinate (Etwo) at (230,87);
-  \coordinate (Etot) at (280,116);
+  \coordinate (Eone) at (239,137);
+  \coordinate (Etwo) at (239,95);
+  \coordinate (Etot) at (298,116);
 
   \draw[dashed,draw=border,line width=0.45mm] (72,78) -- (M) -- (288,78);
   \draw[fill=resultlight,draw=result,line width=0.65mm] (M) circle (4.5);
@@ -57,12 +57,12 @@
   \draw[-{Latex[length=4mm,width=2.8mm]},draw=positive,line width=0.95mm]
     (M) -- (Eone);
   \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=positive,fill=pagebg,inner sep=0.9mm]
-    at (229,154) {$\vec E_1$};
+    at (235,149) {$\vec E_1$};
 
   \draw[-{Latex[length=4mm,width=2.8mm]},draw=negative,line width=0.95mm]
     (M) -- (Etwo);
   \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=negative,fill=pagebg,inner sep=0.9mm]
-    at (231,78) {$\vec E_2$};
+    at (235,84) {$\vec E_2$};
 
   \draw[dashed,draw=border,line width=0.5mm] (Eone) -- (Etot);
   \draw[dashed,draw=border,line width=0.5mm] (Etwo) -- (Etot);
@@ -70,7 +70,7 @@
   \draw[-{Latex[length=4.8mm,width=3.2mm]},draw=result,line width=1.2mm]
     (M) -- (Etot);
   \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=result,fill=pagebg,inner sep=1mm]
-    at (282,129) {$\vec E$};
+    at (298,129) {$\vec E$};
 
   \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
     at (180,160) {напряжённости складываются как векторы};
