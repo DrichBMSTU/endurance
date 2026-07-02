@@ -1,0 +1,92 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{positive}{HTML}{EA580C}
+\definecolor{positivefill}{HTML}{FFEDD5}
+\definecolor{negative}{HTML}{2563EB}
+\definecolor{negativefill}{HTML}{DBEAFE}
+\definecolor{field}{HTML}{7C3AED}
+\definecolor{dielectric}{HTML}{ECFDF5}
+\definecolor{dielectricborder}{HTML}{10B981}
+\definecolor{plate}{HTML}{64748B}
+\definecolor{measure}{HTML}{0F766E}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (400,240);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (394,234);
+
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (200,220) {Плоский конденсатор};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (200,201) {заряды обкладок создают почти однородное поле между пластинами};
+
+  % Plates.
+  \draw[fill=plate!18,draw=plate,line width=0.9mm,rounded corners=1.3mm]
+    (132,58) rectangle (146,176);
+  \draw[fill=plate!18,draw=plate,line width=0.9mm,rounded corners=1.3mm]
+    (254,58) rectangle (268,176);
+
+  % Dielectric layer.
+  \draw[fill=dielectric,draw=dielectricborder,line width=0.55mm,rounded corners=1mm]
+    (148,63) rectangle (252,171);
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (200,76) {диэлектрик $\varepsilon$};
+
+  % Charges.
+  \foreach \y in {72,94,116,138,160} {
+    \draw[fill=positivefill,draw=positive,line width=0.45mm] (123,\y) circle (5);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=positive] at (123,\y) {$+$};
+    \draw[fill=negativefill,draw=negative,line width=0.45mm] (277,\y) circle (5);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=negative] at (277,\y) {$-$};
+  }
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=positive]
+    at (94,176) {$+q$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=negative]
+    at (306,176) {$-q$};
+  \node[align=center,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (92,151) {положительная\\обкладка};
+  \node[align=center,font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (309,151) {отрицательная\\обкладка};
+
+  % Uniform field.
+  \foreach \y in {91,112,133,154} {
+    \draw[-{Latex[length=4.4mm,width=2.9mm]},draw=field,line width=0.75mm]
+      (152,\y) -- (248,\y);
+  }
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=field,fill=dielectric,inner sep=0.8mm]
+    at (200,142) {$\vec E$};
+
+  % Distance and area marks.
+  \draw[{Latex[length=3.2mm,width=2.2mm]}-{Latex[length=3.2mm,width=2.2mm]},draw=measure,line width=0.6mm]
+    (146,45) -- (254,45);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=measure,fill=white,inner sep=1mm]
+    at (200,34) {$d$};
+
+  \draw[draw=measure,line width=0.55mm] (118,58) -- (118,176);
+  \draw[draw=measure,line width=0.55mm] (113,58) -- (123,58);
+  \draw[draw=measure,line width=0.55mm] (113,176) -- (123,176);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=measure,fill=white,inner sep=1mm]
+    at (102,117) {$S$};
+
+  % Voltage mark.
+  \draw[-{Latex[length=3.6mm,width=2.5mm]},draw=textmuted,line width=0.55mm]
+    (139,188) to[bend left=16] (261,188);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain,fill=white,inner sep=1mm]
+    at (200,186) {$U$};
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (200,17) {$C=\dfrac{q}{U}$,\qquad $C=\dfrac{\varepsilon\varepsilon_0 S}{d}=\varepsilon C_0$};
+\end{tikzpicture}
+\end{document}
