@@ -1,0 +1,82 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{94A3B8}
+\definecolor{wireedge}{HTML}{475569}
+\definecolor{current}{HTML}{EA580C}
+\definecolor{electron}{HTML}{2563EB}
+\definecolor{section}{HTML}{7C3AED}
+\definecolor{field}{HTML}{16A34A}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
+  \fill[pagebg] (0,0) rectangle (470,250);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (464,244);
+
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain]
+    at (235,226) {Сила тока через сечение проводника};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (235,207) {за время $\Delta t$ через сечение проходит заряд $\Delta q$};
+
+  % Wire body.
+  \draw[fill=wire!28,draw=wireedge,line width=0.65mm,rounded corners=12mm]
+    (38,78) rectangle (432,156);
+  \draw[fill=wire!45,draw=wireedge,line width=0.45mm]
+    (38,78) .. controls (54,95) and (54,139) .. (38,156)
+    .. controls (22,139) and (22,95) .. (38,78);
+  \draw[fill=wire!18,draw=wireedge,line width=0.45mm]
+    (432,78) .. controls (448,95) and (448,139) .. (432,156)
+    .. controls (416,139) and (416,95) .. (432,78);
+
+  % Cross-section.
+  \draw[fill=section!12,draw=section,line width=0.85mm,dashed]
+    (250,78) .. controls (267,95) and (267,139) .. (250,156)
+    .. controls (233,139) and (233,95) .. (250,78);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=section]
+    at (250,171) {сечение $S$};
+
+  % Conventional current and electron drift.
+  \draw[-{Latex[length=6mm,width=3.6mm]},draw=current,line width=1.1mm]
+    (72,185) -- (398,185);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=current]
+    at (235,195) {условное направление тока $I$};
+
+  \draw[-{Latex[length=6mm,width=3.6mm]},draw=electron,line width=1.1mm]
+    (398,53) -- (72,53);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=electron]
+    at (235,32) {дрейф электронов в металле};
+
+  % Electrons inside wire.
+  \foreach \x/\y in {82/104,118/132,152/96,188/126,226/110,284/134,316/99,354/121,390/101} {
+    \fill[electron] (\x,\y) circle (4.5);
+    \node[font=\sffamily\bfseries\fontsize{8}{9}\selectfont,text=white] at (\x,\y) {$-$};
+  }
+
+  % Small drift arrows in wire.
+  \foreach \x/\y in {122/105,198/139,314/116,378/137} {
+    \draw[-{Latex[length=3.3mm,width=2mm]},draw=electron,line width=0.5mm]
+      (\x+17,\y) -- (\x,\y);
+  }
+
+  % Passed charge label.
+  \draw[-{Latex[length=4.8mm,width=3mm]},draw=field,line width=0.75mm]
+    (216,116) -- (244,116);
+  \draw[-{Latex[length=4.8mm,width=3mm]},draw=field,line width=0.75mm]
+    (256,116) -- (284,116);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=field]
+    at (250,69) {$\Delta q$ проходит через сечение за $\Delta t$};
+
+  \node[font=\sffamily\bfseries\fontsize{17}{21}\selectfont,text=textmain]
+    at (235,18) {$\boxed{I=\dfrac{\Delta q}{\Delta t}}, \qquad \boxed{q=It \text{ при } I=\mathrm{const}}$};
+\end{tikzpicture}
+\end{document}
