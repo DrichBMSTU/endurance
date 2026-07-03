@@ -1,0 +1,81 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,patterns}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{axis}{HTML}{334155}
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{accentfill}{HTML}{DBEAFE}
+\definecolor{energy}{HTML}{EA580C}
+\definecolor{energyfill}{HTML}{FFEDD5}
+\definecolor{plate}{HTML}{64748B}
+\definecolor{field}{HTML}{7C3AED}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
+  \fill[pagebg] (0,0) rectangle (460,260);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (454,254);
+
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain]
+    at (230,238) {Энергия заряженного конденсатора};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (230,218) {при зарядке напряжение растёт от $0$ до $U$, поэтому энергия равна площади треугольника};
+
+  % Capacitor sketch.
+  \draw[fill=accentfill,draw=accent,line width=0.45mm,rounded corners=3mm]
+    (24,30) rectangle (178,200);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=accent]
+    at (101,184) {Конденсатор};
+
+  \draw[fill=plate!18,draw=plate,line width=0.85mm,rounded corners=1mm]
+    (70,65) rectangle (82,154);
+  \draw[fill=plate!18,draw=plate,line width=0.85mm,rounded corners=1mm]
+    (120,65) rectangle (132,154);
+
+  \foreach \y in {78,98,118,138} {
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=energy] at (59,\y) {$+$};
+    \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=accent] at (143,\y) {$-$};
+    \draw[-{Latex[length=3.5mm,width=2.3mm]},draw=field,line width=0.55mm]
+      (86,\y) -- (116,\y);
+  }
+
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=energy] at (55,162) {$+q$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=accent] at (146,162) {$-q$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain] at (101,46) {$W_C$ хранится в поле};
+
+  % Graph block.
+  \draw[fill=energyfill,draw=energy,line width=0.45mm,rounded corners=3mm]
+    (202,30) rectangle (436,200);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=energy]
+    at (319,184) {График зарядки};
+
+  \draw[-{Latex[length=3.8mm,width=2.5mm]},draw=axis,line width=0.65mm]
+    (232,62) -- (414,62);
+  \draw[-{Latex[length=3.8mm,width=2.5mm]},draw=axis,line width=0.65mm]
+    (232,62) -- (232,163);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=axis] at (418,51) {$q$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=axis] at (219,166) {$U$};
+
+  \fill[energy!22] (232,62) -- (392,148) -- (392,62) -- cycle;
+  \draw[draw=energy,line width=0.75mm] (232,62) -- (392,148);
+  \draw[dashed,draw=textmuted,line width=0.45mm] (392,62) -- (392,148) -- (232,148);
+
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=axis] at (392,49) {$q$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=axis] at (218,148) {$U$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=energy]
+    at (322,95) {$W_C=\dfrac{qU}{2}$};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (318,37) {площадь под прямой $U=\dfrac{q}{C}$};
+
+  \node[font=\sffamily\bfseries\fontsize{16}{20}\selectfont,text=textmain]
+    at (230,16) {$\boxed{W_C=\dfrac{qU}{2}=\dfrac{CU^2}{2}=\dfrac{q^2}{2C}}$};
+\end{tikzpicture}
+\end{document}
