@@ -22,6 +22,12 @@
   \draw[draw=#4,line width=0.75mm] (#1+8,#2-13) -- (#1+8,#2+13);
   \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=#4] at (#1+4,#2+23) {$#3$};
 }
+\newcommand{\parallelcapacitor}[4]{
+  \draw[draw=#4,line width=0.75mm] (#1,#2-13) -- (#1,#2+13);
+  \draw[draw=#4,line width=0.75mm] (#1+8,#2-13) -- (#1+8,#2+13);
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=#4,fill=#4!8,inner sep=0.35mm]
+    at (#1+4,#2) {$#3$};
+}
 
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
@@ -45,9 +51,9 @@
   \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (39,164) {$+$};
   \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (201,164) {$-$};
   \foreach \y/\name in {145/{C_1},110/{C_2},75/{C_3}} {
-    \draw[draw=wire,line width=0.65mm] (52,\y) -- (94,\y);
-    \capacitor{94}{\y}{\name}{accent}
-    \draw[draw=wire,line width=0.65mm] (102,\y) -- (188,\y);
+    \draw[draw=wire,line width=0.65mm] (52,\y) -- (116,\y);
+    \parallelcapacitor{116}{\y}{\name}{accent}
+    \draw[draw=wire,line width=0.65mm] (124,\y) -- (188,\y);
   }
   \draw[{Latex[length=3.2mm,width=2.2mm]}-{Latex[length=3.2mm,width=2.2mm]},draw=wire,line width=0.45mm]
     (64,172) -- (176,172);
