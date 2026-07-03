@@ -1,0 +1,85 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{334155}
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{accentfill}{HTML}{DBEAFE}
+\definecolor{series}{HTML}{0F766E}
+\definecolor{seriesfill}{HTML}{CCFBF1}
+\definecolor{formula}{HTML}{7C2D12}
+
+\newcommand{\capacitor}[4]{
+  \draw[draw=#4,line width=0.75mm] (#1,#2-13) -- (#1,#2+13);
+  \draw[draw=#4,line width=0.75mm] (#1+8,#2-13) -- (#1+8,#2+13);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=#4] at (#1+4,#2+23) {$#3$};
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
+  \fill[pagebg] (0,0) rectangle (460,260);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (454,254);
+
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain]
+    at (230,238) {Соединения конденсаторов};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (230,218) {параллельно: одинаково напряжение, последовательно: одинаков заряд};
+
+  % Parallel connection block.
+  \draw[fill=accentfill,draw=accent,line width=0.45mm,rounded corners=3mm]
+    (22,28) rectangle (219,204);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=accent]
+    at (120,190) {Параллельное соединение};
+
+  \draw[draw=wire,line width=0.65mm] (52,56) -- (52,164);
+  \draw[draw=wire,line width=0.65mm] (188,56) -- (188,164);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (39,164) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (201,164) {$-$};
+  \foreach \y/\name in {145/{C_1},110/{C_2},75/{C_3}} {
+    \draw[draw=wire,line width=0.65mm] (52,\y) -- (94,\y);
+    \capacitor{94}{\y}{\name}{accent}
+    \draw[draw=wire,line width=0.65mm] (102,\y) -- (188,\y);
+  }
+  \draw[{Latex[length=3.2mm,width=2.2mm]}-{Latex[length=3.2mm,width=2.2mm]},draw=wire,line width=0.45mm]
+    (64,172) -- (176,172);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain,fill=accentfill,inner sep=0.8mm]
+    at (120,172) {$U_1=U_2=U_3$};
+  \node[align=center,font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=formula]
+    at (120,43) {$C_{\text{паралл}}=C_1+C_2+C_3$};
+
+  % Series connection block.
+  \draw[fill=seriesfill,draw=series,line width=0.45mm,rounded corners=3mm]
+    (241,28) rectangle (438,204);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=series]
+    at (340,190) {Последовательное соединение};
+
+  \draw[draw=wire,line width=0.65mm] (270,111) -- (291,111);
+  \capacitor{291}{111}{C_1}{series}
+  \draw[draw=wire,line width=0.65mm] (299,111) -- (329,111);
+  \capacitor{329}{111}{C_2}{series}
+  \draw[draw=wire,line width=0.65mm] (337,111) -- (367,111);
+  \capacitor{367}{111}{C_3}{series}
+  \draw[draw=wire,line width=0.65mm] (375,111) -- (410,111);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (258,111) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (422,111) {$-$};
+
+  \foreach \x in {285,323,361} {
+    \draw[-{Latex[length=3mm,width=2mm]},draw=series,line width=0.5mm] (\x,148) -- (\x+24,148);
+  }
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain,fill=seriesfill,inner sep=0.8mm]
+    at (340,161) {$q_1=q_2=q_3$};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (340,74) {$U=U_1+U_2+U_3$};
+  \node[align=center,font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=formula]
+    at (340,43) {$\dfrac{1}{C_{\text{посл}}}=\dfrac{1}{C_1}+\dfrac{1}{C_2}+\dfrac{1}{C_3}$};
+\end{tikzpicture}
+\end{document}
