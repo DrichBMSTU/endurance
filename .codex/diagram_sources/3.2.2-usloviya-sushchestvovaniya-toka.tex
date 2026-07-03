@@ -1,0 +1,84 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{475569}
+\definecolor{current}{HTML}{EA580C}
+\definecolor{field}{HTML}{16A34A}
+\definecolor{electron}{HTML}{2563EB}
+\definecolor{source}{HTML}{7C3AED}
+\definecolor{lamp}{HTML}{F59E0B}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
+  \fill[pagebg] (0,0) rectangle (470,270);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (464,264);
+
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain]
+    at (235,246) {Условия существования электрического тока};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (235,226) {свободные заряды + электрическое поле + замкнутая цепь с источником};
+
+  % Main circuit.
+  \draw[draw=wire,line width=1.1mm] (100,92) -- (100,178) -- (370,178) -- (370,92) -- (100,92);
+
+  % Source.
+  \draw[draw=source,line width=1.2mm] (151,92) -- (151,132);
+  \draw[draw=source,line width=0.75mm] (171,103) -- (171,121);
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=source] at (141,116) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=source] at (181,116) {$-$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=source]
+    at (160,65) {источник: $\mathcal{E}$};
+
+  % Lamp/resistor load.
+  \draw[draw=lamp,line width=1.0mm,fill=lamp!12] (334,135) circle (20);
+  \draw[draw=lamp,line width=0.75mm] (322,123) -- (346,147);
+  \draw[draw=lamp,line width=0.75mm] (346,123) -- (322,147);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain] at (334,103) {участок цепи};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain] at (334,82) {$U$};
+
+  % Current arrows.
+  \draw[-{Latex[length=5mm,width=3.2mm]},draw=current,line width=0.9mm] (215,178) -- (270,178);
+  \draw[-{Latex[length=5mm,width=3.2mm]},draw=current,line width=0.9mm] (370,152) -- (370,120);
+  \draw[-{Latex[length=5mm,width=3.2mm]},draw=current,line width=0.9mm] (260,92) -- (205,92);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=current] at (235,193) {ток $I$};
+
+  % Electric field arrow in conductor.
+  \draw[-{Latex[length=5mm,width=3mm]},draw=field,line width=0.9mm] (129,151) -- (129,111);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=field,align=center]
+    at (64,132) {поле\\$\vec E \ne 0$};
+
+  % Free charges.
+  \foreach \x/\y in {218/178,248/178,279/178,370/143,370/116,287/92,238/92,100/138} {
+    \fill[electron] (\x,\y) circle (4.3);
+    \node[font=\sffamily\bfseries\fontsize{8}{9}\selectfont,text=white] at (\x,\y) {$-$};
+  }
+
+  \draw[fill=electron!8,draw=electron,line width=0.45mm,rounded corners=3mm]
+    (36,22) rectangle (165,52);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=electron]
+    at (100.5,37) {свободные заряды есть};
+
+  \draw[fill=field!8,draw=field,line width=0.45mm,rounded corners=3mm]
+    (178,22) rectangle (292,52);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=field]
+    at (235,37) {поле действует};
+
+  \draw[fill=source!8,draw=source,line width=0.45mm,rounded corners=3mm]
+    (305,22) rectangle (434,52);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=source]
+    at (369.5,37) {цепь замкнута};
+
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted,align=center]
+    at (235,207) {источник поддерживает разность потенциалов, поэтому поле в проводниках не исчезает};
+\end{tikzpicture}
+\end{document}
