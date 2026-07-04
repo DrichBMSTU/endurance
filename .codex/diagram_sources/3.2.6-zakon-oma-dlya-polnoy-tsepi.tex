@@ -1,0 +1,75 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{475569}
+\definecolor{current}{HTML}{EA580C}
+\definecolor{source}{HTML}{2563EB}
+\definecolor{load}{HTML}{16A34A}
+\definecolor{internal}{HTML}{9333EA}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
+  \fill[pagebg] (0,0) rectangle (480,265);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (474,259);
+
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain]
+    at (240,239) {Закон Ома для полной цепи};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted]
+    at (240,220) {источник с ЭДС $\mathcal{E}$ и внутренним сопротивлением $r$ подключён к нагрузке $R$};
+
+  % Main circuit wires.
+  \draw[draw=wire,line width=1.1mm] (90,78) -- (90,172) -- (168,172);
+  \draw[draw=wire,line width=1.1mm] (312,172) -- (390,172) -- (390,78) -- (312,78);
+  \draw[draw=wire,line width=1.1mm] (168,78) -- (90,78);
+
+  % Source plates.
+  \draw[draw=source,line width=1.2mm] (168,58) -- (168,98);
+  \draw[draw=source,line width=0.8mm] (190,66) -- (190,90);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=source] at (159,49) {$+$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=source] at (198,49) {$-$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=source]
+    at (179,118) {источник $\mathcal{E}$};
+
+  % Internal resistance.
+  \draw[draw=internal,line width=0.9mm,decorate,decoration={zigzag,segment length=7mm,amplitude=2.3mm}]
+    (198,78) -- (298,78);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=internal]
+    at (248,51) {$r$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (248,33) {внутри источника};
+
+  % External load.
+  \draw[draw=load,line width=0.9mm,decorate,decoration={zigzag,segment length=7mm,amplitude=2.8mm}]
+    (172,172) -- (308,172);
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=load]
+    at (240,193) {$R$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (240,207) {внешняя нагрузка};
+
+  % Current arrows.
+  \draw[-{Latex[length=5mm,width=3mm]},draw=current,line width=1mm] (112,172) -- (150,172);
+  \draw[-{Latex[length=5mm,width=3mm]},draw=current,line width=1mm] (390,142) -- (390,104);
+  \draw[-{Latex[length=5mm,width=3mm]},draw=current,line width=1mm] (298,78) -- (336,78);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=current]
+    at (390,194) {ток $I$};
+
+  % Formula panel.
+  \draw[fill=pagebg,draw=border,line width=0.35mm,rounded corners=3mm]
+    (58,10) rectangle (422,30);
+  \node[font=\sffamily\bfseries\fontsize{16}{20}\selectfont,text=textmain]
+    at (240,20) {$\boxed{\mathcal{E}=IR+Ir}, \qquad \boxed{I=\dfrac{\mathcal{E}}{R+r}}$};
+
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmuted,align=center]
+    at (240,139) {полное сопротивление\\$R_{\text{полн}}=R+r$};
+\end{tikzpicture}
+\end{document}
