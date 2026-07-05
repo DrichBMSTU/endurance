@@ -1,0 +1,73 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{2F2F2F}
+\definecolor{current}{HTML}{EA580C}
+\definecolor{accent}{HTML}{2563EB}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily,line cap=round,line join=round]
+  \fill[pagebg] (0,0) rectangle (460,250);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (454,244);
+  \draw[draw=border,line width=0.35mm] (230,22) -- (230,228);
+
+  % Parallel connection.
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=textmain]
+    at (118,224) {Параллельное соединение};
+  \draw[draw=wire,line width=2.4pt] (28,125) -- (64,125);
+  \draw[draw=wire,line width=2.4pt] (64,178) -- (64,72);
+  \draw[draw=wire,line width=2.4pt] (64,178) -- (100,178);
+  \draw[draw=wire,line width=2.4pt,fill=white] (100,160) rectangle (154,196);
+  \draw[draw=wire,line width=2.4pt] (154,178) -- (194,178);
+  \draw[draw=wire,line width=2.4pt] (64,72) -- (100,72);
+  \draw[draw=wire,line width=2.4pt,fill=white] (100,54) rectangle (154,90);
+  \draw[draw=wire,line width=2.4pt] (154,72) -- (194,72);
+  \draw[draw=wire,line width=2.4pt] (194,178) -- (194,72);
+  \draw[draw=wire,line width=2.4pt] (194,125) -- (226,125);
+  \node at (127,178) {\Large $R_1$};
+  \node at (127,72) {\Large $R_2$};
+  \draw[-{Latex[length=5mm,width=3.8mm]},draw=current,line width=2.5pt] (32,125) -- (58,125);
+  \draw[-{Latex[length=5mm,width=3.8mm]},draw=current,line width=2.2pt] (80,178) -- (98,178);
+  \draw[-{Latex[length=5mm,width=3.8mm]},draw=current,line width=2.2pt] (80,72) -- (98,72);
+  \node[text=current] at (45,143) {\Large $I$};
+  \node[text=current] at (88,194) {\Large $I_1$};
+  \node[text=current] at (88,88) {\Large $I_2$};
+  \draw[<->,draw=accent,line width=1.8pt] (54,205) -- (204,205);
+  \node[text=accent] at (129,218) {\Large $U_1=U_2=U$};
+  \node[font=\sffamily\fontsize{13}{16}\selectfont,text=textmain]
+    at (129,29) {$I=I_1+I_2,\quad \dfrac{1}{R_{\text{паралл}}}=\dfrac{1}{R_1}+\dfrac{1}{R_2}$};
+
+  % Series connection.
+  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=textmain]
+    at (344,224) {Последовательное соединение};
+  \draw[draw=wire,line width=2.4pt] (252,125) -- (282,125);
+  \draw[draw=wire,line width=2.4pt,fill=white] (282,107) rectangle (334,143);
+  \draw[draw=wire,line width=2.4pt] (334,125) -- (360,125);
+  \draw[draw=wire,line width=2.4pt,fill=white] (360,107) rectangle (412,143);
+  \draw[draw=wire,line width=2.4pt] (412,125) -- (440,125);
+  \node at (308,125) {\Large $R_1$};
+  \node at (386,125) {\Large $R_2$};
+  \draw[-{Latex[length=5mm,width=3.8mm]},draw=current,line width=2.5pt] (258,125) -- (280,125);
+  \draw[-{Latex[length=5mm,width=3.8mm]},draw=current,line width=2.5pt] (338,125) -- (358,125);
+  \node[text=current] at (274,145) {\Large $I$};
+  \node[text=current] at (348,145) {\Large $I$};
+  \draw[<->,draw=accent,line width=1.8pt] (282,92) -- (334,92);
+  \draw[<->,draw=accent,line width=1.8pt] (360,92) -- (412,92);
+  \node[text=accent] at (308,74) {\Large $U_1$};
+  \node[text=accent] at (386,74) {\Large $U_2$};
+  \draw[<->,draw=accent,line width=1.8pt] (252,176) -- (440,176);
+  \node[text=accent] at (346,195) {\Large $U=U_1+U_2$};
+  \node[font=\sffamily\fontsize{13}{16}\selectfont,text=textmain]
+    at (346,29) {$I_1=I_2=I,\quad R_{\text{посл}}=R_1+R_2$};
+\end{tikzpicture}
+\end{document}
