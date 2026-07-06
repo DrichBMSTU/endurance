@@ -15,7 +15,8 @@ interface Item {
 type SearchType = "basic" | "tags"
 let searchType: SearchType = "basic"
 let currentSearchTerm: string = ""
-const encoder = (str: string) => str.toLowerCase().split(/([^a-z]|[^\x00-\x7F])/)
+const normalizeSearchText = (str: string) => str.toLowerCase().replace(/ё/g, "е")
+const encoder = (str: string) => normalizeSearchText(str).match(/[\p{L}\p{N}]+/gu) ?? []
 let index = new FlexSearch.Document<Item>({
   charset: "latin:extra",
   encode: encoder,
@@ -46,7 +47,7 @@ const numSearchResults = 8
 const numTagResults = 5
 
 const tokenizeTerm = (term: string) => {
-  const tokens = term.split(/\s+/).filter((t) => t.trim() !== "")
+  const tokens = encoder(term)
   const tokenLen = tokens.length
   if (tokenLen > 1) {
     for (let i = 1; i < tokenLen; i++) {
@@ -57,6 +58,10 @@ const tokenizeTerm = (term: string) => {
   return tokens.sort((a, b) => b.length - a.length) // always highlight longest terms first
 }
 
+const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+const searchRegex = (term: string) =>
+  new RegExp(escapeRegex(term).replace(/е/g, "[её]"), "giu")
+
 function highlight(searchTerm: string, text: string, trim?: boolean) {
   const tokenizedTerms = tokenizeTerm(searchTerm)
   let tokenizedText = text.split(/\s+/).filter((t) => t !== "")
@@ -65,7 +70,7 @@ function highlight(searchTerm: string, text: string, trim?: boolean) {
   let endIndex = tokenizedText.length - 1
   if (trim) {
     const includesCheck = (tok: string) =>
-      tokenizedTerms.some((term) => tok.toLowerCase().startsWith(term.toLowerCase()))
+      tokenizedTerms.some((term) => normalizeSearchText(tok).includes(term))
     const occurrencesIndices = tokenizedText.map(includesCheck)
 
     let bestSum = 0
@@ -88,8 +93,8 @@ function highlight(searchTerm: string, text: string, trim?: boolean) {
     .map((tok) => {
       // see if this tok is prefixed by any search terms
       for (const searchTok of tokenizedTerms) {
-        if (tok.toLowerCase().includes(searchTok.toLowerCase())) {
-          const regex = new RegExp(searchTok.toLowerCase(), "gi")
+        if (normalizeSearchText(tok).includes(searchTok)) {
+          const regex = searchRegex(searchTok)
           return tok.replace(regex, `<span class="highlight">$&</span>`)
         }
       }
@@ -117,7 +122,7 @@ function highlightHTML(searchTerm: string, el: HTMLElement) {
   const highlightTextNodes = (node: Node, term: string) => {
     if (node.nodeType === Node.TEXT_NODE) {
       const nodeText = node.nodeValue ?? ""
-      const regex = new RegExp(term.toLowerCase(), "gi")
+      const regex = searchRegex(term)
       const matches = nodeText.match(regex)
       if (!matches || matches.length === 0) return
       const spanContainer = document.createElement("span")
