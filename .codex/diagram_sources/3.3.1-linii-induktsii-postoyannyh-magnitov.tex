@@ -1,0 +1,111 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,decorations.markings}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{north}{HTML}{2563EB}
+\definecolor{northfill}{HTML}{DBEAFE}
+\definecolor{south}{HTML}{DC2626}
+\definecolor{southfill}{HTML}{FEE2E2}
+\definecolor{field}{HTML}{0F766E}
+\definecolor{fieldlight}{HTML}{14B8A6}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily,
+  fieldarrow/.style={
+    postaction={
+      decorate,
+      decoration={markings,mark=at position 0.52 with {\arrow{Latex[length=2.7mm,width=1.9mm]}}}
+    }
+  }
+]
+  \fill[pagebg] (0,0) rectangle (360,230);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (354,224);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,207) {Линии магнитной индукции постоянных магнитов};
+
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (95,184) {Полосовой магнит};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (265,184) {Подковообразный магнит};
+
+  % Bar magnet.
+  \draw[fill={rgb,255:red,21;green,169;blue,226},draw=north,line width=0.55mm]
+    (48,105) rectangle (95,130);
+  \draw[fill={rgb,255:red,255;green,82;blue,82},draw=south,line width=0.55mm]
+    (95,105) rectangle (142,130);
+
+  % Outside field lines for a bar magnet, matched to the reference:
+  % lines leave N on the left, arc around the magnet, and enter S on the right.
+  \draw[draw=field,line width=0.5mm,fieldarrow]
+    (46,130) .. controls (20,178) and (170,178) .. (144,130);
+  \draw[draw=field,line width=0.5mm,fieldarrow]
+    (47,126) .. controls (28,160) and (162,160) .. (143,126);
+  \draw[draw=field,line width=0.5mm,fieldarrow]
+    (47,121) .. controls (36,146) and (154,146) .. (143,121);
+  \draw[draw=field,line width=0.5mm,fieldarrow]
+    (46,105) .. controls (20,57) and (170,57) .. (144,105);
+  \draw[draw=field,line width=0.5mm,fieldarrow]
+    (47,109) .. controls (28,75) and (162,75) .. (143,109);
+  \draw[draw=field,line width=0.5mm,fieldarrow]
+    (47,114) .. controls (36,89) and (154,89) .. (143,114);
+
+  % Axial outside line: away from N on the left and into S on the right.
+  \draw[-{Latex[length=2.7mm,width=1.9mm]},draw=field,line width=0.5mm]
+    (48,117.5) -- (0,117.5);
+  \draw[-{Latex[length=2.7mm,width=1.9mm]},draw=field,line width=0.5mm]
+    (190,117.5) -- (142,117.5);
+
+  % Inside the magnet the closed field lines return from S to N.
+  \foreach \y in {112,117.5,123} {
+    \draw[-{Latex[length=2.5mm,width=1.8mm]},draw=fieldlight,line width=0.48mm]
+      (134,\y) -- (56,\y);
+  }
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain,fill={rgb,255:red,21;green,169;blue,226},inner sep=0.8pt]
+    at (60,117.5) {$N$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain,fill={rgb,255:red,255;green,82;blue,82},inner sep=0.8pt]
+    at (130,117.5) {$S$};
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmuted,align=center]
+    at (95,35) {Вне магнита линии идут\\от $N$ к $S$ и замыкаются внутри};
+
+  % Horseshoe magnet: one U-shaped body with two facing poles.
+  \draw[fill=northfill,draw=north,line width=0.65mm,rounded corners=2mm]
+    (215,132) rectangle (305,154);
+  \draw[fill=southfill,draw=south,line width=0.65mm,rounded corners=2mm]
+    (215,72) rectangle (305,94);
+  \draw[fill=pagebg,draw=border,line width=0.65mm,rounded corners=2mm]
+    (215,72) rectangle (238,154);
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=1.5mm]
+    (241,96) rectangle (303,130);
+
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=north] at (288,143) {$N$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=south] at (288,83) {$S$};
+
+  % Nearly uniform field in the gap, from N to S.
+  \foreach \x in {250,260,270,280,290} {
+    \draw[-{Latex[length=3.2mm,width=2.2mm]},draw=field,line width=0.65mm]
+      (\x,129) -- (\x,97);
+  }
+
+  % Outer closed field hints around the open side.
+  \draw[-{Latex[length=3.2mm,width=2.3mm]},draw=field,line width=0.65mm]
+    (307,145) .. controls (333,140) and (333,86) .. (307,82);
+  \draw[-{Latex[length=3.2mm,width=2.3mm]},draw=field,line width=0.6mm]
+    (306,153) .. controls (346,148) and (346,78) .. (306,73);
+  \draw[-{Latex[length=3mm,width=2.1mm]},draw=fieldlight,line width=0.5mm]
+    (226,83) -- (226,142);
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmuted,align=center]
+    at (265,35) {В зазоре линии почти параллельны:\\поле сильнее и ближе к однородному};
+\end{tikzpicture}
+\end{document}
