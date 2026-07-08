@@ -1,0 +1,78 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usetikzlibrary{arrows.meta,decorations.markings,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{334155}
+\definecolor{wirefill}{HTML}{E2E8F0}
+\definecolor{current}{HTML}{DC2626}
+\definecolor{field}{HTML}{0F766E}
+\definecolor{fieldlight}{HTML}{14B8A6}
+\definecolor{panel}{HTML}{FFFFFF}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{refline}{HTML}{111827}
+\definecolor{refsoft}{HTML}{64748B}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily,
+  fieldarrow/.style={
+    postaction={
+      decorate,
+      decoration={markings,mark=at position 0.58 with {\arrow{Latex[length=2.7mm,width=1.9mm]}}}
+    }
+  },
+  refarrow/.style={
+    postaction={
+      decorate,
+      decoration={markings,mark=at position 0.62 with {\arrow{Latex[length=3.6mm,width=2.7mm]}}}
+    }
+  }
+]
+  \fill[pagebg] (0,0) rectangle (420,236);
+  \draw[fill=panel,draw=border,line width=0.45mm,rounded corners=4mm]
+    (6,6) rectangle (414,230);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (210,214) {Магнитное поле проводников с током};
+
+  \foreach \x/\title in {75/{Длинный прямой проводник},210/{Кольцевой проводник},345/{Катушка с током}} {
+    \draw[fill=pagebg,draw=border,line width=0.35mm,rounded corners=3mm]
+      (\x-58,28) rectangle (\x+58,195);
+    \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain,align=center]
+      at (\x,181) {\title};
+  }
+
+  \foreach \r in {16,27,38} {
+    \draw[draw=field,line width=0.55mm,fieldarrow]
+      (75,112+\r) arc[start angle=90,end angle=-270,radius=\r];
+  }
+  \draw[fill=wirefill,draw=wire,line width=0.55mm] (75,112) circle (8);
+  \draw[draw=current,line width=0.8mm] (70,107) -- (80,117);
+  \draw[draw=current,line width=0.8mm] (70,117) -- (80,107);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=current]
+    at (75,92) {$I$ от нас};
+  \node[font=\sffamily\fontsize{9}{11}\selectfont,text=textmuted,align=center]
+    at (75,48) {Линии -- окружности\\в плоскостях, перпендикулярных\\проводнику};
+
+  \node[inner sep=0] at (210,112)
+    {\includegraphics[width=109mm,height=94mm,keepaspectratio]{content/Теория ЕГЭ по физике/assets/3.3.2-koltso-enhanced.png}};
+  \node[font=\sffamily\fontsize{9}{11}\selectfont,text=textmuted,align=center]
+    at (210,48) {В центре поле направлено\\вдоль оси витка};
+
+  \node[inner sep=0] at (345,112)
+    {\includegraphics[width=111mm,height=83mm,keepaspectratio]{content/Теория ЕГЭ по физике/assets/3.3.2-solenoid-enhanced.png}};
+  \node[font=\sffamily\fontsize{9}{11}\selectfont,text=textmuted,align=center]
+    at (345,42) {Внутри длинной катушки\\поле почти однородно};
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmuted,align=center]
+    at (210,17) {Направление линий находят правилом буравчика: ход буравчика связывают с током, вращение -- с направлением поля.};
+\end{tikzpicture}
+\end{document}
