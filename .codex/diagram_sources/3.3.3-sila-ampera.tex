@@ -1,0 +1,58 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,decorations.markings,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{wire}{HTML}{334155}
+\definecolor{wirefill}{HTML}{E2E8F0}
+\definecolor{current}{HTML}{DC2626}
+\definecolor{field}{HTML}{2563EB}
+\definecolor{force}{HTML}{16A34A}
+\definecolor{panel}{HTML}{FFFFFF}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily,
+  vector/.style={-Latex,line width=1.2mm},
+  labelbox/.style={fill=panel,draw=border,line width=0.25mm,rounded corners=1.5mm,inner sep=2.2mm}
+]
+  \fill[pagebg] (0,0) rectangle (220,142);
+  \draw[fill=panel,draw=border,line width=0.45mm,rounded corners=4mm]
+    (5,5) rectangle (215,137);
+
+  \node[font=\sffamily\bfseries\fontsize{16}{20}\selectfont,text=textmain]
+    at (110,124) {Сила Ампера};
+
+  \foreach \x in {36,61,86,111,136,161,186} {
+    \foreach \y in {42,67,92} {
+      \draw[field,line width=0.7mm] (\x-4,\y-4) -- (\x+4,\y+4);
+      \draw[field,line width=0.7mm] (\x-4,\y+4) -- (\x+4,\y-4);
+    }
+  }
+  \node[labelbox,font=\sffamily\fontsize{10}{12}\selectfont,text=field,align=center]
+    at (44,108) {$\vec B$ от нас\\в плоскость рисунка};
+
+  \draw[wire,line width=3.8mm] (42,67) -- (178,67);
+  \draw[wirefill,line width=2.8mm] (42,67) -- (178,67);
+  \draw[current,vector] (70,67) -- (151,67);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=current]
+    at (111,56) {$I$};
+
+  \draw[force,vector] (110,67) -- (110,106);
+  \node[labelbox,font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=force]
+    at (137,101) {$\vec F_A$};
+
+  \draw[textmuted,line width=0.35mm] (61,79) arc[start angle=160,end angle=112,radius=49mm];
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmuted]
+    at (78,101) {$90^\circ$};
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmuted,align=center]
+    at (110,24) {Левая рука: линии $\vec B$ входят в ладонь, пальцы направлены по току, большой палец показывает силу.};
+\end{tikzpicture}
+\end{document}
