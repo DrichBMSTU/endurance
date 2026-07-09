@@ -13,7 +13,6 @@
 \definecolor{field}{HTML}{2563EB}
 \definecolor{velocity}{HTML}{DC2626}
 \definecolor{force}{HTML}{16A34A}
-\definecolor{pathline}{HTML}{7C3AED}
 \definecolor{chargefill}{HTML}{FEF3C7}
 \definecolor{chargeborder}{HTML}{D97706}
 \definecolor{panel}{HTML}{FFFFFF}
@@ -39,12 +38,6 @@
   }
   \node[labelbox,font=\sffamily\fontsize{10}{12}\selectfont,text=field,align=center]
     at (48,110) {$\vec B$ от нас\\в плоскость рисунка};
-
-  \draw[pathline,line width=0.7mm,postaction={decorate},
-    decoration={markings,mark=at position 0.55 with {\arrow{Latex}}}]
-    (78,47) arc[start angle=245,end angle=5,radius=44mm];
-  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=pathline,align=center]
-    at (164,34) {траектория\\положительного заряда};
 
   \draw[fill=chargefill,draw=chargeborder,line width=0.7mm] (94,70) circle (6.5);
   \node[font=\sffamily\bfseries\fontsize{13}{15}\selectfont,text=chargeborder]
