@@ -1,0 +1,60 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{current}{HTML}{2563EB}
+\definecolor{emf}{HTML}{DC2626}
+\definecolor{guide}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (350,190);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (344,184);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (175,169) {Самоиндукция при изменении тока};
+
+  \draw[draw=border,line width=0.45mm] (175,23) -- (175,151);
+
+  % Increasing current.
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at (91,146) {Ток увеличивается};
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (32,52) -- (32,125);
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (32,52) -- (155,52);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=current] at (20,120) {$I$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmain] at (157,42) {$t$};
+  \draw[draw=current,line width=1.15mm] (44,62) -- (145,116);
+  \draw[draw=guide,line width=0.4mm,dashed] (44,62) -- (145,62);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=current]
+    at (95,120) {$\dfrac{\Delta I}{\Delta t}>0$};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=emf]
+    at (91,29) {$\mathcal{E}_{si}<0$};
+
+  % Decreasing current.
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at (259,146) {Ток уменьшается};
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (200,52) -- (200,125);
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (200,52) -- (323,52);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=current] at (188,120) {$I$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmain] at (325,42) {$t$};
+  \draw[draw=current,line width=1.15mm] (212,116) -- (313,62);
+  \draw[draw=guide,line width=0.4mm,dashed] (212,62) -- (313,62);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=current]
+    at (263,120) {$\dfrac{\Delta I}{\Delta t}<0$};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=emf]
+    at (259,29) {$\mathcal{E}_{si}>0$};
+\end{tikzpicture}
+\end{document}
