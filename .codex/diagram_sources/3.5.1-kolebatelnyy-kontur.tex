@@ -27,13 +27,13 @@
   % LC circuit.
   \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
     at (75,181) {Колебательный контур};
-  \draw[draw=circuit,line width=1mm] (38,142) -- (52,142);
+  \draw[draw=circuit,line width=1mm] (38,142) -- (108,142) -- (108,130);
   \draw[draw=circuit,line width=1mm]
-    (52,142) arc[start angle=180,end angle=0,radius=7mm]
-             arc[start angle=180,end angle=0,radius=7mm]
-             arc[start angle=180,end angle=0,radius=7mm]
-             arc[start angle=180,end angle=0,radius=7mm];
-  \draw[draw=circuit,line width=1mm] (108,142) -- (108,67) -- (38,67) -- (38,93);
+    (108,130) arc[start angle=90,end angle=-90,radius=7mm]
+              arc[start angle=90,end angle=-90,radius=7mm]
+              arc[start angle=90,end angle=-90,radius=7mm]
+              arc[start angle=90,end angle=-90,radius=7mm];
+  \draw[draw=circuit,line width=1mm] (108,74) -- (108,67) -- (38,67) -- (38,93);
   \draw[draw=circuit,line width=1mm] (25,112) -- (51,112);
   \draw[draw=circuit,line width=1mm] (25,103) -- (51,103);
   \draw[draw=circuit,line width=1mm] (38,93) -- (38,103);
@@ -45,11 +45,11 @@
   \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
     at (61,107) {$C$};
   \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
-    at (80,160) {$L$};
+    at (130,102) {$L$};
   \draw[-{Latex[length=4mm,width=2.8mm]},draw=current,line width=1mm]
-    (108,98) -- (108,128);
+    (54,67) -- (84,67);
   \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=current]
-    at (121,113) {$I$};
+    at (69,57) {$I$};
   \node[align=center,font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
     at (75,39) {$R=0$\\потерь нет};
 
