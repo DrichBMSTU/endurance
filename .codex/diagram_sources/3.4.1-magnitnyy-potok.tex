@@ -1,7 +1,7 @@
 \documentclass[tikz,border=8pt]{standalone}
 \usepackage{fontspec}
 \usepackage{amsmath}
-\usetikzlibrary{arrows.meta,calc,decorations.markings}
+\usetikzlibrary{arrows.meta,calc,intersections}
 
 \setmainfont{Arial}
 \setsansfont{Arial}
@@ -14,38 +14,51 @@
 \begin{tikzpicture}[
   x=1mm,y=1mm,line cap=round,line join=round,
   font=\sffamily,
-  fieldline/.style={fieldblue,line width=0.9mm,-{Latex[length=5.2mm,width=3.4mm]}},
-  hiddenfield/.style={fieldblue,line width=0.55mm,dashed,dash pattern=on 3mm off 2mm},
-  normal/.style={lineblack,line width=0.95mm,-{Latex[length=5.8mm,width=4.2mm]}},
-  angle/.style={lineblack,line width=0.55mm}
+  fieldline/.style={fieldblue,line width=0.75mm,-{Latex[length=4.6mm,width=3mm]}},
+  visiblefield/.style={fieldblue,line width=0.75mm},
+  hiddenfield/.style={fieldblue,line width=0.5mm,dashed,dash pattern=on 2.6mm off 1.8mm},
+  normal/.style={lineblack,line width=0.85mm,-{Latex[length=5.2mm,width=3.8mm]}},
+  angle/.style={lineblack,line width=0.5mm}
 ]
-  \fill[white] (-6,-10) rectangle (104,144);
+  \fill[white] (-8,-8) rectangle (102,112);
 
-  % Magnetic induction lines, tilted like the reference image.
-  \foreach \x in {4,24,44,64,84} {
-    \draw[fieldline] (\x,-2) -- ++(20,93);
+  \path[name path=surface] (45,48) ellipse[x radius=42mm,y radius=19.5mm];
+
+  % The rear rim is behind the visible field vectors.
+  \draw[lineblack,line width=0.55mm] (3,48)
+    arc[start angle=180,end angle=0,x radius=42mm,y radius=19.5mm];
+
+  % Each line is solid in front of the surface, dashed while hidden behind it,
+  % and solid again after crossing the surface. All five vectors are parallel.
+  \newcommand{\drawfield}[2]{%
+    \path[name path=field#1] (#2,0) -- ++(20,92);
+    \path[name intersections={of=surface and field#1,by={#1front,#1back},sort by=field#1}];
+    \coordinate (#1cross) at ({#2+10.435},48);
+    \draw[visiblefield] (#2,0) -- (#1front);
+    \draw[hiddenfield] (#1front) -- (#1cross);
+    \draw[fieldline] (#1cross) -- ({#2+20},92);
   }
-  \foreach \x in {18,38,58,78} {
-    \draw[hiddenfield] (\x,25) -- ++(7,33);
-  }
+  \drawfield{A}{-5}
+  \drawfield{B}{15}
+  \drawfield{C}{34.565}
+  \drawfield{D}{55}
+  \drawfield{E}{75}
 
-  % Surface crossed by the magnetic field.
-  \draw[lineblack,line width=0.7mm] (5,50)
-    .. controls (10,74) and (88,81) .. (100,58)
-    .. controls (91,35) and (16,28) .. (5,50);
+  % The front rim masks the lower portions of the field lines.
+  \draw[lineblack,line width=0.55mm] (87,48)
+    arc[start angle=0,end angle=-180,x radius=42mm,y radius=19.5mm];
 
-  % Central normal and reference field direction from the same point.
-  \coordinate (O) at (52,50);
-  \draw[normal] (O) -- (52,136);
-  \draw[fieldline] (O) -- ++(20,93);
+  % Normal to the surface and the angle with the central field vector.
+  \coordinate (O) at (Ccross);
+  \draw[normal] (O) -- (45,108);
 
   % Angle between n and B.
-  \draw[angle] (52,94) arc[start angle=90,end angle=77.9,radius=44];
-  \node[font=\sffamily\itshape\fontsize{17}{20}\selectfont,text=textmain] at (59,86) {$\alpha$};
+  \draw[angle] (45,75) arc[start angle=90,end angle=77.7,radius=27];
+  \node[font=\sffamily\itshape\fontsize{14}{17}\selectfont,text=textmain] at (48,72) {$\alpha$};
 
   % Labels.
-  \node[font=\sffamily\itshape\fontsize{17}{20}\selectfont,text=fieldblue] at (7,106) {$\vec B$};
-  \node[font=\sffamily\itshape\fontsize{16}{19}\selectfont,text=textmain] at (62,127) {$\vec n$};
-  \node[font=\sffamily\itshape\fontsize{17}{20}\selectfont,text=textmain] at (63,43) {$S$};
+  \node[font=\sffamily\itshape\fontsize{16}{19}\selectfont,text=fieldblue] at (1,85) {$\vec B$};
+  \node[font=\sffamily\itshape\fontsize{15}{18}\selectfont,text=textmain] at (52,102) {$\vec n$};
+  \node[font=\sffamily\itshape\fontsize{16}{19}\selectfont,text=textmain] at (53,41) {$S$};
 \end{tikzpicture}
 \end{document}
