@@ -1,0 +1,63 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,positioning}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{green}{HTML}{15803D}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{softblue}{HTML}{EFF6FF}
+\definecolor{softgreen}{HTML}{F0FDF4}
+\definecolor{softorange}{HTML}{FFF7ED}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (330,166);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (324,160);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (165,145) {От электростанции к потребителю};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (165,132) {напряжение повышают для передачи и понижают перед использованием};
+
+  \tikzset{
+    stage/.style={draw=border,line width=0.45mm,rounded corners=3mm,
+      minimum width=52mm,minimum height=52mm,align=center,text=textmain},
+    flow/.style={-{Latex[length=3.6mm,width=2.5mm]},draw=blue,line width=0.8mm}
+  }
+
+  \node[stage,fill=softgreen] (gen) at (39,77)
+    {\bfseries Генератор\\[2mm]\fontsize{9.5}{12}\selectfont механическая энергия\\$\downarrow$\\электрическая энергия};
+  \node[stage,fill=softblue] (up) at (102,77)
+    {\bfseries Повышающий\\трансформатор\\[2mm]\fontsize{9.5}{12}\selectfont $U\uparrow$, $I\downarrow$};
+  \node[stage,fill=softblue] (line) at (165,77)
+    {\bfseries Высоковольтная\\линия\\[2mm]\fontsize{9.5}{12}\selectfont малые потери\\$I^2R$};
+  \node[stage,fill=softblue] (down) at (228,77)
+    {\bfseries Понижающий\\трансформатор\\[2mm]\fontsize{9.5}{12}\selectfont $U\downarrow$};
+  \node[stage,fill=softorange] (use) at (291,77)
+    {\bfseries Потребитель\\[2mm]\fontsize{9.5}{12}\selectfont тепло, свет,\\движение};
+
+  \draw[flow] (gen.east) -- (up.west);
+  \draw[flow] (up.east) -- (line.west);
+  \draw[flow] (line.east) -- (down.west);
+  \draw[flow] (down.east) -- (use.west);
+
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=green] at (39,39)
+    {производство};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue] at (165,39)
+    {передача};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=orange] at (291,39)
+    {потребление};
+
+  \draw[draw=border,line width=0.45mm] (13,25) -- (317,25);
+  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmuted] at (165,16)
+    {Переменное напряжение удобно преобразовывать трансформаторами};
+\end{tikzpicture}
+\end{document}
