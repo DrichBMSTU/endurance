@@ -1,0 +1,69 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{flux}{HTML}{2563EB}
+\definecolor{emf}{HTML}{DC2626}
+\definecolor{guide}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (350,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (344,204);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (175,190) {Закон Фарадея на графиках};
+
+  % Shared interval guides.
+  \draw[draw=guide,line width=0.45mm,dashed] (112,24) -- (112,168);
+  \draw[draw=guide,line width=0.45mm,dashed] (252,24) -- (252,168);
+
+  % Magnetic flux graph.
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=textmain,line width=0.65mm]
+    (42,105) -- (42,174);
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=textmain,line width=0.65mm]
+    (42,105) -- (320,105);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=flux]
+    at (25,166) {$\Phi$};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmain] at (323,94) {$t$};
+
+  \draw[draw=flux,line width=1.15mm]
+    (58,122) -- (112,122) -- (252,158) -- (307,158);
+  \fill[flux] (112,122) circle[radius=1.8mm];
+  \fill[flux] (252,158) circle[radius=1.8mm];
+  \draw[draw=flux,line width=0.45mm,<->]
+    (267,122) -- (267,158);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=flux,anchor=west]
+    at (273,140) {$\Delta\Phi$};
+
+  % EMF graph.
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=textmain,line width=0.65mm]
+    (42,30) -- (42,92);
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=textmain,line width=0.65mm]
+    (42,70) -- (320,70);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=emf]
+    at (23,87) {$\mathcal{E}_i$};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=textmain] at (323,59) {$t$};
+
+  \draw[draw=emf,line width=1.15mm]
+    (58,70) -- (112,70) -- (112,42) -- (252,42) -- (252,70) -- (307,70);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=emf]
+    at (182,30) {$\mathcal{E}_i=-\dfrac{\Delta\Phi}{\Delta t}=\mathrm{const}<0$};
+
+  % Time interval marker and labels.
+  \draw[draw=textmuted,line width=0.45mm,<->] (112,96) -- (252,96);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmuted]
+    at (182,87) {$\Delta t$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmain] at (112,18) {$t_1$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmain] at (252,18) {$t_2$};
+\end{tikzpicture}
+\end{document}
