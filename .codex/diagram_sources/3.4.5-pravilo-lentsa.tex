@@ -12,7 +12,8 @@
 \definecolor{textmuted}{HTML}{475569}
 \definecolor{external}{HTML}{2563EB}
 \definecolor{induced}{HTML}{DC2626}
-\definecolor{current}{HTML}{7C3AED}
+\definecolor{wire}{HTML}{334155}
+\definecolor{current}{HTML}{059669}
 
 \newcommand{\outofpage}[3]{%
   \draw[draw=#3,line width=0.7mm,fill=white] (#1,#2) circle[radius=2.6mm];
@@ -45,11 +46,11 @@
     at (256.5,158) {Внешний поток убывает};
 
   % Left loop: external field out of page, induced field into page.
-  \draw[draw=current,line width=1.2mm] (93.5,102) circle[radius=42mm];
-  \draw[draw=current,line width=1.2mm,-{Latex[length=4.5mm,width=3.3mm]}]
+  \draw[draw=wire,line width=0.9mm] (93.5,102) circle[radius=42mm];
+  \draw[draw=current,line width=1.55mm,-{Latex[length=5mm,width=3.6mm]}]
     (64,131) arc[start angle=135,end angle=43,radius=42mm];
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=current]
-    at (93.5,50) {$I$ по часовой стрелке};
+  \node[font=\sffamily\bfseries\fontsize{11.5}{14}\selectfont,text=current]
+    at (93.5,50) {Индукционный ток $I_{\text{инд}}$: по часовой стрелке};
 
   \foreach \x/\y in {70/115,93.5/128,117/115,70/89,117/89}
     {\outofpage{\x}{\y}{external}}
@@ -60,11 +61,11 @@
     at (104,76) {$\vec B_{\text{инд}}$};
 
   % Right loop: both external and induced fields out of page.
-  \draw[draw=current,line width=1.2mm] (256.5,102) circle[radius=42mm];
-  \draw[draw=current,line width=1.2mm,-{Latex[length=4.5mm,width=3.3mm]}]
+  \draw[draw=wire,line width=0.9mm] (256.5,102) circle[radius=42mm];
+  \draw[draw=current,line width=1.55mm,-{Latex[length=5mm,width=3.6mm]}]
     (286,131) arc[start angle=45,end angle=137,radius=42mm];
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=current]
-    at (256.5,50) {$I$ против часовой стрелки};
+  \node[font=\sffamily\bfseries\fontsize{11.5}{14}\selectfont,text=current]
+    at (256.5,50) {Индукционный ток $I_{\text{инд}}$: против часовой стрелки};
 
   \foreach \x/\y in {233/115,256.5/128,280/115,233/89,280/89}
     {\outofpage{\x}{\y}{external}}
