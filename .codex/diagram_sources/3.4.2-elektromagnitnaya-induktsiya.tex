@@ -1,6 +1,6 @@
 \documentclass[tikz,border=8pt]{standalone}
 \usepackage{fontspec}
-\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+\usetikzlibrary{arrows.meta,calc}
 
 \setmainfont{Arial}
 \setsansfont{Arial}
@@ -11,74 +11,94 @@
 \definecolor{textmuted}{HTML}{475569}
 \definecolor{wire}{HTML}{334155}
 \definecolor{coil}{HTML}{B45309}
+\definecolor{coilhi}{HTML}{F59E0B}
 \definecolor{north}{HTML}{2563EB}
 \definecolor{south}{HTML}{DC2626}
 \definecolor{motion}{HTML}{7C3AED}
 \definecolor{current}{HTML}{0F766E}
 
+\newcommand{\meter}[2]{%
+  \draw[fill=white,draw=wire,line width=0.65mm,rounded corners=2mm]
+    (30,20) rectangle (100,82);
+  \draw[draw=border,line width=0.45mm] (40,49) arc[start angle=160,end angle=20,radius=32mm];
+  \foreach \a in {30,50,...,150} {
+    \draw[draw=wire,line width=0.35mm]
+      ($(70,38)+(\a:27mm)$) -- ($(70,38)+(\a:31mm)$);
+  }
+  \node[font=\sffamily\fontsize{8}{10}\selectfont,text=textmuted] at (70,68) {$0$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain] at (70,28) {$G$};
+  \fill[wire] (70,38) circle[radius=1.8mm];
+  \draw[draw=#2,line width=0.9mm] (70,38) -- ($(70,38)+(#1:25mm)$);
+  \draw[fill=coilhi,draw=coil,line width=0.45mm] (44,20) circle[radius=3mm];
+  \draw[fill=coilhi,draw=coil,line width=0.45mm] (86,20) circle[radius=3mm];
+}
+
+\newcommand{\coilcircuit}{%
+  \foreach \x in {24,30,...,66} {
+    \draw[draw=coil,line width=1mm] (\x,119) ellipse[x radius=5mm,y radius=27mm];
+    \draw[draw=coilhi,line width=0.28mm] (\x-1.3,119) ellipse[x radius=3.7mm,y radius=25.5mm];
+  }
+  \draw[draw=wire,line width=0.7mm] (24,92) -- (18,92) -- (18,12) -- (44,12) -- (44,20);
+  \draw[draw=wire,line width=0.7mm] (66,146) -- (112,146) -- (112,12) -- (86,12) -- (86,20);
+}
+
+\newcommand{\magnet}{%
+  \draw[fill=north,draw=north,line width=0.5mm] (58,111) rectangle (87,127);
+  \draw[fill=south,draw=south,line width=0.5mm] (87,111) rectangle (116,127);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=white] at (74.5,119) {$N$};
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=white] at (101.5,119) {$S$};
+}
+
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
-  \fill[pagebg] (0,0) rectangle (330,190);
+  \fill[pagebg] (0,0) rectangle (420,225);
   \draw[fill=white,draw=border,line width=0.5mm,rounded corners=4mm]
-    (6,6) rectangle (324,184);
+    (6,6) rectangle (414,219);
 
   \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
-    at (165,167) {Опыт Фарадея с магнитом и катушкой};
+    at (210,202) {Опыт Фарадея: магнит и катушка};
 
-  \draw[draw=border,line width=0.4mm] (165,22) -- (165,151);
+  % 1. Magnet moves into the coil.
+  \begin{scope}[xshift=10mm,yshift=10mm]
+    \draw[fill=white,draw=border,line width=0.4mm,rounded corners=3mm]
+      (0,0) rectangle (125,175);
+    \coilcircuit
+    \magnet
+    \draw[-{Latex[length=4mm,width=2.8mm]},draw=motion,line width=0.9mm]
+      (112,155) -- (75,155);
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=motion] at (93.5,165)
+      {вдвигаем};
+    \meter{125}{current}
+    \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain] at (62.5,8)
+      {(1) поток меняется — ток есть};
+  \end{scope}
 
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
-    at (85,143) {Магнит движется};
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
-    at (245,143) {Магнит неподвижен};
+  % 2. Magnet is stationary.
+  \begin{scope}[xshift=147.5mm,yshift=10mm]
+    \draw[fill=white,draw=border,line width=0.4mm,rounded corners=3mm]
+      (0,0) rectangle (125,175);
+    \coilcircuit
+    \magnet
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmuted] at (93.5,160)
+      {магнит неподвижен};
+    \meter{90}{wire}
+    \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain] at (62.5,8)
+      {(2) поток постоянен — тока нет};
+  \end{scope}
 
-  % Left panel: moving magnet and induced current.
-  \draw[fill=north,draw=north,line width=0.5mm,rounded corners=1mm]
-    (22,87) rectangle (55,111);
-  \draw[fill=south,draw=south,line width=0.5mm,rounded corners=1mm]
-    (55,87) rectangle (88,111);
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=white] at (38.5,99) {$N$};
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=white] at (71.5,99) {$S$};
-  \draw[-{Latex[length=4.2mm,width=3mm]},draw=motion,line width=0.9mm]
-    (39,121) -- (79,121);
-  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=motion] at (59,130) {движение};
-
-  \foreach \x in {100,106,112,118,124,130} {
-    \draw[draw=coil,line width=1.1mm] (\x,77) ellipse[x radius=5mm,y radius=31mm];
-  }
-  \draw[draw=wire,line width=0.75mm] (130,68) -- (143,68) -- (143,42) -- (116,42);
-  \draw[draw=wire,line width=0.75mm] (130,130) -- (151,130) -- (151,42) -- (144,42);
-  \draw[draw=wire,line width=0.75mm] (116,42) -- (108,42);
-  \draw[draw=wire,line width=0.75mm] (144,42) -- (136,42);
-  \draw[fill=white,draw=wire,line width=0.75mm] (122,42) circle[radius=14mm];
-  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain] at (122,47) {$G$};
-  \draw[draw=current,line width=0.85mm] (122,42) -- (130,53);
-  \draw[-{Latex[length=3.4mm,width=2.4mm]},draw=current,line width=0.8mm]
-    (103,65) arc[start angle=205,end angle=318,x radius=25mm,y radius=18mm];
-
-  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=current] at (84,25)
-    {поток меняется $\Rightarrow$ есть ток};
-
-  % Right panel: stationary magnet and no current.
-  \draw[fill=north,draw=north,line width=0.5mm,rounded corners=1mm]
-    (182,87) rectangle (215,111);
-  \draw[fill=south,draw=south,line width=0.5mm,rounded corners=1mm]
-    (215,87) rectangle (248,111);
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=white] at (198.5,99) {$N$};
-  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=white] at (231.5,99) {$S$};
-
-  \foreach \x in {260,266,272,278,284,290} {
-    \draw[draw=coil,line width=1.1mm] (\x,77) ellipse[x radius=5mm,y radius=31mm];
-  }
-  \draw[draw=wire,line width=0.75mm] (290,68) -- (303,68) -- (303,42) -- (276,42);
-  \draw[draw=wire,line width=0.75mm] (290,130) -- (311,130) -- (311,42) -- (304,42);
-  \draw[draw=wire,line width=0.75mm] (276,42) -- (268,42);
-  \draw[draw=wire,line width=0.75mm] (304,42) -- (296,42);
-  \draw[fill=white,draw=wire,line width=0.75mm] (282,42) circle[radius=14mm];
-  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain] at (282,47) {$G$};
-  \draw[draw=wire,line width=0.85mm] (282,42) -- (282,54);
-
-  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmuted] at (245,25)
-    {поток постоянен $\Rightarrow$ тока нет};
+  % 3. Magnet moves out of the coil.
+  \begin{scope}[xshift=285mm,yshift=10mm]
+    \draw[fill=white,draw=border,line width=0.4mm,rounded corners=3mm]
+      (0,0) rectangle (125,175);
+    \coilcircuit
+    \magnet
+    \draw[-{Latex[length=4mm,width=2.8mm]},draw=motion,line width=0.9mm]
+      (75,155) -- (112,155);
+    \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=motion] at (93.5,165)
+      {выдвигаем};
+    \meter{55}{current}
+    \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain] at (62.5,8)
+      {(3) ток меняет направление};
+  \end{scope}
 \end{tikzpicture}
 \end{document}
