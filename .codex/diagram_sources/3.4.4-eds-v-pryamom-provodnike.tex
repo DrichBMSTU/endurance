@@ -70,22 +70,26 @@
 
   % Normal and magnetic field, drawn from the same point on the swept plane.
   \coordinate (O) at (214,104);
-  \coordinate (Ntip) at (173,179);
-  \coordinate (Btip) at (246,184);
+  \coordinate (Ntip) at (214,184);
+  \coordinate (Btip) at (260,177);
   \fill[textmain] (O) circle[radius=1.7mm];
+  % A short direction in the plane and a square mark show n perpendicular to it.
+  \draw[draw=guide,line width=0.45mm,dashed] ($(O)+(-27,0)$) -- (O);
+  \draw[draw=normal,line width=0.65mm]
+    ($(O)+(-8,0)$) -- ($(O)+(-8,8)$) -- ($(O)+(0,8)$);
   \draw[-{Latex[length=5mm,width=3.4mm]},draw=normal,line width=1.15mm]
     (O) -- (Ntip);
   \draw[-{Latex[length=5mm,width=3.4mm]},draw=field,line width=1.25mm]
     (O) -- (Btip);
-  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=normal,anchor=east]
-    at ($(Ntip)+(-3,0)$) {$\vec n$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=normal,anchor=south]
+    at ($(Ntip)+(0,3)$) {$\vec n$};
   \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=field,anchor=west]
     at ($(Btip)+(3,0)$) {$\vec B$};
   \pic[draw=textmain,line width=0.55mm,angle radius=14mm,angle eccentricity=1.28,
        "$\alpha$" {font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain}]
     {angle=Btip--O--Ntip};
-  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=normal,anchor=east]
-    at (171,151) {нормаль};
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=normal,anchor=east]
+    at (207,150) {$\vec n\perp$ плоскости};
 
   % Area relation used in the derivation.
   \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain,
