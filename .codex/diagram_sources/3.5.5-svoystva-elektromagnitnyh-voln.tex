@@ -1,0 +1,70 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{green}{HTML}{059669}
+\definecolor{soft}{HTML}{EFF6FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (300,180);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (294,174);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (150,158) {Электромагнитная волна в вакууме};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (150,144) {взаимная ориентация векторов в выбранной точке волны};
+
+  \draw[fill=soft,draw=border,line width=0.35mm,rounded corners=2.5mm]
+    (22,30) rectangle (172,130);
+
+  \coordinate (O) at (78,75);
+  \draw[dashed,draw=textmuted!50,line width=0.4mm] (42,75) -- (158,75);
+
+  \draw[-{Latex[length=4mm,width=2.7mm]},draw=green,line width=1.15mm]
+    (O) -- (151,75);
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=green]
+    at (151,75) {$\vec c$};
+  \node[anchor=west,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (105,62) {направление волны};
+
+  \draw[-{Latex[length=4mm,width=2.7mm]},draw=blue,line width=1.15mm]
+    (O) -- (78,121);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=blue]
+    at (78,121) {$\vec E$};
+
+  \draw[fill=orange!12,draw=orange,line width=1mm] (O) circle (6mm);
+  \fill[orange] (O) circle (1.6mm);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=orange,line width=0.55mm]
+    (52,49) -- (72,69);
+  \node[anchor=east,align=right,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=orange]
+    at (51,48) {$\vec B$ направлен\\к наблюдателю};
+
+  \draw[draw=textmuted,line width=0.5mm] (78,84) -- (87,84) -- (87,75);
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (97,112) {$\vec E \perp \vec c$};
+
+  \node[align=center,font=\sffamily\bfseries\fontsize{16}{20}\selectfont,text=textmain]
+    at (232,108) {$\vec E \perp \vec B \perp \vec c$};
+  \node[align=left,font=\sffamily\fontsize{11.5}{15}\selectfont,text=textmain]
+    at (232,73) {электрическое поле\\магнитное поле\\направление волны};
+
+  \draw[draw=border,line width=0.4mm] (190,39) -- (274,39);
+  \node[align=center,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (232,24) {Знак $\odot$ означает направление\\из плоскости рисунка к наблюдателю.};
+
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (97,17) {Все три направления попарно перпендикулярны.};
+\end{tikzpicture}
+\end{document}
