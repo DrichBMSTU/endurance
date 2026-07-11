@@ -1,0 +1,99 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{charge}{HTML}{2563EB}
+\definecolor{current}{HTML}{DC2626}
+\definecolor{circuit}{HTML}{334155}
+\definecolor{guide}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,225);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,219);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,204) {Свободные колебания в идеальном контуре};
+
+  % LC circuit.
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at (75,181) {Колебательный контур};
+  \draw[draw=circuit,line width=1mm] (38,158) -- (105,158) -- (105,145);
+  \draw[draw=circuit,line width=1mm]
+    (105,145) .. controls (116,141) and (116,133) .. (105,129)
+              .. controls (94,125) and (94,117) .. (105,113)
+              .. controls (116,109) and (116,101) .. (105,97)
+              .. controls (94,93) and (94,85) .. (105,81);
+  \draw[draw=circuit,line width=1mm] (105,81) -- (105,67) -- (38,67) -- (38,93);
+  \draw[draw=circuit,line width=1mm] (25,112) -- (51,112);
+  \draw[draw=circuit,line width=1mm] (25,103) -- (51,103);
+  \draw[draw=circuit,line width=1mm] (38,93) -- (38,103);
+  \draw[draw=circuit,line width=1mm] (38,112) -- (38,158);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=charge]
+    at (19,124) {$+q$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=charge]
+    at (19,92) {$-q$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (61,107) {$C$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (126,113) {$L$};
+  \draw[-{Latex[length=4mm,width=2.8mm]},draw=current,line width=1mm]
+    (54,158) -- (84,158);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=current]
+    at (69,169) {$I$};
+  \node[align=center,font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (75,39) {$R=0$\\потерь нет};
+
+  % Shared time guides for the two graphs.
+  \foreach \x in {166,207,248,289,330} {
+    \draw[draw=guide,line width=0.35mm,dashed] (\x,39) -- (\x,177);
+  }
+
+  % Charge graph q(t) = q_max sin(omega t).
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (160,141) -- (339,141);
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (166,109) -- (166,179);
+  \draw[draw=charge,line width=1.1mm,smooth,domain=0:360,samples=121]
+    plot ({166+0.455556*\x},{141+25*sin(\x)});
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=charge]
+    at (151,173) {$q$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmain]
+    at (342,132) {$t$};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=charge]
+    at (216,174) {$q=q_{\max}\sin\omega t$};
+
+  % Current graph I(t) = I_max cos(omega t).
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (160,72) -- (339,72);
+  \draw[-{Latex[length=3.5mm,width=2.5mm]},draw=textmain,line width=0.6mm]
+    (166,39) -- (166,105);
+  \draw[draw=current,line width=1.1mm,smooth,domain=0:360,samples=121]
+    plot ({166+0.455556*\x},{72+25*cos(\x)});
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=current]
+    at (151,99) {$I$};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmain]
+    at (342,63) {$t$};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=current]
+    at (216,104) {$I=I_{\max}\cos\omega t$};
+
+  % Time labels and phase relation.
+  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmain] at (166,27) {$0$};
+  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmain] at (207,27) {$T/4$};
+  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmain] at (248,27) {$T/2$};
+  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmain] at (289,27) {$3T/4$};
+  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmain] at (330,27) {$T$};
+  \draw[draw=textmuted,line width=0.45mm,<->] (166,17) -- (207,17);
+  \node[font=\sffamily\bfseries\fontsize{10}{13}\selectfont,text=textmuted]
+    at (248,16) {сдвиг фаз $\pi/2$};
+\end{tikzpicture}
+\end{document}
