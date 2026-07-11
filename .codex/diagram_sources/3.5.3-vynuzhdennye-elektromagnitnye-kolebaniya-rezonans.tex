@@ -1,0 +1,69 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{soft}{HTML}{EFF6FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (300,180);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (294,174);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (150,159) {Резонанс электромагнитных колебаний};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (150,145) {зависимость амплитуды от частоты внешнего воздействия};
+
+  \draw[fill=soft,draw=border,line width=0.35mm,rounded corners=2.5mm]
+    (24,27) rectangle (276,132);
+  \draw[-{Latex[length=3.5mm,width=2.4mm]},draw=textmuted,line width=0.65mm]
+    (42,44) -- (262,44);
+  \draw[-{Latex[length=3.5mm,width=2.4mm]},draw=textmuted,line width=0.65mm]
+    (48,36) -- (48,122);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (268,36) {$\omega$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (36,120) {$A$};
+
+  \draw[dashed,draw=textmuted!60,line width=0.45mm] (154,44) -- (154,119);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (154,33) {$\omega_0$};
+
+  \draw[draw=blue,line width=1.35mm,smooth]
+    plot coordinates {
+      (52,46) (70,47) (88,49) (106,54) (122,65) (136,87)
+      (146,113) (153,124) (160,113) (170,86) (184,65) (202,53)
+      (222,48) (244,46) (258,45)
+    };
+  \draw[draw=orange,line width=1.35mm,smooth]
+    plot coordinates {
+      (52,47) (70,49) (88,52) (106,58) (124,68) (140,80)
+      (154,86) (168,82) (184,71) (202,60) (222,52) (244,48) (258,47)
+    };
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.55mm]
+    (204,111) -- (163,112);
+  \node[anchor=west,align=left,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=blue]
+    at (205,116) {малые потери:\\высокий узкий пик};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=orange,line width=0.55mm]
+    (211,79) -- (178,76);
+  \node[anchor=west,align=left,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=orange]
+    at (212,84) {большие потери:\\низкий широкий пик};
+
+  \draw[<->,draw=textmuted,line width=0.5mm] (132,18) -- (176,18);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmuted]
+    at (154,11) {область резонанса};
+\end{tikzpicture}
+\end{document}
