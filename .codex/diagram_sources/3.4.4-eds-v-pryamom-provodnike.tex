@@ -1,0 +1,96 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc,angles,quotes}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{plane}{HTML}{EFF6FF}
+\definecolor{planeedge}{HTML}{60A5FA}
+\definecolor{rod}{HTML}{0F172A}
+\definecolor{motion}{HTML}{7C3AED}
+\definecolor{normal}{HTML}{059669}
+\definecolor{field}{HTML}{DC2626}
+\definecolor{guide}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (350,225);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (344,219);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (175,204) {Движение прямого проводника в магнитном поле};
+
+  % Plane swept by the conductor. The oblique projection emphasizes that n is
+  % normal to the physical plane spanned by the rod and its displacement.
+  \coordinate (A) at (58,45);
+  \coordinate (C) at (248,45);
+  \coordinate (D) at (304,113);
+  \coordinate (E) at (114,113);
+  \fill[plane] (A) -- (C) -- (D) -- (E) -- cycle;
+  \draw[draw=planeedge,line width=0.65mm] (A) -- (C) -- (D) -- (E) -- cycle;
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted,anchor=west]
+    at (63,27) {плоскость движения проводника};
+
+  % Two successive conductor positions.
+  \coordinate (Pone) at (91,45);
+  \coordinate (None) at (147,113);
+  \coordinate (Ptwo) at (226,45);
+  \coordinate (Ntwo) at (282,113);
+  \draw[draw=rod,line width=2.4mm] (Pone) -- (None);
+  \draw[draw=rod,line width=2.4mm] (Ptwo) -- (Ntwo);
+  \fill[white,draw=rod,line width=0.45mm] (Pone) circle[radius=2.1mm];
+  \fill[white,draw=rod,line width=0.45mm] (None) circle[radius=2.1mm];
+  \fill[white,draw=rod,line width=0.45mm] (Ptwo) circle[radius=2.1mm];
+  \fill[white,draw=rod,line width=0.45mm] (Ntwo) circle[radius=2.1mm];
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain,anchor=east]
+    at ($(Pone)!0.52!(None)+(-5,0)$) {$l$};
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmuted]
+    at (116,126) {положение 1};
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmuted]
+    at (251,126) {положение 2};
+
+  % Motion and swept distance.
+  \draw[-{Latex[length=5mm,width=3.4mm]},draw=motion,line width=1.15mm]
+    (122,78) -- (207,78);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=motion]
+    at (165,91) {$\vec v$};
+  \draw[draw=motion,line width=0.55mm,<->] (91,37) -- (226,37);
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=motion]
+    at (158.5,25) {$v\Delta t$};
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=motion,fill=white,
+        rounded corners=1.2mm,inner xsep=2.2mm,inner ysep=1.2mm]
+    at (160,57) {$\vec v\perp l$};
+
+  % Normal and magnetic field, drawn from the same point on the swept plane.
+  \coordinate (O) at (214,104);
+  \coordinate (Ntip) at (173,179);
+  \coordinate (Btip) at (246,184);
+  \fill[textmain] (O) circle[radius=1.7mm];
+  \draw[-{Latex[length=5mm,width=3.4mm]},draw=normal,line width=1.15mm]
+    (O) -- (Ntip);
+  \draw[-{Latex[length=5mm,width=3.4mm]},draw=field,line width=1.25mm]
+    (O) -- (Btip);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=normal,anchor=east]
+    at ($(Ntip)+(-3,0)$) {$\vec n$};
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=field,anchor=west]
+    at ($(Btip)+(3,0)$) {$\vec B$};
+  \pic[draw=textmain,line width=0.55mm,angle radius=14mm,angle eccentricity=1.28,
+       "$\alpha$" {font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain}]
+    {angle=Btip--O--Ntip};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=normal,anchor=east]
+    at (171,151) {нормаль};
+
+  % Area relation used in the derivation.
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain,
+        fill=white,draw=border,line width=0.4mm,rounded corners=2mm,
+        inner xsep=4mm,inner ysep=2.5mm]
+    at (284,28) {$\Delta S=l\,v\Delta t$};
+\end{tikzpicture}
+\end{document}
