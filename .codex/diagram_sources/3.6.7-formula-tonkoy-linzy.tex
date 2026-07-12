@@ -1,0 +1,91 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{purple}{HTML}{7C3AED}
+\definecolor{ray}{HTML}{D97706}
+\definecolor{guide}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (320,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (314,204);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (160,189) {Величины в формуле тонкой линзы};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (160,174) {Собирающая линза, действительное перевёрнутое изображение};
+
+  \coordinate (A) at (66,103);
+  \coordinate (B) at (66,146);
+  \coordinate (O) at (165,103);
+  \coordinate (Ap) at (236,103);
+  \coordinate (Bp) at (236,72.16);
+  \coordinate (FL) at (124.78,103);
+  \coordinate (FR) at (205.22,103);
+
+  % Главная оптическая ось и тонкая линза
+  \draw[draw=textmuted,line width=0.65mm] (24,103) -- (296,103);
+  \draw[{Latex[length=3mm,width=2mm]}-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.05mm]
+    (165,54) -- (165,152);
+  \fill[blue] (O) circle (1.15mm);
+  \node[anchor=north west,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (167,101) {$O$};
+
+  % Фокусы
+  \foreach \P in {FL,FR} {
+    \fill[blue] (\P) circle (1.05mm);
+  }
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue] at (FL) {$F$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue] at (FR) {$F$};
+
+  % Предмет и изображение
+  \draw[-{Latex[length=3.4mm,width=2.4mm]},draw=blue,line width=1.25mm] (A) -- (B);
+  \draw[-{Latex[length=3.4mm,width=2.4mm]},draw=purple,line width=1.25mm] (Ap) -- (Bp);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue] at (66,148) {предмет};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=purple] at (236,70) {изображение};
+
+  % Два луча, фиксирующие геометрию величин
+  \draw[-{Latex[length=3mm,width=2mm]},draw=ray,line width=0.85mm] (B) -- (165,146);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=ray,line width=0.85mm] (165,146) -- (Bp);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=ray,line width=0.85mm] (B) -- (O);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=ray,line width=0.85mm] (O) -- (Bp);
+
+  % Выносные линии для расстояний и высот
+  \draw[draw=guide,dashed,line width=0.45mm] (66,103) -- (66,163);
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=textmuted,line width=0.6mm]
+    (66,160) -- (165,160);
+  \node[fill=white,inner sep=1.2mm,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (115.5,160) {$d$};
+
+  \draw[draw=guide,dashed,line width=0.45mm] (236,103) -- (236,48);
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=textmuted,line width=0.6mm]
+    (165,50) -- (236,50);
+  \node[fill=white,inner sep=1.2mm,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (200.5,50) {$f$};
+
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=blue,line width=0.65mm]
+    (54,103) -- (54,146);
+  \node[fill=white,inner sep=1mm,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=blue]
+    at (54,124.5) {$H$};
+
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=purple,line width=0.65mm]
+    (249,72.16) -- (249,103);
+  \node[fill=white,inner sep=1mm,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=purple]
+    at (249,87.58) {$h$};
+
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=blue]
+    at (160,24) {$\displaystyle \frac{1}{d}+\frac{1}{f}=\frac{1}{F},\qquad
+      \Gamma=\frac{h}{H}=\frac{|f|}{d}$};
+\end{tikzpicture}
+\end{document}
