@@ -19,62 +19,86 @@
 
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
-  \fill[pagebg] (0,0) rectangle (340,180);
+  \fill[pagebg] (0,0) rectangle (400,220);
   \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
-    (6,6) rectangle (334,174);
+    (6,6) rectangle (394,214);
 
   \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
-    at (170,157) {Шкала электромагнитных волн};
+    at (200,201) {Шкала электромагнитных волн};
   \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
-    at (170,143) {Границы диапазонов приблизительны, ширина полос показана не в масштабе};
+    at (200,188) {Границы диапазонов приблизительны, ширина полос показана не в масштабе};
 
   \draw[-{Latex[length=3.5mm,width=2.4mm]},draw=textmain,line width=0.75mm]
-    (30,126) -- (310,126);
+    (28,173) -- (372,173);
   \node[anchor=west,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
-    at (30,134) {длина волны уменьшается};
+    at (28,180) {длина волны $\lambda$ уменьшается};
 
   \draw[-{Latex[length=3.5mm,width=2.4mm]},draw=textmain,line width=0.75mm]
-    (30,31) -- (310,31);
+    (28,38) -- (372,38);
   \node[anchor=east,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
-    at (310,18) {частота увеличивается};
+    at (372,24) {частота $\nu$ увеличивается};
 
-  \fill[radio] (30,68) rectangle (91,115);
-  \fill[infrared] (91,68) rectangle (137,115);
-  \fill[visible] (137,68) rectangle (174,115);
-  \fill[ultraviolet] (174,68) rectangle (221,115);
-  \fill[xray] (221,68) rectangle (272,115);
-  \fill[gamma] (272,68) rectangle (310,115);
+  \fill[radio] (28,110) rectangle (92,150);
+  \fill[infrared] (92,110) rectangle (150,150);
+  \fill[visible] (150,110) rectangle (205,150);
+  \fill[ultraviolet] (205,110) rectangle (270,150);
+  \fill[xray] (270,110) rectangle (330,150);
+  \fill[gamma] (330,110) rectangle (372,150);
 
-  \draw[draw=white,line width=0.55mm] (91,68)--(91,115) (137,68)--(137,115)
-    (174,68)--(174,115) (221,68)--(221,115) (272,68)--(272,115);
+  \draw[draw=white,line width=0.55mm] (92,110)--(92,150) (150,110)--(150,150)
+    (205,110)--(205,150) (270,110)--(270,150) (330,110)--(330,150);
 
   \node[align=center,font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=white]
-    at (60.5,91.5) {радио-\\волны};
+    at (60,130) {радио-\\волны};
   \node[align=center,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=white]
-    at (114,91.5) {инфра-\\красное};
+    at (121,130) {инфра-\\красное};
   \node[align=center,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=white]
-    at (155.5,91.5) {видимый\\свет};
+    at (177.5,130) {видимый\\свет};
   \node[align=center,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=white]
-    at (197.5,91.5) {ультра-\\фиолет};
+    at (237.5,130) {ультра-\\фиолет};
   \node[align=center,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=white]
-    at (246.5,91.5) {рентгеновское};
+    at (300,130) {рентгеновское};
   \node[align=center,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=white]
-    at (291,91.5) {гамма-\\излучение};
+    at (351,130) {гамма-\\излучение};
+
+  \foreach \x in {92,150,205,270,330} {
+    \draw[draw=textmuted,line width=0.35mm] (\x,150) -- (\x,154);
+    \draw[draw=textmuted,line width=0.35mm] (\x,106) -- (\x,110);
+  }
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (92,160)
+    {$\approx 10^{-3}$ м};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (150,160)
+    {$\approx 7{,}8\cdot10^{-7}$ м};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (205,160)
+    {$\approx 3{,}8\cdot10^{-7}$ м};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (270,160)
+    {$\approx 10^{-8}$ м};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (330,160)
+    {$\approx 5\cdot10^{-12}$ м};
+
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (92,100)
+    {$\approx 3\cdot10^{11}$ Гц};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (150,100)
+    {$\approx 3{,}8\cdot10^{14}$ Гц};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (205,100)
+    {$\approx 7{,}9\cdot10^{14}$ Гц};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (270,100)
+    {$\approx 3\cdot10^{16}$ Гц};
+  \node[font=\sffamily\fontsize{10}{12}\selectfont,text=textmain] at (330,100)
+    {$\approx 6\cdot10^{19}$ Гц};
 
   \node[align=center,font=\sffamily\fontsize{9.7}{12}\selectfont,text=textmuted]
-    at (60.5,55) {связь,\\радиолокация};
+    at (60,73) {связь,\\радиолокация};
   \node[align=center,font=\sffamily\fontsize{9.7}{12}\selectfont,text=textmuted]
-    at (114,55) {тепловизоры,\\пульты};
+    at (121,73) {тепловизоры,\\пульты};
   \node[align=center,font=\sffamily\fontsize{9.7}{12}\selectfont,text=textmuted]
-    at (155.5,55) {зрение,\\освещение};
+    at (177.5,73) {зрение,\\освещение};
   \node[align=center,font=\sffamily\fontsize{9.7}{12}\selectfont,text=textmuted]
-    at (197.5,55) {обеззара-\\живание};
+    at (237.5,73) {обеззара-\\живание};
   \node[align=center,font=\sffamily\fontsize{9.7}{12}\selectfont,text=textmuted]
-    at (246.5,55) {снимки,\\досмотр};
+    at (300,73) {снимки,\\досмотр};
   \node[align=center,font=\sffamily\fontsize{9.7}{12}\selectfont,text=textmuted]
-    at (291,55) {терапия,\\стерилизация};
-
-  \node[font=\sffamily\fontsize{10}{13}\selectfont,text=textmuted]
-    at (170,121) {от больших длин волн к малым};
+    at (351,73) {терапия,\\стерилизация};
 \end{tikzpicture}
 \end{document}
