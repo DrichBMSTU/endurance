@@ -1,0 +1,62 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{ray}{HTML}{D97706}
+\definecolor{normal}{HTML}{64748B}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (300,190);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (294,184);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (150,168) {Законы отражения света};
+
+  \coordinate (O) at (150,57);
+  \coordinate (N) at (150,145);
+  \coordinate (A) at (72,133);
+  \coordinate (B) at (228,133);
+
+  \draw[draw=blue,line width=1.25mm] (35,57) -- (265,57);
+  \node[anchor=north,font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (225,51) {отражающая поверхность};
+
+  \draw[draw=normal,dashed,line width=0.65mm] (150,39) -- (N);
+  \node[anchor=west,font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (154,139) {перпендикуляр};
+
+  \draw[-{Latex[length=4mm,width=2.6mm]},draw=ray,line width=1.15mm]
+    (A) -- (O);
+  \draw[-{Latex[length=4mm,width=2.6mm]},draw=ray,line width=1.15mm]
+    (O) -- (B);
+
+  \node[anchor=south east,font=\sffamily\bfseries\fontsize{11.5}{14}\selectfont,text=textmain]
+    at (95,122) {падающий луч};
+  \node[anchor=south west,font=\sffamily\bfseries\fontsize{11.5}{14}\selectfont,text=textmain]
+    at (205,122) {отражённый луч};
+  \node[anchor=north east,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
+    at (147,55) {$O$};
+
+  \draw[draw=blue,line width=0.65mm]
+    (O) ++(90:18) arc[start angle=90,end angle=136,radius=18];
+  \draw[draw=blue,line width=0.65mm]
+    (O) ++(44:18) arc[start angle=44,end angle=90,radius=18];
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at ($(O)+(113:26)$) {$\alpha$};
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at ($(O)+(67:26)$) {$\beta$};
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=blue]
+    at (150,21) {$\alpha=\beta$};
+\end{tikzpicture}
+\end{document}
