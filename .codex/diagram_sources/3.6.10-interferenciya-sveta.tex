@@ -1,0 +1,98 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{orange}{HTML}{D97706}
+\definecolor{screen}{HTML}{E2E8F0}
+\definecolor{bright}{HTML}{FDE68A}
+\definecolor{darkband}{HTML}{334155}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,204);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,189) {Интерференция света};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,174) {Разность хода определяет, усилят или ослабят друг друга когерентные волны};
+
+  % Панели
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (12,35) rectangle (178,158);
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (183,35) rectangle (348,158);
+
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (95,146) {Разность хода};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (265.5,146) {Интерференционная картина};
+
+  % Два синфазных источника и точка наблюдения
+  \coordinate (Sone) at (34,111);
+  \coordinate (Stwo) at (34,68);
+  \coordinate (P) at (157,101);
+  \draw[draw=screen,line width=1.6mm] (157,52) -- (157,128);
+  \node[anchor=south,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted]
+    at (157,130) {экран};
+
+  \fill[blue] (Sone) circle (2.4mm);
+  \fill[orange] (Stwo) circle (2.4mm);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue]
+    at (29,111) {$S_1$};
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=orange]
+    at (29,68) {$S_2$};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.95mm]
+    (Sone) -- (P);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=orange,line width=0.95mm]
+    (Stwo) -- (P);
+  \fill[textmain] (P) circle (1.8mm);
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (160,101) {$P$};
+
+  \node[fill=pagebg,inner sep=1.2mm,font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=blue]
+    at (96,111) {$l_1$};
+  \node[fill=pagebg,inner sep=1.2mm,font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=orange]
+    at (96,80) {$l_2$};
+
+  \node[draw=border,fill=white,rounded corners=1.5mm,inner xsep=4mm,inner ysep=2.2mm,
+    font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (95,48) {$\Delta=l_2-l_1$};
+
+  % Схематическая картина на экране
+  \draw[fill=screen,draw=border,line width=0.45mm,rounded corners=1mm]
+    (207,55) rectangle (273,132);
+  \foreach \y in {59,75,91,107,123} {
+    \fill[bright] (210,\y) rectangle (270,{\y+8});
+  }
+  \foreach \y in {67,83,99,115} {
+    \fill[darkband] (210,\y) rectangle (270,{\y+8});
+  }
+
+  \draw[-{Latex[length=2.5mm,width=1.7mm]},draw=textmuted,line width=0.55mm]
+    (280,95) -- (273,95);
+  \node[anchor=west,align=left,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmain]
+    at (282,95) {светлая полоса\\максимум};
+
+  \draw[-{Latex[length=2.5mm,width=1.7mm]},draw=textmuted,line width=0.55mm]
+    (280,119) -- (273,119);
+  \node[anchor=west,align=left,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmain]
+    at (282,119) {тёмная полоса\\минимум};
+
+  \node[anchor=north,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted]
+    at (240,52) {схематично};
+
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (180,21) {Максимум: $\Delta=m\lambda$ \qquad Минимум: $\Delta=(2m+1)\lambda/2$};
+\end{tikzpicture}
+\end{document}
