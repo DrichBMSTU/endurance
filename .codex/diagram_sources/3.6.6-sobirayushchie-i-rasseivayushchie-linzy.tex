@@ -76,13 +76,13 @@
   \node[anchor=north,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=textmain] at (235.5,92) {$O$};
   \node[anchor=north,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=textmain] at (200,92) {$F$};
   \node[anchor=north,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=textmain] at (271,92) {$F$};
-  \foreach \y/\ye in {76/66,86/81,106/111,116/126} {
+  \foreach \y in {76,86,106,116} {
     \draw[-{Latex[length=3.1mm,width=2.1mm]},draw=ray,line width=0.9mm]
       (177,\y) -- (235.5,\y);
     \draw[-{Latex[length=3.1mm,width=2.1mm]},draw=ray,line width=0.9mm]
-      (235.5,\y) -- (293,\ye);
+      (235.5,\y) -- ($(FdL)!2.422535!(235.5,\y)$);
     \draw[draw=virtualray,dashed,line width=0.55mm]
-      (200,96) -- (235.5,\y);
+      (FdL) -- (235.5,\y);
   }
   \draw[{Latex[length=2.6mm,width=1.8mm]}-{Latex[length=2.6mm,width=1.8mm]},draw=blue,line width=0.6mm]
     (200,54) -- (235.5,54);
