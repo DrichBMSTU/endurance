@@ -1,0 +1,82 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{purple}{HTML}{7C3AED}
+\definecolor{green}{HTML}{059669}
+\definecolor{ray}{HTML}{D97706}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,205);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,199);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,184) {Фотоаппарат и глаз};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,169) {Собирающая оптическая система создаёт действительное перевёрнутое изображение};
+
+  \foreach \x/\title in {12/Фотоаппарат,183/Глаз} {
+    \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+      (\x,31) rectangle +(165,125);
+    \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+      at (\x+82.5,144) {\title};
+  }
+
+  % Фотоаппарат
+  \draw[draw=textmuted,line width=0.45mm] (20,89) -- (169,89);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.05mm] (28,89) -- (28,126);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (28,128) {предмет};
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=purple,line width=0.9mm]
+    (86,52) -- (86,132);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (86,50) {объектив};
+  \draw[draw=green,line width=1.4mm] (157,55) -- (157,128);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=green] at (157,53) {матрица};
+  \coordinate (camimage) at (157,72);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (28,126) -- (86,126);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (86,126) -- (camimage);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (28,126) -- (86,89);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (86,89) -- (camimage);
+  \draw[-{Latex[length=2.7mm,width=1.8mm]},draw=blue,line width=0.95mm] (157,89) -- (camimage);
+  \node[align=center,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted] at (94.5,40)
+    {фокусировка — перемещением\\объектива или его линз};
+
+  % Глаз
+  \draw[draw=textmuted,line width=0.45mm] (190,89) -- (343,89);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.05mm] (198,89) -- (198,126);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (198,128) {предмет};
+  \draw[draw=textmuted,line width=0.75mm] (246,58)
+    .. controls (229,72) and (229,106) .. (246,120)
+    .. controls (276,142) and (327,135) .. (343,89)
+    .. controls (327,43) and (276,36) .. (246,58);
+  \draw[draw=purple,line width=0.9mm] (246,58) .. controls (235,75) and (235,103) .. (246,120);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (241,53) {роговица};
+  \draw[{Latex[length=2.3mm,width=1.6mm]}-{Latex[length=2.3mm,width=1.6mm]},draw=purple,line width=0.9mm]
+    (275,65) -- (275,113);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (275,62) {хрусталик};
+  \draw[draw=green,line width=1.3mm] (335,63) .. controls (343,78) and (343,100) .. (335,115);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=green] at (335,60) {сетчатка};
+  \coordinate (eyeimage) at (338,73);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (198,126) -- (246,119);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (246,119) -- (275,111);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (275,111) -- (eyeimage);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (198,126) -- (246,99);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (246,99) -- (275,89);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (275,89) -- (eyeimage);
+  \draw[-{Latex[length=2.7mm,width=1.8mm]},draw=blue,line width=0.95mm] (338,89) -- (eyeimage);
+  \node[align=center,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted] at (265.5,40)
+    {фокусировка — изменением\\кривизны хрусталика};
+
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (180,18) {Светочувствительная поверхность находится в плоскости изображения};
+\end{tikzpicture}
+\end{document}
