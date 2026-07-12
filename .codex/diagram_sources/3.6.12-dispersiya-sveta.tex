@@ -1,0 +1,101 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{glass}{HTML}{DBEAFE}
+\definecolor{glassline}{HTML}{2563EB}
+\definecolor{raywhite}{HTML}{64748B}
+\definecolor{redray}{HTML}{DC2626}
+\definecolor{orangeray}{HTML}{EA580C}
+\definecolor{yellowray}{HTML}{CA8A04}
+\definecolor{greenray}{HTML}{16A34A}
+\definecolor{cyanray}{HTML}{0891B2}
+\definecolor{blueray}{HTML}{2563EB}
+\definecolor{violetray}{HTML}{7C3AED}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,204);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,188) {Дисперсия света};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,173) {Стеклянная призма разлагает белый свет в непрерывный спектр};
+
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (16,35) rectangle (344,158);
+
+  % Призма
+  \coordinate (A) at (125,55);
+  \coordinate (B) at (190,150);
+  \coordinate (C) at (248,55);
+  \coordinate (P) at (159,105);
+  \draw[fill=glass,fill opacity=0.78,draw=glassline,line width=1mm]
+    (A) -- (B) -- (C) -- cycle;
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (188,46) {стеклянная призма};
+
+  % Падающий белый луч
+  \draw[-{Latex[length=3.5mm,width=2.4mm]},draw=raywhite,line width=2.2mm]
+    (30,105) -- (P);
+  \draw[draw=white,line width=0.75mm] (33,105) -- (154,105);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmain]
+    at (80,111) {белый свет};
+
+  % Спектральные лучи внутри и после призмы
+  \draw[draw=redray,line width=1.05mm] (P) -- (219,92);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=redray,line width=1.05mm]
+    (219,92) -- (326,88);
+  \draw[draw=orangeray,line width=1.05mm] (P) -- (220,89);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=orangeray,line width=1.05mm]
+    (220,89) -- (326,82);
+  \draw[draw=yellowray,line width=1.05mm] (P) -- (221,86);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=yellowray,line width=1.05mm]
+    (221,86) -- (326,76);
+  \draw[draw=greenray,line width=1.05mm] (P) -- (222,83);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=greenray,line width=1.05mm]
+    (222,83) -- (326,70);
+  \draw[draw=cyanray,line width=1.05mm] (P) -- (223,80);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=cyanray,line width=1.05mm]
+    (223,80) -- (326,64);
+  \draw[draw=blueray,line width=1.05mm] (P) -- (224,77);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=blueray,line width=1.05mm]
+    (224,77) -- (326,58);
+  \draw[draw=violetray,line width=1.05mm] (P) -- (225,74);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=violetray,line width=1.05mm]
+    (225,74) -- (326,52);
+
+  % Экран и цветная полоса
+  \draw[draw=textmain,line width=1.2mm] (326,43) -- (326,98);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=textmain]
+    at (326,102) {экран};
+  \draw[draw=redray,line width=4.5mm] (331,85.6) -- (331,90.4);
+  \draw[draw=orangeray,line width=4.5mm] (331,79.6) -- (331,84.4);
+  \draw[draw=yellowray,line width=4.5mm] (331,73.6) -- (331,78.4);
+  \draw[draw=greenray,line width=4.5mm] (331,67.6) -- (331,72.4);
+  \draw[draw=cyanray,line width=4.5mm] (331,61.6) -- (331,66.4);
+  \draw[draw=blueray,line width=4.5mm] (331,55.6) -- (331,60.4);
+  \draw[draw=violetray,line width=4.5mm] (331,49.6) -- (331,54.4);
+
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=redray]
+    at (335,88) {красный};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=violetray]
+    at (335,52) {фиолетовый};
+
+  \node[draw=border,fill=white,rounded corners=1.5mm,inner xsep=5mm,inner ysep=2.5mm,
+    align=center,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
+    at (180,20) {Фиолетовый свет отклоняется сильнее красного};
+
+  \node[anchor=south west,font=\sffamily\fontsize{9.2}{11.5}\selectfont,text=textmuted]
+    at (251,42) {разные частоты — разные углы преломления};
+\end{tikzpicture}
+\end{document}
