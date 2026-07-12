@@ -1,0 +1,103 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc,angles,quotes}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{ray}{HTML}{D97706}
+\definecolor{normal}{HTML}{64748B}
+\definecolor{mediumone}{HTML}{EFF6FF}
+\definecolor{mediumtwo}{HTML}{DBEAFE}
+\definecolor{glass}{HTML}{DDEAFE}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (320,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (314,204);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (160,188) {Преломление света};
+
+  % Левая панель: граница двух сред
+  \draw[fill=mediumone,draw=border,line width=0.45mm,rounded corners=2mm]
+    (18,24) rectangle (154,169);
+  \fill[mediumtwo] (18.3,24.3) rectangle (153.7,93);
+  \draw[draw=blue,line width=0.8mm] (18,93) -- (154,93);
+
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
+    at (25,157) {Среда 1: $n_1$};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
+    at (25,31) {Среда 2: $n_2>n_1$};
+
+  \coordinate (O) at (87,93);
+  \coordinate (A) at (39,149);
+  \coordinate (B) at (112,38);
+  \coordinate (Nup) at (87,158);
+  \coordinate (Ndown) at (87,29);
+
+  \draw[draw=normal,dashed,line width=0.65mm] (Ndown) -- (Nup);
+  \node[anchor=west,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (91,150) {перпендикуляр};
+
+  \draw[-{Latex[length=4mm,width=2.6mm]},draw=ray,line width=1.1mm] (A) -- (O);
+  \draw[-{Latex[length=4mm,width=2.6mm]},draw=ray,line width=1.1mm] (O) -- (B);
+
+  \node[anchor=south east,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmain]
+    at (58,137) {падающий луч};
+  \node[anchor=north west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmain]
+    at (106,58) {преломлённый луч};
+
+  \draw[draw=blue,line width=0.65mm]
+    (O) ++(90:16) arc[start angle=90,end angle=131,radius=16];
+  \draw[draw=blue,line width=0.65mm]
+    (O) ++(-90:18) arc[start angle=-90,end angle=-66,radius=18];
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at ($(O)+(110:24)$) {$\alpha$};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at ($(O)+(-78:26)$) {$\beta$};
+  \node[anchor=north east,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmain]
+    at (84,91) {$O$};
+
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=blue]
+    at (86,14) {$n_1\sin\alpha=n_2\sin\beta$};
+
+  % Правая панель: луч в призме
+  \draw[fill=mediumone,draw=border,line width=0.45mm,rounded corners=2mm]
+    (166,24) rectangle (302,169);
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (234,156) {Ход луча в призме};
+
+  \coordinate (T) at (235,141);
+  \coordinate (L) at (190,45);
+  \coordinate (R) at (280,45);
+  \coordinate (P) at (213,94);
+  \coordinate (Q) at (261.5,84.5);
+
+  \draw[fill=glass,draw=blue,line width=1mm] (L) -- (T) -- (R) -- cycle;
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (235,59) {стеклянная призма};
+
+  \draw[-{Latex[length=4mm,width=2.6mm]},draw=ray,line width=1.1mm]
+    (174,94) -- (P);
+  \draw[draw=ray,line width=1.1mm] (P) -- (Q);
+  \draw[-{Latex[length=4mm,width=2.6mm]},draw=ray,line width=1.1mm]
+    (Q) -- (298,53);
+
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmain]
+    at (188,98) {луч};
+  \node[anchor=north east,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmain]
+    at (292,50) {к основанию};
+
+  \draw[-{Latex[length=3.2mm,width=2.2mm]},draw=blue,line width=0.75mm]
+    (271,29) -- (233,29);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=blue]
+    at (252,31) {основание призмы};
+\end{tikzpicture}
+\end{document}
