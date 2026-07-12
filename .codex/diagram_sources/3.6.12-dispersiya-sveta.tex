@@ -39,6 +39,14 @@
   \coordinate (B) at (190,150);
   \coordinate (C) at (248,55);
   \coordinate (P) at (159,105);
+  % Точки выхода лежат точно на правой грани B--C.
+  \coordinate (Qred) at ($(B)!0.5172413793!(C)$);
+  \coordinate (Qorange) at ($(B)!0.5344827586!(C)$);
+  \coordinate (Qyellow) at ($(B)!0.5517241379!(C)$);
+  \coordinate (Qgreen) at ($(B)!0.5689655172!(C)$);
+  \coordinate (Qcyan) at ($(B)!0.5862068966!(C)$);
+  \coordinate (Qblue) at ($(B)!0.6034482759!(C)$);
+  \coordinate (Qviolet) at ($(B)!0.6206896552!(C)$);
   \draw[fill=glass,fill opacity=0.78,draw=glassline,line width=1mm]
     (A) -- (B) -- (C) -- cycle;
   \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=textmuted]
@@ -52,27 +60,27 @@
     at (80,111) {белый свет};
 
   % Спектральные лучи внутри и после призмы
-  \draw[draw=redray,line width=1.05mm] (P) -- (219,92);
+  \draw[draw=redray,line width=1.05mm] (P) -- (Qred);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=redray,line width=1.05mm]
-    (219,92) -- (326,88);
-  \draw[draw=orangeray,line width=1.05mm] (P) -- (220,89);
+    (Qred) -- (326,88);
+  \draw[draw=orangeray,line width=1.05mm] (P) -- (Qorange);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=orangeray,line width=1.05mm]
-    (220,89) -- (326,82);
-  \draw[draw=yellowray,line width=1.05mm] (P) -- (221,86);
+    (Qorange) -- (326,82);
+  \draw[draw=yellowray,line width=1.05mm] (P) -- (Qyellow);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=yellowray,line width=1.05mm]
-    (221,86) -- (326,76);
-  \draw[draw=greenray,line width=1.05mm] (P) -- (222,83);
+    (Qyellow) -- (326,76);
+  \draw[draw=greenray,line width=1.05mm] (P) -- (Qgreen);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=greenray,line width=1.05mm]
-    (222,83) -- (326,70);
-  \draw[draw=cyanray,line width=1.05mm] (P) -- (223,80);
+    (Qgreen) -- (326,70);
+  \draw[draw=cyanray,line width=1.05mm] (P) -- (Qcyan);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=cyanray,line width=1.05mm]
-    (223,80) -- (326,64);
-  \draw[draw=blueray,line width=1.05mm] (P) -- (224,77);
+    (Qcyan) -- (326,64);
+  \draw[draw=blueray,line width=1.05mm] (P) -- (Qblue);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=blueray,line width=1.05mm]
-    (224,77) -- (326,58);
-  \draw[draw=violetray,line width=1.05mm] (P) -- (225,74);
+    (Qblue) -- (326,58);
+  \draw[draw=violetray,line width=1.05mm] (P) -- (Qviolet);
   \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=violetray,line width=1.05mm]
-    (225,74) -- (326,52);
+    (Qviolet) -- (326,52);
 
   % Экран и цветная полоса
   \draw[draw=textmain,line width=1.2mm] (326,43) -- (326,98);
