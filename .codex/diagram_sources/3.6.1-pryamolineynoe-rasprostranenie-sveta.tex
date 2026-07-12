@@ -1,0 +1,61 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{ray}{HTML}{D97706}
+\definecolor{source}{HTML}{F59E0B}
+\definecolor{soft}{HTML}{EFF6FF}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (300,180);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (294,174);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (150,158) {Прямолинейное распространение света};
+  \node[font=\sffamily\fontsize{11}{14}\selectfont,text=textmuted]
+    at (150,144) {прозрачная оптически однородная среда};
+
+  \draw[fill=soft,draw=border,line width=0.4mm,rounded corners=3mm]
+    (22,28) rectangle (278,130);
+
+  \coordinate (S) at (65,79);
+  \fill[source!18] (S) circle (11mm);
+  \fill[source] (S) circle (4.5mm);
+  \draw[draw=ray,line width=0.65mm]
+    ($(S)+(0,7)$) -- ($(S)+(0,13)$)
+    ($(S)+(0,-7)$) -- ($(S)+(0,-13)$)
+    ($(S)+(7,0)$) -- ($(S)+(13,0)$)
+    ($(S)+(-7,0)$) -- ($(S)+(-13,0)$)
+    ($(S)+(5,5)$) -- ($(S)+(9.5,9.5)$)
+    ($(S)+(5,-5)$) -- ($(S)+(9.5,-9.5)$)
+    ($(S)+(-5,5)$) -- ($(S)+(-9.5,9.5)$)
+    ($(S)+(-5,-5)$) -- ($(S)+(-9.5,-9.5)$);
+
+  \foreach \P in {(255,112),(262,79),(255,46)} {
+    \draw[-{Latex[length=4mm,width=2.5mm]},draw=ray,line width=1.05mm] (S) -- \P;
+  }
+
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (49,80) {$S$};
+  \node[anchor=north,align=center,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (65,61) {точечный\\источник};
+
+  \draw[-{Latex[length=3.2mm,width=2.1mm]},draw=blue,line width=0.55mm]
+    (191,122) -- (213,105);
+  \node[anchor=south,align=center,font=\sffamily\bfseries\fontsize{11.5}{14}\selectfont,text=blue]
+    at (190,123) {луч света};
+
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (150,17) {Каждый луч остаётся прямой линией, пока среда однородна.};
+\end{tikzpicture}
+\end{document}
