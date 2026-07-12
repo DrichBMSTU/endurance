@@ -1,0 +1,115 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc,angles,quotes}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{orange}{HTML}{D97706}
+\definecolor{barrier}{HTML}{334155}
+\definecolor{wave}{HTML}{60A5FA}
+\definecolor{guide}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,215);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,209);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,194) {Дифракция света и дифракционная решётка};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,179) {Узкая щель отклоняет свет, а решётка усиливает волны в определённых направлениях};
+
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (12,34) rectangle (172,163);
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (178,34) rectangle (348,163);
+
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (92,151) {Дифракция на щели};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (263,151) {Дифракционная решётка};
+
+  % Плоская волна и узкая щель
+  \foreach \x in {30,43,56} {
+    \draw[draw=wave,line width=0.75mm] (\x,61) -- (\x,132);
+  }
+  \foreach \y in {76,96,116} {
+    \draw[-{Latex[length=2.8mm,width=1.8mm]},draw=blue,line width=0.85mm]
+      (24,\y) -- (70,\y);
+  }
+  \node[anchor=south,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (45,134) {плоская волна};
+
+  \draw[draw=barrier,line width=3.2mm] (78,55) -- (78,89);
+  \draw[draw=barrier,line width=3.2mm] (78,107) -- (78,139);
+  \node[anchor=north,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (78,51) {узкая щель};
+
+  \draw[densely dashed,draw=guide,line width=0.45mm] (79,89) -- (154,89);
+  \draw[densely dashed,draw=guide,line width=0.45mm] (79,107) -- (154,107);
+
+  \foreach \r in {22,39,56,73} {
+    \draw[draw=wave,line width=0.75mm]
+      (78,98) ++(-53:\r) arc[start angle=-53,end angle=53,radius=\r];
+  }
+  \draw[-{Latex[length=2.8mm,width=1.8mm]},draw=blue,line width=0.85mm]
+    (82,98) -- (151,127);
+  \draw[-{Latex[length=2.8mm,width=1.8mm]},draw=blue,line width=0.85mm]
+    (82,98) -- (151,69);
+  \node[align=center,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmain]
+    at (129,43) {свет заходит в область\\геометрической тени};
+
+  % Решётка и нормальное падение
+  \draw[draw=barrier,line width=2.8mm] (225,53) -- (225,70);
+  \draw[draw=barrier,line width=2.8mm] (225,75) -- (225,103);
+  \draw[draw=barrier,line width=2.8mm] (225,108) -- (225,136);
+  \draw[draw=barrier,line width=2.8mm] (225,141) -- (225,145);
+
+  \foreach \y in {72.5,105.5,138.5} {
+    \draw[-{Latex[length=2.8mm,width=1.8mm]},draw=blue,line width=0.85mm]
+      (190,\y) -- (221,\y);
+  }
+  \node[anchor=south,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (205,140) {нормальное падение};
+
+  \coordinate (A) at (225,72.5);
+  \coordinate (B) at (225,105.5);
+  \coordinate (Q) at (237.7,78.4);
+  \coordinate (Rone) at (327,120);
+  \coordinate (Rtwo) at (327,153);
+
+  \draw[densely dashed,draw=guide,line width=0.45mm] (A) -- (326,72.5);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.95mm] (A) -- (Rone);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.95mm] (B) -- (Rtwo);
+  \draw[densely dashed,draw=guide,line width=0.45mm] (B) -- (Q);
+
+  \draw[draw=orange,line width=1.35mm] (A) -- (Q);
+  \node[anchor=south west,fill=pagebg,inner sep=0.8mm,
+    font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=orange]
+    at (241,91) {$d\sin\varphi_m$};
+
+  \draw[<->,draw=textmuted,line width=0.55mm]
+    (217,72.5) -- (217,105.5);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (214,89) {$d$};
+
+  \draw[draw=textmain,line width=0.55mm]
+    (245,72.5) arc[start angle=0,end angle=25,radius=20];
+  \node[font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=textmain]
+    at (249,78) {$\varphi_m$};
+
+  \node[anchor=north,align=center,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (270,53) {волны от соседних щелей\\выходят параллельно};
+
+  \node[draw=border,fill=white,rounded corners=1.5mm,inner xsep=5mm,inner ysep=2.4mm,
+    font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=textmain]
+    at (180,20) {$d\sin\varphi_m=m\lambda$};
+\end{tikzpicture}
+\end{document}
