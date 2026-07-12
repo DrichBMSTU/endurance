@@ -1,0 +1,111 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{purple}{HTML}{7C3AED}
+\definecolor{green}{HTML}{059669}
+\definecolor{ray}{HTML}{D97706}
+\definecolor{virtualray}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,199) {Построение изображений};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,184) {Два луча определяют изображение точки; изображения концов задают изображение отрезка};
+
+  \foreach \x/\w in {12/108,126/108,240/108} {
+    \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+      (\x,34) rectangle +(\w,135);
+  }
+
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain] at (66,157) {Собирающая};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain] at (180,157) {Рассеивающая};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain] at (294,157) {Система линз};
+
+  % Собирающая линза
+  \draw[draw=textmuted,line width=0.5mm] (18,104) -- (116,104);
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=blue,line width=0.85mm]
+    (70,59) -- (70,147);
+  \fill[blue] (70,104) circle (0.9mm);
+  \foreach \x in {48,92} {\fill[blue] (\x,104) circle (0.85mm);}
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (48,102) {$F$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (92,102) {$F$};
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.05mm] (28,104) -- (28,138);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (28,140) {$B$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (28,102) {$A$};
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (28,138) -- (70,138);
+  \coordinate (Bc) at (116.2,66.6);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (70,138) -- (Bc);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (28,138) -- (70,104);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (70,104) -- (Bc);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=purple,line width=1.05mm] (116.2,104) -- (Bc);
+  \node[anchor=north east,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (Bc) {$B'$};
+  \node[anchor=south east,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (116.2,106) {$A'$};
+  \node[font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted] at (66,46) {действительное};
+
+  % Рассеивающая линза
+  \draw[draw=textmuted,line width=0.5mm] (132,104) -- (230,104);
+  \draw[{Latex[length=2.5mm,width=1.7mm]}-{Latex[length=2.5mm,width=1.7mm]},draw=blue,line width=0.85mm]
+    (184,59) -- (184,147);
+  \fill[blue] (184,104) circle (0.9mm);
+  \foreach \x in {162,206} {\fill[blue] (\x,104) circle (0.85mm);}
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (162,102) {$F$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (206,102) {$F$};
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.05mm] (142,104) -- (142,138);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (142,140) {$B$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=blue] at (142,102) {$A$};
+  \coordinate (Bd) at (169.56,115.69);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (142,138) -- (184,138);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (184,138) -- (200,162.73);
+  \draw[draw=virtualray,dashed,line width=0.55mm] (Bd) -- (184,138);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (142,138) -- (184,104);
+  \draw[-{Latex[length=2.8mm,width=1.9mm]},draw=ray,line width=0.8mm] (184,104) -- (228,68.38);
+  \draw[draw=virtualray,dashed,line width=0.55mm] (Bd) -- (184,104);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=purple,line width=1.05mm] (169.56,104) -- (Bd);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (Bd) {$B'$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=purple] at (169.56,102) {$A'$};
+  \node[font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted] at (180,46) {мнимое};
+
+  % Последовательное построение в системе двух линз
+  \draw[draw=textmuted,line width=0.5mm] (244,104) -- (344,104);
+  \foreach \x/\name in {276/O_1,316/O_2} {
+    \draw[{Latex[length=2.3mm,width=1.6mm]}-{Latex[length=2.3mm,width=1.6mm]},draw=blue,line width=0.8mm]
+      (\x,61) -- (\x,145);
+    \fill[blue] (\x,104) circle (0.85mm);
+    \node[anchor=north west,font=\sffamily\bfseries\fontsize{8}{9.5}\selectfont,text=textmain] at (\x+1,102) {$\name$};
+  }
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1mm] (246,104) -- (246,134);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8}{9.5}\selectfont,text=blue] at (246,136) {$B$};
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (246,134) -- (276,134);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (276,134) -- (296,84);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (246,134) -- (276,104);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (276,104) -- (296,84);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=purple,line width=1mm,dashed] (296,104) -- (296,84);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{8}{9.5}\selectfont,text=purple] at (296,82) {$B_1$};
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (296,84) -- (316,84);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (316,84) -- (336,124);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (296,84) -- (316,104);
+  \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=ray,line width=0.75mm] (316,104) -- (336,124);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=green,line width=1mm] (336,104) -- (336,124);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{8}{9.5}\selectfont,text=green] at (336,126) {$B_2$};
+  \node[align=center,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted] at (294,47)
+    {изображение $B_1$ первой линзы\\становится предметом для второй};
+
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
+    at (180,19) {Сплошные линии — лучи, штриховые — их продолжения};
+\end{tikzpicture}
+\end{document}

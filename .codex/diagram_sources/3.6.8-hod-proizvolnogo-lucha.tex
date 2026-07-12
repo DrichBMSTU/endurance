@@ -1,0 +1,96 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{ray}{HTML}{D97706}
+\definecolor{guide}{HTML}{64748B}
+\definecolor{virtualray}{HTML}{94A3B8}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (320,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (314,204);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (160,190) {Произвольно наклонённый луч};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (160,175) {Побочная оптическая ось параллельна падающему лучу};
+
+  \foreach \x in {14,165} {
+    \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+      (\x,34) rectangle +(141,132);
+  }
+
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (84.5,154) {Собирающая линза};
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=textmain]
+    at (235.5,154) {Рассеивающая линза};
+
+  % Собирающая линза
+  \draw[draw=textmuted,line width=0.55mm] (23,100) -- (146,100);
+  \draw[{Latex[length=2.8mm,width=1.9mm]}-{Latex[length=2.8mm,width=1.9mm]},draw=blue,line width=0.95mm]
+    (84.5,56) -- (84.5,138);
+  \fill[blue] (84.5,100) circle (1.05mm);
+  \node[anchor=north west,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=textmain]
+    at (86,98) {$O$};
+  \draw[draw=guide,dashed,line width=0.55mm] (120,50) -- (120,144);
+  \fill[blue] (120,100) circle (1mm);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=blue]
+    at (120,102) {$F$};
+  \coordinate (Pc) at (120,89.68);
+  \fill[blue] (Pc) circle (1.2mm);
+  \node[anchor=north east,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue]
+    at (Pc) {$P$};
+  \draw[draw=guide,dash pattern=on 2mm off 1.4mm,line width=0.6mm]
+    (49,110.32) -- (135,85.34);
+  \node[rotate=-16.2,fill=pagebg,inner sep=0.8mm,font=\sffamily\fontsize{8.5}{10}\selectfont,text=guide]
+    at (71,107) {побочная ось};
+  \draw[-{Latex[length=3.1mm,width=2.1mm]},draw=ray,line width=0.95mm]
+    (24,130.73) -- (84.5,113.15);
+  \draw[-{Latex[length=3.1mm,width=2.1mm]},draw=ray,line width=0.95mm]
+    (84.5,113.15) -- (145,73.38);
+  \node[anchor=north,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted]
+    at (120,47) {фокальная плоскость};
+
+  % Рассеивающая линза
+  \draw[draw=textmuted,line width=0.55mm] (174,100) -- (297,100);
+  \draw[{Latex[length=2.8mm,width=1.9mm]}-{Latex[length=2.8mm,width=1.9mm]},draw=blue,line width=0.95mm]
+    (235.5,56) -- (235.5,138);
+  \fill[blue] (235.5,100) circle (1.05mm);
+  \node[anchor=north west,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=textmain]
+    at (237,98) {$O$};
+  \draw[draw=guide,dashed,line width=0.55mm] (200,50) -- (200,144);
+  \fill[blue] (200,100) circle (1mm);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{9.5}{12}\selectfont,text=blue]
+    at (200,98) {$F$};
+  \coordinate (Pd) at (200,110.32);
+  \fill[blue] (Pd) circle (1.2mm);
+  \node[anchor=south east,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue]
+    at (Pd) {$P$};
+  \draw[draw=guide,dash pattern=on 2mm off 1.4mm,line width=0.6mm]
+    (185,114.68) -- (271,89.68);
+  \node[rotate=-16.2,fill=pagebg,inner sep=0.8mm,font=\sffamily\fontsize{8.5}{10}\selectfont,text=guide]
+    at (260,96) {побочная ось};
+  \draw[-{Latex[length=3.1mm,width=2.1mm]},draw=ray,line width=0.95mm]
+    (175,130.73) -- (235.5,113.15);
+  \draw[draw=virtualray,dashed,line width=0.6mm]
+    (Pd) -- (235.5,113.15);
+  \draw[-{Latex[length=3.1mm,width=2.1mm]},draw=ray,line width=0.95mm]
+    (235.5,113.15) -- (296,117.72);
+  \node[anchor=north,font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted]
+    at (200,47) {фокальная плоскость};
+
+  \node[font=\sffamily\bfseries\fontsize{11}{14}\selectfont,text=textmain]
+    at (160,20) {Собирающая: луч идёт через $P$; рассеивающая: через $P$ идёт продолжение луча};
+\end{tikzpicture}
+\end{document}
