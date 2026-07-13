@@ -1,0 +1,86 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{redfill}{HTML}{FEE2E2}
+\definecolor{orange}{HTML}{F97316}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,198) {Планетарная модель атома};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,183) {Схематическое представление модели Резерфорда};
+
+  % Область с условным изображением атома
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (14,43) rectangle (214,168);
+
+  \begin{scope}[shift={(114,103)}]
+    \draw[draw=textmuted,line width=0.65mm,dashed] (0,0) ellipse (54mm and 24mm);
+    \begin{scope}[rotate=60]
+      \draw[draw=textmuted,line width=0.65mm,dashed] (0,0) ellipse (54mm and 24mm);
+    \end{scope}
+    \begin{scope}[rotate=-60]
+      \draw[draw=textmuted,line width=0.65mm,dashed] (0,0) ellipse (54mm and 24mm);
+    \end{scope}
+
+    \shade[inner color=orange,outer color=red,draw=red,line width=0.8mm]
+      (0,0) circle (10mm);
+    \node[font=\sffamily\bfseries\fontsize{17}{19}\selectfont,text=white] at (0,0) {+};
+
+    \node[circle,fill=blue,draw=blue!75!black,line width=0.55mm,minimum size=9mm,
+      inner sep=0pt,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=white]
+      at (-54,0) {$\mathrm{e}^{-}$};
+    \node[circle,fill=blue,draw=blue!75!black,line width=0.55mm,minimum size=9mm,
+      inner sep=0pt,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=white]
+      at (27,46.8) {$\mathrm{e}^{-}$};
+    \node[circle,fill=blue,draw=blue!75!black,line width=0.55mm,minimum size=9mm,
+      inner sep=0pt,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont,text=white]
+      at (27,-46.8) {$\mathrm{e}^{-}$};
+  \end{scope}
+
+  \node[draw=red!45,fill=redfill,rounded corners=1.6mm,
+    minimum width=118mm,minimum height=30mm,align=left,anchor=west,
+    font=\sffamily\fontsize{9.5}{11.8}\selectfont,text=textmain]
+    at (224,145) {\textbf{Ядро}\quad положительный заряд\\[-0.2mm]
+      \hspace*{12mm}и почти вся масса атома};
+  \fill[red] (233,145) circle (3.5mm);
+  \node[font=\sffamily\bfseries\fontsize{9}{10.5}\selectfont,text=white] at (233,145) {+};
+
+  \node[draw=blue!45,fill=bluefill,rounded corners=1.6mm,
+    minimum width=118mm,minimum height=30mm,align=left,anchor=west,
+    font=\sffamily\fontsize{9.5}{11.8}\selectfont,text=textmain]
+    at (224,105) {\textbf{Электроны}\quad отрицательный заряд\\[-0.2mm]
+      \hspace*{12mm}и движение вокруг ядра};
+  \fill[blue] (233,105) circle (3.5mm);
+  \node[font=\sffamily\bfseries\fontsize{7.5}{9}\selectfont,text=white] at (233,105) {$\mathrm{e}^{-}$};
+
+  \node[draw=green!50,fill=greenfill,rounded corners=1.6mm,
+    minimum width=118mm,minimum height=26mm,align=center,anchor=west,
+    font=\sffamily\bfseries\fontsize{9.5}{11.8}\selectfont,text=green]
+    at (224,66) {Атом в целом электрически нейтрален};
+
+  \node[draw=border,fill=white,rounded corners=1.5mm,
+    minimum width=332mm,minimum height=22mm,align=center,
+    font=\sffamily\fontsize{9.2}{11.4}\selectfont,text=textmuted]
+    at (180,25) {Схема условна: ядро и электроны показаны сильно увеличенными,\\
+      а линии обозначают представление об орбитах в исторической модели};
+\end{tikzpicture}
+\end{document}
