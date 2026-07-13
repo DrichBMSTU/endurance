@@ -1,0 +1,111 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{violet}{HTML}{7C3AED}
+\definecolor{cyan}{HTML}{0891B2}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{darkband}{HTML}{111827}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,240);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,234);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,217) {Линейчатые спектры и уровни энергии};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,201) {Дискретные энергии атома приводят к отдельным линиям спектра};
+
+  % Спектр уровней энергии атома водорода
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,45) rectangle (226,185);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
+    at (120,173) {Спектр уровней энергии атома водорода};
+
+  \draw[-{Stealth[length=3.4mm,width=2.4mm]},draw=textmuted,line width=0.65mm]
+    (40,58) -- (40,160);
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmuted]
+    at (40,166) {$E$};
+
+  \draw[draw=textmain,line width=0.9mm] (70,61) -- (178,61);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=textmain]
+    at (65,61) {$n=1$};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (183,61) {$-13{,}6$ эВ};
+
+  \draw[draw=textmain,line width=0.9mm] (70,111) -- (178,111);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=textmain]
+    at (65,111) {$n=2$};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (183,111) {$-3{,}4$ эВ};
+
+  \draw[draw=textmain,line width=0.9mm] (70,135) -- (178,135);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=textmain]
+    at (65,135) {$n=3$};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (183,135) {$-1{,}51$ эВ};
+
+  \draw[draw=textmain,line width=0.9mm] (70,149) -- (178,149);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=textmain]
+    at (65,149) {$n=4$};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (183,149) {$-0{,}85$ эВ};
+
+  \draw[draw=textmuted,line width=0.65mm,densely dashed] (70,163) -- (178,163);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=textmain]
+    at (65,163) {$n\to\infty$};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (183,163) {$0$ эВ};
+
+  % Несколько разрешённых переходов
+  \draw[-{Stealth[length=3.5mm,width=2.5mm]},draw=violet,line width=1.0mm]
+    (104,145) -- (104,115);
+  \draw[-{Stealth[length=3.5mm,width=2.5mm]},draw=cyan,line width=1.0mm]
+    (132,131) -- (132,115);
+  \draw[-{Stealth[length=3.5mm,width=2.5mm]},draw=red,line width=1.0mm]
+    (158,107) -- (158,65);
+
+  \node[font=\sffamily\fontsize{8.5}{10.5}\selectfont,text=textmuted]
+    at (120,50) {вертикальные расстояния показаны условно};
+
+  % Оптический линейчатый спектр
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (236,45) rectangle (346,185);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
+    at (291,169) {Линейчатый спектр света};
+  \node[font=\sffamily\fontsize{9}{11}\selectfont,text=textmuted]
+    at (291,154) {отдельные линии вместо сплошной полосы};
+
+  \draw[fill=darkband,draw=darkband,rounded corners=1.5mm]
+    (247,108) rectangle (335,143);
+  \draw[draw=violet,line width=1.25mm] (258,111) -- (258,140);
+  \draw[draw=blue,line width=1.25mm] (266,111) -- (266,140);
+  \draw[draw=cyan,line width=1.25mm] (279,111) -- (279,140);
+  \draw[draw=green,line width=1.25mm] (297,111) -- (297,140);
+  \draw[draw=orange,line width=1.25mm] (317,111) -- (317,140);
+  \draw[draw=red,line width=1.25mm] (328,111) -- (328,140);
+
+  \node[align=center,font=\sffamily\bfseries\fontsize{9.2}{11.5}\selectfont,text=textmain]
+    at (291,86) {Один разрешённый переход\\между уровнями — одна линия};
+  \node[align=center,font=\sffamily\fontsize{8.2}{10}\selectfont,text=textmuted]
+    at (291,60) {Цвета и расстояния между\\линиями показаны условно};
+
+  \draw[fill=bluefill,draw=blue!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,36);
+  \node[font=\sffamily\bfseries\fontsize{9.7}{12}\selectfont,text=blue]
+    at (180,25) {Уровни описывают энергию атома, линии — энергию излучённых или поглощённых фотонов};
+\end{tikzpicture}
+\end{document}
