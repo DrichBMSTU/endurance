@@ -1,0 +1,97 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{cyan}{HTML}{0891B2}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{absorber}{HTML}{334155}
+\definecolor{mirror}{HTML}{BFDBFE}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,198) {Поглощение и отражение света};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,183) {Передача импульса при перпендикулярном падении};
+
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (12,48) rectangle (174,166);
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (186,48) rectangle (348,166);
+
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (93,153) {Полное поглощение};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (267,153) {Полное отражение};
+
+  % Полностью поглощающая поверхность
+  \draw[fill=absorber,draw=absorber,line width=0.6mm,rounded corners=1mm]
+    (113,78) rectangle (124,134);
+  \foreach \y in {84,94,...,128} {
+    \draw[draw=border,line width=0.35mm] (114,\y) -- (123,\y+5);
+  }
+  \node[anchor=north,align=center,font=\sffamily\fontsize{8.7}{10.5}\selectfont,text=textmuted]
+    at (118.5,74) {поглощающая\\поверхность};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.2mm]
+    (29,106) -- (108,106);
+  \fill[blue] (36,106) circle (1.8mm);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{11.5}\selectfont,text=blue]
+    at (69,110) {падающий фотон};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=orange,line width=1.2mm]
+    (126,106) -- (144,106);
+  \node[anchor=south,align=center,font=\sffamily\bfseries\fontsize{8.8}{10.8}\selectfont,text=orange]
+    at (135,110) {импульс\\поверхности};
+
+  \node[draw=border,fill=white,rounded corners=1.4mm,inner xsep=3.5mm,inner ysep=2.2mm,
+    align=center,font=\sffamily\fontsize{9.2}{11.2}\selectfont,text=textmain]
+    at (93,59) {Фотон поглощён};
+
+  % Полностью отражающая поверхность
+  \draw[fill=mirror,draw=blue,line width=0.8mm,rounded corners=1mm]
+    (294,78) rectangle (305,134);
+  \foreach \y in {80,90,...,130} {
+    \draw[draw=white,line width=0.55mm] (295,\y) -- (304,\y+5);
+  }
+  \node[anchor=north,align=center,font=\sffamily\fontsize{8.7}{10.5}\selectfont,text=textmuted]
+    at (299.5,74) {отражающая\\поверхность};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=1.2mm]
+    (203,97) -- (289,97);
+  \fill[blue] (211,97) circle (1.8mm);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{11.5}\selectfont,text=blue]
+    at (246,101) {падающий фотон};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=cyan,line width=1.2mm]
+    (289,121) -- (203,121);
+  \fill[cyan] (281,121) circle (1.8mm);
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{11.5}\selectfont,text=cyan]
+    at (246,125) {отражённый фотон};
+
+  \draw[-{Latex[length=3mm,width=2mm]},draw=orange,line width=1.2mm]
+    (307,109) -- (343,109);
+  \node[anchor=north,align=center,font=\sffamily\bfseries\fontsize{8.5}{10.3}\selectfont,text=orange]
+    at (325,105) {удвоенный импульс\\поверхности};
+
+  \node[draw=border,fill=white,rounded corners=1.4mm,inner xsep=3.5mm,inner ysep=2.2mm,
+    align=center,font=\sffamily\fontsize{9.2}{11.2}\selectfont,text=textmain]
+    at (267,59) {Импульс меняет направление};
+
+  \node[draw=border,fill=white,rounded corners=1.5mm,inner xsep=5mm,inner ysep=2.5mm,
+    align=center,font=\sffamily\bfseries\fontsize{10}{12.2}\selectfont,text=textmain]
+    at (180,25) {При одинаковом падающем свете отражающая поверхность\\испытывает в два раза большее давление};
+\end{tikzpicture}
+\end{document}
