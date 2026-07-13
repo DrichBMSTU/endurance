@@ -1,0 +1,94 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{redfill}{HTML}{FEE2E2}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,198) {Переходы между уровнями энергии атома};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,183) {Фотон появляется при излучении и исчезает при поглощении};
+
+  % Излучение
+  \draw[fill=redfill,draw=red!45,line width=0.45mm,rounded corners=2.5mm]
+    (14,52) rectangle (174,170);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=red]
+    at (94,156) {Излучение};
+  \node[font=\sffamily\fontsize{9.5}{12}\selectfont,text=textmuted]
+    at (94,143) {переход с верхнего уровня на нижний};
+
+  \draw[draw=textmain,line width=0.8mm] (35,126) -- (153,126);
+  \draw[draw=textmain,line width=0.8mm] (35,78) -- (153,78);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (31,126) {$E_n$};
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (31,78) {$E_m$};
+  \draw[-{Stealth[length=4mm,width=2.8mm]},draw=blue,line width=1.05mm]
+    (72,120) -- (72,84);
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{11}\selectfont,text=blue]
+    at (76,103) {энергия атома};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{11}\selectfont,text=blue]
+    at (76,93) {уменьшается};
+  \draw[decorate,decoration={snake,amplitude=1.6mm,segment length=5mm},
+    -{Stealth[length=3.6mm,width=2.5mm]},draw=red,line width=0.8mm]
+    (91,116) -- (151,116);
+  \node[font=\sffamily\bfseries\fontsize{8.8}{11}\selectfont,text=red]
+    at (121,105) {фотон испускается};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (94,63) {$E_n>E_m$};
+
+  % Поглощение
+  \draw[fill=bluefill,draw=blue!45,line width=0.45mm,rounded corners=2.5mm]
+    (186,52) rectangle (346,170);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=blue]
+    at (266,156) {Поглощение};
+  \node[font=\sffamily\fontsize{9.5}{12}\selectfont,text=textmuted]
+    at (266,143) {переход с нижнего уровня на верхний};
+
+  \draw[draw=textmain,line width=0.8mm] (207,126) -- (325,126);
+  \draw[draw=textmain,line width=0.8mm] (207,78) -- (325,78);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (203,126) {$E_n$};
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=textmain]
+    at (203,78) {$E_m$};
+  \draw[-{Stealth[length=4mm,width=2.8mm]},draw=blue,line width=1.05mm]
+    (288,84) -- (288,120);
+  \node[anchor=east,font=\sffamily\fontsize{8.8}{11}\selectfont,text=blue]
+    at (284,103) {энергия атома};
+  \node[anchor=east,font=\sffamily\fontsize{8.8}{11}\selectfont,text=blue]
+    at (284,93) {увеличивается};
+  \draw[decorate,decoration={snake,amplitude=1.6mm,segment length=5mm},
+    -{Stealth[length=3.6mm,width=2.5mm]},draw=red,line width=0.8mm]
+    (209,116) -- (269,116);
+  \node[font=\sffamily\bfseries\fontsize{8.8}{11}\selectfont,text=red]
+    at (239,105) {фотон поглощается};
+  \node[font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (266,63) {$E_n>E_m$};
+
+  % Общая формула
+  \draw[fill=greenfill,draw=green!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,44);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=green]
+    at (180,31) {$h\nu_{mn}=\frac{hc}{\lambda_{mn}}=E_n-E_m$};
+  \node[font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (180,20) {энергия фотона равна разности энергий уровней};
+\end{tikzpicture}
+\end{document}
