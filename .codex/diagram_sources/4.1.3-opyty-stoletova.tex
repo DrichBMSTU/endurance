@@ -41,7 +41,7 @@
   \draw[fill=white,draw=border,line width=0.7mm,rounded corners=10mm]
     (49,75) rectangle (158,137);
   \node[font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted]
-    at (103.5,129) {вакуум};
+    at (132,129) {вакуум};
 
   \draw[draw=electrode,line width=2.8mm] (73,88) -- (73,121);
   \draw[draw=orange,line width=2.8mm] (139,88) -- (139,121);
@@ -50,21 +50,24 @@
   \node[anchor=north,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=orange]
     at (139,84) {анод $A$};
 
-  % Падающий свет и фотоэлектроны
-  \foreach \y in {98,106,114} {
-    \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.9mm]
-      (22,\y) -- (68,\y);
-  }
+  % УФ-свет входит через кварцевое окно и падает на внутреннюю
+  % поверхность катода. Фотоэлектроны вылетают из тех же точек.
+  \draw[draw=blue,line width=2.2mm] (94,137) -- (109,137);
   \node[anchor=south,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue]
-    at (42,118) {свет};
+    at (117,151) {УФ};
 
-  \foreach \y in {96,106,116} {
-    \fill[cyan] (84,\y) circle (1.4mm);
+  \foreach \sx/\ey in {107/117,114/110,121/103} {
+    \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.9mm]
+      (\sx,149) -- (75,\ey);
+  }
+
+  \foreach \y in {103,110,117} {
+    \fill[cyan] (75,\y) circle (1.4mm);
     \draw[-{Latex[length=2.7mm,width=1.8mm]},draw=cyan,line width=0.8mm]
-      (86,\y) -- (125,\y);
+      (77,\y) -- (125,\y);
   }
   \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=cyan]
-    at (105,119) {фотоэлектроны};
+    at (112,121) {фотоэлектроны};
 
   % Внешняя цепь: источник и миллиамперметр включены последовательно
   \draw[draw=textmain,line width=0.65mm] (73,75) -- (73,60) -- (82,60);
