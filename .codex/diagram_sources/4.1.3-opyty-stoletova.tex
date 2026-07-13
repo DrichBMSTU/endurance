@@ -1,0 +1,110 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{cyan}{HTML}{0891B2}
+\definecolor{orange}{HTML}{EA580C}
+\definecolor{green}{HTML}{16A34A}
+\definecolor{electrode}{HTML}{334155}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,198) {Опыты А. Г. Столетова};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,183) {Наблюдение фотоэффекта и характеристика фотоэлемента};
+
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (12,42) rectangle (181,166);
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2mm]
+    (187,42) rectangle (348,166);
+
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (96.5,153) {Установка};
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=textmain]
+    at (267.5,153) {Фототок и напряжение};
+
+  % Баллон и электроды
+  \draw[fill=white,draw=border,line width=0.7mm,rounded corners=10mm]
+    (49,75) rectangle (158,137);
+  \node[font=\sffamily\fontsize{8.5}{10}\selectfont,text=textmuted]
+    at (103.5,129) {вакуум};
+
+  \draw[draw=electrode,line width=2.8mm] (73,88) -- (73,121);
+  \draw[draw=orange,line width=2.8mm] (139,88) -- (139,121);
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=electrode]
+    at (73,84) {катод $K$};
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=orange]
+    at (139,84) {анод $A$};
+
+  % Падающий свет и фотоэлектроны
+  \foreach \y in {98,106,114} {
+    \draw[-{Latex[length=3mm,width=2mm]},draw=blue,line width=0.9mm]
+      (22,\y) -- (68,\y);
+  }
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=blue]
+    at (42,118) {свет};
+
+  \foreach \y in {96,106,116} {
+    \fill[cyan] (84,\y) circle (1.4mm);
+    \draw[-{Latex[length=2.7mm,width=1.8mm]},draw=cyan,line width=0.8mm]
+      (86,\y) -- (125,\y);
+  }
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=cyan]
+    at (105,119) {фотоэлектроны};
+
+  % Внешняя цепь: источник и миллиамперметр включены последовательно
+  \draw[draw=textmain,line width=0.65mm] (73,75) -- (73,60) -- (82,60);
+  \draw[draw=textmain,line width=0.65mm] (82,54) rectangle (108,66);
+  \node[font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=textmain]
+    at (95,60) {$-\quad U\quad +$};
+  \draw[draw=textmain,line width=0.65mm] (108,60) -- (115,60);
+  \draw[fill=white,draw=green,line width=0.8mm] (125,60) circle (10mm);
+  \node[font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=green]
+    at (125,60) {mA};
+  \draw[draw=textmain,line width=0.65mm] (135,60) -- (139,60) -- (139,75);
+
+  % Оси графика
+  \coordinate (O) at (245,68);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=textmain,line width=0.7mm]
+    (204,68) -- (337,68);
+  \draw[-{Latex[length=3mm,width=2mm]},draw=textmain,line width=0.7mm]
+    (245,53) -- (245,142);
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (338,68) {$U$};
+  \node[anchor=south,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=textmain]
+    at (245,144) {$I$};
+
+  % Характеристика фотоэлемента
+  \draw[draw=green,line width=1.2mm]
+    plot[smooth] coordinates {(214,68) (222,69) (229,74) (237,84) (245,99) (258,119) (274,132) (294,137) (323,138)};
+  \draw[draw=textmuted,dashed,line width=0.5mm] (245,138) -- (328,138);
+  \draw[draw=textmuted,dashed,line width=0.5mm] (214,68) -- (214,58);
+
+  \node[anchor=north,font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=textmain]
+    at (214,65) {$U_{\text{з}}$};
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont,text=green]
+    at (242,138) {$I_{\text{н}}$};
+  \node[anchor=south west,align=left,font=\sffamily\fontsize{8.8}{10.5}\selectfont,text=textmuted]
+    at (278,140) {ток насыщения};
+  \node[anchor=north,align=center,font=\sffamily\fontsize{8.6}{10.3}\selectfont,text=textmuted]
+    at (214,54) {задерживающее\\напряжение};
+
+  \node[draw=border,fill=white,rounded corners=1.5mm,inner xsep=5mm,inner ysep=2.5mm,
+    align=center,font=\sffamily\bfseries\fontsize{9.7}{12}\selectfont,text=textmain]
+    at (180,23) {Интенсивность определяет число фотоэлектронов, частота —\\их максимальную кинетическую энергию};
+\end{tikzpicture}
+\end{document}
