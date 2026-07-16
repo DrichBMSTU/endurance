@@ -1,0 +1,126 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{proton}{HTML}{DC2626}
+\definecolor{protonfill}{HTML}{FEE2E2}
+\definecolor{neutron}{HTML}{0369A1}
+\definecolor{neutronfill}{HTML}{E0F2FE}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,230);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,224);
+
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,208) {Состав и обозначение атомного ядра};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,192) {Протоны и нейтроны образуют ядро, а их числа задают $Z$ и $A$};
+
+  % Обозначение ядра
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,47) rectangle (166,177);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
+    at (90,165) {Обозначение ядра};
+
+  \node[font=\sffamily\bfseries\fontsize{21}{24}\selectfont,text=textmain]
+    at (57,130) {$A$};
+  \node[font=\sffamily\bfseries\fontsize{21}{24}\selectfont,text=textmain]
+    at (57,105) {$Z$};
+  \node[font=\sffamily\bfseries\fontsize{38}{42}\selectfont,text=textmain]
+    at (79,117) {$\mathrm{X}$};
+
+  \draw[-{Stealth[length=2.8mm,width=2mm]},draw=blue,line width=0.65mm]
+    (143,143) -- (66,130);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=blue]
+    at (151,148) {$A$ — число нуклонов};
+
+  \draw[-{Stealth[length=2.8mm,width=2mm]},draw=proton,line width=0.65mm]
+    (143,117) -- (66,106);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=proton]
+    at (151,122) {$Z$ — число протонов};
+
+  \draw[-{Stealth[length=2.8mm,width=2mm]},draw=textmuted,line width=0.65mm]
+    (143,91) -- (89,111);
+  \node[anchor=east,align=right,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=textmuted]
+    at (151,87) {$X$ — символ\\элемента};
+
+  \draw[fill=white,draw=border,line width=0.4mm,rounded corners=1.5mm]
+    (24,57) rectangle (156,77);
+  \node[font=\sffamily\bfseries\fontsize{9.1}{11.2}\selectfont,text=textmain]
+    at (90,67) {нейтронов: $A-Z$ \qquad заряд: $+Ze$};
+
+  % Изотопы водорода
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (176,47) rectangle (346,177);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
+    at (261,165) {Изотопы водорода};
+  \node[font=\sffamily\fontsize{9.4}{11.5}\selectfont,text=textmuted]
+    at (261,151) {во всех ядрах один протон: $Z=1$};
+
+  \foreach \x in {185,238,291} {
+    \draw[fill=pagebg,draw=border,line width=0.4mm,rounded corners=1.8mm]
+      (\x,63) rectangle ++(46,77);
+  }
+
+  % Протий
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at (208,128) {$^{1}_{1}\mathrm{H}$};
+  \node[circle,fill=protonfill,draw=proton,line width=0.65mm,minimum size=15mm,
+    inner sep=0pt,font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=proton]
+    at (208,102) {$+$};
+  \node[font=\sffamily\fontsize{8.7}{10.7}\selectfont,text=textmuted]
+    at (208,75) {нейтронов: 0};
+
+  % Дейтерий
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at (261,128) {$^{2}_{1}\mathrm{H}$};
+  \node[circle,fill=protonfill,draw=proton,line width=0.65mm,minimum size=15mm,
+    inner sep=0pt,font=\sffamily\bfseries\fontsize{12}{14}\selectfont,text=proton]
+    at (254,102) {$+$};
+  \node[circle,fill=neutronfill,draw=neutron,line width=0.65mm,minimum size=15mm,
+    inner sep=0pt,font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=neutron]
+    at (268,102) {$0$};
+  \node[font=\sffamily\fontsize{8.7}{10.7}\selectfont,text=textmuted]
+    at (261,75) {нейтронов: 1};
+
+  % Тритий
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=textmain]
+    at (314,128) {$^{3}_{1}\mathrm{H}$};
+  \node[circle,fill=protonfill,draw=proton,line width=0.65mm,minimum size=14mm,
+    inner sep=0pt,font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=proton]
+    at (307,105) {$+$};
+  \node[circle,fill=neutronfill,draw=neutron,line width=0.65mm,minimum size=14mm,
+    inner sep=0pt,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=neutron]
+    at (321,105) {$0$};
+  \node[circle,fill=neutronfill,draw=neutron,line width=0.65mm,minimum size=14mm,
+    inner sep=0pt,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=neutron]
+    at (314,92) {$0$};
+  \node[font=\sffamily\fontsize{8.7}{10.7}\selectfont,text=textmuted]
+    at (314,75) {нейтронов: 2};
+
+  \draw[fill=greenfill,draw=green!50,line width=0.45mm,rounded corners=2mm]
+    (14,15) rectangle (346,37);
+  \node[font=\sffamily\bfseries\fontsize{10}{12.3}\selectfont,text=green]
+    at (180,26) {У изотопов одинаковое $Z$, но разные $A$ и число нейтронов};
+
+  \node[circle,fill=protonfill,draw=proton,line width=0.5mm,minimum size=7mm,inner sep=0pt,
+    font=\sffamily\bfseries\fontsize{7}{8}\selectfont,text=proton] at (206,54) {$+$};
+  \node[anchor=west,font=\sffamily\fontsize{8}{9.8}\selectfont,text=textmuted] at (212,54) {протон};
+  \node[circle,fill=neutronfill,draw=neutron,line width=0.5mm,minimum size=7mm,inner sep=0pt,
+    font=\sffamily\bfseries\fontsize{6.5}{8}\selectfont,text=neutron] at (275,54) {$0$};
+  \node[anchor=west,font=\sffamily\fontsize{8}{9.8}\selectfont,text=textmuted] at (281,54) {нейтрон};
+\end{tikzpicture}
+\end{document}
