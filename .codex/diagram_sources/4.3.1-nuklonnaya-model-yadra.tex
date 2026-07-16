@@ -1,6 +1,5 @@
 \documentclass[tikz,border=8pt]{standalone}
 \usepackage{fontspec}
-\usetikzlibrary{arrows.meta}
 
 \setmainfont{Arial}
 \setsansfont{Arial}
@@ -35,27 +34,15 @@
   \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
     at (90,165) {Обозначение ядра};
 
-  \node[font=\sffamily\bfseries\fontsize{21}{24}\selectfont,text=textmain]
-    at (57,130) {$A$};
-  \node[font=\sffamily\bfseries\fontsize{21}{24}\selectfont,text=textmain]
-    at (57,105) {$Z$};
   \node[font=\sffamily\bfseries\fontsize{38}{42}\selectfont,text=textmain]
-    at (79,117) {$\mathrm{X}$};
+    at (51,117) {$^{A}_{Z}\mathrm{X}$};
 
-  \draw[-{Stealth[length=2.8mm,width=2mm]},draw=blue,line width=0.65mm]
-    (143,143) -- (66,130);
-  \node[anchor=east,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=blue]
-    at (151,148) {$A$ — число нуклонов};
-
-  \draw[-{Stealth[length=2.8mm,width=2mm]},draw=proton,line width=0.65mm]
-    (143,117) -- (66,106);
-  \node[anchor=east,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=proton]
-    at (151,122) {$Z$ — число протонов};
-
-  \draw[-{Stealth[length=2.8mm,width=2mm]},draw=textmuted,line width=0.65mm]
-    (143,91) -- (89,111);
-  \node[anchor=east,align=right,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=textmuted]
-    at (151,87) {$X$ — символ\\элемента};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=blue]
+    at (82,139) {$A$ — число нуклонов};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=proton]
+    at (82,117) {$Z$ — число протонов};
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{9.3}{11.5}\selectfont,text=textmuted]
+    at (82,95) {$X$ — символ элемента};
 
   \draw[fill=white,draw=border,line width=0.4mm,rounded corners=1.5mm]
     (24,57) rectangle (156,77);
