@@ -1,0 +1,81 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1pt,
+  y=1pt,
+  font=\sffamily\Large,
+  >=Latex,
+  vector/.style={-{Latex[length=12pt]}, line width=3pt},
+  axis/.style={-{Latex[length=11pt]}, line width=2.4pt, draw=gray!25!black},
+  label/.style={text=gray!12!black, fill=white, rounded corners=4pt, inner xsep=7pt, inner ysep=4pt},
+  smalllabel/.style={text=gray!12!black, fill=white, rounded corners=3pt, inner xsep=5pt, inner ysep=3pt}
+]
+  \definecolor{canvas}{RGB}{255,255,255}
+  \definecolor{radiusone}{RGB}{38,111,175}
+  \definecolor{radiustwo}{RGB}{39,133,97}
+  \definecolor{dispred}{RGB}{190,67,73}
+  \definecolor{pathgold}{RGB}{184,126,32}
+  \definecolor{sumviolet}{RGB}{116,82,166}
+
+  \fill[canvas] (0,0) rectangle (1100,650);
+  \draw[gray!30, line width=2pt] (655,65) -- (655,590);
+
+  \node[label, font=\sffamily\LARGE\bfseries] at (325,605) {Положение и движение точки};
+  \node[label, font=\sffamily\LARGE\bfseries] at (875,605) {Сложение перемещений};
+
+  % Radius vectors, trajectory, path, and displacement.
+  \coordinate (O) at (90,105);
+  \coordinate (A) at (250,315);
+  \coordinate (B) at (545,385);
+
+  \draw[axis] (O) -- (620,105) node[smalllabel, anchor=west] {$x$};
+  \draw[axis] (O) -- (90,555) node[smalllabel, anchor=south] {$y$};
+  \node[smalllabel, anchor=north east] at (O) {$O$};
+
+  \draw[line width=4pt, draw=pathgold]
+    (A) .. controls (325,500) and (470,500) .. (B);
+  \node[smalllabel, text=pathgold, align=center] at (405,515) {путь — длина\\участка траектории};
+
+  \draw[vector, draw=radiusone] (O) -- (A);
+  \draw[vector, draw=radiustwo] (O) -- (B);
+  \draw[vector, draw=dispred] (A) -- (B);
+
+  \fill[gray!15!black] (A) circle (7pt);
+  \fill[gray!15!black] (B) circle (7pt);
+  \node[smalllabel, anchor=south east] at ($(A)+(-4,8)$) {$A\,(t_1)$};
+  \node[smalllabel, anchor=south west] at ($(B)+(4,8)$) {$B\,(t_2)$};
+  \node[smalllabel, text=radiusone] at (155,225) {$\vec r_1$};
+  \node[smalllabel, text=radiustwo] at (325,225) {$\vec r_2$};
+  \node[smalllabel, text=dispred] at (405,330) {$\Delta\vec r$};
+  \node[label, align=center] at (340,65) {перемещение соединяет\\начальное положение с конечным};
+
+  % Triangle rule for the exact codificator notation.
+  \coordinate (P) at (735,195);
+  \coordinate (Q) at (855,445);
+  \coordinate (R) at (1035,285);
+
+  \draw[vector, draw=pathgold] (P) -- (Q);
+  \draw[vector, draw=sumviolet] (Q) -- (R);
+  \draw[vector, draw=dispred] (P) -- (R);
+
+  \fill[gray!15!black] (P) circle (7pt);
+  \fill[gray!15!black] (Q) circle (7pt);
+  \fill[gray!15!black] (R) circle (7pt);
+  \node[smalllabel, anchor=east] at ($(P)+(-10,0)$) {начало};
+  \node[smalllabel, anchor=south] at ($(Q)+(0,12)$) {промежуточная точка};
+  \node[smalllabel, anchor=west] at ($(R)+(10,0)$) {конец};
+
+  \node[smalllabel, text=pathgold] at (770,340) {$\Delta\vec r_0$};
+  \node[smalllabel, text=sumviolet] at (965,385) {$\Delta\vec r_2$};
+  \node[smalllabel, text=dispred] at (895,225) {$\Delta\vec r_1$};
+
+  \node[label, align=center] at (875,120) {правило треугольника};
+  \node[label, font=\sffamily\Large\bfseries] at (875,70)
+    {$\Delta\vec r_1=\Delta\vec r_2+\Delta\vec r_0$};
+\end{tikzpicture}
+\end{document}
