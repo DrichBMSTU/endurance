@@ -1,0 +1,56 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1pt,
+  y=1pt,
+  font=\sffamily\Large,
+  >=Latex,
+  axis/.style={-{Latex[length=11pt]}, line width=2.6pt, draw=gray!25!black},
+  graph/.style={line width=4pt, draw=gray!10!black},
+  label/.style={text=gray!12!black, fill=white, rounded corners=4pt, inner xsep=8pt, inner ysep=5pt},
+  smalllabel/.style={text=gray!12!black, fill=white, rounded corners=3pt, inner xsep=5pt, inner ysep=3pt}
+]
+  \definecolor{canvas}{RGB}{255,255,255}
+  \definecolor{positive}{RGB}{38,111,175}
+  \definecolor{positivefill}{RGB}{203,225,244}
+  \definecolor{negative}{RGB}{190,67,73}
+  \definecolor{negativefill}{RGB}{245,211,214}
+
+  \fill[canvas] (0,0) rectangle (1100,650);
+  \node[label, font=\sffamily\LARGE\bfseries] at (550,610)
+    {Перемещение и путь по графику $v_x(t)$};
+
+  \coordinate (O) at (130,315);
+  \draw[axis] (75,315) -- (1035,315) node[smalllabel, anchor=west] {$t$};
+  \draw[axis] (130,90) -- (130,570) node[smalllabel, anchor=south] {$v_x$};
+  \node[smalllabel, anchor=north east] at (O) {$0$};
+
+  \fill[positivefill]
+    (180,315) -- (180,430) -- (365,515) -- (575,315) -- cycle;
+  \fill[negativefill]
+    (575,315) -- (760,155) -- (950,235) -- (950,315) -- cycle;
+
+  \draw[graph]
+    (180,430) -- (365,515) -- (575,315) -- (760,155) -- (950,235);
+
+  \foreach \x/\name in {180/t_1,575/t_0,950/t_2} {
+    \draw[gray!25!black, line width=2pt] (\x,305) -- (\x,325);
+    \node[smalllabel, anchor=north] at (\x,295) {$\name$};
+  }
+
+  \node[label, text=positive, font=\sffamily\LARGE\bfseries] at (365,390) {$S_+$};
+  \node[smalllabel, text=positive] at (365,355) {$v_x>0$};
+  \node[label, text=negative, font=\sffamily\LARGE\bfseries] at (765,240) {$S_-$};
+  \node[smalllabel, text=negative] at (765,200) {$v_x<0$};
+
+  \node[label, font=\sffamily\Large\bfseries] at (350,75)
+    {$\Delta x=S_+-S_-$};
+  \node[label, font=\sffamily\Large\bfseries] at (760,75)
+    {$s=S_++S_-$};
+\end{tikzpicture}
+\end{document}
