@@ -1,0 +1,49 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1pt,
+  y=1pt,
+  font=\sffamily\Large,
+  >=Latex,
+  vector/.style={-{Latex[length=12pt,width=8pt]}, line width=4pt},
+  label/.style={fill=white, rounded corners=4pt, inner xsep=8pt, inner ysep=5pt}
+]
+  \definecolor{canvas}{RGB}{255,255,255}
+  \definecolor{firstvelocity}{RGB}{38,111,175}
+  \definecolor{secondvelocity}{RGB}{112,78,170}
+  \definecolor{velocitychange}{RGB}{190,67,73}
+  \definecolor{textdark}{RGB}{34,34,34}
+
+  \fill[canvas] (0,0) rectangle (1100,600);
+
+  \node[label, text=textdark, font=\sffamily\LARGE\bfseries] at (550,550)
+    {Изменение вектора скорости};
+
+  \coordinate (O) at (180,135);
+  \coordinate (A) at (790,265);
+  \coordinate (B) at (610,465);
+
+  \fill[textdark] (O) circle (5pt);
+  \node[label, text=textdark, anchor=north] at (180,112) {общее начало};
+
+  \draw[vector, draw=firstvelocity] (O) -- (A);
+  \node[label, text=firstvelocity, font=\sffamily\Large\bfseries, anchor=north]
+    at (525,180) {$\vec v(t)$};
+
+  \draw[vector, draw=secondvelocity] (O) -- (B);
+  \node[label, text=secondvelocity, font=\sffamily\Large\bfseries, anchor=east]
+    at (405,355) {$\vec v(t+\Delta t)$};
+
+  \draw[vector, draw=velocitychange] (A) -- (B);
+  \node[label, text=velocitychange, font=\sffamily\Large\bfseries, anchor=west]
+    at (720,375) {$\Delta\vec v$};
+
+  \node[label, text=textdark, font=\sffamily\Large\bfseries] at (550,55)
+    {$\Delta\vec v=\vec v(t+\Delta t)-\vec v(t)$};
+\end{tikzpicture}
+\end{document}
