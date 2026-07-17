@@ -25,48 +25,48 @@
   >={Latex[length=3.2mm,width=2.2mm]},
   vector/.style={-{Latex[length=3.2mm,width=2.2mm]}, line width=1.7pt},
   construction/.style={draw=muted, dashed, line width=0.85pt},
-  panel/.style={rounded corners=7pt, line width=0.9pt, minimum width=7.15cm, inner sep=10pt},
+  panel/.style={rounded corners=7pt, line width=0.9pt, minimum width=8.00cm, inner sep=10pt},
   formula/.style={font=\sffamily\Large, text=ink},
   caption/.style={font=\sffamily\normalsize, text=muted, align=left}
 ]
-  \path[fill=canvas] (-0.35,-0.35) rectangle (16.35,9.55);
+  \path[fill=canvas] (-0.35,-0.35) rectangle (18.45,10.45);
 
   \node[anchor=west, text=ink, font=\sffamily\bfseries\LARGE]
-    at (0.25,9.05) {Движение материальной точки по окружности};
-  \draw[draw=ink!18, line width=0.8pt] (0.25,8.62) -- (15.75,8.62);
+    at (0.25,9.95) {Движение материальной точки по окружности};
+  \draw[draw=ink!18, line width=0.8pt] (0.25,9.50) -- (17.85,9.50);
 
   \node[anchor=west, text=muted, font=\sffamily\bfseries\large]
-    at (0.35,8.18) {ГЕОМЕТРИЯ ДВИЖЕНИЯ};
+    at (0.35,9.02) {ГЕОМЕТРИЯ ДВИЖЕНИЯ};
   \node[anchor=west, text=muted, font=\sffamily\bfseries\large]
-    at (8.55,8.18) {ФИЗИЧЕСКИЙ СМЫСЛ};
+    at (9.85,9.02) {ФИЗИЧЕСКИЙ СМЫСЛ};
 
-  \coordinate (O) at (4.05,4.35);
-  \coordinate (A) at ($(O)+(38:2.58)$);
-  \coordinate (X) at ($(O)+(2.58,0)$);
-  \coordinate (VEnd) at ($(A)+(128:2.05)$);
-  \coordinate (AEnd) at ($(A)!0.63!(O)$);
+  \coordinate (O) at (4.60,4.75);
+  \coordinate (A) at ($(O)+(38:3.10)$);
+  \coordinate (X) at ($(O)+(3.10,0)$);
+  \coordinate (VEnd) at ($(A)+(128:2.35)$);
+  \coordinate (AEnd) at ($(A)!0.62!(O)$);
 
-  \fill[softblue!45] (O) circle (2.58);
-  \draw[draw=orbit, line width=1.55pt] (O) circle (2.58);
+  \fill[softblue!45] (O) circle (3.10);
+  \draw[draw=orbit, line width=1.55pt] (O) circle (3.10);
 
   \draw[construction] (O) -- (X);
   \draw[construction] (O) -- (A);
   \draw[-{Latex[length=2.5mm]}, draw=rotation, line width=1.25pt]
-    ($(O)+(0:1.05)$) arc[start angle=0,end angle=38,radius=1.05];
-  \node[text=rotation, font=\sffamily\Large] at ($(O)+(19:1.38)$) {$\varphi$};
+    ($(O)+(0:1.20)$) arc[start angle=0,end angle=38,radius=1.20];
+  \node[text=rotation, font=\sffamily\Large] at ($(O)+(19:1.62)$) {$\varphi$};
 
   \draw[-{Latex[length=3mm]}, draw=rotation, line width=1.65pt]
-    ($(O)+(205:2.95)$) arc[start angle=205,end angle=265,radius=2.95];
+    ($(O)+(205:3.55)$) arc[start angle=205,end angle=265,radius=3.55];
   \node[text=rotation, font=\sffamily\Large, anchor=east]
-    at ($(O)+(230:3.35)$) {$\omega$};
+    at ($(O)+(230:4.00)$) {$\omega$};
 
   \draw[vector, draw=velocity] (A) -- (VEnd);
   \node[text=velocity, font=\sffamily\Large, anchor=south east]
-    at ($(VEnd)+(-0.05,0.02)$) {$\vec v$};
+    at ($(A)!0.72!(VEnd)+(-0.10,0.10)$) {$\vec v$};
 
   \draw[vector, draw=acceleration] (A) -- (AEnd);
   \node[text=acceleration, font=\sffamily\Large, anchor=west]
-    at (6.25,4.95) {$\vec a_{\text{цс}}$};
+    at ($(A)!0.52!(AEnd)+(0.30,-0.32)$) {$\vec a_{\text{цс}}$};
 
   \fill[ink] (O) circle (2.7pt);
   \node[text=ink, anchor=north, font=\sffamily\large] at ($(O)+(0,-0.18)$) {$O$};
@@ -75,36 +75,36 @@
   \node[text=ink, anchor=south west, font=\sffamily\bfseries\large]
     at ($(A)+(0.10,0.12)$) {$A$};
 
-  \node[text=muted, fill=canvas, inner sep=2pt, rotate=38]
-    at ($(O)!0.43!(A)+(-0.10,0.20)$) {$R$};
+  \node[text=muted, inner sep=1pt, rotate=38]
+    at ($(O)!0.40!(A)+(0,0.30)$) {$R$};
 
   \node[panel, draw=velocity!55, fill=softred, anchor=north west, minimum height=1.48cm]
-    (speedpanel) at (8.45,7.72) {};
+    (speedpanel) at (9.75,8.55) {};
   \node[anchor=west, text=velocity, font=\sffamily\bfseries\Large]
-    at (8.75,7.18) {$\vec v$};
+    at (10.10,7.98) {$\vec v$};
   \node[caption, anchor=west, text width=3.55cm]
-    at (9.55,7.18) {направлена по касательной};
-  \node[formula, anchor=east] at (15.25,7.18) {$v=\omega R$};
+    at (10.95,7.98) {направлена по касательной};
+  \node[formula, anchor=east] at (17.45,7.98) {$v=\omega R$};
 
   \node[panel, draw=acceleration!55, fill=softblue, anchor=north west, minimum height=1.58cm]
-    (accpanel) at (8.45,5.82) {};
+    (accpanel) at (9.75,6.48) {};
   \node[anchor=west, text=acceleration, font=\sffamily\bfseries\Large]
-    at (8.75,5.23) {$\vec a_{\text{цс}}$};
+    at (10.10,5.88) {$\vec a_{\text{цс}}$};
   \node[caption, anchor=west, text width=3.15cm]
-    at (10.05,5.23) {направлено к центру};
-  \node[formula, anchor=east] at (15.25,5.23)
+    at (11.50,5.88) {направлено к центру};
+  \node[formula, anchor=east] at (17.45,5.88)
     {$a_{\text{цс}}=\dfrac{v^2}{R}=\omega^2R$};
 
-  \node[panel, draw=rotation!60, fill=softgold, anchor=north west, minimum height=2.65cm]
-    (uniformpanel) at (8.45,3.72) {};
+  \node[panel, draw=rotation!60, fill=softgold, anchor=north west, minimum height=2.75cm]
+    (uniformpanel) at (9.75,4.22) {};
   \node[anchor=west, text=rotation, font=\sffamily\bfseries\large]
-    at (8.75,3.08) {РАВНОМЕРНОЕ ДВИЖЕНИЕ};
+    at (10.10,3.53) {РАВНОМЕРНОЕ ДВИЖЕНИЕ};
   \node[anchor=center, text=ink, font=\sffamily\Large]
-    at (12.00,2.34) {$|\vec v|=\mathrm{const}$};
+    at (13.70,2.72) {$|\vec v|=\mathrm{const}$};
   \node[caption, anchor=center, align=center]
-    at (12.00,1.62) {модуль скорости постоянен;\\направление вектора меняется};
+    at (13.70,1.92) {модуль скорости постоянен;\\направление вектора меняется};
 
   \node[anchor=west, text=muted, font=\sffamily\normalsize]
-    at (0.45,0.22) {Векторы $\vec v$ и $\vec a_{\text{цс}}$ взаимно перпендикулярны.};
+    at (0.45,0.20) {Векторы $\vec v$ и $\vec a_{\text{цс}}$ взаимно перпендикулярны.};
 \end{tikzpicture}
 \end{document}
