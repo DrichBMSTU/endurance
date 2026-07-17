@@ -1,0 +1,116 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{redfill}{HTML}{FEE2E2}
+\definecolor{violet}{HTML}{7C3AED}
+\definecolor{violetfill}{HTML}{EDE9FE}
+\definecolor{amber}{HTML}{B45309}
+\definecolor{amberfill}{HTML}{FEF3C7}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+
+\newcommand{\nucleon}[3]{\fill[#3] (#1,#2) circle[radius=4.3mm]; \draw[white,line width=0.35mm] (#1,#2) circle[radius=4.3mm];}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (390,270);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (384,264);
+
+  \node[font=\sffamily\bfseries\fontsize{24}{29}\selectfont,text=textmain]
+    at (195,247) {Деление и синтез ядер};
+  \node[font=\sffamily\fontsize{15}{18}\selectfont,text=textmuted]
+    at (195,230) {Два направления ядерных превращений с выделением энергии};
+
+  % Карточка деления
+  \draw[fill=bluefill,draw=blue!45,line width=0.45mm,rounded corners=2.5mm]
+    (14,35) rectangle (190,216);
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont,text=blue]
+    at (102,198) {Деление тяжёлого ядра};
+
+  \fill[blue] (31,132) circle[radius=3.1mm];
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=blue,anchor=south]
+    at (31,138) {нейтрон};
+  \draw[-{Stealth[length=3mm,width=2.2mm]},draw=blue,line width=0.9mm]
+    (37,132) -- (55,132);
+
+  % Тяжёлое ядро
+  \foreach \x/\y/\c in {
+    62/132/violet,70/140/red,78/132/violet,70/124/red,
+    62/148/red,78/148/violet,62/116/violet,78/116/red,
+    54/140/violet,86/140/red,54/124/red,86/124/violet,
+    70/156/violet,70/108/red} {\nucleon{\x}{\y}{\c}}
+
+  \draw[-{Stealth[length=3mm,width=2.2mm]},draw=textmain,line width=0.85mm]
+    (92,139) .. controls (108,145) and (112,157) .. (126,162);
+  \draw[-{Stealth[length=3mm,width=2.2mm]},draw=textmain,line width=0.85mm]
+    (92,125) .. controls (108,119) and (112,107) .. (126,102);
+
+  % Осколки
+  \foreach \x/\y/\c in {136/167/red,144/167/violet,132/159/violet,140/159/red,148/159/violet,136/151/red,144/151/violet}
+    {\nucleon{\x}{\y}{\c}}
+  \foreach \x/\y/\c in {136/107/violet,144/107/red,132/99/red,140/99/violet,148/99/red,136/91/violet,144/91/red}
+    {\nucleon{\x}{\y}{\c}}
+
+  \foreach \x/\y in {164/153,172/132,164/111} {
+    \fill[blue] (\x,\y) circle[radius=3.1mm];
+    \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=blue,anchor=west] at (\x+4,\y) {$n$};
+  }
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (102,70) {два осколка + 2--3 нейтрона};
+  \draw[fill=amberfill,draw=amber!55,line width=0.4mm,rounded corners=2mm]
+    (53,43) rectangle (151,59);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=amber]
+    at (102,51) {выделяется энергия};
+
+  % Карточка синтеза
+  \draw[fill=greenfill,draw=green!45,line width=0.45mm,rounded corners=2.5mm]
+    (200,35) rectangle (376,216);
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont,text=green]
+    at (288,198) {Синтез лёгких ядер};
+
+  % Два лёгких ядра
+  \foreach \x/\y/\c in {224/154/red,232/154/violet,228/146/blue}
+    {\nucleon{\x}{\y}{\c}}
+  \foreach \x/\y/\c in {224/108/violet,232/108/red,228/100/blue}
+    {\nucleon{\x}{\y}{\c}}
+
+  \draw[-{Stealth[length=3mm,width=2.2mm]},draw=green,line width=0.9mm]
+    (240,148) .. controls (258,143) and (260,138) .. (274,134);
+  \draw[-{Stealth[length=3mm,width=2.2mm]},draw=green,line width=0.9mm]
+    (240,106) .. controls (258,111) and (260,118) .. (274,122);
+
+  % Более тяжёлое ядро
+  \foreach \x/\y/\c in {
+    288/128/red,296/136/violet,304/128/red,296/120/violet,
+    288/144/violet,304/144/red,288/112/red,304/112/violet,
+    280/136/red,312/136/violet,280/120/violet,312/120/red}
+    {\nucleon{\x}{\y}{\c}}
+
+  \draw[-{Stealth[length=3mm,width=2.2mm]},draw=amber,line width=0.85mm]
+    (318,128) -- (341,128);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=amber,anchor=west]
+    at (344,128) {энергия};
+
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (288,78) {образуется более тяжёлое ядро};
+  \draw[fill=redfill,draw=red!45,line width=0.4mm,rounded corners=2mm]
+    (232,43) rectangle (344,59);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=red]
+    at (288,51) {очень высокая температура};
+
+  \node[font=\sffamily\fontsize{13.5}{17}\selectfont,text=textmuted]
+    at (195,19) {Схема условная: размеры ядер и число показанных нуклонов не соблюдены в масштабе};
+\end{tikzpicture}
+\end{document}
