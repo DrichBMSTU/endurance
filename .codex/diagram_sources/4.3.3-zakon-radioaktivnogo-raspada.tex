@@ -1,0 +1,70 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{grid}{HTML}{94A3B8}
+\definecolor{red}{HTML}{DC2626}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (390,250);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (384,244);
+
+  \node[font=\sffamily\bfseries\fontsize{24}{29}\selectfont,text=textmain]
+    at (195,228) {Закон радиоактивного распада};
+  \node[font=\sffamily\fontsize{15}{18}\selectfont,text=textmuted]
+    at (195,211) {За каждый период полураспада $T$ число нераспавшихся ядер уменьшается вдвое};
+
+  \begin{scope}[shift={(58,50)},x=82mm,y=138mm]
+    \draw[draw=grid!55,line width=0.3mm,dashed] (0,1) -- (3.62,1);
+    \draw[draw=grid!55,line width=0.3mm,dashed] (0,0.5) -- (1,0.5);
+    \draw[draw=grid!55,line width=0.3mm,dashed] (0,0.25) -- (2,0.25);
+    \draw[draw=grid!55,line width=0.3mm,dashed] (0,0.125) -- (3,0.125);
+
+    \draw[->,draw=textmain,line width=0.55mm] (0,0) -- (3.72,0);
+    \draw[->,draw=textmain,line width=0.55mm] (0,0) -- (0,1.08);
+
+    \draw[draw=blue,line width=1mm]
+      plot[smooth,domain=0:3.62,samples=90] (\x,{pow(2,-\x)});
+
+    \foreach \x/\y in {0/1,1/0.5,2/0.25,3/0.125} {
+      \fill[blue] (\x,\y) circle[radius=1.35mm];
+    }
+
+    \foreach \x/\label in {1/$T$,2/$2T$,3/$3T$} {
+      \draw[draw=textmain,line width=0.4mm] (\x,0.018) -- (\x,-0.018);
+      \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+        at (\x,-0.085) {\label};
+    }
+
+    \node[anchor=east,font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+      at (-0.07,1) {$N_0$};
+    \node[anchor=east,font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+      at (-0.07,0.5) {$N_0/2$};
+    \node[anchor=east,font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+      at (-0.07,0.25) {$N_0/4$};
+    \node[anchor=east,font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+      at (-0.07,0.125) {$N_0/8$};
+
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{17}{21}\selectfont,text=textmain]
+      at (0.04,1.08) {$N(t)$};
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{17}{21}\selectfont,text=textmain]
+      at (3.72,0) {$t$};
+  \end{scope}
+
+  \draw[fill=bluefill,draw=blue!45,line width=0.4mm,rounded corners=2mm]
+    (83,10) rectangle (307,27);
+  \node[font=\sffamily\bfseries\fontsize{16}{20}\selectfont,text=blue]
+    at (195,18.5) {$N_0\rightarrow\dfrac{N_0}{2}\rightarrow\dfrac{N_0}{4}\rightarrow\dfrac{N_0}{8}$};
+\end{tikzpicture}
+\end{document}
