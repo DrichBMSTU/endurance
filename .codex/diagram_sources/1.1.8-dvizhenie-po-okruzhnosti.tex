@@ -1,58 +1,110 @@
-\documentclass[tikz,border=6pt]{standalone}
+\documentclass[tikz,border=8pt]{standalone}
 \usepackage{amsmath}
 \usepackage{fontspec}
-\usetikzlibrary{arrows.meta,angles,quotes,calc}
+\usetikzlibrary{arrows.meta,calc,positioning}
+
 \setmainfont{Arial}
 \setsansfont{Arial}
 
+\definecolor{ink}{HTML}{243447}
+\definecolor{muted}{HTML}{607086}
+\definecolor{orbit}{HTML}{40566F}
+\definecolor{velocity}{HTML}{D1495B}
+\definecolor{acceleration}{HTML}{246BCE}
+\definecolor{rotation}{HTML}{C47F17}
+\definecolor{softblue}{HTML}{EEF5FF}
+\definecolor{softred}{HTML}{FFF1F3}
+\definecolor{softgold}{HTML}{FFF7E8}
+\definecolor{canvas}{HTML}{FFFFFF}
+
 \begin{document}
 \begin{tikzpicture}[
-  scale=1.2,
-  every node/.style={transform shape},
+  x=1cm,
+  y=1cm,
   font=\sffamily\large,
-  >=Latex,
-  orbit/.style={line width=1.2pt, draw=gray!60!black},
-  vector/.style={-{Latex[length=3.5mm]}, line width=1.35pt},
-  guide/.style={line width=0.85pt, draw=gray!50!black, dashed},
-  leader/.style={line width=0.85pt, draw=gray!55!black},
-  label/.style={text=gray!15!black, fill=white, rounded corners=2pt, inner xsep=5pt, inner ysep=2.5pt}
+  >={Latex[length=3.2mm,width=2.2mm]},
+  vector/.style={-{Latex[length=3.2mm,width=2.2mm]}, line width=1.7pt},
+  construction/.style={draw=muted, dashed, line width=0.85pt},
+  panel/.style={rounded corners=7pt, line width=0.9pt, minimum width=7.15cm, inner sep=10pt},
+  formula/.style={font=\sffamily\Large, text=ink},
+  caption/.style={font=\sffamily\normalsize, text=muted, align=left}
 ]
-  \definecolor{canvas}{RGB}{255,255,255}
-  \definecolor{pointblue}{RGB}{43,112,173}
-  \definecolor{speedred}{RGB}{197,72,75}
-  \definecolor{acgreen}{RGB}{57,137,90}
-  \definecolor{omegagold}{RGB}{180,129,42}
+  \path[fill=canvas] (-0.35,-0.35) rectangle (16.35,9.55);
 
-  \fill[canvas] (-5.8,-4.25) rectangle (7.8,5.1);
+  \node[anchor=west, text=ink, font=\sffamily\bfseries\LARGE]
+    at (0.25,9.05) {Движение материальной точки по окружности};
+  \draw[draw=ink!18, line width=0.8pt] (0.25,8.62) -- (15.75,8.62);
 
-  \coordinate (O) at (-1.2,-0.2);
-  \coordinate (M) at ($(O)+(50:2.7)$);
-  \coordinate (X) at ($(O)+(2.7,0)$);
-  \coordinate (AcEnd) at ($(M)!0.56!(O)$);
-  \coordinate (RadMid) at ($(O)!0.52!(M)$);
+  \node[anchor=west, text=muted, font=\sffamily\bfseries\large]
+    at (0.35,8.18) {ГЕОМЕТРИЯ ДВИЖЕНИЯ};
+  \node[anchor=west, text=muted, font=\sffamily\bfseries\large]
+    at (8.55,8.18) {ФИЗИЧЕСКИЙ СМЫСЛ};
 
-  \draw[orbit] (O) circle (2.7);
-  \draw[guide] (O) -- (M);
-  \draw[guide] (O) -- (X);
+  \coordinate (O) at (4.05,4.35);
+  \coordinate (A) at ($(O)+(38:2.58)$);
+  \coordinate (X) at ($(O)+(2.58,0)$);
+  \coordinate (VEnd) at ($(A)+(128:2.05)$);
+  \coordinate (AEnd) at ($(A)!0.63!(O)$);
 
-  \draw[vector, draw=speedred] (M) -- ++(140:2.25);
-  \node[label, text=speedred] at ($(M)+(140:1.35)+(0,0.55)$) {$\vec v$};
+  \fill[softblue!45] (O) circle (2.58);
+  \draw[draw=orbit, line width=1.55pt] (O) circle (2.58);
 
-  \draw[vector, draw=acgreen] (M) -- (AcEnd);
-  \node[label, text=acgreen, anchor=west] at ($(M)!0.42!(AcEnd)+(0.85,0.05)$) {$\vec a_{\text{цс}}$};
+  \draw[construction] (O) -- (X);
+  \draw[construction] (O) -- (A);
+  \draw[-{Latex[length=2.5mm]}, draw=rotation, line width=1.25pt]
+    ($(O)+(0:1.05)$) arc[start angle=0,end angle=38,radius=1.05];
+  \node[text=rotation, font=\sffamily\Large] at ($(O)+(19:1.38)$) {$\varphi$};
 
-  \draw[vector, draw=omegagold] ($(O)+(-35:3.25)$) arc[start angle=-35,end angle=8,radius=3.25];
-  \node[label, text=omegagold, anchor=west] at ($(O)+(3.35,-0.65)$) {$\omega$};
+  \draw[-{Latex[length=3mm]}, draw=rotation, line width=1.65pt]
+    ($(O)+(205:2.95)$) arc[start angle=205,end angle=265,radius=2.95];
+  \node[text=rotation, font=\sffamily\Large, anchor=east]
+    at ($(O)+(230:3.35)$) {$\omega$};
 
-  \pic[draw=gray!55!black, angle radius=0.72cm, "$\varphi$", angle eccentricity=1.45] {angle = X--O--M};
+  \draw[vector, draw=velocity] (A) -- (VEnd);
+  \node[text=velocity, font=\sffamily\Large, anchor=south east]
+    at ($(VEnd)+(-0.05,0.02)$) {$\vec v$};
 
-  \fill[gray!20!black] (O) circle (2pt);
-  \node[label, anchor=north east] at ($(O)+(-0.08,-0.08)$) {$O$};
-  \fill[pointblue] (M) circle (3.2pt);
+  \draw[vector, draw=acceleration] (A) -- (AEnd);
+  \node[text=acceleration, font=\sffamily\Large, anchor=west]
+    at (6.25,4.95) {$\vec a_{\text{цс}}$};
 
-  \draw[leader] (M) -- ++(1.55,1.0) node[label, anchor=west] {$M$ — материальная точка};
-  \draw[leader] (RadMid) -- ++(-2.15,0.45) node[label, anchor=east] {радиус $R$};
+  \fill[ink] (O) circle (2.7pt);
+  \node[text=ink, anchor=north, font=\sffamily\large] at ($(O)+(0,-0.18)$) {$O$};
 
-  \node[label, align=center] at (0,-3.65) {скорость направлена по касательной,\\ускорение — к центру окружности};
+  \fill[velocity] (A) circle (4pt);
+  \node[text=ink, anchor=south west, font=\sffamily\bfseries\large]
+    at ($(A)+(0.10,0.12)$) {$A$};
+
+  \node[text=muted, fill=canvas, inner sep=2pt, rotate=38]
+    at ($(O)!0.43!(A)+(-0.10,0.20)$) {$R$};
+
+  \node[panel, draw=velocity!55, fill=softred, anchor=north west, minimum height=1.48cm]
+    (speedpanel) at (8.45,7.72) {};
+  \node[anchor=west, text=velocity, font=\sffamily\bfseries\Large]
+    at (8.75,7.18) {$\vec v$};
+  \node[caption, anchor=west, text width=3.55cm]
+    at (9.55,7.18) {направлена по касательной};
+  \node[formula, anchor=east] at (15.25,7.18) {$v=\omega R$};
+
+  \node[panel, draw=acceleration!55, fill=softblue, anchor=north west, minimum height=1.58cm]
+    (accpanel) at (8.45,5.82) {};
+  \node[anchor=west, text=acceleration, font=\sffamily\bfseries\Large]
+    at (8.75,5.23) {$\vec a_{\text{цс}}$};
+  \node[caption, anchor=west, text width=3.15cm]
+    at (10.05,5.23) {направлено к центру};
+  \node[formula, anchor=east] at (15.25,5.23)
+    {$a_{\text{цс}}=\dfrac{v^2}{R}=\omega^2R$};
+
+  \node[panel, draw=rotation!60, fill=softgold, anchor=north west, minimum height=2.65cm]
+    (uniformpanel) at (8.45,3.72) {};
+  \node[anchor=west, text=rotation, font=\sffamily\bfseries\large]
+    at (8.75,3.08) {РАВНОМЕРНОЕ ДВИЖЕНИЕ};
+  \node[anchor=center, text=ink, font=\sffamily\Large]
+    at (12.00,2.34) {$|\vec v|=\mathrm{const}$};
+  \node[caption, anchor=center, align=center]
+    at (12.00,1.62) {модуль скорости постоянен;\\направление вектора меняется};
+
+  \node[anchor=west, text=muted, font=\sffamily\normalsize]
+    at (0.45,0.22) {Векторы $\vec v$ и $\vec a_{\text{цс}}$ взаимно перпендикулярны.};
 \end{tikzpicture}
 \end{document}
