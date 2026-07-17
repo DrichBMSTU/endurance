@@ -1,0 +1,58 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,angles,quotes,calc}
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\begin{document}
+\begin{tikzpicture}[
+  scale=1.2,
+  every node/.style={transform shape},
+  font=\sffamily\large,
+  >=Latex,
+  orbit/.style={line width=1.2pt, draw=gray!60!black},
+  vector/.style={-{Latex[length=3.5mm]}, line width=1.35pt},
+  guide/.style={line width=0.85pt, draw=gray!50!black, dashed},
+  leader/.style={line width=0.85pt, draw=gray!55!black},
+  label/.style={text=gray!15!black, fill=white, rounded corners=2pt, inner xsep=5pt, inner ysep=2.5pt}
+]
+  \definecolor{canvas}{RGB}{255,255,255}
+  \definecolor{pointblue}{RGB}{43,112,173}
+  \definecolor{speedred}{RGB}{197,72,75}
+  \definecolor{acgreen}{RGB}{57,137,90}
+  \definecolor{omegagold}{RGB}{180,129,42}
+
+  \fill[canvas] (-5.8,-4.25) rectangle (7.8,5.1);
+
+  \coordinate (O) at (-1.2,-0.2);
+  \coordinate (M) at ($(O)+(50:2.7)$);
+  \coordinate (X) at ($(O)+(2.7,0)$);
+  \coordinate (AcEnd) at ($(M)!0.56!(O)$);
+  \coordinate (RadMid) at ($(O)!0.52!(M)$);
+
+  \draw[orbit] (O) circle (2.7);
+  \draw[guide] (O) -- (M);
+  \draw[guide] (O) -- (X);
+
+  \draw[vector, draw=speedred] (M) -- ++(140:2.25);
+  \node[label, text=speedred] at ($(M)+(140:1.35)+(0,0.55)$) {$\vec v$};
+
+  \draw[vector, draw=acgreen] (M) -- (AcEnd);
+  \node[label, text=acgreen, anchor=west] at ($(M)!0.42!(AcEnd)+(0.85,0.05)$) {$\vec a_{\text{цс}}$};
+
+  \draw[vector, draw=omegagold] ($(O)+(-35:3.25)$) arc[start angle=-35,end angle=8,radius=3.25];
+  \node[label, text=omegagold, anchor=west] at ($(O)+(3.35,-0.65)$) {$\omega$};
+
+  \pic[draw=gray!55!black, angle radius=0.72cm, "$\varphi$", angle eccentricity=1.45] {angle = X--O--M};
+
+  \fill[gray!20!black] (O) circle (2pt);
+  \node[label, anchor=north east] at ($(O)+(-0.08,-0.08)$) {$O$};
+  \fill[pointblue] (M) circle (3.2pt);
+
+  \draw[leader] (M) -- ++(1.55,1.0) node[label, anchor=west] {$M$ — материальная точка};
+  \draw[leader] (RadMid) -- ++(-2.15,0.45) node[label, anchor=east] {радиус $R$};
+
+  \node[label, align=center] at (0,-3.65) {скорость направлена по касательной,\\ускорение — к центру окружности};
+\end{tikzpicture}
+\end{document}
