@@ -7751,7 +7751,14 @@ Git:
 - HTML-проверка: `is-unresolved=False`, `broken-link=False`, `katex-error=False`, `gif-ref=True`, `full-title=True`.
 
 Git:
-- Commit: `Переделать теорию по пункту 1.1.7` (создаётся текущим коммитом).
-- Push: не выполнялся; ожидает явного разрешения пользователя.
+- Commit: `97e92a5` — `Переделать теорию по пункту 1.1.7`.
+- Push: выполнен в `origin/v4`.
+
+Публикация:
+- GitHub Actions workflow: `29617950442` — `Deploy Quartz site to GitHub Pages`, статус `success` для SHA `97e92a51ae76ddec1ade9b65e68a584679c824a4`.
+- Job `build`: успешно; Quartz собран и artifact загружен.
+- Job `deploy`: успешно; GitHub Pages обновлён.
+- Live URL: `https://endurancege.ru/Теория-ЕГЭ-по-физике/1.-Механика/1.1-Кинематика/1.1.7-Свободное-падение`.
+- Live-проверка: страница и `https://endurancege.ru/adds/adds_gif/kinematics_3.gif` отвечают HTTP 200; полный заголовок и GIF присутствуют; маркеры `is-unresolved`, `broken-link` и `katex-error` отсутствуют.
 
 ---
