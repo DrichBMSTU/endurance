@@ -28,7 +28,8 @@
   card box/.style={fill=card,draw=border,line width=1.6pt,rounded corners=18pt},
   force arrow/.style={draw=force,line width=3.4pt,-{Stealth[length=13pt,width=10pt]}},
   action line/.style={draw=force!68,line width=2pt,dash pattern=on 10pt off 7pt},
-  arm line/.style={draw=arm,line width=3pt,{Bar[length=10pt,width=15pt]}-{Bar[length=10pt,width=15pt]}},
+  dimension line/.style={draw=arm,line width=2.2pt},
+  extension line/.style={draw=arm!78,line width=1.6pt},
   guide line/.style={draw=muted!65,line width=1.8pt,dash pattern=on 7pt off 6pt}
 }
 
@@ -58,12 +59,12 @@
   % Rotation axis through O, perpendicular to the drawing plane.
   \fill[ink] (300,220) circle (5.5pt);
   \draw[ink,line width=2pt] (300,220) circle (13pt);
-  \node[font=\LabelFont,text=ink,anchor=east] at (276,220) {$O$};
+  \node[font=\LabelFont,text=ink,anchor=north west] at (318,204) {$O$};
   \node[font=\BodyFont,text=muted,align=left,anchor=west] at (365,205)
     {ось через $O$\\перпендикулярна рисунку};
 
   % Point of application and force line.
-  \draw[action line] (128,410) -- (681,410);
+  \draw[action line] (86,410) -- (681,410);
   \fill[force] (535,410) circle (6pt);
   \node[font=\LabelFont,text=force,anchor=south] at (535,425) {$A$};
   \draw[force arrow] (535,410) -- (681,410);
@@ -71,14 +72,22 @@
   \node[font=\BodyFont,text=force,anchor=south west] at (132,448)
     {линия действия силы};
 
-  % Perpendicular arm OH.
+  % Perpendicular arm OH and its engineering-style dimension.
   \coordinate (H) at (300,410);
   \draw[guide line] (300,220) -- (H);
-  \draw[arm line] (319,226) -- (319,404);
-  \node[font=\FormulaFont,text=arm,anchor=west] at (338,314) {$l$};
   \fill[arm] (H) circle (5pt);
   \node[font=\LabelFont,text=arm,anchor=north east] at (288,399) {$H$};
   \draw[arm,line width=2.2pt] (300,388) -- (322,388) -- (322,410);
+
+  % The upper extension is the force line itself. The lower extension
+  % begins with a small overrun and stops short of the axis symbol.
+  \draw[extension line] (86,220) -- (281,220);
+  \draw[dimension line,-{Stealth[length=11pt,width=8pt]}]
+    (98,286) -- (98,220);
+  \draw[dimension line,-{Stealth[length=11pt,width=8pt]}]
+    (98,344) -- (98,410);
+  \node[font=\FormulaFont,text=arm,fill=card,rounded corners=5pt,
+    inner xsep=8pt,inner ysep=3pt] at (98,315) {$l$};
 
   \node[font=\BodyFont,text=muted,align=center] at (378,96)
     {$OH$ — кратчайшее расстояние до линии действия силы};
