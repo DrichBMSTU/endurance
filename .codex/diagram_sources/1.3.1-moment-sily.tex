@@ -1,0 +1,101 @@
+\documentclass[tikz,border=0pt]{standalone}
+
+\usepackage{fix-cm}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{canvas}{HTML}{F7F9FC}
+\definecolor{card}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{172033}
+\definecolor{muted}{HTML}{53627A}
+\definecolor{border}{HTML}{C9D3E1}
+\definecolor{bodyfill}{HTML}{E8EEF6}
+\definecolor{bodyedge}{HTML}{70839D}
+\definecolor{force}{HTML}{1976C9}
+\definecolor{arm}{HTML}{C43E72}
+\definecolor{accent}{HTML}{007F73}
+
+\newcommand{\TitleFont}{\fontsize{40}{46}\selectfont\bfseries}
+\newcommand{\PanelFont}{\fontsize{29}{35}\selectfont\bfseries}
+\newcommand{\FormulaFont}{\fontsize{42}{50}\selectfont\bfseries}
+\newcommand{\BodyFont}{\fontsize{22}{28}\selectfont}
+\newcommand{\LabelFont}{\fontsize{23}{28}\selectfont\bfseries}
+
+\tikzset{
+  card box/.style={fill=card,draw=border,line width=1.6pt,rounded corners=18pt},
+  force arrow/.style={draw=force,line width=3.4pt,-{Stealth[length=13pt,width=10pt]}},
+  action line/.style={draw=force!68,line width=2pt,dash pattern=on 10pt off 7pt},
+  arm line/.style={draw=arm,line width=3pt,{Bar[length=10pt,width=15pt]}-{Bar[length=10pt,width=15pt]}},
+  guide line/.style={draw=muted!65,line width=1.8pt,dash pattern=on 7pt off 6pt}
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,font=\sffamily]
+  \path[use as bounding box] (0,0) rectangle (1100,650);
+  \fill[canvas] (0,0) rectangle (1100,650);
+  \draw[border,line width=1.5pt,rounded corners=20pt]
+    (12,12) rectangle (1088,638);
+
+  \node[font=\TitleFont,text=ink] at (550,598)
+    {Плечо и момент силы};
+
+  \draw[card box] (42,65) rectangle (715,550);
+  \draw[card box] (745,65) rectangle (1058,550);
+
+  \node[font=\PanelFont,text=force] at (378,510)
+    {Плечо силы};
+
+  % Rigid body viewed along the rotation axis.
+  \path[fill=bodyfill,draw=bodyedge,line width=2.4pt]
+    (138,180) .. controls (122,302) and (170,445) .. (330,458)
+    .. controls (454,468) and (594,435) .. (620,329)
+    .. controls (642,238) and (547,151) .. (412,142)
+    .. controls (286,154) and (155,142) .. cycle;
+
+  % Rotation axis through O, perpendicular to the drawing plane.
+  \fill[ink] (300,220) circle (5.5pt);
+  \draw[ink,line width=2pt] (300,220) circle (13pt);
+  \node[font=\LabelFont,text=ink,anchor=east] at (276,220) {$O$};
+  \node[font=\BodyFont,text=muted,align=left,anchor=west] at (365,205)
+    {ось через $O$\\перпендикулярна рисунку};
+
+  % Point of application and force line.
+  \draw[action line] (128,410) -- (681,410);
+  \fill[force] (535,410) circle (6pt);
+  \node[font=\LabelFont,text=force,anchor=south] at (535,425) {$A$};
+  \draw[force arrow] (535,410) -- (681,410);
+  \node[font=\FormulaFont,text=force,anchor=south] at (635,429) {$\vec F$};
+  \node[font=\BodyFont,text=force,anchor=south west] at (132,448)
+    {линия действия силы};
+
+  % Perpendicular arm OH.
+  \coordinate (H) at (300,410);
+  \draw[guide line] (300,220) -- (H);
+  \draw[arm line] (319,226) -- (319,404);
+  \node[font=\FormulaFont,text=arm,anchor=west] at (338,314) {$l$};
+  \fill[arm] (H) circle (5pt);
+  \node[font=\LabelFont,text=arm,anchor=north east] at (288,399) {$H$};
+  \draw[arm,line width=2.2pt] (300,388) -- (322,388) -- (322,410);
+
+  \node[font=\BodyFont,text=muted,align=center] at (378,96)
+    {$OH$ — кратчайшее расстояние до линии действия силы};
+
+  % Formula and meaning card.
+  \node[font=\PanelFont,text=accent] at (901,505) {Модуль момента};
+  \node[font=\FormulaFont,text=ink] at (901,416) {$\displaystyle |M|=Fl$};
+
+  \draw[border,line width=1.5pt] (785,358) -- (1017,358);
+  \node[font=\BodyFont,text=ink,align=left,anchor=west] at (785,309)
+    {$F$ — модуль силы};
+  \node[font=\BodyFont,text=ink,align=left,anchor=west] at (785,250)
+    {$l$ — плечо силы};
+
+  \draw[accent,line width=2pt,rounded corners=10pt]
+    (780,116) rectangle (1022,205);
+  \node[font=\BodyFont,text=accent,align=center] at (901,161)
+    {если линия действия\\проходит через ось,\\то $l=0$ и $|M|=0$};
+\end{tikzpicture}
+\end{document}
