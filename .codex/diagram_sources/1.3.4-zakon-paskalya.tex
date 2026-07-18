@@ -1,38 +1,102 @@
-\documentclass[tikz,border=6pt]{standalone}
+\documentclass[tikz,border=0pt]{standalone}
 \usepackage{fontspec}
 \usetikzlibrary{arrows.meta}
+
 \setmainfont{Arial}
 \setsansfont{Arial}
 
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{cyanfill}{HTML}{E0F2FE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{redfill}{HTML}{FEE2E2}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+
 \begin{document}
-\begin{tikzpicture}[
-  font=\sffamily,
-  >=Latex,
-  pressure/.style={-{Latex[length=3mm]}, line width=1.1pt, draw=blue!65!black},
-  wall/.style={line width=1.1pt, draw=gray!70!black},
-  label/.style={text=gray!20!black}
-]
-  \definecolor{fluid}{RGB}{223,242,249}
-  \definecolor{fluidline}{RGB}{72,137,173}
-  \definecolor{piston}{RGB}{210,215,219}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,230);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,224);
 
-  \draw[wall, rounded corners=5pt, fill=fluid] (0.4,0.3) rectangle (7.4,3.9);
-  \draw[wall, fill=piston] (2.6,3.9) rectangle (5.2,4.25);
-  \draw[wall] (3.9,4.25) -- (3.9,5.0);
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=textmain]
+    at (180,208) {Как передаётся внешнее давление};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (180,192) {Поршень одинаково увеличивает давление во всём объёме жидкости или газа};
 
-  \node[label] at (3.9,3.25) {жидкость или газ};
-  \node[label] at (3.9,0.75) {давление передаётся одинаково};
-  \node[label] at (3.9,0.42) {во все стороны};
+  % Сосуд с поршнем
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,45) rectangle (228,180);
 
-  \draw[pressure] (3.9,5.1) -- (3.9,4.3);
-  \node[label, right] at (4.05,4.7) {поршень};
+  \draw[fill=cyanfill,draw=textmuted,line width=0.75mm,rounded corners=2mm]
+    (30,61) rectangle (212,141);
+  \draw[fill=white,draw=white,line width=0.8mm]
+    (91,140) rectangle (151,147);
+  \draw[fill=border,draw=textmuted,line width=0.7mm]
+    (94,141) rectangle (148,153);
+  \draw[draw=textmuted,line width=1.0mm] (121,153) -- (121,169);
 
-  \coordinate (c) at (3.9,2.1);
-  \foreach \angle in {0,45,90,135,180,225,270,315} {
-    \draw[pressure] (c) -- ++(\angle:1.15);
+  \draw[-{Stealth[length=3.6mm,width=2.6mm]},draw=red,line width=1.1mm]
+    (121,178) -- (121,160);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{9.2}{11.3}\selectfont,text=red]
+    at (115,170) {внешнее действие};
+  \node[anchor=west,font=\sffamily\fontsize{8.8}{10.8}\selectfont,text=textmuted]
+    at (153,147) {поршень};
+
+  \node[font=\sffamily\bfseries\fontsize{11}{13.5}\selectfont,text=blue]
+    at (121,130) {жидкость или газ};
+
+  % Три произвольные точки среды
+  \foreach \x/\y/\label in {68/108/A,166/111/B,119/82/C} {
+    \node[circle,fill=white,draw=blue,line width=0.7mm,minimum size=12mm,inner sep=0pt,
+      font=\sffamily\bfseries\fontsize{10.5}{12.5}\selectfont,text=blue]
+      at (\x,\y) {\label};
   }
+  \node[font=\sffamily\fontsize{8.8}{10.8}\selectfont,text=textmuted]
+    at (121,69) {в каждой точке — одна и та же добавка давления};
 
-  \draw[fill=fluidline, draw=none] (c) circle (2.2pt);
-  \node[label, above] at (3.9,5.12) {внешнее давление};
+  % Силы давления на стенки: равные короткие стрелки
+  \draw[-{Stealth[length=3.2mm,width=2.3mm]},draw=blue,line width=0.95mm]
+    (30,96) -- (18,96);
+  \draw[-{Stealth[length=3.2mm,width=2.3mm]},draw=blue,line width=0.95mm]
+    (212,96) -- (224,96);
+  \draw[-{Stealth[length=3.2mm,width=2.3mm]},draw=blue,line width=0.95mm]
+    (82,61) -- (82,49);
+  \draw[-{Stealth[length=3.2mm,width=2.3mm]},draw=blue,line width=0.95mm]
+    (160,61) -- (160,49);
+
+  % Смысл закона
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (238,45) rectangle (346,180);
+
+  \draw[fill=bluefill,draw=blue!35,line width=0.4mm,rounded corners=1.8mm]
+    (246,141) rectangle (338,173);
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=blue]
+    at (292,164) {Во все точки};
+  \node[align=center,text width=84mm,font=\sffamily\fontsize{8.5}{10.5}\selectfont,text=textmain]
+    at (292,150) {A, B и C получают одинаковое добавочное давление};
+
+  \draw[fill=greenfill,draw=green!35,line width=0.4mm,rounded corners=1.8mm]
+    (246,99) rectangle (338,131);
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=green]
+    at (292,122) {По всем направлениям};
+  \node[align=center,text width=84mm,font=\sffamily\fontsize{8.5}{10.5}\selectfont,text=textmain]
+    at (292,108) {Среда действует на площадки любой ориентации};
+
+  \draw[fill=redfill,draw=red!30,line width=0.4mm,rounded corners=1.8mm]
+    (246,57) rectangle (338,89);
+  \node[font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=red]
+    at (292,80) {Без ослабления};
+  \node[align=center,text width=84mm,font=\sffamily\fontsize{8.5}{10.5}\selectfont,text=textmain]
+    at (292,66) {Добавка не уменьшается с расстоянием от поршня};
+
+  \draw[fill=bluefill,draw=blue!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,36);
+  \node[font=\sffamily\bfseries\fontsize{9.6}{11.8}\selectfont,text=blue]
+    at (180,25) {Давление — скаляр; стрелки показывают силы давления на стенки};
 \end{tikzpicture}
 \end{document}
