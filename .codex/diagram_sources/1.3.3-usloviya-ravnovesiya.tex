@@ -1,0 +1,109 @@
+\documentclass[tikz,border=0pt]{standalone}
+
+\usepackage{fix-cm}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{canvas}{HTML}{F7F9FC}
+\definecolor{card}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{172033}
+\definecolor{muted}{HTML}{53627A}
+\definecolor{border}{HTML}{C9D3E1}
+\definecolor{bodyfill}{HTML}{E8EEF6}
+\definecolor{bodyedge}{HTML}{70839D}
+\definecolor{force}{HTML}{1976C9}
+\definecolor{moment}{HTML}{C43E72}
+\definecolor{balance}{HTML}{007F73}
+
+\newcommand{\TitleFont}{\fontsize{40}{46}\selectfont\bfseries}
+\newcommand{\PanelFont}{\fontsize{27}{33}\selectfont\bfseries}
+\newcommand{\FormulaFont}{\fontsize{26}{32}\selectfont\bfseries}
+\newcommand{\BodyFont}{\fontsize{21}{27}\selectfont}
+\newcommand{\LabelFont}{\fontsize{23}{29}\selectfont\bfseries}
+
+\tikzset{
+  card box/.style={fill=card,draw=border,line width=1.6pt,rounded corners=18pt},
+  body/.style={fill=bodyfill,draw=bodyedge,line width=2.6pt,rounded corners=10pt},
+  force arrow/.style={draw=force,line width=3.4pt,-{Stealth[length=13pt,width=10pt]}},
+  action line/.style={draw=force!55,line width=1.8pt,dash pattern=on 8pt off 6pt},
+  moment arrow/.style={draw=moment,line width=3.2pt,-{Stealth[length=13pt,width=10pt]}}
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,font=\sffamily]
+  \path[use as bounding box] (0,0) rectangle (1100,720);
+  \fill[canvas] (0,0) rectangle (1100,720);
+  \draw[border,line width=1.5pt,rounded corners=20pt]
+    (12,12) rectangle (1088,708);
+
+  \node[font=\TitleFont,text=ink] at (550,665)
+    {Почему нужны оба условия};
+
+  \draw[card box] (42,70) rectangle (528,610);
+  \draw[card box] (572,70) rectangle (1058,610);
+
+  % Left panel: a force couple. The resultant force is zero, but
+  % both moments have the same sign and rotate the body.
+  \node[font=\PanelFont,text=moment] at (285,565)
+    {Только силы уравновешены};
+
+  \draw[body] (142,305) rectangle (428,405);
+  \coordinate (Oleft) at (285,355);
+  \fill[ink] (Oleft) circle (6pt);
+  \draw[ink,line width=2pt] (Oleft) circle (13pt);
+  \node[font=\LabelFont,text=ink,anchor=north west] at (302,344) {$O$};
+
+  \draw[action line] (82,405) -- (488,405);
+  \draw[action line] (82,305) -- (488,305);
+
+  \fill[force] (398,405) circle (5.5pt);
+  \draw[force arrow] (398,405) -- (478,405);
+  \node[font=\LabelFont,text=force,anchor=south] at (442,420) {$\vec F_2$};
+
+  \fill[force] (172,305) circle (5.5pt);
+  \draw[force arrow] (172,305) -- (92,305);
+  \node[font=\LabelFont,text=force,anchor=north] at (128,286) {$\vec F_1$};
+
+  \draw[moment arrow]
+    ($(Oleft)+(145:72)$) arc[start angle=145,end angle=-105,radius=72pt];
+  \node[font=\BodyFont,text=moment,anchor=west] at (362,350) {поворот};
+
+  \node[font=\FormulaFont,text=force] at (285,220)
+    {$\vec F_1+\vec F_2=\vec 0$};
+  \node[font=\FormulaFont,text=moment] at (285,172)
+    {$M_1+M_2\ne 0$};
+  \node[font=\BodyFont,text=muted,align=center] at (285,112)
+    {линии действия сил\\не совпадают};
+
+  % Right panel: equal opposite collinear forces. Their line of action
+  % passes through O, so both the force sum and the moment sum vanish.
+  \node[font=\PanelFont,text=balance] at (815,565)
+    {Оба условия выполнены};
+
+  \draw[body] (672,305) rectangle (958,405);
+  \coordinate (Oright) at (815,355);
+  \fill[ink] (Oright) circle (6pt);
+  \draw[ink,line width=2pt] (Oright) circle (13pt);
+  \node[font=\LabelFont,text=ink,anchor=north west] at (832,344) {$O$};
+
+  \draw[action line] (612,355) -- (1018,355);
+
+  \fill[force] (702,355) circle (5.5pt);
+  \draw[force arrow] (702,355) -- (622,355);
+  \node[font=\LabelFont,text=force,anchor=south] at (658,374) {$\vec F_1$};
+
+  \fill[force] (928,355) circle (5.5pt);
+  \draw[force arrow] (928,355) -- (1008,355);
+  \node[font=\LabelFont,text=force,anchor=south] at (972,374) {$\vec F_2$};
+
+  \node[font=\FormulaFont,text=force] at (815,220)
+    {$\vec F_1+\vec F_2=\vec 0$};
+  \node[font=\FormulaFont,text=balance] at (815,172)
+    {$M_1+M_2=0$};
+  \node[font=\BodyFont,text=balance,align=center] at (815,112)
+    {равновесие\\сохраняется};
+\end{tikzpicture}
+\end{document}
