@@ -1,0 +1,62 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{axis}{HTML}{94A3B8}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{gold}{HTML}{A16207}
+\definecolor{goldfill}{HTML}{FEF3C7}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,190);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,184);
+
+  \node[font=\sffamily\bfseries\fontsize{25}{30}\selectfont,text=textmain]
+    at (180,169) {Импульс материальной точки};
+  \node[font=\sffamily\fontsize{19}{23}\selectfont,text=textmuted]
+    at (180,152) {Импульс — вектор, направление которого совпадает с направлением скорости};
+
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,44) rectangle (346,139);
+
+  \node[font=\sffamily\fontsize{19}{23}\selectfont,text=textmuted]
+    at (82,129) {материальная точка};
+
+  \draw[draw=axis,dashed,line width=0.55mm] (40,92) -- (326,92);
+  \fill[bluefill] (82,92) circle (21mm);
+  \draw[draw=textmain,line width=0.75mm] (82,92) circle (21mm);
+  \node[font=\sffamily\bfseries\fontsize{26}{31}\selectfont,text=textmain] at (82,92) {$m$};
+
+  \draw[-{Stealth[length=4.2mm,width=3.1mm]},draw=blue,line width=1.35mm]
+    (108,113) -- (270,113);
+  \node[font=\sffamily\bfseries\fontsize{28}{34}\selectfont,text=blue,fill=white,inner sep=1.2mm]
+    at (189,124) {$\vec v$};
+
+  \draw[-{Stealth[length=4.2mm,width=3.1mm]},draw=red,line width=1.35mm]
+    (108,72) -- (270,72);
+  \node[font=\sffamily\bfseries\fontsize{28}{34}\selectfont,text=red,fill=white,inner sep=1.2mm]
+    at (189,61) {$\vec p=m\vec v$};
+
+  \node[align=center,font=\sffamily\bfseries\fontsize{18}{22}\selectfont,
+    text=textmain,fill=white,draw=border,line width=0.35mm,rounded corners=1.5mm,
+    inner xsep=3mm,inner ysep=2mm]
+    at (305,93) {направления\\совпадают};
+
+  \draw[fill=goldfill,draw=gold!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,34);
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont,text=gold]
+    at (180,24) {При $v=0$ импульс равен нулю; длины стрелок на схеме условны};
+\end{tikzpicture}
+\end{document}
