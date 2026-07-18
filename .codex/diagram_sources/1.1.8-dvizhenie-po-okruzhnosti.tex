@@ -1,110 +1,130 @@
-\documentclass[tikz,border=8pt]{standalone}
-\usepackage{amsmath}
+\documentclass[tikz,border=0pt]{standalone}
+
+\usepackage{fix-cm}
 \usepackage{fontspec}
-\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
 
 \setmainfont{Arial}
 \setsansfont{Arial}
 
-\definecolor{ink}{HTML}{243447}
-\definecolor{muted}{HTML}{607086}
-\definecolor{orbit}{HTML}{40566F}
-\definecolor{velocity}{HTML}{D1495B}
-\definecolor{acceleration}{HTML}{246BCE}
-\definecolor{rotation}{HTML}{C47F17}
-\definecolor{softblue}{HTML}{EEF5FF}
-\definecolor{softred}{HTML}{FFF1F3}
-\definecolor{softgold}{HTML}{FFF7E8}
-\definecolor{canvas}{HTML}{FFFFFF}
+\definecolor{canvas}{HTML}{F7F9FC}
+\definecolor{card}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{172033}
+\definecolor{muted}{HTML}{53627A}
+\definecolor{border}{HTML}{C9D3E1}
+\definecolor{orbit}{HTML}{304968}
+\definecolor{velocityColor}{HTML}{D33F49}
+\definecolor{accelerationColor}{HTML}{1976C9}
+\definecolor{rotationColor}{HTML}{C96A08}
+\definecolor{highlight}{HTML}{EAF2FB}
+
+\newcommand{\TitleFont}{\Huge\bfseries}
+\newcommand{\SectionFont}{\Large\bfseries}
+\newcommand{\BodyFont}{\LARGE}
+\newcommand{\FormulaFont}{\huge}
+\newcommand{\VectorFont}{\huge\bfseries}
+
+\tikzset{
+  orbit line/.style={draw=orbit,line width=1.05mm},
+  radius line/.style={draw=muted,line width=0.65mm,dash pattern=on 4pt off 4pt},
+  velocity vector/.style={draw=velocityColor,line width=1.2mm,-{Stealth[length=10pt,width=7pt]}},
+  acceleration vector/.style={draw=accelerationColor,line width=1.2mm,-{Stealth[length=10pt,width=7pt]}},
+  rotation vector/.style={draw=rotationColor,line width=1.05mm,-{Stealth[length=9pt,width=6pt]}},
+  card box/.style={fill=card,draw=border,line width=0.55mm,rounded corners=5mm}
+}
 
 \begin{document}
-\begin{tikzpicture}[
-  x=1cm,
-  y=1cm,
-  font=\sffamily\large,
-  >={Latex[length=3.2mm,width=2.2mm]},
-  vector/.style={-{Latex[length=3.2mm,width=2.2mm]}, line width=1.7pt},
-  construction/.style={draw=muted, dashed, line width=0.85pt},
-  panel/.style={rounded corners=7pt, line width=0.9pt, minimum width=8.00cm, inner sep=10pt},
-  formula/.style={font=\sffamily\Large, text=ink},
-  caption/.style={font=\sffamily\normalsize, text=muted, align=left}
-]
-  \path[fill=canvas] (-0.35,-0.35) rectangle (18.45,10.45);
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \path[use as bounding box] (0,0) rectangle (35.5,21.5);
+  \fill[canvas] (0,0) rectangle (35.5,21.5);
+  \draw[border,line width=0.45mm,rounded corners=5mm]
+    (0.25,0.25) rectangle (35.25,21.25);
 
-  \node[anchor=west, text=ink, font=\sffamily\bfseries\LARGE]
-    at (0.25,9.95) {Движение материальной точки по окружности};
-  \draw[draw=ink!18, line width=0.8pt] (0.25,9.50) -- (17.85,9.50);
+  % Header
+  \node[font=\TitleFont,text=ink,anchor=west]
+    at (1.5,20.15) {Равномерное движение по окружности};
+  \draw[border,line width=0.45mm] (1.5,19.25) -- (34.0,19.25);
 
-  \node[anchor=west, text=muted, font=\sffamily\bfseries\large]
-    at (0.35,9.02) {ГЕОМЕТРИЯ ДВИЖЕНИЯ};
-  \node[anchor=west, text=muted, font=\sffamily\bfseries\large]
-    at (9.85,9.02) {ФИЗИЧЕСКИЙ СМЫСЛ};
+  \node[font=\SectionFont,text=muted,anchor=west]
+    at (1.8,18.45) {ГЕОМЕТРИЯ В ТОЧКЕ $A$};
+  \node[font=\SectionFont,text=muted,anchor=west]
+    at (19.25,18.45) {НАПРАВЛЕНИЯ И ФОРМУЛЫ};
 
-  \coordinate (O) at (4.60,4.75);
-  \coordinate (A) at ($(O)+(38:3.10)$);
-  \coordinate (X) at ($(O)+(3.10,0)$);
-  \coordinate (VEnd) at ($(A)+(128:2.35)$);
-  \coordinate (AEnd) at ($(A)!0.62!(O)$);
+  % Independent construction of the circular-motion geometry
+  \coordinate (O) at (10.4,10.5);
+  \coordinate (A) at ($(O)+(35:6.6)$);
+  \coordinate (B) at ($(O)+(155:6.6)$);
+  \coordinate (VEnd) at ($(A)+(125:4.1)$);
+  \coordinate (AccEnd) at ($(A)!0.78!(O)$);
 
-  \fill[softblue!45] (O) circle (3.10);
-  \draw[draw=orbit, line width=1.55pt] (O) circle (3.10);
+  \draw[orbit line] (O) circle[radius=6.6];
 
-  \draw[construction] (O) -- (X);
-  \draw[construction] (O) -- (A);
-  \draw[-{Latex[length=2.5mm]}, draw=rotation, line width=1.25pt]
-    ($(O)+(0:1.20)$) arc[start angle=0,end angle=38,radius=1.20];
-  \node[text=rotation, font=\sffamily\Large] at ($(O)+(19:1.62)$) {$\varphi$};
+  % Radius is drawn to a separate point so its label never competes
+  % with the centripetal-acceleration vector.
+  \draw[radius line] (O) -- (B);
+  \node[font=\VectorFont,text=muted]
+    at ($(O)!0.52!(B)+(0,-0.95)$) {$R$};
 
-  \draw[-{Latex[length=3mm]}, draw=rotation, line width=1.65pt]
-    ($(O)+(205:3.55)$) arc[start angle=205,end angle=265,radius=3.55];
-  \node[text=rotation, font=\sffamily\Large, anchor=east]
-    at ($(O)+(230:4.00)$) {$\omega$};
+  % Rotation direction outside the orbit
+  \draw[rotation vector]
+    ($(O)+(185:7.45)$)
+    arc[start angle=185,end angle=255,radius=7.45];
+  \node[font=\VectorFont,text=rotationColor]
+    at ($(O)+(218:8.15)$) {$\omega$};
 
-  \draw[vector, draw=velocity] (A) -- (VEnd);
-  \node[text=velocity, font=\sffamily\Large, anchor=south east]
-    at ($(A)!0.72!(VEnd)+(-0.10,0.10)$) {$\vec v$};
+  % Tangential velocity and centripetal acceleration start at the same point.
+  \draw[velocity vector] (A) -- (VEnd);
+  \node[font=\VectorFont,text=velocityColor]
+    at ($(A)!0.62!(VEnd)+(0.85,0.62)$) {$\vec v$};
 
-  \draw[vector, draw=acceleration] (A) -- (AEnd);
-  \node[text=acceleration, font=\sffamily\Large, anchor=west]
-    at ($(A)!0.52!(AEnd)+(0.30,-0.32)$) {$\vec a_{\text{цс}}$};
+  \draw[acceleration vector] (A) -- (AccEnd);
+  \node[font=\VectorFont,text=accelerationColor]
+    at ($(A)!0.48!(AccEnd)+(1.20,-1.00)$) {$\vec a_{\text{цс}}$};
 
-  \fill[ink] (O) circle (2.7pt);
-  \node[text=ink, anchor=north, font=\sffamily\large] at ($(O)+(0,-0.18)$) {$O$};
+  \fill[ink] (O) circle[radius=0.16];
+  \node[font=\BodyFont,text=ink,anchor=north east]
+    at ($(O)+(-0.22,-0.18)$) {$O$};
 
-  \fill[velocity] (A) circle (4pt);
-  \node[text=ink, anchor=south west, font=\sffamily\bfseries\large]
-    at ($(A)+(0.10,0.12)$) {$A$};
+  \fill[velocityColor] (A) circle[radius=0.19];
+  \node[font=\BodyFont,text=ink,anchor=west]
+    at ($(A)+(0.48,0.18)$) {$A$};
 
-  \node[text=muted, inner sep=1pt, rotate=38]
-    at ($(O)!0.40!(A)+(0,0.30)$) {$R$};
+  % Explanatory cards are separated from the geometry.
+  \draw[card box,draw=velocityColor!45] (19.15,13.75) rectangle (34.0,17.45);
+  \draw[velocity vector] (20.15,16.00) -- (23.20,16.00);
+  \node[font=\VectorFont,text=velocityColor,anchor=west]
+    at (23.85,16.00) {$\vec v$};
+  \node[font=\BodyFont,text=ink,anchor=west]
+    at (26.10,16.00) {по касательной};
+  \node[font=\FormulaFont,text=ink]
+    at (26.60,14.75) {$v=\omega R$};
 
-  \node[panel, draw=velocity!55, fill=softred, anchor=north west, minimum height=1.48cm]
-    (speedpanel) at (9.75,8.55) {};
-  \node[anchor=west, text=velocity, font=\sffamily\bfseries\Large]
-    at (10.10,7.98) {$\vec v$};
-  \node[caption, anchor=west, text width=3.55cm]
-    at (10.95,7.98) {направлена по касательной};
-  \node[formula, anchor=east] at (17.45,7.98) {$v=\omega R$};
+  \draw[card box,draw=accelerationColor!45] (19.15,9.25) rectangle (34.0,12.95);
+  \draw[acceleration vector] (20.15,11.50) -- (23.20,11.50);
+  \node[font=\VectorFont,text=accelerationColor,anchor=west]
+    at (23.85,11.50) {$\vec a_{\text{цс}}$};
+  \node[font=\BodyFont,text=ink,anchor=west]
+    at (27.35,11.50) {к центру};
+  \node[font=\FormulaFont,text=ink]
+    at (26.60,10.20) {$a_{\text{цс}}=\dfrac{v^2}{R}=\omega^2R$};
 
-  \node[panel, draw=acceleration!55, fill=softblue, anchor=north west, minimum height=1.58cm]
-    (accpanel) at (9.75,6.48) {};
-  \node[anchor=west, text=acceleration, font=\sffamily\bfseries\Large]
-    at (10.10,5.88) {$\vec a_{\text{цс}}$};
-  \node[caption, anchor=west, text width=3.15cm]
-    at (11.50,5.88) {направлено к центру};
-  \node[formula, anchor=east] at (17.45,5.88)
-    {$a_{\text{цс}}=\dfrac{v^2}{R}=\omega^2R$};
+  \draw[card box,draw=rotationColor!45] (19.15,4.35) rectangle (34.0,8.45);
+  \draw[rotation vector]
+    (20.55,6.35) arc[start angle=205,end angle=505,radius=1.15];
+  \node[font=\VectorFont,text=rotationColor,anchor=west]
+    at (23.85,6.95) {$\omega$};
+  \node[font=\BodyFont,text=ink,anchor=west]
+    at (26.05,6.95) {угловая скорость};
+  \node[font=\FormulaFont,text=ink]
+    at (27.05,5.45) {$\omega=\dfrac{2\pi}{T}=2\pi\nu$};
 
-  \node[panel, draw=rotation!60, fill=softgold, anchor=north west, minimum height=2.75cm]
-    (uniformpanel) at (9.75,4.22) {};
-  \node[anchor=west, text=rotation, font=\sffamily\bfseries\large]
-    at (10.10,3.53) {РАВНОМЕРНОЕ ДВИЖЕНИЕ};
-  \node[anchor=center, text=ink, font=\sffamily\Large]
-    at (13.70,2.72) {$|\vec v|=\mathrm{const}$};
-  \node[caption, anchor=center, align=center]
-    at (13.70,1.92) {модуль скорости постоянен;\\направление вектора меняется};
-
-  \node[anchor=west, text=muted, font=\sffamily\normalsize]
-    at (0.45,0.20) {Векторы $\vec v$ и $\vec a_{\text{цс}}$ взаимно перпендикулярны.};
+  % Final relation is isolated in its own band, away from all vectors.
+  \filldraw[fill=highlight,draw=accelerationColor!35,line width=0.55mm,rounded corners=5mm]
+    (3.0,0.65) rectangle (34.0,2.90);
+  \node[font=\FormulaFont,text=ink,anchor=west]
+    at (4.10,1.78) {$\vec v\perp\vec a_{\text{цс}}$};
+  \node[font=\BodyFont,text=muted,anchor=west]
+    at (11.35,1.78) {меняется направление скорости, даже если $|\vec v|=\mathrm{const}$};
 \end{tikzpicture}
 \end{document}
