@@ -1,52 +1,99 @@
-\documentclass[tikz,border=6pt]{standalone}
+\documentclass[tikz,border=0pt]{standalone}
 \usepackage{fontspec}
 \usetikzlibrary{arrows.meta}
+
 \setmainfont{Arial}
 \setsansfont{Arial}
 
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{cyanfill}{HTML}{E0F2FE}
+\definecolor{cyanline}{HTML}{0284C7}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{redfill}{HTML}{FEE2E2}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+
 \begin{document}
-\begin{tikzpicture}[
-  font=\sffamily,
-  >=Latex,
-  wall/.style={line width=1.1pt, draw=gray!70!black},
-  pressure/.style={-{Latex[length=3mm]}, line width=1.1pt, draw=blue!65!black},
-  measure/.style={{Latex[length=2.4mm]}-{Latex[length=2.4mm]}, line width=0.9pt, draw=gray!55!black},
-  guide/.style={line width=0.7pt, draw=gray!55!black, dashed},
-  label/.style={text=gray!15!black},
-  note/.style={text=gray!15!black, fill=white, rounded corners=2pt, inner xsep=4pt, inner ysep=2pt}
-]
-  \definecolor{canvas}{RGB}{255,255,255}
-  \definecolor{fluid}{RGB}{223,242,249}
-  \definecolor{fluidline}{RGB}{72,137,173}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,230);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,224);
 
-  \fill[canvas] (-0.1,-0.25) rectangle (8.35,4.85);
+  \node[font=\sffamily\bfseries\fontsize{22}{27}\selectfont,text=textmain]
+    at (180,208) {Давление на глубине};
+  \node[font=\sffamily\fontsize{14}{17}\selectfont,text=textmuted]
+    at (180,192) {Полное давление складывается из давления на поверхности и веса столба жидкости};
 
-  \draw[wall, rounded corners=4pt] (0.6,0.45) -- (0.6,4.15) -- (7.1,4.15) -- (7.1,0.45) -- cycle;
-  \fill[fluid] (0.75,0.6) rectangle (6.95,3.45);
-  \draw[line width=1pt, draw=fluidline] (0.75,3.45) -- (6.95,3.45);
+  % Сосуд и покоящаяся жидкость
+  \draw[fill=pagebg,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,45) rectangle (238,180);
+  \fill[cyanfill] (32,58) rectangle (206,145);
+  \draw[draw=textmuted,line width=0.8mm]
+    (32,165) -- (32,58) -- (206,58) -- (206,165);
+  \draw[draw=cyanline,line width=0.8mm] (32,145) -- (206,145);
 
-  \foreach \x in {2.0,3.1,4.2,5.3} {
-    \draw[pressure] (\x,4.03) -- (\x,3.58);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=red]
+    at (119,171) {давление $p_0$ на поверхности};
+  \foreach \x in {59,99,139,179} {
+    \draw[-{Stealth[length=3.4mm,width=2.5mm]},draw=red,line width=1.0mm]
+      (\x,164) -- (\x,151);
   }
-  \node[note] at (3.65,4.45) {внешнее давление $p_0$};
 
-  \coordinate (A) at (4.35,1.5);
-  \draw[fill=fluidline, draw=none] (A) circle (2.4pt);
-  \node[note, anchor=west] at (4.55,1.78) {точка $A$};
-  \node[note, anchor=west] at (4.55,0.92) {$p_A=p_0+\rho gh$};
+  % Мысленно выделенный столб жидкости над точкой A
+  \draw[fill=bluefill,draw=blue,line width=0.55mm,dashed,rounded corners=1.5mm]
+    (103,82) rectangle (145,145);
+  \node[align=center,font=\sffamily\bfseries\fontsize{13.5}{16.5}\selectfont,text=blue]
+    at (124,116) {столб\\жидкости};
+  \node[align=center,font=\sffamily\fontsize{13}{16}\selectfont,text=textmuted]
+    at (73,102) {его вес создаёт\\добавку $\rho gh$};
 
-  \draw[guide] (0.75,3.45) -- (7.65,3.45);
-  \draw[guide] (A) -- (7.65,1.5);
-  \draw[measure] (7.52,3.45) -- (7.52,1.5);
-  \node[note, anchor=west] at (7.65,2.48) {$h$};
+  \fill[blue] (124,82) circle (2.2mm);
+  \draw[draw=blue,line width=0.55mm] (128,85) -- (146,93);
+  \node[anchor=west,fill=white,rounded corners=1.3mm,inner xsep=2.2mm,inner ysep=1.3mm,
+    font=\sffamily\bfseries\fontsize{13.5}{16.5}\selectfont,text=blue]
+    at (147,94) {точка $A$};
 
-  \coordinate (B) at (2.35,1.75);
-  \draw[fill=fluidline, draw=none] (B) circle (2.2pt);
-  \foreach \angle in {0,60,120,180,240,300} {
-    \draw[pressure] (B) -- ++(\angle:0.62);
-  }
-  \node[note, align=center] at (2.35,0.86) {давление действует\\во все стороны};
+  % Глубина h отсчитывается вертикально от поверхности
+  \draw[draw=textmuted,line width=0.45mm,dashed] (145,145) -- (225,145);
+  \draw[draw=textmuted,line width=0.45mm,dashed] (145,82) -- (225,82);
+  \draw[{Stealth[length=3.2mm,width=2.3mm]}-{Stealth[length=3.2mm,width=2.3mm]},
+    draw=green,line width=0.9mm] (219,145) -- (219,82);
+  \node[fill=pagebg,inner sep=1.3mm,font=\sffamily\bfseries\fontsize{16}{19}\selectfont,text=green]
+    at (219,113.5) {$h$};
 
-  \node[note] at (3.85,2.72) {покоящаяся жидкость};
+  % Смысл двух слагаемых
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (248,45) rectangle (346,180);
+
+  \draw[fill=bluefill,draw=blue!35,line width=0.4mm,rounded corners=1.8mm]
+    (256,139) rectangle (338,171);
+  \node[font=\sffamily\bfseries\fontsize{13.5}{16.5}\selectfont,text=blue]
+    at (297,162) {давление в точке $A$};
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (297,149) {$p_A=p_0+\rho gh$};
+
+  \draw[fill=redfill,draw=red!30,line width=0.4mm,rounded corners=1.8mm]
+    (256,99) rectangle (338,129);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=red]
+    at (272,114) {$p_0$};
+  \node[anchor=west,align=left,font=\sffamily\fontsize{13}{16}\selectfont,text=textmain]
+    at (284,114) {вклад давления\\на поверхности};
+
+  \draw[fill=greenfill,draw=green!35,line width=0.4mm,rounded corners=1.8mm]
+    (256,59) rectangle (338,89);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=green]
+    at (275,74) {$\rho gh$};
+  \node[anchor=west,align=left,font=\sffamily\fontsize{13}{16}\selectfont,text=textmain]
+    at (290,74) {вклад веса\\жидкости};
+
+  \draw[fill=cyanfill,draw=cyanline!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,36);
+  \node[font=\sffamily\bfseries\fontsize{13.5}{16.5}\selectfont,text=cyanline]
+    at (180,25) {Глубину $h$ отсчитывают вертикально вниз от поверхности жидкости};
 \end{tikzpicture}
 \end{document}
