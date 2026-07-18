@@ -1,0 +1,84 @@
+\documentclass[tikz,border=0pt]{standalone}
+
+\usepackage{fix-cm}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{canvas}{HTML}{F7F9FC}
+\definecolor{card}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{172033}
+\definecolor{muted}{HTML}{53627A}
+\definecolor{border}{HTML}{C9D3E1}
+\definecolor{force}{HTML}{1976C9}
+\definecolor{surface}{HTML}{E8EEF6}
+\definecolor{surfaceedge}{HTML}{70839D}
+\definecolor{accent}{HTML}{007F73}
+
+\newcommand{\TitleFont}{\fontsize{40}{46}\selectfont\bfseries}
+\newcommand{\PanelFont}{\fontsize{29}{35}\selectfont\bfseries}
+\newcommand{\FormulaFont}{\fontsize{44}{52}\selectfont\bfseries}
+\newcommand{\BodyFont}{\fontsize{23}{29}\selectfont}
+\newcommand{\LabelFont}{\fontsize{22}{27}\selectfont\bfseries}
+
+\tikzset{
+  card box/.style={fill=card,draw=border,line width=1.6pt,rounded corners=18pt},
+  pressure arrow/.style={draw=force,line width=3.2pt,-{Stealth[length=12pt,width=9pt]}},
+  small pressure arrow/.style={draw=force!72,line width=2.4pt,-{Stealth[length=10pt,width=7pt]}},
+  normal line/.style={draw=muted!65,line width=1.8pt,dash pattern=on 8pt off 7pt}
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,font=\sffamily]
+  \path[use as bounding box] (0,0) rectangle (1100,620);
+  \fill[canvas] (0,0) rectangle (1100,620);
+  \draw[border,line width=1.5pt,rounded corners=20pt]
+    (12,12) rectangle (1088,608);
+
+  \node[font=\TitleFont,text=ink] at (550,568)
+    {Давление на поверхность};
+
+  \draw[card box] (42,65) rectangle (675,520);
+  \draw[card box] (705,65) rectangle (1058,520);
+
+  \node[font=\PanelFont,text=force] at (358,478)
+    {Перпендикулярная сила};
+
+  % Surface with area S.
+  \path[fill=surface,draw=surfaceedge,line width=2.4pt]
+    (135,155) -- (560,155) -- (620,235) -- (195,235) -- cycle;
+  \draw[surfaceedge!65,line width=1.8pt]
+    (135,155) -- (135,132) -- (560,132) -- (560,155);
+  \draw[surfaceedge!65,line width=1.8pt]
+    (560,132) -- (620,212) -- (620,235);
+  \node[font=\FormulaFont,text=ink] at (378,194) {$S$};
+
+  % The resultant normal force and smaller arrows showing its distribution.
+  \draw[normal line] (378,420) -- (378,235);
+  \draw[pressure arrow] (378,425) -- (378,240);
+  \node[font=\LabelFont,text=force,anchor=west] at (397,350)
+    {$\vec F_{\perp}$};
+
+  \foreach \x in {235,305,451,521} {
+    \draw[small pressure arrow] (\x,355) -- (\x,240);
+  }
+
+  \node[font=\BodyFont,text=muted,align=center] at (358,105)
+    {сила распределена по площади поверхности};
+
+  % Formula card.
+  \node[font=\PanelFont,text=accent] at (881,465) {Давление};
+  \node[font=\FormulaFont,text=ink] at (881,378)
+    {$\displaystyle p=\frac{F_{\perp}}{S}$};
+
+  \draw[border,line width=1.5pt] (750,315) -- (1013,315);
+  \node[font=\BodyFont,text=ink,align=left,anchor=west] at (750,264)
+    {$F_{\perp}$ --- модуль силы\\по нормали к поверхности};
+  \node[font=\BodyFont,text=ink,align=left,anchor=west] at (750,174)
+    {$S$ --- площадь поверхности};
+  \node[font=\BodyFont,text=muted,align=center] at (881,112)
+    {давление --- сила,\\приходящаяся на единицу\\площади};
+\end{tikzpicture}
+\end{document}
