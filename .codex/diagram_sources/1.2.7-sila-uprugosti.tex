@@ -1,0 +1,106 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{gold}{HTML}{A16207}
+\definecolor{goldfill}{HTML}{FEF3C7}
+\definecolor{slatefill}{HTML}{E2E8F0}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,220);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,214);
+
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont,text=textmain]
+    at (180,199) {Сила упругости и закон Гука};
+  \node[font=\sffamily\fontsize{13}{16}\selectfont,text=textmuted]
+    at (180,182) {Сила направлена к недеформированному состоянию, а её проекция линейно зависит от деформации};
+
+  % Левая панель: недеформированная и растянутая пружина
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,44) rectangle (222,171);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (118,159) {Растяжение пружины};
+
+  % Недеформированное состояние
+  \fill[textmuted] (28,118) rectangle (32,144);
+  \foreach \yy in {120,126,132,138,144}
+    \draw[draw=textmuted,line width=0.45mm] (23,\yy-4) -- (28,\yy+1);
+  \draw[draw=textmuted,line width=0.8mm,
+    decorate,decoration={coil,aspect=0.55,segment length=4.5mm,amplitude=3.2mm,pre length=2mm,post length=2mm}]
+    (32,131) -- (128,131);
+  \draw[fill=slatefill,draw=textmuted,line width=0.55mm,rounded corners=1.2mm]
+    (128,119) rectangle (150,143);
+  \node[anchor=west,font=\sffamily\fontsize{12.5}{15}\selectfont,text=textmuted]
+    at (157,131) {без деформации: $x=0$};
+
+  % Растянутое состояние
+  \fill[textmuted] (28,69) rectangle (32,95);
+  \foreach \yy in {71,77,83,89,95}
+    \draw[draw=textmuted,line width=0.45mm] (23,\yy-4) -- (28,\yy+1);
+  \draw[draw=blue,line width=1.0mm,
+    decorate,decoration={coil,aspect=0.55,segment length=5.0mm,amplitude=3.5mm,pre length=2mm,post length=2mm}]
+    (32,82) -- (180,82);
+  \draw[fill=bluefill,draw=blue,line width=0.65mm,rounded corners=1.2mm]
+    (180,70) rectangle (202,94);
+
+  % Сила упругости действует в сторону, противоположную смещению
+  \draw[preaction={draw=white,line width=3.2mm},
+    -{Stealth[length=3.6mm,width=2.7mm]},draw=red,line width=1.2mm]
+    (191,82) -- (151,82);
+  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=red]
+    at (171,101) {$\vec F_{\text{упр}}$};
+
+  \draw[draw=textmuted,dashed,line width=0.45mm] (128,112) -- (128,53);
+  \draw[draw=textmuted,dashed,line width=0.45mm] (180,68) -- (180,53);
+  \draw[{Stealth[length=2.5mm,width=1.8mm]}-{Stealth[length=2.5mm,width=1.8mm]},
+    draw=gold,line width=0.85mm] (129,57) -- (179,57);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=gold,fill=white,inner sep=1.2mm]
+    at (154,57) {$x>0$};
+
+  % Правая панель: график проекции силы
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (230,44) rectangle (346,171);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (288,159) {График закона Гука};
+
+  \draw[-{Stealth[length=2.8mm,width=2.1mm]},draw=textmain,line width=0.75mm]
+    (247,105) -- (335,105);
+  \draw[-{Stealth[length=2.8mm,width=2.1mm]},draw=textmain,line width=0.75mm]
+    (288,58) -- (288,150);
+  \node[anchor=west,font=\sffamily\fontsize{12.5}{15}\selectfont,text=textmain] at (336,105) {$x$};
+  \node[anchor=south,font=\sffamily\fontsize{12.5}{15}\selectfont,text=textmain] at (288,151) {$F_x$};
+  \fill[textmain] (288,105) circle (1.2mm);
+  \node[anchor=north east,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted] at (285,102) {$0$};
+
+  \draw[draw=blue,line width=1.25mm] (253,143) -- (323,67);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue,fill=white,inner sep=1.2mm]
+    at (316,137) {$F_x=-kx$};
+
+  \node[align=center,font=\sffamily\fontsize{11.8}{14}\selectfont,text=blue]
+    at (260,120) {сжатие\\$x<0,\;F_x>0$};
+
+  \node[align=center,font=\sffamily\fontsize{11.8}{14}\selectfont,text=red]
+    at (317,91) {растяжение\\$x>0,\;F_x<0$};
+
+  \node[font=\sffamily\fontsize{11.5}{14}\selectfont,text=textmuted]
+    at (288,51) {малые упругие деформации};
+
+  \draw[fill=goldfill,draw=gold!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,36);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=gold]
+    at (180,25) {Знак «минус»: сила упругости направлена против деформации};
+\end{tikzpicture}
+\end{document}
