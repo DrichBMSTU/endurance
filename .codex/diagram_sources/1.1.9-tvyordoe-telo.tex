@@ -88,37 +88,37 @@
     {любой отрезок остаётся\\параллелен самому себе};
 
   % Rotation: top view along the fixed axis. Two points trace circles of different radii.
-  \coordinate (O) at (890,330);
-  \draw[orbit A] (O) circle[radius=105pt];
-  \draw[orbit B] (O) circle[radius=190pt];
+  \coordinate (O) at (890,320);
+  \draw[orbit A] (O) circle[radius=90pt];
+  \draw[orbit B] (O) circle[radius=165pt];
 
-  \begin{scope}[shift={(O)},rotate=18]
+  \begin{scope}[shift={(O)},rotate=12]
     \draw[rigid body,fill=rotation!9]
-      (-25,-42) rectangle (225,42);
-    \fill[pointA] (105,0) circle[radius=7pt];
-    \fill[pointB] (190,0) circle[radius=7pt];
-    \node[font=\LabelFont,text=pointA,anchor=south] at (105,12) {$A$};
-    \node[font=\LabelFont,text=pointB,anchor=south] at (190,12) {$B$};
+      (-22,-38) rectangle (200,38);
+    \fill[pointA] (90,0) circle[radius=7pt];
+    \fill[pointB] (165,0) circle[radius=7pt];
+    \node[font=\LabelFont,text=pointA,anchor=south] at (90,12) {$A$};
+    \node[font=\LabelFont,text=pointB,anchor=south] at (165,12) {$B$};
   \end{scope}
 
-  \begin{scope}[shift={(O)},rotate=72]
+  \begin{scope}[shift={(O)},rotate=48]
     \draw[ghost body,fill=rotation!4]
-      (-25,-42) rectangle (225,42);
-    \fill[pointA] (105,0) circle[radius=7pt];
-    \fill[pointB] (190,0) circle[radius=7pt];
+      (-22,-38) rectangle (200,38);
+    \fill[pointA] (90,0) circle[radius=7pt];
+    \fill[pointB] (165,0) circle[radius=7pt];
   \end{scope}
 
   \draw[rotation path]
-    ($(O)+(18:212)$) arc[start angle=18,end angle=60,radius=212pt];
+    ($(O)+(12:188)$) arc[start angle=12,end angle=44,radius=188pt];
   \node[font=\LabelFont,text=rotation,anchor=west]
-    at ($(O)+(38:225)$) {поворот};
+    at ($(O)+(27:196)$) {поворот};
 
   \fill[card] (O) circle[radius=15pt];
   \draw[ink,line width=2.7pt] (O) circle[radius=15pt];
   \fill[ink] (O) circle[radius=4.5pt];
-  \draw[muted,line width=2.2pt] ($(O)+(-12,-11)$) -- (830,270);
+  \draw[muted,line width=2.2pt] ($(O)+(-12,-11)$) -- (830,260);
   \node[font=\BodyFont,text=muted,fill=card,inner sep=5pt,anchor=east]
-    at (825,270) {ось вращения};
+    at (825,260) {ось вращения};
 
   \node[font=\BodyFont,text=ink,align=center] at (890,102)
     {точки описывают окружности\\вокруг общей оси};
