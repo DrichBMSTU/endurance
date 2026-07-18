@@ -1,0 +1,108 @@
+\documentclass[tikz,border=0pt]{standalone}
+
+\usepackage{fix-cm}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{canvas}{HTML}{F7F9FC}
+\definecolor{card}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{172033}
+\definecolor{muted}{HTML}{53627A}
+\definecolor{border}{HTML}{C9D3E1}
+\definecolor{massone}{HTML}{1976C9}
+\definecolor{masstwo}{HTML}{C43E72}
+\definecolor{center}{HTML}{007F73}
+\definecolor{bodyfill}{HTML}{E8EEF6}
+\definecolor{bodyedge}{HTML}{70839D}
+
+\newcommand{\TitleFont}{\fontsize{40}{46}\selectfont\bfseries}
+\newcommand{\PanelFont}{\fontsize{28}{34}\selectfont\bfseries}
+\newcommand{\BodyFont}{\fontsize{22}{28}\selectfont}
+\newcommand{\SmallFont}{\fontsize{18}{23}\selectfont}
+\newcommand{\LabelFont}{\fontsize{24}{29}\selectfont\bfseries}
+\newcommand{\FormulaFont}{\fontsize{28}{35}\selectfont\bfseries}
+
+\tikzset{
+  card box/.style={fill=card,draw=border,line width=1.6pt,rounded corners=18pt},
+  axis/.style={draw=muted,line width=2pt,-{Stealth[length=12pt,width=9pt]}},
+  guide/.style={draw=muted!58,line width=1.6pt,dash pattern=on 7pt off 6pt}
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,font=\sffamily]
+  \path[use as bounding box] (0,0) rectangle (1100,720);
+  \fill[canvas] (0,0) rectangle (1100,720);
+  \draw[border,line width=1.5pt,rounded corners=20pt]
+    (12,12) rectangle (1088,708);
+
+  \node[font=\TitleFont,text=ink] at (550,666)
+    {Центр масс и распределение массы};
+
+  \draw[card box] (42,72) rectangle (700,615);
+  \draw[card box] (730,72) rectangle (1058,615);
+
+  % Left panel: two point masses and their center of mass.
+  \node[font=\PanelFont,text=ink] at (371,570)
+    {Система двух точек};
+
+  \draw[axis] (105,330) -- (655,330);
+  \node[font=\LabelFont,text=muted,anchor=north east] at (101,318) {$O$};
+  \node[font=\LabelFont,text=muted,anchor=west] at (660,330) {$x$};
+
+  \draw[muted!38,line width=3pt] (250,330) -- (590,330);
+
+  \fill[massone!16] (250,330) circle (36pt);
+  \draw[massone,line width=3pt] (250,330) circle (36pt);
+  \fill[massone] (250,330) circle (6pt);
+  \node[font=\LabelFont,text=massone,anchor=south] at (250,380) {$m_1$};
+  \node[font=\BodyFont,text=muted,anchor=south] at (250,420) {меньшая масса};
+
+  \fill[masstwo!16] (590,330) circle (55pt);
+  \draw[masstwo,line width=3pt] (590,330) circle (55pt);
+  \fill[masstwo] (590,330) circle (7pt);
+  \node[font=\LabelFont,text=masstwo,anchor=south] at (590,399) {$m_2$};
+  \node[font=\BodyFont,text=muted,anchor=south] at (590,442) {большая масса};
+
+  \coordinate (C) at (505,330);
+  \draw[guide] (C) -- (505,245);
+  \fill[center] (C) circle (9pt);
+  \draw[center,line width=2pt] (C) circle (17pt);
+  \node[font=\LabelFont,text=center,anchor=north] at (505,237) {$C$ — центр масс};
+
+  \draw[muted,line width=1.8pt] (250,319) -- (250,341);
+  \draw[muted,line width=1.8pt] (505,319) -- (505,341);
+  \draw[muted,line width=1.8pt] (590,319) -- (590,341);
+
+  \node[font=\BodyFont,text=ink,align=center] at (371,151)
+    {центр масс лежит между точками\\и ближе к большей массе};
+
+  % Right panel: symmetric bodies and the equality with center of gravity.
+  \node[font=\PanelFont,text=ink] at (894,570)
+    {Однородные тела};
+
+  \fill[bodyfill] (817,425) circle (66pt);
+  \draw[bodyedge,line width=3pt] (817,425) circle (66pt);
+  \fill[center] (817,425) circle (8pt);
+  \node[font=\LabelFont,text=center,anchor=south west] at (828,430) {$C$};
+  \node[font=\BodyFont,text=muted] at (817,334) {диск};
+
+  \fill[bodyfill] (970,425) circle (69pt);
+  \fill[card] (970,425) circle (39pt);
+  \draw[bodyedge,line width=3pt] (970,425) circle (69pt);
+  \draw[bodyedge,line width=3pt] (970,425) circle (39pt);
+  \fill[center] (970,425) circle (8pt);
+  \node[font=\LabelFont,text=center,anchor=south west] at (981,430) {$C$};
+  \node[font=\BodyFont,text=muted] at (970,334) {кольцо};
+
+  \node[font=\SmallFont,text=ink,align=center] at (894,270)
+    {$C$ совпадает с центром симметрии;\\у кольца в точке $C$\\нет вещества};
+
+  \draw[center,line width=2pt,rounded corners=12pt]
+    (765,98) rectangle (1023,220);
+  \node[font=\SmallFont,text=center,align=center] at (894,159)
+    {$\vec g=\mathrm{const}$\\центр масс совпадает\\с центром тяжести};
+\end{tikzpicture}
+\end{document}
