@@ -1,0 +1,117 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{cyanline}{HTML}{0284C7}
+\definecolor{cyanfill}{HTML}{E0F2FE}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+\definecolor{gold}{HTML}{A16207}
+\definecolor{goldfill}{HTML}{FDE68A}
+\definecolor{goldsub}{HTML}{C7DCCB}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,230);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,224);
+
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont,text=textmain]
+    at (180,208) {Закон Архимеда и плавание тела};
+  \node[font=\sffamily\fontsize{13}{16}\selectfont,text=textmuted]
+    at (180,191) {Разность сил давления создаёт выталкивающую силу, а при плавании силы уравновешены};
+
+  % Левая панель: происхождение архимедовой силы
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,44) rectangle (176,181);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (95,169) {Почему сила направлена вверх};
+
+  \fill[cyanfill] (30,72) rectangle (160,147);
+  \draw[draw=textmuted,line width=0.8mm]
+    (30,153) -- (30,72) -- (160,72) -- (160,153);
+  \draw[draw=cyanline,line width=0.8mm] (30,147) -- (160,147);
+
+  \draw[fill=goldfill,draw=gold,line width=0.65mm,rounded corners=1.5mm]
+    (76,96) rectangle (114,129);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=gold]
+    at (95,112.5) {тело};
+
+  % Давление сверху меньше, чем снизу
+  \draw[-{Stealth[length=3.2mm,width=2.3mm]},draw=cyanline,line width=1.0mm]
+    (95,145) -- (95,133);
+  \node[anchor=west,font=\sffamily\fontsize{11.5}{14}\selectfont,text=cyanline]
+    at (101,139) {$F_{\text{верх}}$};
+
+  \draw[-{Stealth[length=3.2mm,width=2.3mm]},draw=cyanline,line width=1.0mm]
+    (95,75) -- (95,92);
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{11.5}{14}\selectfont,text=cyanline]
+    at (101,82) {$F_{\text{низ}}$};
+
+  % Горизонтальные действия на одном уровне взаимно компенсируются
+  \draw[-{Stealth[length=2.8mm,width=2.0mm]},draw=blue,line width=0.85mm]
+    (55,112) -- (72,112);
+  \draw[-{Stealth[length=2.8mm,width=2.0mm]},draw=blue,line width=0.85mm]
+    (135,112) -- (118,112);
+  \node[align=center,font=\sffamily\fontsize{10.5}{13}\selectfont,text=textmuted]
+    at (95,157) {жидкость покоится};
+
+  \draw[fill=bluefill,draw=blue!35,line width=0.4mm,rounded corners=1.8mm]
+    (22,49) rectangle (168,66);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
+    at (95,57.5) {$F_{\text{низ}}>F_{\text{верх}}\;\Rightarrow\;\vec F_{\text{Арх}}\uparrow$};
+
+  % Правая панель: равновесие плавающего тела
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (184,44) rectangle (346,181);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont,text=textmain]
+    at (265,169) {Плавание в равновесии};
+
+  \fill[cyanfill] (200,72) rectangle (330,118);
+  \draw[draw=textmuted,line width=0.8mm]
+    (200,153) -- (200,72) -- (330,72) -- (330,153);
+  \draw[draw=cyanline,line width=0.8mm] (200,118) -- (241,118);
+  \draw[draw=cyanline,line width=0.8mm] (289,118) -- (330,118);
+
+  \fill[goldsub] (241,93) rectangle (289,118);
+  \fill[goldfill] (241,118) rectangle (289,145);
+  \draw[draw=gold,line width=0.65mm,rounded corners=1.5mm]
+    (241,93) rectangle (289,145);
+
+  \node[align=center,font=\sffamily\bfseries\fontsize{10.8}{13}\selectfont,text=cyanline]
+    at (220,94) {$V_{\text{вытесн}}$\\[-0.8mm]$=V_{\text{погр}}$};
+
+  % Схема равнодействующих сил; стрелки одинаковой длины
+  \fill[textmain] (265,119) circle (1.5mm);
+  \draw[-{Stealth[length=3.4mm,width=2.5mm]},draw=blue,line width=1.15mm]
+    (265,119) -- (265,157);
+  \node[anchor=east,font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=blue]
+    at (258,150) {$\vec F_{\text{Арх}}$};
+
+  \draw[-{Stealth[length=3.4mm,width=2.5mm]},draw=red,line width=1.15mm]
+    (265,119) -- (265,81);
+  \node[anchor=west,font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=red]
+    at (272,86) {$\vec F_{\text{тяж}}$};
+
+  \draw[fill=greenfill,draw=green!35,line width=0.4mm,rounded corners=1.8mm]
+    (218,49) rectangle (312,66);
+  \node[font=\sffamily\bfseries\fontsize{12.5}{15}\selectfont,text=green]
+    at (265,57.5) {$F_{\text{Арх}}=F_{\text{тяж}}=mg$};
+
+  \draw[fill=cyanfill,draw=cyanline!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,36);
+  \node[font=\sffamily\bfseries\fontsize{13}{16}\selectfont,text=cyanline]
+    at (180,25) {Сила Архимеда определяется плотностью среды и объёмом вытесненной части};
+\end{tikzpicture}
+\end{document}
