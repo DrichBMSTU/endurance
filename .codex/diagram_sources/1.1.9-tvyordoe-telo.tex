@@ -1,0 +1,126 @@
+\documentclass[tikz,border=0pt]{standalone}
+
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{canvas}{HTML}{F7F9FC}
+\definecolor{card}{HTML}{FFFFFF}
+\definecolor{ink}{HTML}{172033}
+\definecolor{muted}{HTML}{53627A}
+\definecolor{border}{HTML}{C9D3E1}
+\definecolor{translation}{HTML}{1976C9}
+\definecolor{rotation}{HTML}{C96A08}
+\definecolor{pointA}{HTML}{007F73}
+\definecolor{pointB}{HTML}{B24A5A}
+
+\newcommand{\TitleFont}{\fontsize{42}{48}\selectfont\bfseries}
+\newcommand{\PanelFont}{\fontsize{31}{37}\selectfont\bfseries}
+\newcommand{\BodyFont}{\fontsize{23}{29}\selectfont}
+\newcommand{\LabelFont}{\fontsize{21}{26}\selectfont\bfseries}
+
+\tikzset{
+  card box/.style={fill=card,draw=border,line width=1.6pt,rounded corners=18pt},
+  rigid body/.style={draw=ink!82,line width=2.7pt,fill=translation!9,rounded corners=7pt},
+  ghost body/.style={draw=ink!55,line width=2.5pt,dashed,fill=translation!4,rounded corners=7pt},
+  path A/.style={draw=pointA!75,line width=2.7pt,dashed,-{Stealth[length=11pt,width=8pt]}},
+  path B/.style={draw=pointB!75,line width=2.7pt,dashed,-{Stealth[length=11pt,width=8pt]}},
+  rotation path/.style={draw=rotation,line width=3.2pt,-{Stealth[length=12pt,width=9pt]}},
+  orbit A/.style={draw=pointA!55,line width=2.3pt,dash pattern=on 9pt off 7pt},
+  orbit B/.style={draw=pointB!55,line width=2.3pt,dash pattern=on 9pt off 7pt}
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,font=\sffamily]
+  \path[use as bounding box] (0,0) rectangle (1200,700);
+  \fill[canvas] (0,0) rectangle (1200,700);
+  \draw[border,line width=1.5pt,rounded corners=20pt]
+    (12,12) rectangle (1188,688);
+
+  \node[font=\TitleFont,text=ink] at (600,648)
+    {Два вида движения твёрдого тела};
+
+  \draw[card box] (35,65) rectangle (585,595);
+  \draw[card box] (615,65) rectangle (1165,595);
+
+  \node[font=\PanelFont,text=translation] at (310,550)
+    {Поступательное движение};
+  \node[font=\PanelFont,text=rotation] at (890,550)
+    {Вращательное движение};
+
+  % Translation: the same rigid body is shifted without changing orientation.
+  \coordinate (C1) at (165,320);
+  \coordinate (C2) at (420,410);
+
+  \begin{scope}[shift={(C1)}]
+    \draw[rigid body]
+      (-90,-72) -- (48,-82) -- (92,-18) -- (65,72) -- (-72,62) -- cycle;
+    \draw[ink,line width=3.0pt] (-48,34) -- (44,-35);
+  \end{scope}
+  \begin{scope}[shift={(C2)}]
+    \draw[ghost body]
+      (-90,-72) -- (48,-82) -- (92,-18) -- (65,72) -- (-72,62) -- cycle;
+    \draw[ink!62,line width=3.0pt,dashed] (-48,34) -- (44,-35);
+  \end{scope}
+
+  \coordinate (A1) at ($(C1)+(-48,34)$);
+  \coordinate (B1) at ($(C1)+(44,-35)$);
+  \coordinate (A2) at ($(C2)+(-48,34)$);
+  \coordinate (B2) at ($(C2)+(44,-35)$);
+
+  \draw[path A] (A1) -- (A2);
+  \draw[path B] (B1) -- (B2);
+  \fill[pointA] (A1) circle[radius=7pt];
+  \fill[pointB] (B1) circle[radius=7pt];
+  \fill[pointA] (A2) circle[radius=7pt];
+  \fill[pointB] (B2) circle[radius=7pt];
+
+  \node[font=\LabelFont,text=pointA,anchor=south east] at ($(A1)+(-7,8)$) {$A$};
+  \node[font=\LabelFont,text=pointB,anchor=north west] at ($(B1)+(8,-7)$) {$B$};
+  \node[font=\LabelFont,text=pointA,anchor=south west] at ($(A2)+(8,7)$) {$A'$};
+  \node[font=\LabelFont,text=pointB,anchor=north west] at ($(B2)+(8,-7)$) {$B'$};
+
+  \node[font=\BodyFont,text=ink,align=center] at (310,158)
+    {тело переносится без поворота};
+  \node[font=\BodyFont,text=muted,align=center] at (310,105)
+    {любой отрезок остаётся\\параллелен самому себе};
+
+  % Rotation: top view along the fixed axis. Two points trace circles of different radii.
+  \coordinate (O) at (890,330);
+  \draw[orbit A] (O) circle[radius=105pt];
+  \draw[orbit B] (O) circle[radius=190pt];
+
+  \begin{scope}[shift={(O)},rotate=18]
+    \draw[rigid body,fill=rotation!9]
+      (-25,-42) rectangle (225,42);
+    \fill[pointA] (105,0) circle[radius=7pt];
+    \fill[pointB] (190,0) circle[radius=7pt];
+    \node[font=\LabelFont,text=pointA,anchor=south] at (105,12) {$A$};
+    \node[font=\LabelFont,text=pointB,anchor=south] at (190,12) {$B$};
+  \end{scope}
+
+  \begin{scope}[shift={(O)},rotate=72]
+    \draw[ghost body,fill=rotation!4]
+      (-25,-42) rectangle (225,42);
+    \fill[pointA] (105,0) circle[radius=7pt];
+    \fill[pointB] (190,0) circle[radius=7pt];
+  \end{scope}
+
+  \draw[rotation path]
+    ($(O)+(18:212)$) arc[start angle=18,end angle=60,radius=212pt];
+  \node[font=\LabelFont,text=rotation,anchor=west]
+    at ($(O)+(38:225)$) {поворот};
+
+  \fill[card] (O) circle[radius=15pt];
+  \draw[ink,line width=2.7pt] (O) circle[radius=15pt];
+  \fill[ink] (O) circle[radius=4.5pt];
+  \draw[muted,line width=2.2pt] ($(O)+(-12,-11)$) -- (830,270);
+  \node[font=\BodyFont,text=muted,fill=card,inner sep=5pt,anchor=east]
+    at (825,270) {ось вращения};
+
+  \node[font=\BodyFont,text=ink,align=center] at (890,102)
+    {точки описывают окружности\\вокруг общей оси};
+\end{tikzpicture}
+\end{document}
