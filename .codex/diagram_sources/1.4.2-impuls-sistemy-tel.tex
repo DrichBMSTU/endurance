@@ -1,0 +1,90 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{textmuted}{HTML}{475569}
+\definecolor{axis}{HTML}{94A3B8}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{bluefill}{HTML}{DBEAFE}
+\definecolor{green}{HTML}{15803D}
+\definecolor{greenfill}{HTML}{DCFCE7}
+\definecolor{red}{HTML}{DC2626}
+\definecolor{redfill}{HTML}{FEE2E2}
+
+\begin{document}
+\begin{tikzpicture}[x=1mm,y=1mm,line cap=round,line join=round,font=\sffamily]
+  \fill[pagebg] (0,0) rectangle (360,210);
+  \draw[fill=white,draw=border,line width=0.55mm,rounded corners=4mm]
+    (6,6) rectangle (354,204);
+
+  \node[font=\sffamily\bfseries\fontsize{25}{30}\selectfont,text=textmain]
+    at (180,189) {Импульс системы тел};
+  \node[font=\sffamily\fontsize{19}{23}\selectfont,text=textmuted]
+    at (180,172) {Импульсы всех выбранных тел складывают как векторы};
+
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (14,43) rectangle (176,156);
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (95,145) {Выбранная система};
+  \draw[draw=axis,dashed,line width=0.55mm,rounded corners=3mm]
+    (25,57) rectangle (165,132);
+
+  \fill[bluefill] (53,84) circle (11mm);
+  \draw[draw=blue,line width=0.65mm] (53,84) circle (11mm);
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain] at (53,84) {1};
+  \draw[-{Stealth[length=4.2mm,width=3.1mm]},draw=blue,line width=1.35mm]
+    (68,84) -- (137,84);
+  \node[font=\sffamily\bfseries\fontsize{23}{28}\selectfont,text=blue,fill=white,inner sep=0.8mm]
+    at (103,96) {$\vec p_1$};
+
+  \fill[greenfill] (134,109) circle (11mm);
+  \draw[draw=green,line width=0.65mm] (134,109) circle (11mm);
+  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont,text=textmain] at (134,109) {2};
+  \draw[-{Stealth[length=4.2mm,width=3.1mm]},draw=green,line width=1.35mm]
+    (120,112) -- (74,128);
+  \node[font=\sffamily\bfseries\fontsize{23}{28}\selectfont,text=green,fill=white,inner sep=0.8mm]
+    at (96,119) {$\vec p_2$};
+
+  \node[font=\sffamily\fontsize{16}{20}\selectfont,text=textmuted]
+    at (95,49) {граница системы условна};
+
+  \draw[fill=white,draw=border,line width=0.45mm,rounded corners=2.5mm]
+    (184,43) rectangle (346,156);
+  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont,text=textmain]
+    at (265,145) {Векторная сумма};
+
+  \coordinate (A) at (200,67);
+  \coordinate (B) at (307,67);
+  \coordinate (C) at (255,119);
+
+  \draw[-{Stealth[length=4.2mm,width=3.1mm]},draw=blue,line width=1.35mm]
+    (A) -- (B);
+  \node[font=\sffamily\bfseries\fontsize{23}{28}\selectfont,text=blue,fill=white,inner sep=0.8mm]
+    at (253,80) {$\vec p_1$};
+
+  \draw[-{Stealth[length=4.2mm,width=3.1mm]},draw=green,line width=1.35mm]
+    (B) -- (C);
+  \node[font=\sffamily\bfseries\fontsize{23}{28}\selectfont,text=green,fill=white,inner sep=0.8mm]
+    at (291,101) {$\vec p_2$};
+
+  \draw[-{Stealth[length=4.5mm,width=3.3mm]},draw=red,line width=1.5mm]
+    (A) -- (C);
+  \node[font=\sffamily\bfseries\fontsize{24}{29}\selectfont,text=red,fill=white,inner sep=0.8mm]
+    at (220,102) {$\vec p$};
+
+  \node[font=\sffamily\fontsize{16}{20}\selectfont,text=textmuted]
+    at (265,49) {пример для двух тел};
+
+  \draw[fill=redfill,draw=red!45,line width=0.45mm,rounded corners=2mm]
+    (14,14) rectangle (346,34);
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont,text=red]
+    at (180,24) {$\vec p=\vec p_1+\vec p_2+\ldots$};
+\end{tikzpicture}
+\end{document}
