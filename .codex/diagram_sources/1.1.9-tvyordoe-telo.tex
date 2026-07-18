@@ -95,10 +95,6 @@
   \begin{scope}[shift={(O)},rotate=12]
     \draw[rigid body,fill=rotation!9]
       (-22,-38) rectangle (200,38);
-    \fill[pointA] (90,0) circle[radius=7pt];
-    \fill[pointB] (165,0) circle[radius=7pt];
-    \node[font=\LabelFont,text=pointA,anchor=south] at (90,12) {$A$};
-    \node[font=\LabelFont,text=pointB,anchor=south] at (165,12) {$B$};
   \end{scope}
 
   \begin{scope}[shift={(O)},rotate=48]
@@ -106,6 +102,14 @@
       (-22,-38) rectangle (200,38);
     \fill[pointA] (90,0) circle[radius=7pt];
     \fill[pointB] (165,0) circle[radius=7pt];
+  \end{scope}
+
+  % Draw the marked points and their labels last so the ghost body cannot cover them.
+  \begin{scope}[shift={(O)},rotate=12]
+    \fill[pointA] (90,0) circle[radius=7pt];
+    \fill[pointB] (165,0) circle[radius=7pt];
+    \node[font=\LabelFont,text=pointA,anchor=north] at (90,-10) {$A$};
+    \node[font=\LabelFont,text=pointB,anchor=south] at (165,12) {$B$};
   \end{scope}
 
   \draw[rotation path]
