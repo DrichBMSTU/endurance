@@ -13,53 +13,55 @@
 \definecolor{force}{HTML}{DC2626}
 \definecolor{move}{HTML}{2563EB}
 \definecolor{projection}{HTML}{16A34A}
-\definecolor{softblue}{HTML}{DBEAFE}
 \definecolor{softgreen}{HTML}{DCFCE7}
 
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
-  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (250,150);
-  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (244,144);
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (300,180);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (7,7) rectangle (293,173);
 
-  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont, text=textmain] at (125,132)
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (150,159)
     {Работа силы на малом перемещении};
 
-  \coordinate (O) at (45,66);
-  \coordinate (X) at (205,66);
-  \coordinate (F) at (125,115);
-  \coordinate (P) at (125,66);
+  \coordinate (O) at (50,79);
+  \coordinate (X) at (245,79);
+  \coordinate (F) at (154,137);
+  \coordinate (P) at (154,79);
 
-  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=axis, line width=0.75mm] (28,66) -- (221,66);
-  \node[font=\sffamily\fontsize{13}{15}\selectfont, text=axis] at (226,66) {$x$};
+  \draw[-{Latex[length=4.8mm,width=3.4mm]}, draw=axis, line width=0.8mm] (29,79) -- (265,79);
+  \node[font=\sffamily\fontsize{14}{17}\selectfont, text=axis] at (271,79) {$x$};
 
-  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=move, line width=1.15mm] (O) -- (X);
-  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=move] at (137,54)
+  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=move, line width=1.2mm] (O) -- (X);
+  \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=move] at (174,65)
     {$\Delta\vec{r}$};
 
-  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=force, line width=1.15mm] (O) -- (F);
-  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=force] at (135,117)
+  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=force, line width=1.2mm] (O) -- (F);
+  \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=force] at (165,138)
     {$\vec{F}$};
 
-  \draw[dashed, draw=projection, line width=0.8mm] (F) -- (P);
-  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=projection, line width=1.05mm] (O) -- (P);
-  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=projection] at (86,76)
-    {$F_x$};
+  \draw[dashed, draw=projection, line width=0.9mm] (F) -- (P);
+  \draw[draw=projection, line width=1.35mm] (50,87) -- (154,87);
+  \draw[draw=projection, line width=0.75mm] (50,83.5) -- (50,90.5);
+  \draw[draw=projection, line width=0.75mm] (154,83.5) -- (154,90.5);
+  \draw[draw=projection, line width=0.75mm] (P) ++(-2.8,0) -- ++(0,2.8) -- ++(2.8,0);
+  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=projection, fill=white, inner sep=1.3mm] at (102,99)
+    {$F_x=|\vec F|\cos\alpha$};
 
   \pic[
     draw=axis,
     line width=0.65mm,
-    angle radius=21mm,
+    angle radius=25mm,
     "$\alpha$",
-    angle eccentricity=1.28,
+    angle eccentricity=1.25,
     text=axis,
-    font=\sffamily\fontsize{14}{17}\selectfont
+    font=\sffamily\fontsize{16}{19}\selectfont
   ] {angle = X--O--F};
 
-  \draw[fill=softgreen, draw=projection!55, line width=0.45mm, rounded corners=2.5mm] (24,18) rectangle (226,39);
-  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=textmain] at (125,29)
-    {$A = F\Delta r\cos\alpha = F_x\Delta x$};
+  \draw[fill=softgreen, draw=projection!55, line width=0.45mm, rounded corners=2.5mm] (27,20) rectangle (273,48);
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (150,34)
+    {$A=|\vec F|\,|\Delta\vec r|\cos\alpha=F_x\Delta x$};
 
-  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (178,96)
-    {работу дает проекция\\силы на перемещение};
+  \node[font=\sffamily\fontsize{14}{17}\selectfont, text=axis, align=center] at (223,118)
+    {работу определяет проекция\\силы на направление\\перемещения};
 \end{tikzpicture}
 \end{document}
