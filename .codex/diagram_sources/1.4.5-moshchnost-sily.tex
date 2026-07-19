@@ -17,49 +17,59 @@
 
 \begin{document}
 \begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
-  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (250,150);
-  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (244,144);
+  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (300,180);
+  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (7,7) rectangle (293,173);
 
-  \node[font=\sffamily\bfseries\fontsize{20}{24}\selectfont, text=textmain] at (125,132)
+  \node[font=\sffamily\bfseries\fontsize{22}{26}\selectfont, text=textmain] at (150,159)
     {Мощность силы};
 
-  \coordinate (O) at (45,66);
-  \coordinate (V) at (205,66);
-  \coordinate (F) at (126,114);
-  \coordinate (P) at (126,66);
+  \coordinate (O) at (50,79);
+  \coordinate (V) at (245,79);
+  \coordinate (F) at (154,137);
+  \coordinate (P) at (154,79);
 
-  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=axis, line width=0.75mm] (28,66) -- (221,66);
-  \node[font=\sffamily\fontsize{13}{15}\selectfont, text=axis, anchor=east] at (217,76)
-    {движение};
+  \draw[-{Latex[length=4.8mm,width=3.4mm]}, draw=axis, line width=0.8mm] (29,79) -- (265,79);
+  \node[font=\sffamily\fontsize{14}{17}\selectfont, text=axis] at (271,79) {$x$};
 
-  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=velocity, line width=1.15mm] (O) -- (V);
-  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=velocity] at (136,53)
+  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=velocity, line width=1.2mm] (O) -- (V);
+  \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=velocity] at (174,65)
     {$\vec{v}$};
 
-  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=force, line width=1.15mm] (O) -- (F);
-  \node[font=\sffamily\bfseries\fontsize{16}{19}\selectfont, text=force] at (136,116)
+  \draw[-{Latex[length=5.2mm,width=3.7mm]}, draw=force, line width=1.2mm] (O) -- (F);
+  \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=force] at (165,138)
     {$\vec{F}$};
 
-  \draw[dashed, draw=projection, line width=0.8mm] (F) -- (P);
-  \draw[-{Latex[length=4.8mm,width=3.5mm]}, draw=projection, line width=1.05mm] (O) -- (P);
-  \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont, text=projection] at (86,77)
-    {$F\cos\alpha$};
+  % Проекционная линия оставлена с зазорами у вектора силы и оси.
+  \draw[dashed, draw=projection, line width=0.9mm] (154,130) -- (154,94);
+
+  % Проекция силы вынесена ниже схемы по образцу диаграммы 1.4.4.
+  \draw[draw=projection, line width=0.75mm] (50,74) -- (50,54);
+  \draw[draw=projection, line width=0.75mm] (154,74) -- (154,54);
+  \draw[-{Latex[length=3.8mm,width=2.8mm]}, draw=projection, line width=0.9mm]
+    (78,58) -- (50,58);
+  \draw[-{Latex[length=3.8mm,width=2.8mm]}, draw=projection, line width=0.9mm]
+    (126,58) -- (154,58);
+  \node[
+    font=\sffamily\bfseries\fontsize{15}{18}\selectfont,
+    text=projection
+  ] at (102,58)
+    {$F_x=|\vec F|\cos\alpha$};
 
   \pic[
     draw=axis,
     line width=0.65mm,
-    angle radius=21mm,
+    angle radius=25mm,
     "$\alpha$",
-    angle eccentricity=1.28,
+    angle eccentricity=1.25,
     text=axis,
-    font=\sffamily\fontsize{14}{17}\selectfont
+    font=\sffamily\fontsize{16}{19}\selectfont
   ] {angle = V--O--F};
 
-  \draw[fill=softgreen, draw=projection!55, line width=0.45mm, rounded corners=2.5mm] (33,18) rectangle (217,40);
-  \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=textmain] at (125,29)
-    {$P = Fv\cos\alpha$};
+  \draw[fill=softgreen, draw=projection!55, line width=0.45mm, rounded corners=2.5mm] (27,20) rectangle (273,48);
+  \node[font=\sffamily\bfseries\fontsize{18}{22}\selectfont, text=textmain] at (150,34)
+    {$P=|\vec F|\,|\vec v|\cos\alpha=F_x|\vec v|$};
 
-  \node[font=\sffamily\fontsize{12}{14}\selectfont, text=axis, align=center] at (179,96)
-    {мощность дает проекция\\силы на скорость};
+  \node[font=\sffamily\fontsize{14}{17}\selectfont, text=axis, align=center] at (223,118)
+    {мощность определяет проекция\\силы на направление\\скорости};
 \end{tikzpicture}
 \end{document}
