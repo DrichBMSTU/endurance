@@ -39,12 +39,23 @@
   \node[font=\sffamily\bfseries\fontsize{17}{20}\selectfont, text=force] at (165,138)
     {$\vec{F}$};
 
-  \draw[dashed, draw=projection, line width=0.9mm] (F) -- (P);
-  \draw[draw=projection, line width=1.35mm] (50,87) -- (154,87);
-  \draw[draw=projection, line width=0.75mm] (50,83.5) -- (50,90.5);
-  \draw[draw=projection, line width=0.75mm] (154,83.5) -- (154,90.5);
-  \draw[draw=projection, line width=0.75mm] (P) ++(-2.8,0) -- ++(0,2.8) -- ++(2.8,0);
-  \node[font=\sffamily\bfseries\fontsize{15}{18}\selectfont, text=projection, fill=white, inner sep=1.3mm] at (102,99)
+  % Проекционная линия оставлена с зазорами у вектора силы и оси.
+  \draw[dashed, draw=projection, line width=0.9mm] (154,130) -- (154,94);
+
+  % Размерная линия вынесена ниже схемы. Выносные линии начинаются
+  % с зазором 5 мм от оси и не доходят до формульного блока.
+  \draw[draw=projection, line width=0.75mm] (50,74) -- (50,54);
+  \draw[draw=projection, line width=0.75mm] (154,74) -- (154,54);
+  % Размерная линия физически разорвана вокруг подписи: под текстом
+  % нет скрытого отрезка, поэтому линия не касается символов.
+  \draw[-{Latex[length=3.8mm,width=2.8mm]}, draw=projection, line width=0.9mm]
+    (78,58) -- (50,58);
+  \draw[-{Latex[length=3.8mm,width=2.8mm]}, draw=projection, line width=0.9mm]
+    (126,58) -- (154,58);
+  \node[
+    font=\sffamily\bfseries\fontsize{15}{18}\selectfont,
+    text=projection
+  ] at (102,58)
     {$F_x=|\vec F|\cos\alpha$};
 
   \pic[
