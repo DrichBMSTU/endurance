@@ -1,64 +1,175 @@
-\documentclass[tikz,border=8pt]{standalone}
+\documentclass[tikz,border=0pt]{standalone}
 \usepackage{fontspec}
 \usepackage{amsmath}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing}
 
 \setmainfont{Arial}
 \setsansfont{Arial}
 
-\definecolor{pagebg}{HTML}{F8FAFC}
-\definecolor{border}{HTML}{CBD5E1}
-\definecolor{textmain}{HTML}{0F172A}
-\definecolor{axis}{HTML}{475569}
+\definecolor{pagebg}{HTML}{F7F9FC}
+\definecolor{panelbg}{HTML}{FFFFFF}
+\definecolor{border}{HTML}{C8D3E0}
+\definecolor{ink}{HTML}{0F172A}
+\definecolor{muted}{HTML}{52606D}
+\definecolor{guide}{HTML}{94A3B8}
+\definecolor{spring}{HTML}{64748B}
 \definecolor{disp}{HTML}{2563EB}
-\definecolor{vel}{HTML}{16A34A}
-\definecolor{acc}{HTML}{DC2626}
-\definecolor{soft}{HTML}{EFF6FF}
+\definecolor{dispfill}{HTML}{DBEAFE}
+\definecolor{velocity}{HTML}{047857}
+\definecolor{accel}{HTML}{DC2626}
+\definecolor{kinetic}{HTML}{0F9F8F}
+\definecolor{potential}{HTML}{D97706}
 
 \begin{document}
-\begin{tikzpicture}[x=1mm,y=1mm, font=\sffamily]
-  \draw[fill=pagebg, draw=none, rounded corners=5mm] (0,0) rectangle (270,154);
-  \draw[fill=white, draw=border, line width=0.6mm, rounded corners=4mm] (6,6) rectangle (264,148);
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily]
+  \path[fill=pagebg,rounded corners=5mm] (0,0) rectangle (360,210);
 
-  \node[font=\sffamily\bfseries\fontsize{19}{23}\selectfont, text=textmain] at (135,136)
-    {Гармонические колебания};
+  \node[font=\sffamily\bfseries\fontsize{21}{25}\selectfont,text=ink]
+    at (180,194) {Ключевые состояния гармонического осциллятора};
+  \node[font=\sffamily\fontsize{12}{15}\selectfont,text=muted]
+    at (180,183) {Смещение отсчитывается от положения равновесия $x=0$};
 
-  \draw[fill=soft, draw=border, line width=0.35mm, rounded corners=2.5mm] (19,22) rectangle (251,123);
+  % Left extreme
+  \begin{scope}[shift={(12,38)}]
+    \path[fill=panelbg,draw=border,line width=0.55mm,rounded corners=3mm]
+      (0,0) rectangle (104,136);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=ink]
+      at (52,122) {Левое крайнее};
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=disp]
+      at (52,110) {$x=-A$};
 
-  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (30,72) -- (242,72);
-  \draw[-{Latex[length=3mm,width=2mm]}, draw=axis, line width=0.55mm] (38,36) -- (38,113);
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (244,64) {$t$};
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis] at (49,113) {$x,\ v_x,\ a_x$};
+    \draw[draw=guide,line width=0.45mm] (14,70) -- (94,70);
+    \draw[draw=ink,line width=0.75mm] (14,56) -- (14,84);
+    \foreach \yy in {57,62,...,82} {
+      \draw[draw=guide,line width=0.35mm] (9,\yy-4) -- (14,\yy);
+    }
+    \draw[draw=spring,line width=0.7mm,decorate,
+      decoration={zigzag,segment length=4mm,amplitude=2.5mm}]
+      (14,70) -- (34,70);
+    \draw[fill=dispfill,draw=disp,line width=0.75mm,rounded corners=1.2mm]
+      (34,61) rectangle (52,79);
+    \draw[dashed,draw=guide,line width=0.45mm] (62,51) -- (62,92);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont,text=muted] at (62,47) {$x=0$};
+    \draw[-{Latex[length=3.2mm,width=2.2mm]},draw=accel,line width=0.9mm]
+      (43,96) -- (61,96);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=accel]
+      at (52,104) {$\vec F,\ \vec a$};
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=muted]
+      at (78,89) {$v=0$};
 
-  \draw[dashed, draw=axis!55, line width=0.35mm] (38,104) -- (235,104);
-  \draw[dashed, draw=axis!55, line width=0.35mm] (38,40) -- (235,40);
-  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=axis] at (29,104) {$A$};
-  \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont, text=axis] at (27,40) {$-A$};
+    \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=muted,line width=0.5mm]
+      (25,39) -- (91,39);
+    \draw[draw=guide,line width=0.45mm] (43,36) -- (43,42);
+    \draw[draw=guide,line width=0.45mm] (62,36) -- (62,42);
+    \draw[draw=guide,line width=0.45mm] (81,36) -- (81,42);
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (43,31) {$-A$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (62,31) {$0$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (81,31) {$+A$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (94,35) {$x$};
 
-  \draw[draw=disp, line width=1.25mm, smooth]
-    plot coordinates {(38,72) (50.25,90.4) (62.5,98) (74.75,90.4) (87,72) (99.25,53.6) (111.5,46) (123.75,53.6) (136,72) (148.25,90.4) (160.5,98) (172.75,90.4) (185,72) (197.25,53.6) (209.5,46) (221.75,53.6) (234,72)};
-  \draw[draw=vel, line width=1.1mm, smooth]
-    plot coordinates {(38,93) (50.25,86.85) (62.5,72) (74.75,57.15) (87,51) (99.25,57.15) (111.5,72) (123.75,86.85) (136,93) (148.25,86.85) (160.5,72) (172.75,57.15) (185,51) (197.25,57.15) (209.5,72) (221.75,86.85) (234,93)};
-  \draw[draw=acc, line width=1.1mm, smooth]
-    plot coordinates {(38,72) (50.25,55.0) (62.5,48) (74.75,55.0) (87,72) (99.25,89.0) (111.5,96) (123.75,89.0) (136,72) (148.25,55.0) (160.5,48) (172.75,55.0) (185,72) (197.25,89.0) (209.5,96) (221.75,89.0) (234,72)};
+    \fill[potential] (19,15) circle (2mm);
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=ink]
+      at (24,15) {$E_{\text{п}}=E$};
+    \fill[kinetic] (63,15) circle (2mm);
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=ink]
+      at (68,15) {$E_{\text{к}}=0$};
+  \end{scope}
 
-  \draw[<->, draw=axis, line width=0.5mm] (38,28) -- (136,28);
-  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=axis] at (87,18) {$T$};
-  \draw[dashed, draw=axis!45, line width=0.35mm] (38,28) -- (38,104);
-  \draw[dashed, draw=axis!45, line width=0.35mm] (136,28) -- (136,104);
+  % Equilibrium
+  \begin{scope}[shift={(128,38)}]
+    \path[fill=panelbg,draw=border,line width=0.55mm,rounded corners=3mm]
+      (0,0) rectangle (104,136);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=ink]
+      at (52,122) {Равновесие};
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=disp]
+      at (52,110) {$x=0$};
 
-  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=disp, anchor=west] at (166,112)
-    {$x(t)=A\sin(\omega t+\varphi_0)$};
-  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=vel, anchor=west] at (166,101)
-    {$v_x(t)=x'_t$};
-  \node[font=\sffamily\bfseries\fontsize{12}{14}\selectfont, text=acc, anchor=west] at (166,90)
-    {$a_x(t)=-\omega^2x(t)$};
+    \draw[draw=guide,line width=0.45mm] (14,70) -- (94,70);
+    \draw[draw=ink,line width=0.75mm] (14,56) -- (14,84);
+    \foreach \yy in {57,62,...,82} {
+      \draw[draw=guide,line width=0.35mm] (9,\yy-4) -- (14,\yy);
+    }
+    \draw[draw=spring,line width=0.7mm,decorate,
+      decoration={zigzag,segment length=4mm,amplitude=2.5mm}]
+      (14,70) -- (53,70);
+    \draw[dashed,draw=guide,line width=0.45mm] (62,51) -- (62,92);
+    \draw[fill=dispfill,draw=disp,line width=0.75mm,rounded corners=1.2mm]
+      (53,61) rectangle (71,79);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont,text=muted] at (62,47) {$x=0$};
+    \draw[{Latex[length=3.2mm,width=2.2mm]}-{Latex[length=3.2mm,width=2.2mm]},
+      draw=velocity,line width=0.9mm] (43,96) -- (81,96);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=velocity]
+      at (62,104) {$v_x=\pm v_{\max}$};
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=muted]
+      at (78,89) {$F_x=a_x=0$};
 
-  \draw[fill=disp, draw=none] (154,112) circle (1.8mm);
-  \draw[fill=vel, draw=none] (154,101) circle (1.8mm);
-  \draw[fill=acc, draw=none] (154,90) circle (1.8mm);
+    \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=muted,line width=0.5mm]
+      (25,39) -- (91,39);
+    \draw[draw=guide,line width=0.45mm] (43,36) -- (43,42);
+    \draw[draw=guide,line width=0.45mm] (62,36) -- (62,42);
+    \draw[draw=guide,line width=0.45mm] (81,36) -- (81,42);
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (43,31) {$-A$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (62,31) {$0$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (81,31) {$+A$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (94,35) {$x$};
 
-  \node[font=\sffamily\fontsize{11}{13}\selectfont, text=axis, align=center] at (135,11)
-    {ускорение всегда направлено к положению равновесия};
+    \fill[potential] (19,15) circle (2mm);
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=ink]
+      at (24,15) {$E_{\text{п}}=0$};
+    \fill[kinetic] (63,15) circle (2mm);
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=ink]
+      at (68,15) {$E_{\text{к}}=E$};
+  \end{scope}
+
+  % Right extreme
+  \begin{scope}[shift={(244,38)}]
+    \path[fill=panelbg,draw=border,line width=0.55mm,rounded corners=3mm]
+      (0,0) rectangle (104,136);
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=ink]
+      at (52,122) {Правое крайнее};
+    \node[font=\sffamily\bfseries\fontsize{14}{17}\selectfont,text=disp]
+      at (52,110) {$x=+A$};
+
+    \draw[draw=guide,line width=0.45mm] (14,70) -- (94,70);
+    \draw[draw=ink,line width=0.75mm] (14,56) -- (14,84);
+    \foreach \yy in {57,62,...,82} {
+      \draw[draw=guide,line width=0.35mm] (9,\yy-4) -- (14,\yy);
+    }
+    \draw[draw=spring,line width=0.7mm,decorate,
+      decoration={zigzag,segment length=4mm,amplitude=2.5mm}]
+      (14,70) -- (72,70);
+    \draw[dashed,draw=guide,line width=0.45mm] (62,51) -- (62,92);
+    \node[font=\sffamily\fontsize{10}{12}\selectfont,text=muted] at (62,47) {$x=0$};
+    \draw[fill=dispfill,draw=disp,line width=0.75mm,rounded corners=1.2mm]
+      (72,61) rectangle (90,79);
+    \draw[-{Latex[length=3.2mm,width=2.2mm]},draw=accel,line width=0.9mm]
+      (81,96) -- (63,96);
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=accel]
+      at (72,104) {$\vec F,\ \vec a$};
+    \node[font=\sffamily\bfseries\fontsize{11}{13}\selectfont,text=muted]
+      at (43,89) {$v=0$};
+
+    \draw[-{Latex[length=2.6mm,width=1.8mm]},draw=muted,line width=0.5mm]
+      (25,39) -- (91,39);
+    \draw[draw=guide,line width=0.45mm] (43,36) -- (43,42);
+    \draw[draw=guide,line width=0.45mm] (62,36) -- (62,42);
+    \draw[draw=guide,line width=0.45mm] (81,36) -- (81,42);
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (43,31) {$-A$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (62,31) {$0$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (81,31) {$+A$};
+    \node[font=\sffamily\fontsize{9.5}{11}\selectfont,text=muted] at (94,35) {$x$};
+
+    \fill[potential] (19,15) circle (2mm);
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=ink]
+      at (24,15) {$E_{\text{п}}=E$};
+    \fill[kinetic] (63,15) circle (2mm);
+    \node[anchor=west,font=\sffamily\bfseries\fontsize{10.5}{13}\selectfont,text=ink]
+      at (68,15) {$E_{\text{к}}=0$};
+  \end{scope}
+
+  \node[font=\sffamily\bfseries\fontsize{12}{15}\selectfont,text=ink]
+    at (180,20) {$E_{\text{к}}+E_{\text{п}}=E=\mathrm{const}$};
+  \node[font=\sffamily\fontsize{10.5}{13}\selectfont,text=muted]
+    at (180,10) {В крайних положениях возвращающая сила максимальна; в равновесии скорость максимальна};
 \end{tikzpicture}
 \end{document}
