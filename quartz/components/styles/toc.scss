@@ -85,10 +85,18 @@ ul.toc-content.overflow {
 
 .toc.mobile-only {
   margin-top: 1rem;
-  padding: 0.35rem 0.75rem;
+  padding: 0 0.75rem;
   border: 1px solid var(--lightgray);
   border-radius: 6px;
   background: var(--light);
+
+  @media all and ($mobile) {
+    display: flex;
+  }
+
+  & .toc-content-wrapper.collapsed > ul {
+    margin-block: 0;
+  }
 
   & ul.toc-content.overflow {
     max-height: min(50vh, 24rem);
