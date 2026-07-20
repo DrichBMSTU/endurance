@@ -1,0 +1,139 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+\setsansfont{Arial}
+
+\definecolor{pagebg}{HTML}{F8FAFC}
+\definecolor{panel}{HTML}{FFFFFF}
+\definecolor{border}{HTML}{CBD5E1}
+\definecolor{textmain}{HTML}{0F172A}
+\definecolor{muted}{HTML}{475569}
+\definecolor{track}{HTML}{E2E8F0}
+\definecolor{air}{HTML}{2563EB}
+\definecolor{water}{HTML}{0F766E}
+\definecolor{steel}{HTML}{C2410C}
+
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,font=\sffamily]
+  % Fixed 1100 x 650 canvas with an opaque, full-bleed background.
+  \path[use as bounding box] (0,0) rectangle (1100,650);
+  \fill[pagebg] (0,0) rectangle (1100,650);
+
+  \node[
+    anchor=west,
+    text=textmain,
+    font=\bfseries\fontsize{40}{46}\selectfont
+  ] at (56,594) {Скорость звука в разных средах};
+  \node[
+    anchor=west,
+    text=muted,
+    font=\fontsize{24}{29}\selectfont
+  ] at (56,548) {Типичные значения на общей линейной шкале};
+
+  \draw[
+    fill=panel,
+    draw=border,
+    line width=1.5pt,
+    rounded corners=22pt
+  ] (40,55) rectangle (1060,505);
+
+  \node[
+    anchor=west,
+    text=muted,
+    font=\bfseries\fontsize{18}{22}\selectfont
+  ] at (78,461) {СРЕДА};
+  \node[
+    anchor=west,
+    text=muted,
+    font=\bfseries\fontsize{18}{22}\selectfont
+  ] at (340,461) {ЛИНЕЙНАЯ ШКАЛА, м/с};
+  \node[
+    anchor=east,
+    text=muted,
+    font=\bfseries\fontsize{18}{22}\selectfont
+  ] at (1018,461) {ТИПИЧНОЕ ЗНАЧЕНИЕ};
+
+  \draw[draw=border,line width=1.2pt] (70,430) -- (1030,430);
+  \draw[draw=track,line width=1.2pt] (70,320) -- (1030,320);
+  \draw[draw=track,line width=1.2pt] (70,220) -- (1030,220);
+
+  % Shared guide lines for the linear scale from 0 to 5000 m/s.
+  \foreach \x in {440,540,640,740} {
+    \draw[draw=border,line width=1pt,dash pattern=on 2pt off 6pt]
+      (\x,125) -- (\x,410);
+  }
+
+  % Air: 340 m/s on a 0--5000 m/s scale.
+  \draw[draw=air,line width=6pt,line cap=round] (68,346) -- (68,394);
+  \node[
+    anchor=west,
+    text=textmain,
+    font=\bfseries\fontsize{30}{35}\selectfont
+  ] at (82,386) {Воздух};
+  \node[
+    anchor=west,
+    text=muted,
+    font=\fontsize{20}{24}\selectfont
+  ] at (82,350) {при комнатной температуре};
+  \draw[draw=track,line width=24pt,line cap=round] (340,370) -- (840,370);
+  \draw[draw=air,line width=24pt,line cap=round] (340,370) -- (374,370);
+  \fill[air] (374,370) circle (9pt);
+  \node[
+    anchor=east,
+    text=air,
+    font=\bfseries\fontsize{30}{35}\selectfont
+  ] at (1018,370) {≈ 340 м/с};
+
+  % Water: 1500 m/s on the same scale.
+  \draw[draw=water,line width=6pt,line cap=round] (68,246) -- (68,294);
+  \node[
+    anchor=west,
+    text=textmain,
+    font=\bfseries\fontsize{30}{35}\selectfont
+  ] at (82,270) {Вода};
+  \draw[draw=track,line width=24pt,line cap=round] (340,270) -- (840,270);
+  \draw[draw=water,line width=24pt,line cap=round] (340,270) -- (490,270);
+  \fill[water] (490,270) circle (9pt);
+  \node[
+    anchor=east,
+    text=water,
+    font=\bfseries\fontsize{30}{35}\selectfont
+  ] at (1018,270) {≈ 1500 м/с};
+
+  % Steel: 5000 m/s fills the scale.
+  \draw[draw=steel,line width=6pt,line cap=round] (68,146) -- (68,194);
+  \node[
+    anchor=west,
+    text=textmain,
+    font=\bfseries\fontsize{30}{35}\selectfont
+  ] at (82,170) {Сталь};
+  \draw[draw=track,line width=24pt,line cap=round] (340,170) -- (840,170);
+  \draw[draw=steel,line width=24pt,line cap=round] (340,170) -- (840,170);
+  \fill[steel] (840,170) circle (9pt);
+  \node[
+    anchor=east,
+    text=steel,
+    font=\bfseries\fontsize{30}{35}\selectfont
+  ] at (1018,170) {≈ 5000 м/с};
+
+  % Scale labels. Positions correspond to 0, 1000, ..., 5000 m/s.
+  \draw[draw=muted,line width=1.5pt] (340,108) -- (840,108);
+  \foreach \x/\label in {
+    340/0,
+    440/1000,
+    540/2000,
+    640/3000,
+    740/4000,
+    840/5000
+  } {
+    \draw[draw=muted,line width=1.5pt] (\x,100) -- (\x,116);
+    \node[
+      anchor=north,
+      text=muted,
+      font=\fontsize{18}{22}\selectfont
+    ] at (\x,94) {\label};
+  }
+\end{tikzpicture}
+\end{document}

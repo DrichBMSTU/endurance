@@ -1,0 +1,164 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+
+\definecolor{Bg}{HTML}{F8FAFC}
+\definecolor{Panel}{HTML}{FFFFFF}
+\definecolor{Ink}{HTML}{0F172A}
+\definecolor{Muted}{HTML}{475569}
+\definecolor{Border}{HTML}{CBD5E1}
+\definecolor{Particle}{HTML}{64748B}
+\definecolor{Blue}{HTML}{1D4ED8}
+\definecolor{BlueSoft}{HTML}{DBEAFE}
+\definecolor{Teal}{HTML}{0F766E}
+\definecolor{TealSoft}{HTML}{CCFBF1}
+\definecolor{Orange}{HTML}{C2410C}
+\definecolor{OrangeSoft}{HTML}{FFEDD5}
+
+\begin{document}
+\pagecolor{Bg}
+\begin{tikzpicture}[x=1pt,y=1pt]
+  \path[use as bounding box] (0,0) rectangle (1100,850);
+  \fill[Bg] (0,0) rectangle (1100,850);
+
+  \tikzset{
+    panel/.style={draw=Border, fill=Panel, line width=1.5pt, rounded corners=18pt},
+    heading/.style={text=Ink, font=\fontsize{44}{52}\selectfont\bfseries},
+    subtitle/.style={text=Muted, font=\fontsize{33}{40}\selectfont},
+    label/.style={text=Ink, font=\fontsize{34}{41}\selectfont},
+    small/.style={text=Muted, font=\fontsize{28}{34}\selectfont},
+    wavearrow/.style={draw=Blue, line width=4pt, -{Latex[length=14pt,width=10pt]}},
+    particlearrow/.style={draw=Orange, line width=3pt,
+      {Latex[length=10pt,width=7pt]}-{Latex[length=10pt,width=7pt]}}
+  }
+
+  \node[heading] at (550,810) {Волна движется — частица колеблется};
+  \node[subtitle] at (550,765)
+    {Три последовательных момента распространения звука в воздухе};
+
+  % Легенда.
+  \fill[BlueSoft, draw=Blue, line width=1.3pt, rounded corners=5pt]
+    (92,704) rectangle (126,728);
+  \node[label, anchor=west] at (140,716) {сжатие};
+  \fill[TealSoft, draw=Teal, line width=1.3pt, rounded corners=5pt]
+    (315,704) rectangle (349,728);
+  \node[label, anchor=west] at (363,716) {разрежение};
+  \fill[Orange] (570,716) circle (8pt);
+  \node[label, anchor=west] at (590,716) {та же частица};
+  \draw[Border, line width=2pt, densely dashed] (820,697) -- (820,735);
+  \node[label, anchor=west] at (836,716) {равновесие};
+
+  \draw[wavearrow] (310,670) -- (965,670);
+  \node[label, text=Blue, fill=Bg, inner xsep=12pt] at (637,670)
+    {возмущение перемещается вправо};
+
+  % Первый момент.
+  \begin{scope}[shift={(0,455)}]
+    \draw[panel] (45,0) rectangle (1055,175);
+    \node[fill=Ink, text=Panel, rounded corners=10pt, inner xsep=16pt,
+      inner ysep=8pt, font=\fontsize{28}{34}\selectfont\bfseries]
+      at (112,137) {момент 1};
+
+    % Колеблющийся источник.
+    \fill[Ink, rounded corners=6pt] (156,47) rectangle (200,123);
+    \fill[Muted] (200,61) -- (245,43) -- (245,127) -- (200,109) -- cycle;
+    \draw[Orange, line width=4pt] (248,52) -- (248,118);
+
+    % Области давления и частицы воздуха.
+    % Периодические области давления согласованы с полем смещений ниже:
+    % разрежение — максимум производной, сжатие — минимум производной.
+    \foreach \c in {280,520,760,1000} {
+      \fill[BlueSoft, rounded corners=14pt]
+        ({\c-32},27) rectangle ({\c+32},148);
+    }
+    \foreach \c in {400,640,880} {
+      \fill[TealSoft, rounded corners=14pt]
+        ({\c-32},27) rectangle ({\c+32},148);
+    }
+    \draw[Border, line width=1.4pt] (270,87) -- (1005,87);
+    \foreach \x in {280,310,...,1000} {
+      \pgfmathsetmacro{\xx}{\x+12*sin((\x-160)*1.5)}
+      \ifnum\x=700
+        \fill[Panel] (\xx,87) circle (11pt);
+        \fill[Orange] (\xx,87) circle (8.5pt);
+      \else
+        \fill[Particle] (\xx,87) circle (5.5pt);
+      \fi
+    }
+
+    % Одна и та же частица и её положение равновесия.
+    \draw[Border, line width=2pt, densely dashed] (690,35) -- (690,132);
+    \draw[particlearrow] (652,143) -- (728,143);
+  \end{scope}
+
+  % Второй момент: области сместились, частица отклонилась вправо.
+  \begin{scope}[shift={(0,250)}]
+    \draw[panel] (45,0) rectangle (1055,175);
+    \node[fill=Ink, text=Panel, rounded corners=10pt, inner xsep=16pt,
+      inner ysep=8pt, font=\fontsize{28}{34}\selectfont\bfseries]
+      at (112,137) {момент 2};
+
+    \fill[Ink, rounded corners=6pt] (156,47) rectangle (200,123);
+    \fill[Muted] (200,61) -- (245,43) -- (245,127) -- (200,109) -- cycle;
+    \draw[Orange, line width=4pt] (238,52) -- (238,118);
+
+    \foreach \c in {340,580,820} {
+      \fill[BlueSoft, rounded corners=14pt]
+        ({\c-32},27) rectangle ({\c+32},148);
+    }
+    \foreach \c in {460,700,940} {
+      \fill[TealSoft, rounded corners=14pt]
+        ({\c-32},27) rectangle ({\c+32},148);
+    }
+    \draw[Border, line width=1.4pt] (270,87) -- (1005,87);
+    \foreach \x in {280,310,...,1000} {
+      \pgfmathsetmacro{\xx}{\x+12*sin((\x-220)*1.5)}
+      \ifnum\x=700
+        \fill[Panel] (\xx,87) circle (11pt);
+        \fill[Orange] (\xx,87) circle (8.5pt);
+      \else
+        \fill[Particle] (\xx,87) circle (5.5pt);
+      \fi
+    }
+
+    \draw[Border, line width=2pt, densely dashed] (690,35) -- (690,132);
+    \draw[particlearrow] (652,143) -- (728,143);
+  \end{scope}
+
+  % Третий момент: волна ушла дальше, частица отклонилась в другую сторону.
+  \begin{scope}[shift={(0,45)}]
+    \draw[panel] (45,0) rectangle (1055,175);
+    \node[fill=Ink, text=Panel, rounded corners=10pt, inner xsep=16pt,
+      inner ysep=8pt, font=\fontsize{28}{34}\selectfont\bfseries]
+      at (112,137) {момент 3};
+
+    \fill[Ink, rounded corners=6pt] (156,47) rectangle (200,123);
+    \fill[Muted] (200,61) -- (245,43) -- (245,127) -- (200,109) -- cycle;
+    \draw[Orange, line width=4pt] (253,52) -- (253,118);
+
+    \foreach \c in {400,640,880} {
+      \fill[BlueSoft, rounded corners=14pt]
+        ({\c-32},27) rectangle ({\c+32},148);
+    }
+    \foreach \c in {280,520,760,1000} {
+      \fill[TealSoft, rounded corners=14pt]
+        ({\c-32},27) rectangle ({\c+32},148);
+    }
+    \draw[Border, line width=1.4pt] (270,87) -- (1005,87);
+    \foreach \x in {280,310,...,1000} {
+      \pgfmathsetmacro{\xx}{\x+12*sin((\x-280)*1.5)}
+      \ifnum\x=700
+        \fill[Panel] (\xx,87) circle (11pt);
+        \fill[Orange] (\xx,87) circle (8.5pt);
+      \else
+        \fill[Particle] (\xx,87) circle (5.5pt);
+      \fi
+    }
+
+    \draw[Border, line width=2pt, densely dashed] (690,35) -- (690,132);
+    \draw[particlearrow] (652,143) -- (728,143);
+  \end{scope}
+\end{tikzpicture}
+\end{document}
