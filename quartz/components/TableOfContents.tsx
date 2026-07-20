@@ -11,6 +11,7 @@ import { concatenateResources } from "../util/resources"
 
 interface Options {
   layout: "modern" | "legacy"
+  collapsed?: boolean
 }
 
 const defaultOptions: Options = {
@@ -29,15 +30,26 @@ export default ((opts?: Partial<Options>) => {
       return null
     }
 
+    const translations = i18n(cfg.locale).components.tableOfContents
+    const collapsed = opts?.collapsed ?? fileData.collapseToc
+    const contentId = displayClass === "mobile-only" ? "toc-content-mobile" : "toc-content-desktop"
+
     return (
       <div class={classNames(displayClass, "toc")}>
         <button
           type="button"
-          class={fileData.collapseToc ? "collapsed toc-header" : "toc-header"}
-          aria-controls="toc-content"
-          aria-expanded={!fileData.collapseToc}
+          class={collapsed ? "collapsed toc-header" : "toc-header"}
+          aria-controls={contentId}
+          aria-expanded={!collapsed}
+          aria-label={
+            collapsed
+              ? (translations.expand ?? translations.title)
+              : (translations.collapse ?? translations.title)
+          }
+          data-expand-label={translations.expand ?? translations.title}
+          data-collapse-label={translations.collapse ?? translations.title}
         >
-          <h3>{i18n(cfg.locale).components.tableOfContents.title}</h3>
+          <h3>{translations.title}</h3>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -49,19 +61,28 @@ export default ((opts?: Partial<Options>) => {
             stroke-linecap="round"
             stroke-linejoin="round"
             class="fold"
+            aria-hidden="true"
+            focusable="false"
           >
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-        <OverflowList class={fileData.collapseToc ? "collapsed toc-content" : "toc-content"}>
-          {fileData.toc.map((tocEntry) => (
-            <li key={tocEntry.slug} class={`depth-${tocEntry.depth}`}>
-              <a href={`#${tocEntry.slug}`} data-for={tocEntry.slug}>
-                {tocEntry.text}
-              </a>
-            </li>
-          ))}
-        </OverflowList>
+        <div
+          id={contentId}
+          class={collapsed ? "collapsed toc-content-wrapper" : "toc-content-wrapper"}
+          aria-hidden={collapsed}
+          inert={collapsed}
+        >
+          <OverflowList class="toc-content">
+            {fileData.toc.map((tocEntry) => (
+              <li key={tocEntry.slug} class={`depth-${tocEntry.depth}`}>
+                <a href={`#${tocEntry.slug}`} data-for={tocEntry.slug}>
+                  {tocEntry.text}
+                </a>
+              </li>
+            ))}
+          </OverflowList>
+        </div>
       </div>
     )
   }
@@ -74,7 +95,7 @@ export default ((opts?: Partial<Options>) => {
       return null
     }
     return (
-      <details class="toc" open={!fileData.collapseToc}>
+      <details class="toc" open={!(opts?.collapsed ?? fileData.collapseToc)}>
         <summary>
           <h3>{i18n(cfg.locale).components.tableOfContents.title}</h3>
         </summary>

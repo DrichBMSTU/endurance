@@ -6,6 +6,13 @@
     margin: 0;
   }
 
+  & > .graph-description {
+    color: var(--darkgray);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin: 0.25rem 0 0;
+  }
+
   & > .graph-outer {
     border-radius: 5px;
     border: 1px solid var(--lightgray);
@@ -17,23 +24,29 @@
 
     & > .global-graph-icon {
       cursor: pointer;
-      background: none;
-      border: none;
+      align-items: center;
+      background-color: var(--light);
+      border: 1px solid var(--lightgray);
       color: var(--dark);
-      opacity: 0.5;
-      width: 24px;
-      height: 24px;
+      display: flex;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
       position: absolute;
-      padding: 0.2rem;
-      margin: 0.3rem;
+      padding: 0.65rem;
+      margin: 0.35rem;
       top: 0;
       right: 0;
       border-radius: 4px;
-      background-color: transparent;
-      transition: background-color 0.5s ease;
-      cursor: pointer;
+      transition: background-color 0.2s ease;
+
       &:hover {
         background-color: var(--lightgray);
+      }
+
+      & > svg {
+        height: 100%;
+        width: 100%;
       }
     }
   }
@@ -44,13 +57,46 @@
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
+    height: 100dvh;
     backdrop-filter: blur(4px);
+    background: rgb(0 0 0 / 35%);
     display: none;
     overflow: hidden;
 
     &.active {
-      display: inline-block;
+      display: block;
+    }
+
+    & > .global-graph-close {
+      align-items: center;
+      background: var(--light);
+      border: 1px solid var(--lightgray);
+      border-radius: 4px;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      height: 44px;
+      justify-content: center;
+      padding: 0.65rem;
+      position: fixed;
+      right: calc(10vw + 0.75rem);
+      top: calc(10vh + 0.75rem);
+      width: 44px;
+      z-index: 1;
+
+      &:hover {
+        background: var(--lightgray);
+      }
+
+      & > svg {
+        fill: none;
+        height: 100%;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-width: 2;
+        width: 100%;
+      }
     }
 
     & > .global-graph-container {
@@ -67,6 +113,16 @@
 
       @media all and not ($desktop) {
         width: 90%;
+        height: 90vh;
+        height: 90dvh;
+      }
+    }
+
+    @media all and not ($desktop) {
+      & > .global-graph-close {
+        right: calc(5% + 0.5rem);
+        top: calc(5vh + 0.5rem);
+        top: calc(5dvh + 0.5rem);
       }
     }
   }

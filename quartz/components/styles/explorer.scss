@@ -96,7 +96,8 @@ button.desktop-explorer {
   border: none;
   text-align: left;
   cursor: pointer;
-  padding: 0;
+  min-height: 44px;
+  padding: 0.5rem 0;
   color: var(--dark);
   display: flex;
   align-items: center;
@@ -122,12 +123,14 @@ button.desktop-explorer {
 
     & li > a {
       color: var(--dark);
-      opacity: 0.75;
+      align-items: center;
+      display: flex;
+      min-height: 44px;
       pointer-events: all;
 
       &.active {
-        opacity: 1;
-        color: var(--tertiary);
+        color: var(--secondary);
+        text-decoration: underline;
       }
     }
   }
@@ -161,12 +164,15 @@ button.desktop-explorer {
     font-family: var(--headerFont);
     font-size: 0.95rem;
     font-weight: $semiBoldWeight;
+    align-items: center;
+    display: flex;
     line-height: 1.5rem;
-    display: inline-block;
+    min-height: 44px;
   }
 
   & div > a:hover {
-    color: var(--tertiary);
+    color: var(--secondary);
+    text-decoration: underline;
   }
 
   & div > button {
@@ -175,8 +181,8 @@ button.desktop-explorer {
     border: none;
     text-align: left;
     cursor: pointer;
-    padding-left: 0;
-    padding-right: 0;
+    min-height: 44px;
+    padding: 0;
     display: flex;
     align-items: center;
     font-family: var(--headerFont);
@@ -191,6 +197,21 @@ button.desktop-explorer {
       pointer-events: none;
     }
   }
+
+  & > .folder-toggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--secondary);
+    cursor: pointer;
+    display: flex;
+    flex: 0 0 44px;
+    height: 44px;
+    justify-content: center;
+    margin-left: -0.65rem;
+    padding: 0;
+    width: 44px;
+  }
 }
 
 .folder-icon {
@@ -202,7 +223,7 @@ button.desktop-explorer {
   flex-shrink: 0;
 }
 
-li:has(> .folder-outer:not(.open)) > .folder-container > svg {
+li:has(> .folder-outer:not(.open)) > .folder-container > .folder-toggle .folder-icon {
   transform: rotate(-90deg);
 }
 
@@ -213,7 +234,7 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
 .explorer {
   @media all and ($mobile) {
     &.collapsed {
-      flex: 0 0 34px;
+      flex: 0 0 44px;
 
       & > .explorer-content {
         transform: translateX(-100vw);
@@ -222,7 +243,7 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
     }
 
     &:not(.collapsed) {
-      flex: 0 0 34px;
+      flex: 0 0 44px;
 
       & > .explorer-content {
         transform: translateX(0);
@@ -253,7 +274,9 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
 
     .mobile-explorer {
       margin: 0;
-      padding: 5px;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 10px;
       z-index: 101;
 
       .lucide-menu {
@@ -263,22 +286,8 @@ li:has(> .folder-outer:not(.open)) > .folder-container > svg {
   }
 }
 
-.no-scroll {
-  opacity: 0;
-  overflow: hidden;
-}
-
-html:has(.no-scroll) {
-  overflow: hidden;
-}
-
-@media all and not ($mobile) {
-  .no-scroll {
-    opacity: 1 !important;
-    overflow: auto !important;
-  }
-
-  html:has(.no-scroll) {
-    overflow: auto !important;
+@media all and ($mobile) {
+  html.explorer-open {
+    overflow: hidden;
   }
 }

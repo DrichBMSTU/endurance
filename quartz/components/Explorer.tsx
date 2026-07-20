@@ -60,12 +60,20 @@ export default ((userOpts?: Partial<Options>) => {
   const { OverflowList, overflowListAfterDOMLoaded } = OverflowListFactory()
 
   const Explorer: QuartzComponent = ({ cfg, displayClass }: QuartzComponentProps) => {
+    const translations = i18n(cfg.locale).components.explorer
+    const title = opts.title ?? translations.title
+    const openLabel = translations.open ?? `Open ${title}`
+    const closeLabel = translations.close ?? `Close ${title}`
     return (
       <div
         class={classNames(displayClass, "explorer")}
         data-behavior={opts.folderClickBehavior}
         data-collapsed={opts.folderDefaultState}
         data-savestate={opts.useSavedState}
+        data-open-label={openLabel}
+        data-close-label={closeLabel}
+        data-expand-folder-label={translations.expandFolder ?? "Expand section"}
+        data-collapse-folder-label={translations.collapseFolder ?? "Collapse section"}
         data-data-fns={JSON.stringify({
           order: opts.order,
           sortFn: opts.sortFn.toString(),
@@ -78,6 +86,8 @@ export default ((userOpts?: Partial<Options>) => {
           class="explorer-toggle mobile-explorer hide-until-loaded"
           data-mobile={true}
           aria-controls="explorer-content"
+          aria-expanded="false"
+          aria-label={openLabel}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -88,6 +98,8 @@ export default ((userOpts?: Partial<Options>) => {
             stroke-linecap="round"
             stroke-linejoin="round"
             class="lucide-menu"
+            aria-hidden="true"
+            focusable="false"
           >
             <line x1="4" x2="20" y1="12" y2="12" />
             <line x1="4" x2="20" y1="6" y2="6" />
@@ -98,9 +110,11 @@ export default ((userOpts?: Partial<Options>) => {
           type="button"
           class="title-button explorer-toggle desktop-explorer"
           data-mobile={false}
+          aria-controls="explorer-content"
           aria-expanded={true}
+          aria-label={closeLabel}
         >
-          <h2>{opts.title ?? i18n(cfg.locale).components.explorer.title}</h2>
+          <h2>{title}</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
@@ -112,11 +126,13 @@ export default ((userOpts?: Partial<Options>) => {
             stroke-linecap="round"
             stroke-linejoin="round"
             class="fold"
+            aria-hidden="true"
+            focusable="false"
           >
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-        <div class="explorer-content" aria-expanded={false}>
+        <div id="explorer-content" class="explorer-content">
           <OverflowList class="explorer-ul" />
         </div>
         <template id="template-file">
@@ -127,22 +143,26 @@ export default ((userOpts?: Partial<Options>) => {
         <template id="template-folder">
           <li>
             <div class="folder-container">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="5 8 14 8"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="folder-icon"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <button type="button" class="folder-toggle" aria-expanded="false">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="12"
+                  height="12"
+                  viewBox="5 8 14 8"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="folder-icon"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
               <div>
-                <button class="folder-button">
+                <button type="button" class="folder-button">
                   <span class="folder-title"></span>
                 </button>
               </div>

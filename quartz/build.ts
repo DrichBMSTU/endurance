@@ -1,5 +1,6 @@
 import sourceMapSupport from "source-map-support"
 sourceMapSupport.install(options)
+import fs from "fs"
 import path from "path"
 import { PerfTimer } from "./util/perf"
 import { rimraf } from "rimraf"
@@ -67,7 +68,9 @@ async function buildQuartz(argv: Argv, mut: Mutex, clientRefresh: () => void) {
 
   const release = await mut.acquire()
   perf.addEvent("clean")
-  await rimraf(path.join(output, "*"), { glob: true })
+  await fs.promises.mkdir(output, { recursive: true })
+  const outputEntries = await fs.promises.readdir(output)
+  await Promise.all(outputEntries.map((entry) => rimraf(path.join(output, entry))))
   console.log(`Cleaned output directory \`${output}\` in ${perf.timeSince("clean")}`)
 
   perf.addEvent("glob")

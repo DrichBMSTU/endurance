@@ -6,6 +6,13 @@ export default {
     description: "Описание отсутствует",
   },
   components: {
+    accessibility: {
+      skipToContent: "Перейти к содержанию",
+    },
+    breadcrumbs: {
+      label: "Хлебные крошки",
+      rootName: "Главная",
+    },
     callout: {
       note: "Заметка",
       abstract: "Резюме",
@@ -31,12 +38,20 @@ export default {
     },
     explorer: {
       title: "Проводник",
+      open: "Открыть проводник",
+      close: "Закрыть проводник",
+      expandFolder: "Развернуть раздел",
+      collapseFolder: "Свернуть раздел",
     },
     footer: {
       createdWith: "Создано с помощью",
     },
     graph: {
       title: "Вид графа",
+      globalGraph: "Открыть глобальный граф связей",
+      description:
+        "Интерактивная схема связей между заметками. Текстовые ссылки доступны в содержании и разделе обратных ссылок.",
+      close: "Закрыть граф связей",
     },
     recentNotes: {
       title: "Недавние заметки",
@@ -50,9 +65,16 @@ export default {
     search: {
       title: "Поиск",
       searchBarPlaceholder: "Найти что-нибудь",
+      dialogLabel: "Поиск по сайту",
+      close: "Закрыть поиск",
+      noResults: "Ничего не найдено.",
+      tryAnotherSearch: "Попробуйте изменить запрос.",
+      resultsFound: ({ count }) => `Найдено результатов: ${count}`,
     },
     tableOfContents: {
       title: "Оглавление",
+      expand: "Развернуть оглавление",
+      collapse: "Свернуть оглавление",
     },
     contentMeta: {
       readingTime: ({ minutes }) => `время чтения ~${minutes} мин.`,

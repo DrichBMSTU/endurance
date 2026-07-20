@@ -27,7 +27,13 @@ export function pageResources(
   staticResources: StaticResources,
 ): StaticResources {
   const contentIndexPath = joinSegments(baseDir, "static/contentIndex.json")
-  const contentIndexScript = `const fetchData = fetch("${contentIndexPath}").then(data => data.json())`
+  const contentIndexMetadataPath = joinSegments(baseDir, "static/contentIndexMeta.json")
+  const contentIndexScript = `
+    let contentIndexPromise;
+    let contentIndexMetadataPromise;
+    const fetchData = () => contentIndexPromise ??= fetch("${contentIndexPath}").then(data => data.json());
+    const fetchDataMetadata = () => contentIndexMetadataPromise ??= fetch("${contentIndexMetadataPath}").then(data => data.json());
+  `
 
   const resources: StaticResources = {
     css: [

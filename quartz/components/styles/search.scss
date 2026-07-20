@@ -13,7 +13,7 @@
     border-radius: 4px;
     font-family: inherit;
     font-size: inherit;
-    height: 2rem;
+    min-height: 2.75rem;
     padding: 0;
     display: flex;
     align-items: center;
@@ -50,6 +50,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
     display: none;
     backdrop-filter: blur(4px);
@@ -68,7 +69,13 @@
         width: 90%;
       }
 
-      & > * {
+      @media all and ($mobile) {
+        width: calc(100% - 2rem);
+        margin-top: 1rem;
+      }
+
+      & > .search-controls,
+      & > .search-layout {
         width: 100%;
         border-radius: 7px;
         background: var(--light);
@@ -78,17 +85,63 @@
         margin-bottom: 2em;
       }
 
-      & > input {
-        box-sizing: border-box;
-        padding: 0.5em 1em;
-        font-family: var(--bodyFont);
-        color: var(--dark);
-        font-size: 1.1em;
+      & > .search-controls {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
         border: 1px solid var(--lightgray);
 
-        &:focus {
-          outline: none;
+        & > input {
+          box-sizing: border-box;
+          min-width: 0;
+          min-height: 3rem;
+          flex: 1;
+          padding: 0.5em 1em;
+          border: none;
+          background: var(--light);
+          color: var(--dark);
+          font-family: var(--bodyFont);
+          font-size: 1.1em;
+
+          &:focus-visible {
+            outline: 3px solid var(--secondary);
+            outline-offset: -3px;
+          }
         }
+
+        & > .search-close {
+          display: inline-flex;
+          min-width: 2.75rem;
+          min-height: 2.75rem;
+          align-items: center;
+          justify-content: center;
+          margin-right: 0.15rem;
+          padding: 0;
+          border: none;
+          border-radius: 5px;
+          background: transparent;
+          color: var(--dark);
+          cursor: pointer;
+
+          & svg {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+          }
+        }
+      }
+
+      & > .search-status {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
       }
 
       & > .search-layout {
@@ -193,7 +246,7 @@
             margin: 0;
             text-transform: none;
             text-align: left;
-            outline: none;
+            outline: 2px solid transparent;
             font-weight: inherit;
 
             &:hover,
@@ -227,7 +280,8 @@
               color: var(--secondary);
 
               &.match-tag {
-                color: var(--tertiary);
+                color: var(--secondary);
+                text-decoration: underline;
               }
             }
 

@@ -1,10 +1,34 @@
 import { i18n } from "../i18n"
-import { FullSlug, getFileExtension, joinSegments, pathToRoot } from "../util/path"
+import { FullSlug, getFileExtension, joinSegments, pathToRoot, simplifySlug } from "../util/path"
 import { CSSResourceToStyleElement, JSResourceToScriptElement } from "../util/resources"
 import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
 import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage"
+
+function getImageMimeType(imagePath: string): string {
+  const pathWithoutQuery = imagePath.split(/[?#]/, 1)[0]
+  const extension = getFileExtension(pathWithoutQuery)?.slice(1).toLowerCase() ?? "png"
+
+  if (extension === "jpg" || extension === "jpeg") return "image/jpeg"
+  if (extension === "svg") return "image/svg+xml"
+  return `image/${extension}`
+}
+
+function getCanonicalUrl(baseUrl: string, slug: FullSlug): string {
+  const siteUrl = new URL(`https://${baseUrl}`)
+  if (!siteUrl.pathname.endsWith("/")) siteUrl.pathname += "/"
+
+  const canonicalSlug = slug === "404" ? "404" : simplifySlug(slug)
+  return new URL(canonicalSlug === "/" ? "." : canonicalSlug, siteUrl).toString()
+}
+
+function addSiteTitleSuffix(title: string, siteTitle: string, suffix: string): string {
+  return title.toLocaleLowerCase().startsWith(siteTitle.toLocaleLowerCase())
+    ? title
+    : title + suffix
+}
+
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -13,8 +37,8 @@ export default (() => {
     ctx,
   }: QuartzComponentProps) => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
-    const title =
-      (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+    const rawTitle = fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
+    const title = addSiteTitleSuffix(rawTitle, cfg.pageTitle, titleSuffix)
     const description =
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??
@@ -23,18 +47,19 @@ export default (() => {
     const { css, js, additionalHead } = externalResources
 
     const url = new URL(`https://${cfg.baseUrl ?? "example.com"}`)
+    if (!url.pathname.endsWith("/")) url.pathname += "/"
     const path = url.pathname as FullSlug
     const baseDir = fileData.slug === "404" ? path : pathToRoot(fileData.slug!)
     const iconPath = joinSegments(baseDir, "static/icon.png")
 
     // Url of current page
-    const socialUrl =
-      fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
+    const canonicalUrl = cfg.baseUrl ? getCanonicalUrl(cfg.baseUrl, fileData.slug!) : undefined
+    const socialUrl = canonicalUrl ?? url.toString()
 
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
       (e) => e.name === CustomOgImagesEmitterName,
     )
-    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
+    const ogImageDefaultPath = new URL("static/icon.png", url).toString()
 
     return (
       <head>
@@ -53,7 +78,7 @@ export default (() => {
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <meta name="og:site_name" content={cfg.pageTitle}></meta>
+        <meta property="og:site_name" content={cfg.pageTitle}></meta>
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -67,16 +92,14 @@ export default (() => {
             <meta property="og:image" content={ogImageDefaultPath} />
             <meta property="og:image:url" content={ogImageDefaultPath} />
             <meta name="twitter:image" content={ogImageDefaultPath} />
-            <meta
-              property="og:image:type"
-              content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
-            />
+            <meta property="og:image:type" content={getImageMimeType(ogImageDefaultPath)} />
           </>
         )}
 
         {cfg.baseUrl && (
           <>
-            <meta property="twitter:domain" content={cfg.baseUrl}></meta>
+            <link rel="canonical" href={socialUrl} />
+            <meta property="twitter:domain" content={url.hostname}></meta>
             <meta property="og:url" content={socialUrl}></meta>
             <meta property="twitter:url" content={socialUrl}></meta>
           </>

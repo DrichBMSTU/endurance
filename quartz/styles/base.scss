@@ -6,9 +6,50 @@
 
 html {
   scroll-behavior: smooth;
-  text-size-adjust: none;
+  text-size-adjust: 100%;
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%;
+
+  &.search-open,
+  &.graph-open {
+    overflow: hidden;
+  }
+}
+
+:where(a, button, input, summary, [tabindex]):focus-visible {
+  border-radius: 3px;
+  outline: 3px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  background: var(--light);
+  border: 2px solid var(--secondary);
+  border-radius: 4px;
+  color: var(--dark);
+  left: 0.75rem;
+  padding: 0.65rem 1rem;
+  position: fixed;
+  top: 0.75rem;
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 0.15s ease;
+  z-index: 10000;
+
+  &:focus {
+    transform: translateY(0);
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 body,
@@ -91,7 +132,8 @@ a {
   color: var(--secondary);
 
   &:hover {
-    color: var(--tertiary) !important;
+    color: var(--secondary) !important;
+    text-decoration: underline;
   }
 
   &.internal {
@@ -364,7 +406,8 @@ h6 {
     user-select: none;
   }
 
-  &[id]:hover > a {
+  &[id]:hover > a,
+  &[id]:focus-within > a {
     opacity: 1;
   }
 
@@ -536,7 +579,7 @@ img {
   margin: 0 auto;
   max-width: 100%;
   border-radius: 5px;
-//   margin: 1rem 0;
+  //   margin: 1rem 0;
   content-visibility: auto;
 }
 
@@ -617,4 +660,19 @@ iframe.pdf {
   background: var(--secondary);
   transition: width 0.2s ease;
   z-index: 9999;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

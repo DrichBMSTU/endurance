@@ -1,15 +1,30 @@
 ---
-title: For those who love physics
+title: "Endurance — физика для ОГЭ и ЕГЭ"
+description: "Системная теория по школьной физике, материалы ФИПИ и удобный поиск для подготовки к ОГЭ и ЕГЭ."
 ---
 
 <section class="home-hero" aria-labelledby="home-title">
   <div class="home-hero-media">
-    <img src="adds/adds_gif/Endurance.gif" alt="Endurance" class="home-gif" />
+    <video class="home-gif home-motion" width="716" height="500" autoplay loop muted playsinline preload="metadata" poster="adds/adds_gif/Endurance-poster.webp" aria-hidden="true">
+      <source src="adds/adds_gif/Endurance.webm" type="video/webm" media="(prefers-reduced-motion: no-preference)" />
+      <source src="adds/adds_gif/Endurance.mp4" type="video/mp4" media="(prefers-reduced-motion: no-preference)" />
+    </video>
+    <img src="adds/adds_gif/Endurance-poster.webp" alt="" class="home-gif home-motion-static" width="716" height="500" loading="eager" fetchpriority="high" decoding="async" aria-hidden="true" />
   </div>
   <div class="home-hero-copy">
-    <p class="home-eyebrow">For those who love physics</p>
+    <p class="home-eyebrow">Физика без лишнего шума</p>
     <h1 id="home-title">Endurance</h1>
     <p class="home-subtitle">Системная теория по физике для подготовки к ОГЭ и ЕГЭ: без лишнего шума, с ясной логикой, аккуратными формулами и материалами, к которым удобно возвращаться перед экзаменом.</p>
+  </div>
+</section>
+
+<section class="home-section" aria-labelledby="home-start-title">
+  <h2 id="home-start-title">С чего начать</h2>
+  <p>Откройте полный кодификатор тем или сразу перейдите к официальным материалам для подготовки.</p>
+  <div class="home-links" aria-label="Основные разделы сайта">
+    <a href="ОГЭ">Подготовка к ОГЭ</a>
+    <a href="Теория-ЕГЭ-по-физике/">Подготовка к ЕГЭ</a>
+    <a href="Материалы">Материалы ФИПИ</a>
   </div>
 </section>
 
@@ -30,7 +45,7 @@ title: For those who love physics
   </div>
   <div class="home-panel">
     <h2>Как пользоваться</h2>
-    <p>Начинайте с нужного раздела теории или используйте поиск по сайту: он помогает быстро найти формулу, определение, закон или связанный разбор.</p>
+    <p>Начинайте с нужного раздела теории или используйте поиск по сайту: он помогает быстро найти формулу, определение, закон или связанный разбор. В конце каждой статьи есть краткая сводка, а связанные темы доступны через внутренние ссылки и обратные связи.</p>
   </div>
 </section>
 

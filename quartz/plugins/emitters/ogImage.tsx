@@ -21,6 +21,21 @@ const defaultOptions: SocialImageOptions = {
   excludeRoot: false,
 }
 
+function getImageMimeType(imagePath: string): string {
+  const pathWithoutQuery = imagePath.split(/[?#]/, 1)[0]
+  const extension = getFileExtension(pathWithoutQuery)?.slice(1).toLowerCase() ?? "png"
+
+  if (extension === "jpg" || extension === "jpeg") return "image/jpeg"
+  if (extension === "svg") return "image/svg+xml"
+  return `image/${extension}`
+}
+
+function addSiteTitleSuffix(title: string, siteTitle: string, suffix: string): string {
+  return title.toLocaleLowerCase().startsWith(siteTitle.toLocaleLowerCase())
+    ? title
+    : title + suffix
+}
+
 /**
  * Generates social image (OG/twitter standard) and saves it as `.webp` inside the public folder
  * @param opts options for generating image
@@ -74,8 +89,8 @@ async function processOgImage(
   const cfg = ctx.cfg.configuration
   const slug = fileData.slug!
   const titleSuffix = cfg.pageTitleSuffix ?? ""
-  const title =
-    (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+  const rawTitle = fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
+  const title = addSiteTitleSuffix(rawTitle, cfg.pageTitle, titleSuffix)
   const description =
     fileData.frontmatter?.socialDescription ??
     fileData.frontmatter?.description ??
@@ -156,9 +171,9 @@ export const CustomOgImages: QuartzEmitterPlugin<Partial<SocialImageOptions>> = 
             const generatedOgImagePath = isRealFile
               ? `https://${baseUrl}/${pageData.slug!}-og-image.webp`
               : undefined
-            const defaultOgImagePath = `https://${baseUrl}/static/og-image.png`
+            const defaultOgImagePath = `https://${baseUrl}/index-og-image.webp`
             const ogImagePath = userDefinedOgImagePath ?? generatedOgImagePath ?? defaultOgImagePath
-            const ogImageMimeType = `image/${getFileExtension(ogImagePath) ?? "png"}`
+            const ogImageMimeType = getImageMimeType(ogImagePath)
             return (
               <>
                 {!userDefinedOgImagePath && (

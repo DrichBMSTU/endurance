@@ -11,4 +11,6 @@ interface CustomEventMap {
 }
 
 type ContentIndex = Record<FullSlug, ContentDetails>
-declare const fetchData: Promise<ContentIndex>
+type ContentIndexMetadata = Record<FullSlug, ContentMetadata>
+declare const fetchData: () => Promise<ContentIndex>
+declare const fetchDataMetadata: () => Promise<ContentIndexMetadata>

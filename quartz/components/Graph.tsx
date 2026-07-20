@@ -63,12 +63,27 @@ export default ((opts?: Partial<GraphOptions>) => {
   const Graph: QuartzComponent = ({ displayClass, cfg }: QuartzComponentProps) => {
     const localGraph = { ...defaultOptions.localGraph, ...opts?.localGraph }
     const globalGraph = { ...defaultOptions.globalGraph, ...opts?.globalGraph }
+    const translations = i18n(cfg.locale).components.graph
+    const globalGraphLabel = translations.globalGraph ?? `Open ${translations.title}`
+    const graphDescription = translations.description ?? "Interactive map of links between notes."
     return (
       <div class={classNames(displayClass, "graph")}>
-        <h3>{i18n(cfg.locale).components.graph.title}</h3>
+        <h3>{translations.title}</h3>
+        <p class="graph-description">{graphDescription}</p>
         <div class="graph-outer">
-          <div class="graph-container" data-cfg={JSON.stringify(localGraph)}></div>
-          <button class="global-graph-icon" aria-label="Global Graph">
+          <div
+            class="graph-container"
+            role="img"
+            aria-label={graphDescription}
+            data-cfg={JSON.stringify(localGraph)}
+          ></div>
+          <button
+            type="button"
+            class="global-graph-icon"
+            aria-label={globalGraphLabel}
+            aria-controls="global-graph-dialog"
+            aria-expanded="false"
+          >
             <svg
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -78,6 +93,8 @@ export default ((opts?: Partial<GraphOptions>) => {
               viewBox="0 0 55 55"
               fill="currentColor"
               xmlSpace="preserve"
+              aria-hidden="true"
+              focusable="false"
             >
               <path
                 d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
@@ -95,8 +112,30 @@ export default ((opts?: Partial<GraphOptions>) => {
             </svg>
           </button>
         </div>
-        <div class="global-graph-outer">
-          <div class="global-graph-container" data-cfg={JSON.stringify(globalGraph)}></div>
+        <div
+          id="global-graph-dialog"
+          class="global-graph-outer"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden="true"
+          aria-label={globalGraphLabel}
+        >
+          <button
+            type="button"
+            class="global-graph-close"
+            aria-label={translations.close ?? "Close graph"}
+          >
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+          <p class="visually-hidden">{graphDescription}</p>
+          <div
+            class="global-graph-container"
+            role="img"
+            aria-label={graphDescription}
+            data-cfg={JSON.stringify(globalGraph)}
+          ></div>
         </div>
       </div>
     )

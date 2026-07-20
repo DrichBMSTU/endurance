@@ -22,6 +22,13 @@ export interface Translation {
     description: string
   }
   components: {
+    accessibility?: {
+      skipToContent: string
+    }
+    breadcrumbs?: {
+      label: string
+      rootName: string
+    }
     callout: CalloutTranslation
     backlinks: {
       title: string
@@ -33,12 +40,19 @@ export interface Translation {
     }
     explorer: {
       title: string
+      open?: string
+      close?: string
+      expandFolder?: string
+      collapseFolder?: string
     }
     footer: {
       createdWith: string
     }
     graph: {
       title: string
+      globalGraph?: string
+      description?: string
+      close?: string
     }
     recentNotes: {
       title: string
@@ -51,9 +65,16 @@ export interface Translation {
     search: {
       title: string
       searchBarPlaceholder: string
+      dialogLabel?: string
+      close?: string
+      noResults?: string
+      tryAnotherSearch?: string
+      resultsFound?: (variables: { count: number }) => string
     }
     tableOfContents: {
       title: string
+      expand?: string
+      collapse?: string
     }
     contentMeta: {
       readingTime: (variables: { minutes: number }) => string

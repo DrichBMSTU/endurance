@@ -2,6 +2,15 @@ const userPref = window.matchMedia("(prefers-color-scheme: light)").matches ? "l
 const currentTheme = localStorage.getItem("theme") ?? userPref
 document.documentElement.setAttribute("saved-theme", currentTheme)
 
+const updateThemeButtonLabels = (theme: "light" | "dark") => {
+  for (const button of document.getElementsByClassName("darkmode")) {
+    const darkmodeButton = button as HTMLButtonElement
+    const label =
+      theme === "dark" ? darkmodeButton.dataset.lightLabel : darkmodeButton.dataset.darkLabel
+    if (label) darkmodeButton.setAttribute("aria-label", label)
+  }
+}
+
 const emitThemeChangeEvent = (theme: "light" | "dark") => {
   const event: CustomEventMap["themechange"] = new CustomEvent("themechange", {
     detail: { theme },
@@ -10,11 +19,15 @@ const emitThemeChangeEvent = (theme: "light" | "dark") => {
 }
 
 document.addEventListener("nav", () => {
+  const savedTheme = document.documentElement.getAttribute("saved-theme") as "light" | "dark"
+  updateThemeButtonLabels(savedTheme)
+
   const switchTheme = () => {
     const newTheme =
       document.documentElement.getAttribute("saved-theme") === "dark" ? "light" : "dark"
     document.documentElement.setAttribute("saved-theme", newTheme)
     localStorage.setItem("theme", newTheme)
+    updateThemeButtonLabels(newTheme)
     emitThemeChangeEvent(newTheme)
   }
 
@@ -22,6 +35,7 @@ document.addEventListener("nav", () => {
     const newTheme = e.matches ? "dark" : "light"
     document.documentElement.setAttribute("saved-theme", newTheme)
     localStorage.setItem("theme", newTheme)
+    updateThemeButtonLabels(newTheme)
     emitThemeChangeEvent(newTheme)
   }
 

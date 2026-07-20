@@ -16,7 +16,7 @@ import {
   processGoogleFonts,
 } from "../../util/theme"
 import { Features, transform } from "lightningcss"
-import { transform as transpile } from "esbuild"
+import { build as bundle, transform as transpile } from "esbuild"
 import { write } from "./helpers"
 
 type ComponentResources = {
@@ -286,9 +286,18 @@ export const ComponentResources: QuartzEmitterPlugin = () => {
         styles,
       )
 
-      const [prescript, postscript] = await Promise.all([
+      const [prescript, postscript, graphBundle] = await Promise.all([
         joinScripts(componentResources.beforeDOMLoaded),
         joinScripts(componentResources.afterDOMLoaded),
+        bundle({
+          entryPoints: ["quartz/components/scripts/graph.lazy.ts"],
+          bundle: true,
+          format: "esm",
+          minify: true,
+          platform: "browser",
+          target: ["chrome109", "edge115", "firefox102", "safari15.6"],
+          write: false,
+        }),
       ])
 
       yield write({
@@ -322,6 +331,13 @@ export const ComponentResources: QuartzEmitterPlugin = () => {
         slug: "postscript" as FullSlug,
         ext: ".js",
         content: postscript,
+      })
+
+      yield write({
+        ctx,
+        slug: joinSegments("static", "graph") as FullSlug,
+        ext: ".js",
+        content: graphBundle.outputFiles[0].text,
       })
     },
     async *partialEmit() {},

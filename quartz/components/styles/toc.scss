@@ -16,7 +16,8 @@ button.toc-header {
   border: none;
   text-align: left;
   cursor: pointer;
-  padding: 0;
+  padding: 0.25rem 0;
+  min-height: 2.75rem;
   color: var(--dark);
   display: flex;
   align-items: center;
@@ -38,6 +39,22 @@ button.toc-header {
   }
 }
 
+.toc-content-wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  min-height: 0;
+  transition: grid-template-rows 0.2s ease;
+
+  &.collapsed {
+    grid-template-rows: 0fr;
+  }
+
+  & > ul {
+    min-height: 0;
+    overflow: hidden auto;
+  }
+}
+
 ul.toc-content.overflow {
   list-style: none;
   position: relative;
@@ -49,18 +66,37 @@ ul.toc-content.overflow {
 
   & > li > a {
     color: var(--dark);
-    opacity: 0.35;
+    opacity: 0.72;
     transition:
       0.5s ease opacity,
       0.3s ease color;
     &.in-view {
-      opacity: 0.75;
+      color: var(--secondary);
+      opacity: 1;
     }
   }
 
   @for $i from 0 through 6 {
     & .depth-#{$i} {
       padding-left: calc(1rem * #{$i});
+    }
+  }
+}
+
+.toc.mobile-only {
+  margin-top: 1rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  background: var(--light);
+
+  & ul.toc-content.overflow {
+    max-height: min(50vh, 24rem);
+
+    & > li > a {
+      display: flex;
+      align-items: center;
+      min-height: 2.75rem;
     }
   }
 }

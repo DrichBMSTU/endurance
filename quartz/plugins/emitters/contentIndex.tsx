@@ -20,6 +20,7 @@ export type ContentDetails = {
   date?: Date
   description?: string
 }
+export type ContentMetadata = Pick<ContentDetails, "slug" | "filePath" | "title" | "links" | "tags">
 
 interface Options {
   enableSiteMap: boolean
@@ -137,22 +138,35 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
         })
       }
 
-      const fp = joinSegments("static", "contentIndex") as FullSlug
-      const simplifiedIndex = Object.fromEntries(
+      const searchIndex = Object.fromEntries(
         Array.from(linkIndex).map(([slug, content]) => {
-          // remove description and from content index as nothing downstream
-          // actually uses it. we only keep it in the index as we need it
-          // for the RSS feed
-          delete content.description
-          delete content.date
-          return [slug, content]
+          const {
+            description: _description,
+            date: _date,
+            richContent: _richContent,
+            ...details
+          } = content
+          return [slug, details]
         }),
+      )
+      const metadataIndex = Object.fromEntries(
+        Object.entries(searchIndex).map(([slug, { content: _content, ...metadata }]) => [
+          slug,
+          metadata,
+        ]),
       )
 
       yield write({
         ctx,
-        content: JSON.stringify(simplifiedIndex),
-        slug: fp,
+        content: JSON.stringify(searchIndex),
+        slug: joinSegments("static", "contentIndex") as FullSlug,
+        ext: ".json",
+      })
+
+      yield write({
+        ctx,
+        content: JSON.stringify(metadataIndex),
+        slug: joinSegments("static", "contentIndexMeta") as FullSlug,
         ext: ".json",
       })
     },

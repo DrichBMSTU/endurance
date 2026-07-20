@@ -2,7 +2,7 @@
 
 // put your custom CSS here!
 :root {
-    --textHighlight: rgba(31, 161, 181, 0.5) !important; // Пример: #ffd3b6 (розовый)
+  --textHighlight: rgba(31, 161, 181, 0.5) !important; // Пример: #ffd3b6 (розовый)
 }
 
 [data-theme="dark"] {
@@ -10,8 +10,8 @@
 }
 
 mark {
-    background-color: var(--textHighlight) !important;
-  }
+  background-color: var(--textHighlight) !important;
+}
 
 body[data-slug="index"] {
   & article {
@@ -155,7 +155,7 @@ body[data-slug="index"] {
 
   & .home-links a {
     display: inline-flex;
-    min-height: 2.35rem;
+    min-height: 2.75rem;
     align-items: center;
     justify-content: center;
     padding: 0.35rem 0.85rem;
@@ -196,5 +196,18 @@ body[data-slug="index"] {
     & .home-grid {
       grid-template-columns: 1fr;
     }
+  }
+}
+body[data-slug="index"] .home-motion-static {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-slug="index"] .home-motion {
+    display: none;
+  }
+
+  body[data-slug="index"] .home-motion-static {
+    display: block;
   }
 }

@@ -20,6 +20,7 @@ export const CNAME: QuartzEmitterPlugin = () => ({
     if (!content) {
       return []
     }
+    await fs.promises.mkdir(argv.output, { recursive: true })
     await fs.promises.writeFile(path, content)
     return [path] as FilePath[]
   },

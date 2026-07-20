@@ -15,19 +15,23 @@ const observer = new IntersectionObserver((entries) => {
 
 function toggleToc(this: HTMLElement) {
   this.classList.toggle("collapsed")
-  this.setAttribute(
-    "aria-expanded",
-    this.getAttribute("aria-expanded") === "true" ? "false" : "true",
-  )
-  const content = this.nextElementSibling as HTMLElement | undefined
+  const expanded = this.getAttribute("aria-expanded") !== "true"
+  this.setAttribute("aria-expanded", expanded.toString())
+  const label = expanded ? this.dataset.collapseLabel : this.dataset.expandLabel
+  if (label) this.setAttribute("aria-label", label)
+  const contentId = this.getAttribute("aria-controls")
+  const content = contentId ? document.getElementById(contentId) : null
   if (!content) return
   content.classList.toggle("collapsed")
+  content.setAttribute("aria-hidden", (!expanded).toString())
+  content.toggleAttribute("inert", !expanded)
 }
 
 function setupToc() {
   for (const toc of document.getElementsByClassName("toc")) {
     const button = toc.querySelector(".toc-header")
-    const content = toc.querySelector(".toc-content")
+    const contentId = button?.getAttribute("aria-controls")
+    const content = contentId ? document.getElementById(contentId) : null
     if (!button || !content) return
     button.addEventListener("click", toggleToc)
     window.addCleanup(() => button.removeEventListener("click", toggleToc))

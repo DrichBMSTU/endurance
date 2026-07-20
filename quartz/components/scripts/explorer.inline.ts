@@ -1,17 +1,20 @@
 import { FileTrieNode } from "../../util/fileTrie"
 import { FullSlug, resolveRelative, simplifySlug } from "../../util/path"
-import { ContentDetails } from "../../plugins/emitters/contentIndex"
+import { ContentMetadata } from "../../plugins/emitters/contentIndex"
 
 type MaybeHTMLElement = HTMLElement | undefined
+type ExplorerNode = FileTrieNode<ContentMetadata>
 
 interface ParsedOptions {
   folderClickBehavior: "collapse" | "link"
   folderDefaultState: "collapsed" | "open"
   useSavedState: boolean
-  sortFn: (a: FileTrieNode, b: FileTrieNode) => number
-  filterFn: (node: FileTrieNode) => boolean
-  mapFn: (node: FileTrieNode) => void
-  order: "sort" | "filter" | "map"[]
+  sortFn: (a: ExplorerNode, b: ExplorerNode) => number
+  filterFn: (node: ExplorerNode) => boolean
+  mapFn: (node: ExplorerNode) => void
+  order: ("sort" | "filter" | "map")[]
+  expandFolderLabel: string
+  collapseFolderLabel: string
 }
 
 type FolderState = {
@@ -20,32 +23,31 @@ type FolderState = {
 }
 
 let currentExplorerState: Array<FolderState>
-function toggleExplorer(this: HTMLElement) {
+
+function setExplorerExpanded(explorer: HTMLElement, expanded: boolean) {
+  explorer.classList.toggle("collapsed", !expanded)
+  const label = expanded ? explorer.dataset.closeLabel : explorer.dataset.openLabel
+  for (const toggle of explorer.querySelectorAll<HTMLButtonElement>(".explorer-toggle")) {
+    toggle.setAttribute("aria-expanded", expanded.toString())
+    if (label) toggle.setAttribute("aria-label", label)
+  }
+
+  const mobileToggle = explorer.querySelector<HTMLButtonElement>(".mobile-explorer")
+  if (mobileToggle?.checkVisibility()) {
+    document.documentElement.classList.toggle("explorer-open", expanded)
+  }
+}
+
+function toggleExplorer(this: HTMLButtonElement) {
   const nearestExplorer = this.closest(".explorer") as HTMLElement
   if (!nearestExplorer) return
-  nearestExplorer.classList.toggle("collapsed")
-  nearestExplorer.setAttribute(
-    "aria-expanded",
-    nearestExplorer.getAttribute("aria-expanded") === "true" ? "false" : "true",
-  )
+  setExplorerExpanded(nearestExplorer, nearestExplorer.classList.contains("collapsed"))
 }
 
 function toggleFolder(evt: MouseEvent) {
   evt.stopPropagation()
-  const target = evt.target as MaybeHTMLElement
-  if (!target) return
-
-  // Check if target was svg icon or button
-  const isSvg = target.nodeName === "svg"
-
-  // corresponding <ul> element relative to clicked button/folder
-  const folderContainer = (
-    isSvg
-      ? // svg -> div.folder-container
-        target.parentElement
-      : // button.folder-button -> div -> div.folder-container
-        target.parentElement?.parentElement
-  ) as MaybeHTMLElement
+  const toggle = evt.currentTarget as HTMLButtonElement | null
+  const folderContainer = toggle?.closest(".folder-container") as MaybeHTMLElement
   if (!folderContainer) return
   const childFolderContainer = folderContainer.nextElementSibling as MaybeHTMLElement
   if (!childFolderContainer) return
@@ -55,6 +57,7 @@ function toggleFolder(evt: MouseEvent) {
   // Collapse folder container
   const isCollapsed = !childFolderContainer.classList.contains("open")
   setFolderState(childFolderContainer, isCollapsed)
+  updateFolderToggles(folderContainer, !isCollapsed)
 
   const currentFolderState = currentExplorerState.find(
     (item) => item.path === folderContainer.dataset.folderpath,
@@ -72,7 +75,7 @@ function toggleFolder(evt: MouseEvent) {
   localStorage.setItem("fileTree", stringifiedFileTree)
 }
 
-function createFileNode(currentSlug: FullSlug, node: FileTrieNode): HTMLLIElement {
+function createFileNode(currentSlug: FullSlug, node: ExplorerNode): HTMLLIElement {
   const template = document.getElementById("template-file") as HTMLTemplateElement
   const clone = template.content.cloneNode(true) as DocumentFragment
   const li = clone.querySelector("li") as HTMLLIElement
@@ -83,6 +86,7 @@ function createFileNode(currentSlug: FullSlug, node: FileTrieNode): HTMLLIElemen
 
   if (currentSlug === node.slug) {
     a.classList.add("active")
+    a.setAttribute("aria-current", "page")
   }
 
   return li
@@ -90,7 +94,7 @@ function createFileNode(currentSlug: FullSlug, node: FileTrieNode): HTMLLIElemen
 
 function createFolderNode(
   currentSlug: FullSlug,
-  node: FileTrieNode,
+  node: ExplorerNode,
   opts: ParsedOptions,
 ): HTMLLIElement {
   const template = document.getElementById("template-folder") as HTMLTemplateElement
@@ -99,6 +103,7 @@ function createFolderNode(
   const folderContainer = li.querySelector(".folder-container") as HTMLElement
   const titleContainer = folderContainer.querySelector("div") as HTMLElement
   const folderOuter = li.querySelector(".folder-outer") as HTMLElement
+  const folderToggle = li.querySelector(".folder-toggle") as HTMLButtonElement
   const ul = folderOuter.querySelector("ul") as HTMLUListElement
 
   const folderPath = node.slug
@@ -129,9 +134,14 @@ function createFolderNode(
   const folderIsPrefixOfCurrentSlug =
     simpleFolderPath === currentSlug.slice(0, simpleFolderPath.length)
 
-  if (!isCollapsed || folderIsPrefixOfCurrentSlug) {
+  const isExpanded = !isCollapsed || folderIsPrefixOfCurrentSlug
+  if (isExpanded) {
     folderOuter.classList.add("open")
   }
+  folderToggle.dataset.expandLabel = opts.expandFolderLabel
+  folderToggle.dataset.collapseLabel = opts.collapseFolderLabel
+  folderToggle.dataset.folderName = node.displayName
+  updateFolderToggles(folderContainer, isExpanded)
 
   for (const child of node.children) {
     const childNode = child.isFolder
@@ -156,6 +166,8 @@ async function setupExplorer(currentSlug: FullSlug) {
       sortFn: new Function("return " + (dataFns.sortFn || "undefined"))(),
       filterFn: new Function("return " + (dataFns.filterFn || "undefined"))(),
       mapFn: new Function("return " + (dataFns.mapFn || "undefined"))(),
+      expandFolderLabel: explorer.dataset.expandFolderLabel || "Expand section",
+      collapseFolderLabel: explorer.dataset.collapseFolderLabel || "Collapse section",
     }
 
     // Get folder state from local storage
@@ -165,8 +177,8 @@ async function setupExplorer(currentSlug: FullSlug) {
       serializedExplorerState.map((entry: FolderState) => [entry.path, entry.collapsed]),
     )
 
-    const data = await fetchData
-    const entries = [...Object.entries(data)] as [FullSlug, ContentDetails][]
+    const data = await fetchDataMetadata()
+    const entries = [...Object.entries(data)] as [FullSlug, ContentMetadata][]
     const trie = FileTrieNode.fromEntries(entries)
 
     // Apply functions in order
@@ -217,7 +229,11 @@ async function setupExplorer(currentSlug: FullSlug) {
       // try to scroll to the active element if it exists
       const activeElement = explorerUl.querySelector(".active")
       if (activeElement) {
-        activeElement.scrollIntoView({ behavior: "smooth" })
+        activeElement.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+        })
       }
     }
 
@@ -241,13 +257,24 @@ async function setupExplorer(currentSlug: FullSlug) {
       }
     }
 
-    const folderIcons = explorer.getElementsByClassName(
-      "folder-icon",
+    const folderToggles = explorer.getElementsByClassName(
+      "folder-toggle",
     ) as HTMLCollectionOf<HTMLElement>
-    for (const icon of folderIcons) {
-      icon.addEventListener("click", toggleFolder)
-      window.addCleanup(() => icon.removeEventListener("click", toggleFolder))
+    for (const toggle of folderToggles) {
+      toggle.addEventListener("click", toggleFolder)
+      window.addCleanup(() => toggle.removeEventListener("click", toggleFolder))
     }
+
+    const closeExplorerOnEscape = (event: KeyboardEvent) => {
+      if (!event.key.startsWith("Esc") || explorer.classList.contains("collapsed")) return
+      const mobileToggle = explorer.querySelector<HTMLButtonElement>(".mobile-explorer")
+      if (!mobileToggle?.checkVisibility()) return
+      event.preventDefault()
+      setExplorerExpanded(explorer, false)
+      mobileToggle.focus()
+    }
+    document.addEventListener("keydown", closeExplorerOnEscape)
+    window.addCleanup(() => document.removeEventListener("keydown", closeExplorerOnEscape))
   }
 }
 
@@ -268,8 +295,9 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     if (!mobileExplorer) return
 
     if (mobileExplorer.checkVisibility()) {
-      explorer.classList.add("collapsed")
-      explorer.setAttribute("aria-expanded", "false")
+      setExplorerExpanded(explorer as HTMLElement, false)
+    } else {
+      setExplorerExpanded(explorer as HTMLElement, true)
     }
 
     mobileExplorer.classList.remove("hide-until-loaded")
@@ -278,4 +306,20 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
 
 function setFolderState(folderElement: HTMLElement, collapsed: boolean) {
   return collapsed ? folderElement.classList.remove("open") : folderElement.classList.add("open")
+}
+
+function updateFolderToggles(folderContainer: HTMLElement, expanded: boolean) {
+  const folderName =
+    folderContainer.querySelector<HTMLElement>(".folder-title")?.textContent ??
+    folderContainer.querySelector<HTMLButtonElement>(".folder-toggle")?.dataset.folderName ??
+    ""
+  for (const toggle of folderContainer.querySelectorAll<HTMLButtonElement>(
+    ".folder-toggle, .folder-button",
+  )) {
+    toggle.setAttribute("aria-expanded", expanded.toString())
+    const action = expanded ? toggle.dataset.collapseLabel : toggle.dataset.expandLabel
+    if (toggle.classList.contains("folder-toggle") && action) {
+      toggle.setAttribute("aria-label", `${action}: ${folderName}`)
+    }
+  }
 }

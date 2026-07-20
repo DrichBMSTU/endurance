@@ -39,6 +39,9 @@ async function mouseEnterHandler(
   }
 
   const targetUrl = new URL(link.href)
+  if (decodeURIComponent(targetUrl.pathname).toLowerCase().endsWith(".pdf")) {
+    return
+  }
   const hash = decodeURIComponent(targetUrl.hash)
   targetUrl.hash = ""
   targetUrl.search = ""
@@ -63,7 +66,7 @@ async function mouseEnterHandler(
 
   if (!response) return
   const [contentType] = response.headers.get("Content-Type")!.split(";")
-  const [contentTypeCategory, typeInfo] = contentType.split("/")
+  const [contentTypeCategory] = contentType.split("/")
 
   const popoverElement = document.createElement("div")
   popoverElement.id = popoverId
@@ -82,15 +85,6 @@ async function mouseEnterHandler(
       popoverInner.appendChild(img)
       break
     case "application":
-      switch (typeInfo) {
-        case "pdf":
-          const pdf = document.createElement("iframe")
-          pdf.src = targetUrl.toString()
-          popoverInner.appendChild(pdf)
-          break
-        default:
-          break
-      }
       break
     default:
       const contents = await response.text()
@@ -119,6 +113,7 @@ function clearActivePopover() {
 document.addEventListener("nav", () => {
   const links = [...document.querySelectorAll("a.internal")] as HTMLAnchorElement[]
   for (const link of links) {
+    if (decodeURIComponent(new URL(link.href).pathname).toLowerCase().endsWith(".pdf")) continue
     link.addEventListener("mouseenter", mouseEnterHandler)
     link.addEventListener("mouseleave", clearActivePopover)
     window.addCleanup(() => {
