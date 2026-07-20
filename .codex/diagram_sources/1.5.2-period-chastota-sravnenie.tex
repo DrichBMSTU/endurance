@@ -1,0 +1,122 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{lmodern}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+
+\definecolor{Bg}{HTML}{F8FAFC}
+\definecolor{Panel}{HTML}{FFFFFF}
+\definecolor{Ink}{HTML}{0F172A}
+\definecolor{Muted}{HTML}{475569}
+\definecolor{Border}{HTML}{CBD5E1}
+\definecolor{Blue}{HTML}{1D4ED8}
+\definecolor{BlueSoft}{HTML}{DBEAFE}
+\definecolor{Teal}{HTML}{0F766E}
+\definecolor{TealSoft}{HTML}{CCFBF1}
+\definecolor{Amber}{HTML}{B45309}
+\definecolor{AmberSoft}{HTML}{FEF3C7}
+
+\begin{document}
+\pagecolor{Bg}
+\begin{tikzpicture}[x=1pt,y=1pt]
+  \path[use as bounding box] (0,0) rectangle (1200,1000);
+  \fill[Bg] (0,0) rectangle (1200,1000);
+
+  \tikzset{
+    panel/.style={draw=Border, fill=Panel, line width=1.4pt, rounded corners=18pt},
+    maintext/.style={text=Ink, align=center},
+    smalltext/.style={text=Muted, align=center, font=\fontsize{23}{28}\selectfont},
+    flow/.style={-{Latex[length=12pt,width=9pt]}, line width=3pt},
+    pill/.style={rounded corners=13pt, inner xsep=18pt, inner ysep=11pt, line width=1.2pt}
+  }
+
+  % Верхняя панель: период как повторение состояния.
+  \draw[panel] (50,560) rectangle (1150,950);
+  \node[maintext, font=\fontsize{32}{38}\selectfont\bfseries] at (600,910)
+    {Один период: система вернулась в то же состояние};
+
+  % Фазовый круг.
+  \begin{scope}[shift={(235,735)}]
+    \draw[Border, line width=2.2pt] (0,0) circle (100);
+    \draw[Border, line width=1.7pt] (-115,0) -- (115,0);
+    \draw[Border, line width=1.7pt] (0,-115) -- (0,115);
+    \draw[Blue, line width=4pt, -{Latex[length=13pt,width=10pt]}]
+      (35:120) arc[start angle=35,end angle=385,radius=120];
+    \draw[Blue, line width=3pt] (0,0) -- (35:100);
+    \fill[Blue] (35:100) circle (7);
+    \node[maintext, font=\fontsize{30}{35}\selectfont\bfseries] at (0,0) {$\omega$};
+    \node[smalltext, text=Ink] at (0,-150) {полный оборот $2\pi$ за время $T$};
+  \end{scope}
+
+  % Главная связь величин.
+  \draw[fill=BlueSoft, draw=Blue, line width=1.8pt, rounded corners=16pt]
+    (420,670) rectangle (770,835);
+  \node[maintext, text=Blue, font=\fontsize{36}{43}\selectfont\bfseries] at (595,770)
+    {$\displaystyle T=\frac{2\pi}{\omega}=\frac{1}{\nu}$};
+  \node[smalltext] at (595,712) {$T$ — с, $\nu$ — Гц, $\omega$ — рад/с};
+
+  % Секундная шкала: повторяющиеся состояния.
+  \draw[Ink, line width=2.3pt] (840,750) -- (1100,750);
+  \foreach \x in {840,905,970,1035,1100} {
+    \draw[Ink, line width=2pt] (\x,735) -- (\x,765);
+    \fill[Teal] (\x,750) circle (7);
+  }
+  \node[smalltext, text=Ink] at (840,790) {$0$};
+  \node[smalltext, text=Ink] at (1100,790) {$1\ \text{с}$};
+  \draw[Teal, line width=2.8pt, {Latex[length=9pt,width=7pt]}-{Latex[length=9pt,width=7pt]}]
+    (843,695) -- (902,695);
+  \node[maintext, text=Teal, font=\fontsize{25}{30}\selectfont\bfseries] at (872,657) {$T$};
+  \node[smalltext, text=Ink] at (970,850) {за $1$ с — $\nu$ колебаний};
+  \node[smalltext] at (970,625) {соседние метки — одинаковые состояния};
+
+  % Карта параметров: математический маятник.
+  \draw[panel] (50,300) rectangle (1150,525);
+  \node[anchor=west, maintext, font=\fontsize{30}{36}\selectfont\bfseries]
+    at (85,485) {Математический маятник};
+  \node[anchor=west, smalltext] at (85,445) {малые свободные колебания};
+
+  \node[pill, draw=Blue, fill=BlueSoft, text=Blue, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (215,365) {$l\uparrow$};
+  \draw[flow, Blue] (280,365) -- (365,365);
+  \node[pill, draw=Blue, fill=Panel, text=Blue, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (435,365) {$T\uparrow$};
+  \node[smalltext] at (325,325) {длиннее — медленнее};
+
+  \node[pill, draw=Teal, fill=TealSoft, text=Teal, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (585,365) {$g\uparrow$};
+  \draw[flow, Teal] (650,365) -- (735,365);
+  \node[pill, draw=Teal, fill=Panel, text=Teal, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (805,365) {$T\downarrow$};
+  \node[smalltext] at (695,325) {сильнее $g$ — быстрее};
+
+  \node[maintext, text=Ink, font=\fontsize{32}{39}\selectfont\bfseries]
+    at (1000,405) {$\displaystyle T=2\pi\sqrt{\frac{l}{g}}$};
+  \node[smalltext] at (1000,340) {масса груза не входит};
+
+  % Карта параметров: пружинный маятник.
+  \draw[panel] (50,50) rectangle (1150,275);
+  \node[anchor=west, maintext, font=\fontsize{30}{36}\selectfont\bfseries]
+    at (85,235) {Пружинный маятник};
+  \node[anchor=west, smalltext] at (85,195) {свободные колебания, выполняется закон Гука};
+
+  \node[pill, draw=Amber, fill=AmberSoft, text=Amber, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (215,115) {$m\uparrow$};
+  \draw[flow, Amber] (280,115) -- (365,115);
+  \node[pill, draw=Amber, fill=Panel, text=Amber, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (435,115) {$T\uparrow$};
+  \node[smalltext] at (325,75) {тяжелее — медленнее};
+
+  \node[pill, draw=Teal, fill=TealSoft, text=Teal, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (585,115) {$k\uparrow$};
+  \draw[flow, Teal] (650,115) -- (735,115);
+  \node[pill, draw=Teal, fill=Panel, text=Teal, font=\fontsize{29}{34}\selectfont\bfseries]
+    at (805,115) {$T\downarrow$};
+  \node[smalltext] at (695,75) {жёстче — быстрее};
+
+  \node[maintext, text=Ink, font=\fontsize{32}{39}\selectfont\bfseries]
+    at (1000,155) {$\displaystyle T=2\pi\sqrt{\frac{m}{k}}$};
+  \node[smalltext] at (1000,90) {$g$ в формулу не входит};
+\end{tikzpicture}
+\end{document}
