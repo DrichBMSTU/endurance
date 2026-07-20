@@ -1,0 +1,116 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+
+\definecolor{Bg}{HTML}{F8FAFC}
+\definecolor{Panel}{HTML}{FFFFFF}
+\definecolor{Ink}{HTML}{0F172A}
+\definecolor{Muted}{HTML}{475569}
+\definecolor{Border}{HTML}{CBD5E1}
+\definecolor{Blue}{HTML}{1D4ED8}
+\definecolor{BlueSoft}{HTML}{DBEAFE}
+\definecolor{Orange}{HTML}{C2410C}
+\definecolor{OrangeSoft}{HTML}{FFEDD5}
+\definecolor{Purple}{HTML}{7E22CE}
+\definecolor{PurpleSoft}{HTML}{F3E8FF}
+
+\begin{document}
+\pagecolor{Bg}
+\begin{tikzpicture}[x=1pt,y=1pt]
+  \path[use as bounding box] (0,0) rectangle (1100,900);
+  \fill[Bg] (0,0) rectangle (1100,900);
+
+  \tikzset{
+    panel/.style={draw=Border, fill=Panel, line width=1.5pt, rounded corners=18pt},
+    heading/.style={text=Ink, font=\fontsize{34}{40}\selectfont\bfseries},
+    label/.style={text=Ink, font=\fontsize{27}{32}\selectfont},
+    muted/.style={text=Muted, font=\fontsize{24}{29}\selectfont},
+    propagation/.style={draw=Blue, line width=4pt, -{Latex[length=14pt,width=10pt]}},
+    oscillation/.style={draw=Orange, line width=3.5pt,
+      {Latex[length=11pt,width=8pt]}-{Latex[length=11pt,width=8pt]}},
+    measure/.style={draw=Purple, line width=3pt,
+      {Latex[length=10pt,width=7pt]}-{Latex[length=10pt,width=7pt]}}
+  }
+
+  % Поперечная волна.
+  \draw[panel] (45,475) rectangle (1055,855);
+  \node[heading, anchor=west] at (80,815) {Поперечная волна};
+  \node[muted, anchor=east] at (1020,815)
+    {колебания частиц $\perp$ распространению};
+
+  \draw[propagation] (700,750) -- (980,750);
+  \node[label, text=Blue, anchor=east] at (970,780)
+    {распространение волны};
+
+  \draw[Border, line width=2pt, dashed] (160,650) -- (990,650);
+
+  \draw[Blue, line width=5pt, smooth, samples=180, domain=170:970, variable=\x]
+    plot ({\x},{650+78*sin((\x-170)*1.125)});
+  \foreach \i in {0,...,20} {
+    \pgfmathsetmacro{\xx}{170+40*\i}
+    \pgfmathsetmacro{\yy}{650+78*sin((\xx-170)*1.125)}
+    \fill[Panel] (\xx,\yy) circle (7.5pt);
+    \fill[Orange] (\xx,\yy) circle (5.2pt);
+  }
+
+  \draw[oscillation] (115,575) -- (115,725);
+  \node[label, text=Orange, align=center, rotate=90] at (82,650)
+    {колебания частиц};
+
+  \draw[Border, line width=1.7pt, dashed] (250,728) -- (250,535);
+  \draw[Border, line width=1.7pt, dashed] (570,728) -- (570,535);
+  \draw[measure] (255,535) -- (565,535);
+  \node[fill=PurpleSoft, rounded corners=10pt, inner xsep=16pt, inner ysep=7pt,
+    text=Purple, font=\fontsize{30}{36}\selectfont\bfseries] at (410,535) {$\lambda$};
+  \node[muted] at (410,495) {между ближайшими гребнями};
+
+  % Продольная волна.
+  \draw[panel] (45,45) rectangle (1055,440);
+  \node[heading, anchor=west] at (80,400) {Продольная волна};
+  \node[muted, anchor=east] at (1020,400)
+    {колебания частиц $\parallel$ распространению};
+
+  \draw[propagation] (700,345) -- (980,345);
+  \node[label, text=Blue, anchor=east] at (970,375)
+    {распространение волны};
+
+  \draw[oscillation] (105,295) -- (275,295);
+  \node[label, text=Orange] at (190,330) {колебания частиц};
+
+  % Равномерные положения равновесия и мгновенные положения частиц.
+  \foreach \i in {0,...,34} {
+    \pgfmathsetmacro{\xeq}{170+22*\i}
+    \draw[Border, line width=1.4pt] (\xeq,220) circle (5.2pt);
+  }
+  \foreach \i in {0,...,34} {
+    \pgfmathsetmacro{\xeq}{170+22*\i}
+    \pgfmathsetmacro{\xnow}{\xeq+27*sin(360*\i/14)}
+    \fill[Orange] (\xnow,220) circle (6.2pt);
+  }
+
+  \node[label, text=Ink] at (324,270) {сжатие};
+  \node[label, text=Muted] at (478,270) {разрежение};
+  \node[label, text=Ink] at (632,270) {сжатие};
+
+  \draw[Border, line width=1.7pt, dashed] (324,250) -- (324,115);
+  \draw[Border, line width=1.7pt, dashed] (632,250) -- (632,115);
+  \draw[measure] (329,115) -- (627,115);
+  \node[fill=PurpleSoft, rounded corners=10pt, inner xsep=16pt, inner ysep=7pt,
+    text=Purple, font=\fontsize{30}{36}\selectfont\bfseries] at (478,115) {$\lambda$};
+  \node[muted] at (478,75) {между соседними сжатиями};
+
+  \draw[draw=Border, fill=Panel, line width=1.2pt, rounded corners=10pt]
+    (760,70) rectangle (1015,150);
+  \draw[Border, line width=1.4pt] (795,112) circle (5.2pt);
+  \node[muted, anchor=west] at (815,112) {равновесие};
+  \fill[Orange] (795,82) circle (6.2pt);
+  \node[muted, anchor=west] at (815,82) {частица сейчас};
+
+  \node[fill=BlueSoft, rounded corners=12pt, inner xsep=20pt, inner ysep=10pt,
+    text=Blue, font=\fontsize{24}{29}\selectfont\bfseries]
+    at (875,285) {за $T$ волна проходит $\lambda$};
+\end{tikzpicture}
+\end{document}

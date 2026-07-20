@@ -1,0 +1,93 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,calc}
+
+\setmainfont{Arial}
+
+\definecolor{Bg}{HTML}{F8FAFC}
+\definecolor{Panel}{HTML}{FFFFFF}
+\definecolor{Ink}{HTML}{0F172A}
+\definecolor{Muted}{HTML}{475569}
+\definecolor{Border}{HTML}{CBD5E1}
+\definecolor{Blue}{HTML}{1D4ED8}
+\definecolor{BlueSoft}{HTML}{DBEAFE}
+\definecolor{Purple}{HTML}{7E22CE}
+\definecolor{PurpleSoft}{HTML}{F3E8FF}
+\definecolor{Shadow}{HTML}{EDF0F5}
+
+\begin{document}
+\pagecolor{Bg}
+\begin{tikzpicture}[x=1pt,y=1pt]
+  \path[use as bounding box] (0,0) rectangle (1100,650);
+  \fill[Bg] (0,0) rectangle (1100,650);
+
+  \tikzset{
+    panel/.style={draw=Border, fill=Panel, line width=1.5pt, rounded corners=18pt},
+    heading/.style={text=Ink, font=\fontsize{34}{40}\selectfont\bfseries},
+    label/.style={text=Ink, font=\fontsize{27}{32}\selectfont},
+    muted/.style={text=Muted, font=\fontsize{24}{29}\selectfont},
+    wavefront/.style={draw=Blue, line width=4pt},
+    propagation/.style={draw=Blue, line width=4pt, -{Latex[length=14pt,width=10pt]}},
+    measure/.style={draw=Purple, line width=3pt,
+      {Latex[length=10pt,width=7pt]}-{Latex[length=10pt,width=7pt]}}
+  }
+
+  \draw[panel] (45,45) rectangle (1055,605);
+  \node[heading] at (550,560)
+    {Дифракция: волна огибает препятствие};
+
+  % Области геометрической тени за экраном.
+  \fill[Shadow] (505,115) rectangle (1015,255);
+  \fill[Shadow] (505,365) rectangle (1015,500);
+
+  % Плоские фронты до препятствия.
+  \foreach \x in {125,215,305,395} {
+    \draw[wavefront] (\x,120) -- (\x,500);
+  }
+  \node[fill=BlueSoft, rounded corners=10pt, inner xsep=16pt, inner ysep=7pt,
+    label, text=Blue] at (260,515) {плоские фронты};
+  \draw[propagation] (145,75) -- (405,75);
+  \node[muted, text=Blue] at (275,105) {направление волны};
+
+  \draw[measure] (220,465) -- (300,465);
+  \node[fill=PurpleSoft, rounded corners=9pt, inner xsep=12pt, inner ysep=5pt,
+    text=Purple, font=\fontsize{27}{32}\selectfont\bfseries] at (260,465) {$\lambda$};
+
+  % Экран с отверстием.
+  \draw[Ink, line width=18pt, line cap=round] (500,115) -- (500,255);
+  \draw[Ink, line width=18pt, line cap=round] (500,365) -- (500,500);
+  \node[label, rotate=90] at (465,310) {экран};
+
+  \draw[measure] (535,260) -- (535,360);
+  \node[fill=PurpleSoft, rounded corners=9pt, inner xsep=12pt, inner ysep=5pt,
+    text=Purple, font=\fontsize{27}{32}\selectfont\bfseries, rotate=90]
+    at (535,310) {$a\sim\lambda$};
+
+  % Расходящиеся фронты после отверстия.
+  \begin{scope}
+    \clip (505,105) rectangle (1025,510);
+    \foreach \r in {105,195,285,375,465} {
+      \draw[wavefront] ($(500,310)+(-72:\r)$)
+        arc[start angle=-72,end angle=72,radius=\r];
+    }
+  \end{scope}
+
+  \node[muted, text=Muted, fill=Shadow, rounded corners=6pt, inner sep=5pt]
+    at (865,465) {геометрическая тень};
+  \node[muted, text=Muted, fill=Shadow, rounded corners=6pt, inner sep=5pt]
+    at (865,155) {геометрическая тень};
+
+  \draw[propagation] (650,310) -- (965,310);
+
+  \draw[Purple, line width=2.5pt, -{Latex[length=11pt,width=8pt]}]
+    (725,420) to[out=190,in=80] (625,390);
+  \node[fill=PurpleSoft, rounded corners=10pt, inner xsep=14pt, inner ysep=7pt,
+    label, text=Purple, align=center] at (820,410)
+    {фронт заходит\\в область тени};
+
+  \node[fill=BlueSoft, rounded corners=12pt, inner xsep=20pt, inner ysep=10pt,
+    text=Blue, font=\fontsize{26}{31}\selectfont\bfseries]
+    at (800,82) {дифракция особенно заметна при $a\sim\lambda$};
+\end{tikzpicture}
+\end{document}

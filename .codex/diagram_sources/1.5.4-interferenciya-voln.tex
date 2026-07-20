@@ -1,0 +1,85 @@
+\documentclass[tikz,border=0pt]{standalone}
+\usepackage{fontspec}
+\usetikzlibrary{arrows.meta}
+
+\setmainfont{Arial}
+
+\definecolor{Bg}{HTML}{F8FAFC}
+\definecolor{Panel}{HTML}{FFFFFF}
+\definecolor{Ink}{HTML}{0F172A}
+\definecolor{Muted}{HTML}{475569}
+\definecolor{Border}{HTML}{CBD5E1}
+\definecolor{Blue}{HTML}{1D4ED8}
+\definecolor{Teal}{HTML}{0F766E}
+\definecolor{Purple}{HTML}{7E22CE}
+\definecolor{GreenSoft}{HTML}{DCFCE7}
+\definecolor{Green}{HTML}{15803D}
+\definecolor{OrangeSoft}{HTML}{FFEDD5}
+\definecolor{Orange}{HTML}{C2410C}
+
+\begin{document}
+\pagecolor{Bg}
+\begin{tikzpicture}[x=1pt,y=1pt]
+  \path[use as bounding box] (0,0) rectangle (1100,650);
+  \fill[Bg] (0,0) rectangle (1100,650);
+
+  \tikzset{
+    panel/.style={draw=Border, fill=Panel, line width=1.5pt, rounded corners=18pt},
+    heading/.style={text=Ink, font=\fontsize{34}{40}\selectfont\bfseries},
+    label/.style={text=Ink, font=\fontsize{27}{32}\selectfont},
+    muted/.style={text=Muted, font=\fontsize{24}{29}\selectfont},
+    axis/.style={draw=Border, line width=1.7pt, dashed}
+  }
+
+  \node[heading] at (550,615) {Интерференция: смещения складываются};
+
+  % Усиление.
+  \draw[panel] (45,335) rectangle (1055,570);
+  \node[label, anchor=west, font=\fontsize{29}{35}\selectfont\bfseries]
+    at (80,525) {Волны в фазе};
+  \node[fill=GreenSoft, rounded corners=12pt, inner xsep=18pt, inner ysep=8pt,
+    text=Green, font=\fontsize{25}{30}\selectfont\bfseries, anchor=east]
+    at (1020,525) {усиление};
+
+  \node[muted] at (260,485) {волна 1};
+  \node[muted] at (555,485) {волна 2};
+  \node[muted] at (885,485) {результат};
+  \node[label, text=Muted] at (407,425) {$+$};
+  \node[label, text=Muted] at (720,425) {$=$};
+
+  \draw[axis] (140,415) -- (375,415);
+  \draw[axis] (435,415) -- (670,415);
+  \draw[axis] (760,415) -- (1010,415);
+  \draw[Blue, line width=4pt, smooth, samples=100, domain=145:370, variable=\x]
+    plot ({\x},{415+38*sin((\x-145)*2.4)});
+  \draw[Teal, line width=4pt, smooth, samples=100, domain=440:665, variable=\x]
+    plot ({\x},{415+38*sin((\x-440)*2.4)});
+  \draw[Purple, line width=5pt, smooth, samples=110, domain=765:1005, variable=\x]
+    plot ({\x},{415+70*sin((\x-765)*2.25)});
+
+  % Ослабление.
+  \draw[panel] (45,55) rectangle (1055,300);
+  \node[label, anchor=west, font=\fontsize{29}{35}\selectfont\bfseries]
+    at (80,255) {Волны в противофазе};
+  \node[fill=OrangeSoft, rounded corners=12pt, inner xsep=18pt, inner ysep=8pt,
+    text=Orange, font=\fontsize{25}{30}\selectfont\bfseries, anchor=east]
+    at (1020,255) {ослабление};
+
+  \node[muted] at (260,215) {волна 1};
+  \node[muted] at (555,215) {волна 2};
+  \node[muted] at (885,215) {результат};
+  \node[label, text=Muted] at (407,155) {$+$};
+  \node[label, text=Muted] at (720,155) {$=$};
+
+  \draw[axis] (140,145) -- (375,145);
+  \draw[axis] (435,145) -- (670,145);
+  \draw[axis] (760,145) -- (1010,145);
+  \draw[Blue, line width=4pt, smooth, samples=100, domain=145:370, variable=\x]
+    plot ({\x},{145+38*sin((\x-145)*2.4)});
+  \draw[Teal, line width=4pt, smooth, samples=100, domain=440:665, variable=\x]
+    plot ({\x},{145-38*sin((\x-440)*2.4)});
+  \draw[Purple, line width=5pt] (765,145) -- (1005,145);
+  \node[text=Orange, align=center, font=\fontsize{22}{27}\selectfont] at (885,95)
+    {при равных амплитудах\\возможно полное гашение};
+\end{tikzpicture}
+\end{document}
